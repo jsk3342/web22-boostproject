@@ -25,7 +25,7 @@
 | <img src="https://avatars.githubusercontent.com/u/45356754?v=4" width="120" /> | <img src="https://avatars.githubusercontent.com/u/46553489?v=4" width="120" /> | <img src="https://avatars.githubusercontent.com/u/101329724?v=4" width="120"> | <img src="https://avatars.githubusercontent.com/u/85912592?v=4" width="120"> | <img src="https://avatars.githubusercontent.com/u/48922050?v=4" width="120"> |
 |                                     **BE**                                     |                                     **BE**                                      |                                    **FE**                                    |                                    **FE**                                    |                                    **FE**                                    |
 |                    [@i3kae](https://github.com/i3kae)                    |                    [@hoeeeeeh](https://github.com/hoeeeeeh)                     |                   [@gominzip](https://github.com/gominzip)                   |                [@jsk3342](https://github.com/jsk3342)                |                    [@spearStr](https://github.com/spearStr)                    |
-|                                       [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J063_-cab2485fa41c45bdaa71dd0b6c8c9436?pvs=4)                                         |                                        [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J049_-11cfb169e98843c9b0833caf92cd48e9?pvs=4)                                        |                                      [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J009_-e6884d9084f842e9a66a36da4d4db30e?pvs=4)                                      |                                      [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J064_-0c84cab9024d4653a5aabbf9f4037582?pvs=4)                                      |                                      [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J280_-62f3f3939efd4ab8aea02c0d53c8232f?pvs=4)                                      |
+
 
 
 </div>
@@ -37,7 +37,7 @@
 
 저희는 이러한 컨퍼런스 문화가 더욱 활발해지고, 더 많은 사람들이 기회를 얻을 수 있기를 바라는 마음으로 LiBoo 프로젝트를 기획하게 되었습니다.  
 
-작게는 팀원 간 소규모 기술 공유부터, 크게는 네이버 부스트캠프 발표나 기업의 컨퍼런스과도 함께할 수 있는 서비스를 만들고자 합니다!"  
+작게는 팀원 간 소규모 기술 공유부터, 크게는 네이버 부스트캠프 발표나 기업의 컨퍼런스과도 함께할 수 있는 서비스를 만들고자 합니다!
 
 ## 주요 기능
 
