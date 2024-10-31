@@ -15,6 +15,21 @@
   <a href="https://gominzip.notion.site/12d673f3719e8012b6a9fa08b8662ad3?pvs=4"> 회의록 </a>
 </p>
 
+<br/>
+  
+<div align="center">
+<h3> 🧡 팀원 소개 </h3>
+
+|                                     김준서                                     |                                    김영길                                      |                                    고민지                                    |                                    김지수                                    |                                    홍창현                                    |
+| :----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: |
+| <img src="https://avatars.githubusercontent.com/u/45356754?v=4" width="120" /> | <img src="https://avatars.githubusercontent.com/u/46553489?v=4" width="120" /> | <img src="https://avatars.githubusercontent.com/u/101329724?v=4" width="120"> | <img src="https://avatars.githubusercontent.com/u/85912592?v=4" width="120"> | <img src="https://avatars.githubusercontent.com/u/48922050?v=4" width="120"> |
+|                                     **BE**                                     |                                     **BE**                                      |                                    **FE**                                    |                                    **FE**                                    |                                    **FE**                                    |
+|                    [@i3kae](https://github.com/i3kae)                    |                    [@hoeeeeeh](https://github.com/hoeeeeeh)                     |                   [@gominzip](https://github.com/gominzip)                   |                [@jsk3342](https://github.com/jsk3342)                |                    [@spearStr](https://github.com/spearStr)                    |
+|                                       [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J063_-cab2485fa41c45bdaa71dd0b6c8c9436?pvs=4)                                         |                                        [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J049_-11cfb169e98843c9b0833caf92cd48e9?pvs=4)                                        |                                      [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J009_-e6884d9084f842e9a66a36da4d4db30e?pvs=4)                                      |                                      [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J064_-0c84cab9024d4653a5aabbf9f4037582?pvs=4)                                      |                                      [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J280_-62f3f3939efd4ab8aea02c0d53c8232f?pvs=4)                                      |
+
+
+</div>
+<br/>
 
 # 프로젝트 개요
 ## LiBoo를 만들게 된 계기
@@ -150,30 +165,16 @@
 
     
 
-- 커밋 컨벤션
-    - **feat** : 새로운 기능 추가, 기존의 기능을 요구 사항에 맞추어 수정
-    - **fix** : 기능에 대한 버그 수정
-    - **build** : 빌드 관련 수정
-    - **chore** : 패키지 매니저 수정, 그 외 기타 수정 ex) .gitignore
-    - **ci** : CI 관련 설정 수정
-    - **docs** : 문서(주석) 수정
-    - **style** : 코드 스타일, 포맷팅에 대한 수정
-    - **refactor** : 기능의 변화가 아닌 코드 리팩터링 ex) 변수 이름 변경
-    - **test** : 테스트 코드 추가/수정
-    - **release** : 버전 릴리즈
-    - Typo : 오타 수정(?)
+## 커밋 컨벤션
+  - **feat** : 새로운 기능 추가, 기존의 기능을 요구 사항에 맞추어 수정
+  - **fix** : 기능에 대한 버그 수정
+  - **build** : 빌드 관련 수정
+  - **chore** : 패키지 매니저 수정, 그 외 기타 수정 ex) .gitignore
+  - **ci** : CI 관련 설정 수정
+  - **docs** : 문서(주석) 수정
+  - **style** : 코드 스타일, 포맷팅에 대한 수정
+  - **refactor** : 기능의 변화가 아닌 코드 리팩터링 ex) 변수 이름 변경
+  - **test** : 테스트 코드 추가/수정
+  - **release** : 버전 릴리즈
+  - Typo : 오타 수정(?)
 
-  
-  
-<div align="center">
-<h1> 🧡 팀원 소개 </h1>
-
-|                                     김준서                                     |                                    김영길                                      |                                    고민지                                    |                                    김지수                                    |                                    홍창현                                    |
-| :----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: |
-| <img src="https://avatars.githubusercontent.com/u/45356754?v=4" width="120" /> | <img src="https://avatars.githubusercontent.com/u/46553489?v=4" width="120" /> | <img src="https://avatars.githubusercontent.com/u/101329724?v=4" width="120"> | <img src="https://avatars.githubusercontent.com/u/85912592?v=4" width="120"> | <img src="https://avatars.githubusercontent.com/u/48922050?v=4" width="120"> |
-|                                     **BE**                                     |                                     **BE**                                      |                                    **FE**                                    |                                    **FE**                                    |                                    **FE**                                    |
-|                    [@i3kae](https://github.com/i3kae)                    |                    [@hoeeeeeh](https://github.com/hoeeeeeh)                     |                   [@gominzip](https://github.com/gominzip)                   |                [@jsk3342](https://github.com/jsk3342)                |                    [@spearStr](https://github.com/spearStr)                    |
-|                                       [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J063_-cab2485fa41c45bdaa71dd0b6c8c9436?pvs=4)                                         |                                        [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J049_-11cfb169e98843c9b0833caf92cd48e9?pvs=4)                                        |                                      [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J009_-e6884d9084f842e9a66a36da4d4db30e?pvs=4)                                      |                                      [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J064_-0c84cab9024d4653a5aabbf9f4037582?pvs=4)                                      |                                      [렛미인트로듀스](https://www.notion.so/boostcamp-wm/J280_-62f3f3939efd4ab8aea02c0d53c8232f?pvs=4)                                      |
-
-
-</div>
