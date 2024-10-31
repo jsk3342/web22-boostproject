@@ -9,7 +9,7 @@
   <a href="https://gominzip.notion.site/TEAM-127673f3719e803faf63c70322560d3b?pvs=4"> 팀 노션 </a> &nbsp; ╎ &nbsp; 
   <!-- <a href="https://github.com/orgs/boostcampwm2023/projects/80">백로그</a> &nbsp; ╎ &nbsp; -->
   <!-- <a href="https://www.notion.so/04317c11a3d240408383dab9249527a2">기획서</a> &nbsp; ╎ &nbsp; -->
-  <a href="https://www.figma.com/files/team/1433355346796142535/project/296173022/LiBoo?fuid=1249324932824321727"> Figma </a> &nbsp; ╎ &nbsp;
+  <a href="https://www.figma.com/design/op5Ui6oZ4Zx2D8VUgWOKM0/LiBoo-%F0%9F%9A%80?node-id=1-3&t=WOh9pRJjrJinyUFT-1"> Figma </a> &nbsp; ╎ &nbsp;
   <a href="https://gominzip.notion.site/12d673f3719e8109b9d4d3d63f74a988?pvs=4"> 그라운드 룰 </a> &nbsp; ╎ &nbsp;
   <a href="https://gominzip.notion.site/b987e92eb6c84eef9af1301877eb7c91?pvs=4"> 기술 정리 노트 </a> &nbsp; ╎ &nbsp;
   <a href="https://gominzip.notion.site/12d673f3719e8012b6a9fa08b8662ad3?pvs=4"> 회의록 </a>
