@@ -6,7 +6,7 @@
 <br/>
 
 <p align=center>
-  <a href="https://bow-snail-89d.notion.site/MergeMasters-c9a78b108ea445f8b2281f2e6ae80369?pvs=4"> 팀 노션 </a> &nbsp; ╎ &nbsp; 
+  <a href="https://gominzip.notion.site/TEAM-127673f3719e803faf63c70322560d3b?pvs=4"> 팀 노션 </a> &nbsp; ╎ &nbsp; 
   <!-- <a href="https://github.com/orgs/boostcampwm2023/projects/80">백로그</a> &nbsp; ╎ &nbsp; -->
   <!-- <a href="https://www.notion.so/04317c11a3d240408383dab9249527a2">기획서</a> &nbsp; ╎ &nbsp; -->
   <a href="https://www.figma.com/files/team/1433355346796142535/project/296173022/LiBoo?fuid=1249324932824321727"> Figma </a> &nbsp; ╎ &nbsp;
