@@ -1,1 +1,1 @@
-# frontend
+# 라이부 FE
