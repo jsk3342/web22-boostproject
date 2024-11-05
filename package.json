@@ -1,0 +1,12 @@
+{
+  "name": "web22-LiBoo",
+  "packageManager": "yarn@4.5.1",
+  "workspaces": [
+    "backend",
+    "frontend",
+    "shared"
+  ],
+  "scripts": {
+    "build": "yarn workspaces foreach run build"
+  }
+}
