@@ -1,4 +1,4 @@
-import { HostSetting, Chat, Header } from '@components/host';
+import { Setting, Chat, Header } from '@components/host';
 import styled from 'styled-components';
 
 export default function HostPage() {
@@ -6,7 +6,7 @@ export default function HostPage() {
     <>
       <Header />
       <FlexContainer>
-        <HostSetting />
+        <Setting />
         <Chat />
       </FlexContainer>
     </>
