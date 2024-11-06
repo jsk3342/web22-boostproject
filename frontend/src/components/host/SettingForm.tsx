@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 export default function SettingForm() {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [tag, setTag] = useState('');
   const [notice, setNotice] = useState('');
-  const [previewImage, setPreviewImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
-  const handleImageChange = (e) => {
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files && e.target.files[0]) {
       setPreviewImage(URL.createObjectURL(e.target.files[0]));
     }
