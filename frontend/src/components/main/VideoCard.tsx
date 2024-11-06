@@ -16,11 +16,11 @@ const VideoCard = () => {
 
       <VideoCardWrapper>
         <VideoCardProfile>
-          <img src={''} />
+          <img />
         </VideoCardProfile>
         <VideoCardArea>
-          <span className="video-card-title">방송 제목 방송 제목</span>
-          <span className="video-card-name">라이부</span>
+          <span className="video_card_title">방송 제목 방송 제목</span>
+          <span className="video_card_name">라이부</span>
           <VideoCardInformation>
             <ShowInfoBadge badgeType="category" text="프론트엔드" />
             <ShowInfoBadge badgeType="tag" text="태그" />
@@ -79,7 +79,6 @@ const VideoCardProfile = styled.div`
   border-radius: 50%;
   display: block;
   overflow: hidden;
-  position: relative;
   width: 40px;
   height: 40px;
 
@@ -93,12 +92,12 @@ const VideoCardProfile = styled.div`
 const VideoCardArea = styled.div`
   display: flex;
   flex-direction: column;
-  .video-card-title {
+  .video_card_title {
     ${({ theme }) => theme.typographyStyle['display-bold16']}
     color: ${({ theme }) => theme.tokenColor['text-strong']};
     margin-bottom: 8px;
   }
-  .video-card-name {
+  .video_card_name {
     ${({ theme }) => theme.typographyStyle['display-medium14']}
     color: ${({ theme }) => theme.tokenColor['text-bold']};
     margin-bottom: 4px;

@@ -10,7 +10,7 @@ const ShowInfoBadge = ({ text, badgeType, onClick }: ShowInfoBadgeProps) => {
   const backgroundColor = badgeType === 'category' ? 'surface-alt' : 'surface-default';
 
   return (
-    <ShowInfoBadgeContainer backgroundColor={backgroundColor} onClick={onClick}>
+    <ShowInfoBadgeContainer $backgroundColor={backgroundColor} onClick={onClick}>
       {text}
     </ShowInfoBadgeContainer>
   );
@@ -18,7 +18,7 @@ const ShowInfoBadge = ({ text, badgeType, onClick }: ShowInfoBadgeProps) => {
 
 export default ShowInfoBadge;
 
-const ShowInfoBadgeContainer = styled.div<{ backgroundColor: string }>`
+const ShowInfoBadgeContainer = styled.div<{ $backgroundColor: string }>`
   box-sizing: border-box;
   height: 20px;
   width: fit-content;
@@ -30,6 +30,6 @@ const ShowInfoBadgeContainer = styled.div<{ backgroundColor: string }>`
   border-radius: 4px;
   color: ${({ theme }) => theme.tokenColor['text-default']};
   ${({ theme }) => theme.typographyStyle['display-medium12']}
-  background-color: ${({ theme, backgroundColor }) => theme.tokenColor[backgroundColor] || 'transparent'};
+  background-color: ${({ theme, $backgroundColor }) => theme.tokenColor[$backgroundColor] || 'transparent'};
   cursor: pointer;
 `;
