@@ -30,7 +30,7 @@ export { ThumbnailBadge, LiveBadge, ReplayBadge, LiveViewCountBadge, ReplayViewC
 const ThumbnailBadgeContainer = styled.div<{ backgroundColor: string }>`
   height: 20px;
   width: fit-content;
-  padding: 3px 5px;
+  padding: 0 7px;
   border-radius: 4px;
   display: flex;
   align-items: center;
