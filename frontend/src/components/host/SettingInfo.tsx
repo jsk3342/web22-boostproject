@@ -3,12 +3,12 @@ import OBSIcon from '@assets/img_studio_obs.png';
 import DownloadIcon from '@assets/download.svg';
 
 interface SettingInfoProps {
-  onClose: () => void;
+  toggleModal: () => void;
 }
 
-export default function SettingInfo({ onClose }: SettingInfoProps) {
+export default function SettingInfo({ toggleModal }: SettingInfoProps) {
   return (
-    <PopupOverlay onClick={onClose}>
+    <PopupOverlay onClick={toggleModal}>
       <PopupContainer
         role="alertdialog"
         aria-modal="true"
@@ -18,7 +18,7 @@ export default function SettingInfo({ onClose }: SettingInfoProps) {
       >
         <Header>
           <PopupTitle id="popup-title">스트리밍 설정 안내</PopupTitle>
-          <CloseButton onClick={onClose} aria-label="팝업 닫기">
+          <CloseButton onClick={toggleModal} aria-label="팝업 닫기">
             <span className="blind">팝업 닫기</span>
           </CloseButton>
         </Header>
@@ -69,7 +69,7 @@ export default function SettingInfo({ onClose }: SettingInfoProps) {
           </PopupInner>
         </PopupContent>
         <PopupFooter>
-          <ConfirmButton onClick={onClose}>확인</ConfirmButton>
+          <ConfirmButton onClick={toggleModal}>확인</ConfirmButton>
         </PopupFooter>
       </PopupContainer>
     </PopupOverlay>

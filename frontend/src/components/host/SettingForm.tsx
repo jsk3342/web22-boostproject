@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { ChangeEvent, useState } from 'react';
 
-export default function SettingForm() {
+interface SettingFormProps {
+  toggleStreaming: () => void;
+}
+
+export default function SettingForm({ toggleStreaming }: SettingFormProps) {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [tag, setTag] = useState('');
@@ -72,7 +76,7 @@ export default function SettingForm() {
           </ImageUpload>
         </FormCell>
 
-        <Button>업데이트</Button>
+        <Button onClick={toggleStreaming}>업데이트</Button>
       </FormArea>
     </Container>
   );
