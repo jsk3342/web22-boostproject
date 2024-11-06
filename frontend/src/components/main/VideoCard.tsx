@@ -1,23 +1,32 @@
 import styled from 'styled-components';
 import sampleThumbnail from '@assets/sampleThumbnail.png';
-import { LiveBadge, LiveViewCountBadge } from './ThumbnailBadge';
+import { LiveBadge, LiveViewCountBadge, ReplayBadge, ReplayViewCountBadge } from './ThumbnailBadge';
 import ShowInfoBadge from './ShowInfoBadge';
 
-const VideoCard = () => {
+interface VideoCardProps {
+  type: 'live' | 'replay';
+}
+
+const VideoCard = ({ type }: VideoCardProps) => {
   return (
     <VideoCardContainer>
       <VideoCardThumbnail>
         <VideoCardImage src={sampleThumbnail} />
-        <VideoCardDescription>
-          <LiveBadge />
-          <LiveViewCountBadge count={1125} />
-        </VideoCardDescription>
+        {type === 'live' ? (
+          <VideoCardDescription>
+            <LiveBadge />
+            <LiveViewCountBadge count={1125} />
+          </VideoCardDescription>
+        ) : (
+          <VideoCardDescription>
+            <ReplayBadge />
+            <ReplayViewCountBadge count={1125} />
+          </VideoCardDescription>
+        )}
       </VideoCardThumbnail>
 
       <VideoCardWrapper>
-        <VideoCardProfile>
-          <img />
-        </VideoCardProfile>
+        <VideoCardProfile></VideoCardProfile>
         <VideoCardArea>
           <span className="video_card_title">방송 제목 방송 제목</span>
           <span className="video_card_name">라이부</span>
@@ -35,8 +44,7 @@ export default VideoCard;
 
 const VideoCardContainer = styled.div`
   height: 30%;
-  max-width: 440px;
-  min-width: 260px;
+  width: 30%;
   word-wrap: break-word;
   word-break: break-all;
 `;
@@ -92,6 +100,7 @@ const VideoCardProfile = styled.div`
 const VideoCardArea = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 5px;
   .video_card_title {
     ${({ theme }) => theme.typographyStyle['display-bold16']}
     color: ${({ theme }) => theme.tokenColor['text-strong']};
@@ -100,7 +109,7 @@ const VideoCardArea = styled.div`
   .video_card_name {
     ${({ theme }) => theme.typographyStyle['display-medium14']}
     color: ${({ theme }) => theme.tokenColor['text-bold']};
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
 `;
 

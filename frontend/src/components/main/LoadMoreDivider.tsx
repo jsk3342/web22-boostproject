@@ -59,6 +59,6 @@ const LoadMoreDividerBox = styled.div`
     content: '';
     flex: 1;
     height: 1px;
-    background-color: ${({ theme }) => theme.tokenColor['text-strong']};
+    background-color: ${({ theme }) => theme.tokenColor['surface-alt']};
   }
 `;
