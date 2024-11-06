@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import playerLoading from '@assets/player_loading.gif';
+import { usePortal } from '@hooks/usePortal';
+import SettingInfo from './SettingInfo';
 
 interface ContainerProps {
   onStreaming: boolean;
@@ -8,9 +10,17 @@ interface ContainerProps {
 
 export default function Player() {
   const [onStreaming, setOnStreaming] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const createPortal = usePortal();
 
   const toggleStreaming = () => {
-    setOnStreaming((prev) => !prev);
+    // setOnStreaming((prev) => !prev);
+    setShowModal((prev) => !prev);
+  };
+
+  const onClose = () => {
+    setShowModal(false);
   };
 
   return (
@@ -23,6 +33,7 @@ export default function Player() {
             <Button type="button" onClick={toggleStreaming}>
               스트리밍 설정 안내
             </Button>
+            {showModal && createPortal(<SettingInfo onClose={onClose} />)}
           </PlayerWrapper>
         </LivePlayerInner>
       </Container>
