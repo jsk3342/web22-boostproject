@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 
 interface OfflineViewProps {
-  closeModal: () => void;
+  openModal: () => void;
 }
 
-export default function OfflineView({ closeModal }: OfflineViewProps) {
+export default function OfflineView({ openModal }: OfflineViewProps) {
   return (
     <LivePlayerInner>
       <PlayerTitle>라이브 스트리밍을 시작하려면 스트리밍 소프트웨어를 연결하세요.</PlayerTitle>
       <PlayerDescription>방송 시작 및 종료는 스트리밍 소프트웨어에서 가능합니다.</PlayerDescription>
       <PlayerWrapper>
-        <Button type="button" onClick={closeModal}>
+        <Button type="button" onClick={openModal}>
           스트리밍 설정 안내
         </Button>
       </PlayerWrapper>
