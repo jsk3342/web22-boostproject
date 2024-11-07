@@ -10,13 +10,11 @@ const Chat = () => {
 
   return (
     <>
-      {chatVisible ? (
+      {chatVisible && (
         <ChatContainer>
           <h3>채팅</h3>
           <button onClick={handleChatVisible}>채팅창아 사라져라!</button>
         </ChatContainer>
-      ) : (
-        <></>
       )}
     </>
   );

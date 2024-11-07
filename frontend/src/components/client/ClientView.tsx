@@ -7,6 +7,7 @@ import Footer from './Footer';
 const ClientView = () => {
   return (
     <ClientViewContainer>
+      {/* <h1 class='hidden'>클라이언트 페이지</h1> */}
       <Player />
       <PlayerInfo />
       <Footer />

@@ -12,7 +12,7 @@ const Player = () => {
   const [onStreaming, setOnStreaming] = useState(false);
 
   return (
-    <Container onStreaming={onStreaming}>
+    <Container $onStreaming={onStreaming}>
       <LivePlayerInner>{!onStreaming && <PlayButton onClick={() => setOnStreaming(true)} />}</LivePlayerInner>
     </Container>
   );
@@ -23,7 +23,6 @@ export default Player;
 const Container = styled.div<ContainerProps>`
   background: ${({ onStreaming, theme }) =>
     onStreaming ? theme.tokenColors['surface-default'] : `url(${playerLoading}) no-repeat center / cover`};
-  width: 100%;
   padding-top: 56.25%;
   position: relative;
 `;

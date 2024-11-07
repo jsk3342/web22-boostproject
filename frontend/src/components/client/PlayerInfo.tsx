@@ -2,17 +2,17 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 const PlayerInfo = () => {
-  const [isLiveVideo, setIsLiveVideo] = useState(true);
+  const [videoStatus, setVideoStatus] = useState(true);
 
   return (
     <PlayerInfoContainer>
       <VideoTitle>크롱의 클라이언트 상태관리 라이부</VideoTitle>
       <PlayerInfoBox>
-        <ImageBox>{isLiveVideo && <LiveBox>LIVE</LiveBox>}</ImageBox>
+        <ImageBox>{videoStatus && <LiveBox>LIVE</LiveBox>}</ImageBox>
         <VideoInfo>
           <VideoUploader>네이버 부스트캠프</VideoUploader>
-          <CategoryTitle>frontend</CategoryTitle>
-          {isLiveVideo && (
+          <Category>frontend</Category>
+          {videoStatus && (
             <LiveInfo>
               <p>192명 시청 중</p>
               <p>·</p>
@@ -84,7 +84,7 @@ const VideoUploader = styled.p`
   ${({ theme }) => theme.tokenTypographys['display-bold16']};
 `;
 
-const CategoryTitle = styled.p`
+const Category = styled.p`
   color: ${({ theme }) => theme.tokenColors['brand-default']};
   ${({ theme }) => theme.tokenTypographys['display-bold12']};
 `;
@@ -108,7 +108,7 @@ const VideoDescription = styled.div`
   background-color: ${({ theme }) => theme.tokenColors['surface-alt']};
 `;
 
-const DescriptionTitle = styled.h2`
+const DescriptionTitle = styled.p`
   ${({ theme }) => theme.tokenTypographys['display-bold12']};
 `;
 
