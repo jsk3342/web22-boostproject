@@ -19,6 +19,9 @@ const MainLiveSection = ({ title, type }: MainLiveSectionProps) => {
         ))}
       </MainSectionContentList>
       <LoadMoreDivider text="더보기" />
+      <div className="parent">
+        <div className="child"></div>
+      </div>
     </MainSectionContainer>
   );
 };
@@ -26,7 +29,6 @@ const MainLiveSection = ({ title, type }: MainLiveSectionProps) => {
 export default MainLiveSection;
 
 const MainSectionContainer = styled.section`
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,7 +50,6 @@ const MainSectionHeader = styled.div`
 `;
 
 const MainSectionContentList = styled.div`
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;

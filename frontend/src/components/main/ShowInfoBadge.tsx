@@ -18,14 +18,9 @@ const ShowInfoBadge = ({ text, badgeType, onClick }: ShowInfoBadgeProps) => {
 
 export default ShowInfoBadge;
 
-const ShowInfoBadgeContainer = styled.div<{ $backgroundColor: string }>`
+const ShowInfoBadgeContainer = styled.span<{ $backgroundColor: string }>`
   box-sizing: border-box;
-  height: 20px;
-  width: fit-content;
-  padding: 4px 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 3px 6px;
   border: 1px solid ${({ theme }) => theme.tokenColor['surface-alt']};
   border-radius: 4px;
   color: ${({ theme }) => theme.tokenColor['text-default']};

@@ -33,15 +33,10 @@ const ReplayViewCountBadge = ({ count }: { count: number }) => (
 
 export { ThumbnailBadge, LiveBadge, LiveBadgeLarge, ReplayBadge, LiveViewCountBadge, ReplayViewCountBadge };
 
-const ThumbnailBadgeContainer = styled.div<{ $backgroundColor: string; $size: 'small' | 'large' }>`
-  height: ${({ $size }) => ($size === 'large' ? '25px' : '20px')};
-  width: fit-content;
-  padding: ${({ $size }) => ($size === 'large' ? '0 12px' : '0 7px')};
+const ThumbnailBadgeContainer = styled.span<{ $backgroundColor: string; $size: 'small' | 'large' }>`
+  padding: ${({ $size }) => ($size === 'large' ? '6px 12px' : '6px 8px')};
   ${({ theme, $size }) => theme.typographyStyle[$size === 'large' ? 'display-bold16' : 'display-bold12']}
   border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: ${({ theme }) => theme.tokenColor['color-white']};
 
   background-color: ${({ theme, $backgroundColor }) =>
