@@ -1,7 +1,21 @@
+import styled from 'styled-components';
+
+import Header from '@components/client/Header';
+import ClientView from '@components/client/ClientView';
+import Chat from '@components/client/Chat';
+
 export default function ClientPage() {
   return (
     <>
-      <h1>client page</h1>
+      <Header />
+      <ClientContainer>
+        <ClientView />
+        <Chat />
+      </ClientContainer>
     </>
   );
 }
+
+const ClientContainer = styled.div`
+  display: flex;
+`;

@@ -1,6 +1,6 @@
-import { TypographyToken, ColorToken } from '../types/style';
+import { TypographyToken, ColorToken } from '@types/style';
 
-export const color = {
+export const colorMap = {
   gray: {
     100: '#DFE2EA',
     200: '#DDDDDD',
@@ -19,44 +19,44 @@ export const color = {
   brand: '#01F89F'
 };
 
-export const tokenColor: Record<ColorToken, string> = {
-  'surface-default': color.gray.black,
-  'surface-alt': color.gray[900],
-  'text-weak': color.gray[700],
-  'text-default': color.gray[500],
-  'text-bold': color.gray[300],
-  'text-strong': color.gray[100],
-  'color-white': color.gray.white,
-  'brand-default': color.brand,
-  'purple-default': color.purple[500],
-  'purple-alt': color.purple[100],
-  'border-default': color.gray[200]
+export const tokenColors: Record<ColorToken, string> = {
+  'surface-default': colorMap.gray.black,
+  'surface-alt': colorMap.gray[900],
+  'text-weak': colorMap.gray[700],
+  'text-default': colorMap.gray[500],
+  'text-bold': colorMap.gray[300],
+  'text-strong': colorMap.gray[100],
+  'color-white': colorMap.gray.white,
+  'brand-default': colorMap.brand,
+  'purple-default': colorMap.purple[500],
+  'purple-alt': colorMap.purple[100],
+  'border-default': colorMap.gray[200]
 };
 
-export const typography = {
+export const typographyMap = {
   fontWeights: {
     bold: 700,
     medium: 400
   },
   lineHeights: {
-    default: 'auto'
+    default: 1.5
   }
 };
 
-export const typographyStyle: Record<TypographyToken, string> = {
-  'display-bold48': `font-size: 48px; font-weight: ${typography.fontWeights.bold}; line-height: ${typography.lineHeights.default};`,
-  'display-bold24': `font-size: 24px; font-weight: ${typography.fontWeights.bold}; line-height: ${typography.lineHeights.default};`,
-  'display-bold20': `font-size: 20px; font-weight: ${typography.fontWeights.bold};  line-height: ${typography.lineHeights.default};`,
-  'display-bold16': `font-size: 16px; font-weight: ${typography.fontWeights.bold}; line-height: ${typography.lineHeights.default};`,
-  'display-bold14': `font-size: 14px; font-weight: ${typography.fontWeights.bold}; line-height: ${typography.lineHeights.default};`,
-  'display-bold12': `font-size: 12px; font-weight: ${typography.fontWeights.bold};  line-height: ${typography.lineHeights.default};`,
-  'display-medium16': `font-size: 16px; font-weight: ${typography.fontWeights.medium}; line-height: ${typography.lineHeights.default};`,
-  'display-medium14': `font-size: 14px; font-weight: ${typography.fontWeights.medium}; line-height: ${typography.lineHeights.default};`,
-  'display-medium12': `font-size: 12px; font-weight: ${typography.fontWeights.medium}; line-height: ${typography.lineHeights.default};`
+export const tokenTypographys: Record<TypographyToken, string> = {
+  'display-bold48': `font-size: 48px; font-weight: ${typographyMap.fontWeights.bold}; line-height: ${typographyMap.lineHeights.default};`,
+  'display-bold24': `font-size: 24px; font-weight: ${typographyMap.fontWeights.bold}; line-height: ${typographyMap.lineHeights.default};`,
+  'display-bold20': `font-size: 20px; font-weight: ${typographyMap.fontWeights.bold};  line-height: ${typographyMap.lineHeights.default};`,
+  'display-bold16': `font-size: 16px; font-weight: ${typographyMap.fontWeights.bold}; line-height: ${typographyMap.lineHeights.default};`,
+  'display-bold14': `font-size: 14px; font-weight: ${typographyMap.fontWeights.bold}; line-height: ${typographyMap.lineHeights.default};`,
+  'display-bold12': `font-size: 12px; font-weight: ${typographyMap.fontWeights.bold};  line-height: ${typographyMap.lineHeights.default};`,
+  'display-medium16': `font-size: 16px; font-weight: ${typographyMap.fontWeights.medium}; line-height: ${typographyMap.lineHeights.default};`,
+  'display-medium14': `font-size: 14px; font-weight: ${typographyMap.fontWeights.medium}; line-height: ${typographyMap.lineHeights.default};`,
+  'display-medium12': `font-size: 12px; font-weight: ${typographyMap.fontWeights.medium}; line-height: ${typographyMap.lineHeights.default};`
 };
 
 export const theme = {
-  color,
-  tokenColor,
-  typographyStyle
+  colorMap,
+  tokenColors,
+  tokenTypographys
 };
