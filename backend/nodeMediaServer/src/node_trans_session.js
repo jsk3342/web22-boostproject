@@ -73,19 +73,18 @@ class NodeTransSession extends EventEmitter {
     Array.prototype.push.apply(argv, ['-c:a', ac]);
     Array.prototype.push.apply(argv, this.conf.acParam);
     Array.prototype.push.apply(argv, ['-f', 'tee', '-map', '0:a?', '-map', '0:v?', mapStr]);
-    argv = argv.filter((n) => { return n; }); //去空
-    console.log('trans')
+    argv = argv.filter((n) => { return n; });
     this.ffmpeg_exec = spawn(this.conf.ffmpeg, argv);
 
-    fs.watch(ouPath, (eventType, filename) => {
-      if (filename && filename === 'index.m3u8') {
-        if (eventType === 'rename') {
-          console.log(`index.m3u8 파일이 새로 생성되었습니다: ${filename}`);
-        } else if (eventType === 'change') {
-          console.log(`index.m3u8 파일이 갱신되었습니다: ${filename}`);
-        }
-      }
-    });
+    // fs.watch(ouPath, (eventType, filename) => {
+    //   if (filename && filename === 'index.m3u8') {
+    //     if (eventType === 'rename') {
+    //       console.log(`index.m3u8 파일이 새로 생성되었습니다: ${filename}`);
+    //     } else if (eventType === 'change') {
+    //       console.log(`index.m3u8 파일이 갱신되었습니다: ${filename}`);
+    //     }
+    //   }
+    // });
 
     this.ffmpeg_exec.on('error', (e) => {
       Logger.ffdebug(e);
@@ -97,7 +96,6 @@ class NodeTransSession extends EventEmitter {
 
     this.ffmpeg_exec.stderr.on('data', (data) => {
       Logger.ffdebug(`FF_LOG:${data}`);
-      console.log(data.toString());
     });
 
     this.ffmpeg_exec.on('close', (code) => {

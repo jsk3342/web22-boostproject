@@ -11,6 +11,8 @@
     "start": "tsx src/index.ts"
   },
   "devDependencies": {
+    "dotenv": "^16.4.5",
     "tsx": "^4.19.2"
-  }
+  },
+  "type": "module"
 }

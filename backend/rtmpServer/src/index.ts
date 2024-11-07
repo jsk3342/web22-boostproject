@@ -1,4 +1,15 @@
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+
+// 상위 디렉터리의 .env 파일을 불러오기
+dotenv.config({
+  path: resolve('../../.env'), // 필요에 따라 경로 수정
+});
+
 import NodeMediaServer from 'nodeMediaServer';
+
+
 
 const httpConfig = {
   port: 8000,
