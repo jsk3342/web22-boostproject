@@ -3,13 +3,13 @@ import OnlineView from './OnlineView';
 
 interface StreamingViewProps {
   onStreaming: boolean;
-  onToggleModal: () => void;
+  closeModal: () => void;
 }
 
-export default function StreamingView({ onStreaming, onToggleModal }: StreamingViewProps) {
+export default function StreamingView({ onStreaming, closeModal }: StreamingViewProps) {
   if (onStreaming) {
     return <OnlineView />;
   }
 
-  return <OfflineView onToggleModal={onToggleModal} />;
+  return <OfflineView closeModal={closeModal} />;
 }

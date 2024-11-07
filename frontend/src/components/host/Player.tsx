@@ -11,16 +11,16 @@ interface PlayerProps {
 }
 
 export default function Player({ onStreaming }: PlayerProps) {
-  const { isOpen, toggleModal } = useModal();
+  const { isOpen, closeModal } = useModal();
   const createPortal = usePortal();
 
   return (
     <>
       <Container onStreaming={onStreaming}>
-        <StreamingView onStreaming={onStreaming} onToggleModal={toggleModal} />
+        <StreamingView onStreaming={onStreaming} closeModal={closeModal} />
       </Container>
       <StreamingStatus onStreaming={onStreaming} />
-      {isOpen && createPortal(<SettingInfo toggleModal={toggleModal} />)}
+      {isOpen && createPortal(<SettingInfo closeModal={closeModal} />)}
     </>
   );
 }
