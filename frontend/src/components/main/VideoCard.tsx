@@ -43,8 +43,6 @@ const VideoCard = ({ type }: VideoCardProps) => {
 export default VideoCard;
 
 const VideoCardContainer = styled.div`
-  height: 30%;
-  width: 30%;
   word-wrap: break-word;
   word-break: break-all;
 `;
@@ -78,7 +76,6 @@ const VideoCardWrapper = styled.div`
   margin-top: 12px;
   display: flex;
   min-width: 0;
-  width: 100%;
 `;
 
 const VideoCardProfile = styled.div`
