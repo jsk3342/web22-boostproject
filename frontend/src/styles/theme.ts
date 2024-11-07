@@ -30,7 +30,8 @@ export const tokenColors: Record<ColorToken, string> = {
   'brand-default': colorMap.brand,
   'purple-default': colorMap.purple[500],
   'purple-alt': colorMap.purple[100],
-  'border-default': colorMap.gray[200]
+  'border-default': colorMap.gray[200],
+  'red-default': colorMap.red
 };
 
 export const typographyMap = {

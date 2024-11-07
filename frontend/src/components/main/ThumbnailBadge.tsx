@@ -35,12 +35,12 @@ export { ThumbnailBadge, LiveBadge, LiveBadgeLarge, ReplayBadge, LiveViewCountBa
 
 const ThumbnailBadgeContainer = styled.span<{ $backgroundColor: string; $size: 'small' | 'large' }>`
   padding: ${({ $size }) => ($size === 'large' ? '6px 12px' : '6px 8px')};
-  ${({ theme, $size }) => theme.typographyStyle[$size === 'large' ? 'display-bold16' : 'display-bold12']}
+  ${({ theme, $size }) => theme.tokenTypographys[$size === 'large' ? 'display-bold16' : 'display-bold12']}
   border-radius: 4px;
-  color: ${({ theme }) => theme.tokenColor['color-white']};
+  color: ${({ theme }) => theme.tokenColors['color-white']};
 
   background-color: ${({ theme, $backgroundColor }) =>
     $backgroundColor.startsWith('#') || $backgroundColor.startsWith('rgb')
       ? $backgroundColor
-      : theme.tokenColor[$backgroundColor] || theme.tokenColor['gray-default']};
+      : theme.tokenColors[$backgroundColor] || theme.tokenColors['gray-default']};
 `;

@@ -24,5 +24,5 @@ const MainPageContainer = styled.div`
   justify-content: center;
   padding: 90px 45px;
   gap: 40px;
-  background: ${({ theme }) => theme.tokenColor['surface-default']};
+  background: ${({ theme }) => theme.tokenColors['surface-default']};
 `;

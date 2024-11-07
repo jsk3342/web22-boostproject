@@ -31,10 +31,10 @@ const MoreButtonBox = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${({ theme }) => theme.tokenColor['text-default']};
-  ${({ theme }) => theme.typographyStyle['display-medium12']}
-  background-color: ${({ theme }) => theme.tokenColor['surface-default']};
-  border: 1px solid ${({ theme }) => theme.tokenColor['surface-alt']};
+  color: ${({ theme }) => theme.tokenColors['text-default']};
+  ${({ theme }) => theme.tokenTypographys['display-medium12']}
+  background-color: ${({ theme }) => theme.tokenColors['surface-default']};
+  border: 1px solid ${({ theme }) => theme.tokenColors['surface-alt']};
   border-radius: 15px;
   margin: 0 16px;
   cursor: pointer;
@@ -58,6 +58,6 @@ const LoadMoreDividerBox = styled.div`
     content: '';
     flex: 1;
     height: 1px;
-    background-color: ${({ theme }) => theme.tokenColor['surface-alt']};
+    background-color: ${({ theme }) => theme.tokenColors['surface-alt']};
   }
 `;

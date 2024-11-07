@@ -21,10 +21,10 @@ export default ShowInfoBadge;
 const ShowInfoBadgeContainer = styled.span<{ $backgroundColor: string }>`
   box-sizing: border-box;
   padding: 3px 6px;
-  border: 1px solid ${({ theme }) => theme.tokenColor['surface-alt']};
+  border: 1px solid ${({ theme }) => theme.tokenColors['surface-alt']};
   border-radius: 4px;
-  color: ${({ theme }) => theme.tokenColor['text-default']};
-  ${({ theme }) => theme.typographyStyle['display-medium12']}
-  background-color: ${({ theme, $backgroundColor }) => theme.tokenColor[$backgroundColor] || 'transparent'};
+  color: ${({ theme }) => theme.tokenColors['text-default']};
+  ${({ theme }) => theme.tokenTypographys['display-medium12']}
+  background-color: ${({ theme, $backgroundColor }) => theme.tokenColors[$backgroundColor] || 'transparent'};
   cursor: pointer;
 `;

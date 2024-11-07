@@ -40,12 +40,12 @@ const MainSectionHeader = styled.div`
   align-items: end;
   margin-bottom: 25px;
   .live_section_title {
-    ${({ theme }) => theme.typographyStyle['display-bold20']}
-    color: ${({ theme }) => theme.tokenColor['color-white']};
+    ${({ theme }) => theme.tokenTypographys['display-bold20']}
+    color: ${({ theme }) => theme.tokenColors['color-white']};
   }
   .live_section_button {
-    ${({ theme }) => theme.typographyStyle['display-bold14']}
-    color: ${({ theme }) => theme.tokenColor['text-default']};
+    ${({ theme }) => theme.tokenTypographys['display-bold14']}
+    color: ${({ theme }) => theme.tokenColors['text-default']};
   }
 `;
 

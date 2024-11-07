@@ -71,12 +71,12 @@ const RecommendLiveHeader = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
-    ${({ theme }) => theme.typographyStyle['display-bold16']}
-    color: ${({ theme }) => theme.tokenColor['red-default']};
+    ${({ theme }) => theme.tokenTypographys['display-bold16']}
+    color: ${({ theme }) => theme.tokenColors['red-default']};
   }
   .recommend_live_title {
-    ${({ theme }) => theme.typographyStyle['display-bold24']}
-    color: ${({ theme }) => theme.tokenColor['color-white']};
+    ${({ theme }) => theme.tokenTypographys['display-bold24']}
+    color: ${({ theme }) => theme.tokenColors['color-white']};
   }
 `;
 
@@ -89,8 +89,8 @@ const RecommendLiveInformation = styled.div`
 
 const RecommendLiveProfile = styled.div`
   margin-right: 10px;
-  background: ${({ theme }) => theme.tokenColor['surface-alt']} no-repeat 50% / cover;
-  border: 4px solid ${({ theme }) => theme.tokenColor['brand-default']};
+  background: ${({ theme }) => theme.tokenColors['surface-alt']} no-repeat 50% / cover;
+  border: 4px solid ${({ theme }) => theme.tokenColors['brand-default']};
   border-radius: 50%;
   display: block;
   overflow: hidden;
@@ -110,13 +110,13 @@ const RecommendLiveArea = styled.div`
   flex-direction: column;
   gap: 5px;
   .video_card_name {
-    ${({ theme }) => theme.typographyStyle['display-bold20']}
-    color: ${({ theme }) => theme.tokenColor['text-strong']};
+    ${({ theme }) => theme.tokenTypographys['display-bold20']}
+    color: ${({ theme }) => theme.tokenColors['text-strong']};
     margin-bottom: 8px;
   }
   .video_card_category {
-    ${({ theme }) => theme.typographyStyle['display-bold16']}
-    color: ${({ theme }) => theme.tokenColor['brand-default']};
+    ${({ theme }) => theme.tokenTypographys['display-bold16']}
+    color: ${({ theme }) => theme.tokenColors['brand-default']};
     margin-bottom: 4px;
   }
 `;

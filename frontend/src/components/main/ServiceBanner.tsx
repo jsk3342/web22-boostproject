@@ -9,5 +9,5 @@ export default ServiceBanner;
 const ServiceBannerContainer = styled.div`
   height: 80px;
   border-radius: 10px;
-  background: ${({ theme }) => theme.tokenColor['brand-default']};
+  background: ${({ theme }) => theme.tokenColors['brand-default']};
 `;

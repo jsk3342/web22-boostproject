@@ -80,7 +80,7 @@ const VideoCardWrapper = styled.div`
 
 const VideoCardProfile = styled.div`
   margin-right: 10px;
-  background: ${({ theme }) => theme.tokenColor['surface-alt']} no-repeat 50% / cover;
+  background: ${({ theme }) => theme.tokenColors['surface-alt']} no-repeat 50% / cover;
   border-radius: 50%;
   display: block;
   overflow: hidden;
@@ -99,13 +99,13 @@ const VideoCardArea = styled.div`
   flex-direction: column;
   margin-top: 5px;
   .video_card_title {
-    ${({ theme }) => theme.typographyStyle['display-bold16']}
-    color: ${({ theme }) => theme.tokenColor['text-strong']};
+    ${({ theme }) => theme.tokenTypographys['display-bold16']}
+    color: ${({ theme }) => theme.tokenColors['text-strong']};
     margin-bottom: 8px;
   }
   .video_card_name {
-    ${({ theme }) => theme.typographyStyle['display-medium14']}
-    color: ${({ theme }) => theme.tokenColor['text-bold']};
+    ${({ theme }) => theme.tokenTypographys['display-medium14']}
+    color: ${({ theme }) => theme.tokenColors['text-bold']};
     margin-bottom: 6px;
   }
 `;

@@ -67,7 +67,7 @@ const LiveBox = styled.div`
   transform: translateX(-50%);
   padding: 2px 8px;
   border-radius: 7px;
-  background-color: ${({ theme }) => theme.colorMap['red']};
+  background-color: ${({ theme }) => theme.tokenColors['red-default']};
   color: ${({ theme }) => theme.tokenColors['text-strong']};
   ${({ theme }) => theme.tokenTypographys['display-bold16']};
   line-height: 1.2;

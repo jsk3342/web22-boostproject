@@ -14,6 +14,6 @@ const HeaderContainer = styled.div`
   top: 0;
   right: 0;
   z-index: 11000;
-  background: ${({ theme }) => theme.tokenColor['surface-default']};
-  color: ${({ theme }) => theme.tokenColor['text-strong']};
+  background: ${({ theme }) => theme.tokenColors['surface-default']};
+  color: ${({ theme }) => theme.tokenColors['text-strong']};
 `;
