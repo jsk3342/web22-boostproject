@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 import Player from './Player';
 import SettingForm from './SettingForm';
+import { useState } from 'react';
 
 export default function Setting() {
+  const [onStreaming, setOnStreaming] = useState(false);
+  const toggleStreaming = () => {
+    setOnStreaming((prev) => !prev);
+  };
+
   return (
     <Container>
-      <Player />
-      <SettingForm />
+      <Player onStreaming={onStreaming} />
+      <SettingForm toggleStreaming={toggleStreaming} />
     </Container>
   );
 }
