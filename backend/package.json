@@ -1,9 +1,7 @@
 {
   "name": "backend",
+  "private": true,
   "packageManager": "yarn@4.5.1",
-  "dependencies": {
-    "shared": "workspace:^"
-  },
   "workspaces": [
     "*"
   ],
@@ -11,5 +9,9 @@
     "@types/node": "^22.9.0",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3"
+  },
+  "scripts": {
+    "start_rtmp": "yarn workspace rtmpServer run start",
+    "start": "yarn start_rtmp"
   }
 }
