@@ -25,8 +25,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: .env setting
-        run: echo "REGISTRY_TOKEN=${{ secrets.REGISTRY_TOKEN }}" > ./.env
+        run: |
+          touch .env
+          echo "REGISTRY_TOKEN=${{ secrets.REGISTRY_TOKEN }}" > .env
 
+      - name: ls test
+        run: ls -la
+      
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
