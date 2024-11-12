@@ -21,9 +21,9 @@ jobs:
         workspace: [frontend, backend]
 
     steps:
-      - name: pwd check
-        run: pwd
-        
+      - name: .env setting
+        run: echo "REGISTRY_TOKEN=${{ secrets.REGISTRY_TOKEN }}" >> /home/runner/work/web22-LiBoo/web22-LiBoo/backend/.env
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
