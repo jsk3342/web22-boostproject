@@ -1,4 +1,4 @@
-export type colorToken =
+export type ColorToken =
   | 'surface-default'
   | 'surface-alt'
   | 'text-weak'
@@ -12,7 +12,7 @@ export type colorToken =
   | 'red-default'
   | 'border-default';
 
-export type typographyToken =
+export type TypographyToken =
   | 'display-bold48'
   | 'display-bold24'
   | 'display-bold20'
