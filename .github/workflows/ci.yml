@@ -27,7 +27,7 @@ jobs:
       - name: .env setting
         run: |
           touch ../.env
-          echo "GITHUB_REGISTRY_TOKEN=${{ secrets.REGISTRY_TOKEN }}" > ../.env
+          echo "GITHUB_REGISTRY_TOKEN:${{ secrets.REGISTRY_TOKEN }}" > ../.env
         
       
       - name: Setup Node.js
