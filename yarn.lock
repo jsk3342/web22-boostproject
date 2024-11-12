@@ -97,9 +97,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/client-s3@npm:^3.685.0":
-  version: 3.686.0
-  resolution: "@aws-sdk/client-s3@npm:3.686.0"
+"@aws-sdk/client-s3@npm:^3.688.0":
+  version: 3.689.0
+  resolution: "@aws-sdk/client-s3@npm:3.689.0"
   dependencies:
     "@aws-crypto/sha1-browser": "npm:5.2.0"
     "@aws-crypto/sha256-browser": "npm:5.2.0"
@@ -110,7 +110,7 @@ __metadata:
     "@aws-sdk/credential-provider-node": "npm:3.687.0"
     "@aws-sdk/middleware-bucket-endpoint": "npm:3.686.0"
     "@aws-sdk/middleware-expect-continue": "npm:3.686.0"
-    "@aws-sdk/middleware-flexible-checksums": "npm:3.686.0"
+    "@aws-sdk/middleware-flexible-checksums": "npm:3.689.0"
     "@aws-sdk/middleware-host-header": "npm:3.686.0"
     "@aws-sdk/middleware-location-constraint": "npm:3.686.0"
     "@aws-sdk/middleware-logger": "npm:3.686.0"
@@ -159,7 +159,7 @@ __metadata:
     "@smithy/util-utf8": "npm:^3.0.0"
     "@smithy/util-waiter": "npm:^3.1.7"
     tslib: "npm:^2.6.2"
-  checksum: 10c0/5b7f222834846b77ee747746af197377fea65a14e817c3c564912517027fe45ea9bcc485acf3202019011b1706881dd4221552924d4d8cb873ed9b7af5ebf862
+  checksum: 10c0/002bd6285b33f2a78789aa83443712be3362b24db4ec592d5f15172186a69e5687a4450fda38c80f5fc7d2b7042515fca0bae60085e30848cc9c76aa418fa165
   languageName: node
   linkType: hard
 
@@ -470,9 +470,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@aws-sdk/middleware-flexible-checksums@npm:3.686.0":
-  version: 3.686.0
-  resolution: "@aws-sdk/middleware-flexible-checksums@npm:3.686.0"
+"@aws-sdk/middleware-flexible-checksums@npm:3.689.0":
+  version: 3.689.0
+  resolution: "@aws-sdk/middleware-flexible-checksums@npm:3.689.0"
   dependencies:
     "@aws-crypto/crc32": "npm:5.2.0"
     "@aws-crypto/crc32c": "npm:5.2.0"
@@ -487,7 +487,7 @@ __metadata:
     "@smithy/util-stream": "npm:^3.2.1"
     "@smithy/util-utf8": "npm:^3.0.0"
     tslib: "npm:^2.6.2"
-  checksum: 10c0/56418559cf2a3d61f2acf0c903c82ea447863bc3d157da4b6b0b03f018d0e74fc8a4455d9fbc907afc59969cf62ad034f6aed88754f8fab3a405767a54014dd0
+  checksum: 10c0/5bca4640456ede98f0a07f8cae6b00f27f531ab193277f4b88e2ede427ea71a448f55668cf76c70e3d1385420017ff14e458e9b3d9043979621881ba0aae767c
   languageName: node
   linkType: hard
 
@@ -2889,7 +2889,10 @@ __metadata:
   dependencies:
     "@eslint/js": "npm:^9.14.0"
     "@types/node": "npm:^22.9.0"
-    shared: "workspace:^"
+    "@typescript-eslint/eslint-plugin": "npm:^8.14.0"
+    "@typescript-eslint/parser": "npm:^8.14.0"
+    eslint: "npm:^9.14.0"
+    globals: "npm:^15.12.0"
     tsx: "npm:^4.19.2"
     typescript: "npm:^5.6.3"
     typescript-eslint: "npm:^8.14.0"
@@ -5573,7 +5576,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picocolors@npm:^1.0.0, picocolors@npm:^1.1.0":
+"path@npm:0.12.7":
+  version: 0.12.7
+  resolution: "path@npm:0.12.7"
+  dependencies:
+    process: "npm:^0.11.1"
+    util: "npm:^0.10.3"
+  checksum: 10c0/f795ce5438a988a590c7b6dfd450ec9baa1c391a8be4c2dea48baa6e0f5b199e56cd83b8c9ebf3991b81bea58236d2c32bdafe2c17a2e70c3a2e4c69891ade59
+  languageName: node
+  linkType: hard
+
+"picocolors@npm:^1.0.0, picocolors@npm:^1.1.0, picocolors@npm:^1.1.1":
   version: 1.1.1
   resolution: "picocolors@npm:1.1.1"
   checksum: 10c0/e2e3e8170ab9d7c7421969adaa7e1b31434f789afb9b3f115f6b96d91945041ac3ceb02e9ec6fe6510ff036bcc0bf91e69a1772edc0b707e12b19c0f2d6bcf58
@@ -5951,8 +5964,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "rtmpServer@workspace:backend/rtmpServer"
   dependencies:
+    "@eslint/js": "npm:^9.13.0"
+    "@hoeeeeeh/node-media-server": "npm:2.7.28"
+    "@types/node": "npm:^22.9.0"
+    "@typescript-eslint/eslint-plugin": "npm:^8.14.0"
+    "@typescript-eslint/parser": "npm:^8.14.0"
     dotenv: "npm:^16.4.5"
-    nodeMediaServer: "workspace:^"
+    eslint: "npm:^9.13.0"
+    globals: "npm:^15.11.0"
+    path: "npm:0.12.7"
     tsx: "npm:^4.19.2"
     typescript: "npm:^5.6.3"
     typescript-eslint: "npm:^8.11.0"
