@@ -12,5 +12,8 @@ export default defineConfig({
       include: '**/*.svg'
     })
   ],
+  build: {
+    outDir: '.dist'
+  },
   cacheDir: '.vite'
 });

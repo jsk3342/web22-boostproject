@@ -5,7 +5,7 @@ import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 
-export default tseslint.config({ ignores: ['dist'] }, js.configs.recommended, ...tseslint.configs.recommended, {
+export default tseslint.config({ ignores: ['.*'] }, js.configs.recommended, ...tseslint.configs.recommended, {
   files: ['**/*.{ts,tsx}'],
   languageOptions: {
     ecmaVersion: 2020,
@@ -34,6 +34,7 @@ export default tseslint.config({ ignores: ['dist'] }, js.configs.recommended, ..
         allowConstantExport: true
       }
     ],
+    'react/react-in-jsx-scope': 'off',
     eqeqeq: ['error', 'always'],
     indent: ['error', 2],
     quotes: ['error', 'single'],
