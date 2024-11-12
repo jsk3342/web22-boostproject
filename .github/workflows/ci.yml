@@ -21,6 +21,9 @@ jobs:
         workspace: [frontend, backend]
 
     steps:
+      - name: pwd check
+        run: pwd
+        
       - name: Checkout repository
         uses: actions/checkout@v3
 
