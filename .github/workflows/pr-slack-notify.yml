@@ -1,0 +1,79 @@
+# .github/workflows/pr-slack-notify.yml
+name: PR Slack Notification
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      # 리뷰어 정보를 JSON으로 저장
+      - name: Set reviewers based on repository
+        id: set-reviewers
+        run: |
+          REPO_NAME="${{ github.repository }}"
+          if [[ $REPO_NAME == */dev-fe ]]; then
+            echo "team=FE" >> $GITHUB_OUTPUT
+            echo "reviewers=<@U07GSBHPCPR> <@U07H6QLFPBM> <@U07H9CTPC9J>" >> $GITHUB_OUTPUT
+          elif [[ $REPO_NAME == */dev-be ]]; then
+            echo "team=BE" >> $GITHUB_OUTPUT
+            echo "reviewers=<@U07GSBPT9ST> <@U07H0978N14>" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Send Slack notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          custom_payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "🔍 *새로운 ${{ steps.set-reviewers.outputs.team }} PR이 등록되었습니다*"
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Repository:*\n${{ github.repository }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*작성자:*\n<@${{ github.event.pull_request.user.login }}>"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*PR 제목:*\n<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*PR 설명:*\n${{ github.event.pull_request.body }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "👉 ${{ steps.set-reviewers.outputs.reviewers }} 리뷰 부탁드립니다!"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
