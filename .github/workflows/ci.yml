@@ -21,11 +21,11 @@ jobs:
         workspace: [frontend, backend]
 
     steps:
-      - name: .env setting
-        run: echo "REGISTRY_TOKEN=${{ secrets.REGISTRY_TOKEN }}" > ./backend/.env
-
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: .env setting
+        run: echo "REGISTRY_TOKEN=${{ secrets.REGISTRY_TOKEN }}" > ./backend/.env
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
