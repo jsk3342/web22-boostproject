@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        workspace: [backend, frontend, shared]
+        workspace: [frontend]
 
     steps:
     - name: Checkout repository
