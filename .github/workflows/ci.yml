@@ -28,6 +28,8 @@ jobs:
         run: |
           touch .env
           echo "REGISTRY_TOKEN=${{ secrets.REGISTRY_TOKEN }}" > .env
+          touch ../.env
+          echo "REGISTRY_TOKEN=${{ secrets.REGISTRY_TOKEN }}" > ../.env
 
       - name: ls test
         run: ls -la
