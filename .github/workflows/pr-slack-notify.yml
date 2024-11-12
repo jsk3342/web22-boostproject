@@ -1,4 +1,3 @@
-# .github/workflows/pr-slack-notify.yml
 name: PR Slack Notification
 
 on:
@@ -9,9 +8,6 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      
-      # 리뷰어 정보를 JSON으로 저장
       - name: Set reviewers based on repository
         id: set-reviewers
         run: |
@@ -76,4 +72,3 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
