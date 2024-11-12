@@ -1,20 +1,17 @@
-import { resolve, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import NodeMediaServer from '@hoeeeeeh/node-media-server';
+
 import dotenv from 'dotenv';
+import path from 'path';
 
 // 상위 디렉터리의 .env 파일을 불러오기
-dotenv.config({
-  path: resolve('../../.env'), // 필요에 따라 경로 수정
-});
-
-import NodeMediaServer from 'nodeMediaServer';
-
-
+dotenv.config({path: path.resolve('../.env')});
 
 const httpConfig = {
   port: 8000,
   allow_origin: "*",
-  mediaroot: "../nodeMediaServer/media",
+
+  //package.json 기준
+  mediaroot: "../media",
 };
 
 const rtmpConfig = {
@@ -26,7 +23,8 @@ const rtmpConfig = {
 };
 
 const transformationConfig = {
-  ffmpeg: "../nodeMediaServer/ffmpeg",
+  //package.json 기준
+  ffmpeg: path.resolve('../ffmpeg'),
   tasks: [
     {
       app: "live",
@@ -35,10 +33,22 @@ const transformationConfig = {
       hlsKeep: false,
     },
   ],
-  MediaRoot: "../nodeMediaServer/media",
+  //package.json 기준
+  MediaRoot: "../media",
 };
 
+const S3ClientConfig = {
+  region: process.env.OBJECT_STORAGE_REGION || '',
+  endpoint: process.env.OBJECT_STORAGE_ENDPOINT || '',
+  credentials: {
+    accessKeyId : process.env.OBJECT_STORAGE_ACCESS_KEY_ID || '',
+    secretAccessKey : process.env.OBJECT_STORAGE_SECRET_ACCESS_KEY || '',
+  }
+}
+console.log(S3ClientConfig);
+
 const config = {
+  s3Client: S3ClientConfig,
   http: httpConfig,
   rtmp: rtmpConfig,
   trans: transformationConfig,
@@ -46,4 +56,6 @@ const config = {
 
 const nodeMediaServer = new NodeMediaServer(config);
 
+
 nodeMediaServer.run();
+

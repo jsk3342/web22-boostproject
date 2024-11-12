@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  rtmp-server:
+    container_name: rtmp-container
+    build:
+      context: rtmpServer
+      dockerfile: dockerfile
+    image: liboost/backend-rtmp-server
+    env_file: .env
+    ports:
+      - 8000:8000
+      - 1935:1935
+    networks:
+      - backend-bridge
+
+networks:
+  backend-bridge:
+    driver: bridge
+    name: media-server

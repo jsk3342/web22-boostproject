@@ -1,12 +1,10 @@
 {
   "name": "rtmpServer",
+  "private": true,
   "packageManager": "yarn@4.5.1",
   "dependencies": {
-    "nodeMediaServer": "workspace:^"
+    "@hoeeeeeh/node-media-server": "2.7.28"
   },
-  "workspaces": [
-    "nodeMediaServer"
-  ],
   "scripts": {
     "start": "tsx src/index.ts"
   },

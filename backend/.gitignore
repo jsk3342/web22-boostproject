@@ -1,5 +1,5 @@
 node_modules
 ffmpeg
-nodeMediaServer/media/*
-
+rtmpServer/nodeMediaServer/media/*
+media
 .env
