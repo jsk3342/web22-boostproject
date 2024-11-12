@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 const PlayerInfo = () => {
-  const [videoStatus, setVideoStatus] = useState(true);
+  const [videoStatus] = useState(true);
 
   return (
     <PlayerInfoContainer>
