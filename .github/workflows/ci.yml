@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: .env setting
-        run: echo "REGISTRY_TOKEN=${{ secrets.REGISTRY_TOKEN }}" > ./backend/.env
+        run: echo "REGISTRY_TOKEN=${{ secrets.REGISTRY_TOKEN }}" > ./.env
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
