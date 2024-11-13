@@ -16,7 +16,8 @@
       "@pages/*": ["src/pages/*"],
       "@assets/*": ["src/assets/*"],
       "@styles/*": ["src/styles/*"],
-      "@type/*": ["src/type/*"]
+      "@type/*": ["src/type/*"],
+      "@apis/*": ["src/apis/*"]
     },
     "types": ["vite/client"]
   },
