@@ -1,15 +1,15 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "ESNext",
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
+    "target": "ESNext",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./.dist",
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,
