@@ -16,4 +16,6 @@ export default function ClientPage() {
 
 const ClientContainer = styled.div`
   display: flex;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.tokenColors['surface-default']};
 `;
