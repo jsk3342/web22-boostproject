@@ -4,6 +4,7 @@ import { HostController } from './host.controller';
 import { HostService } from './host.service';
 import { HttpStatus } from '@nestjs/common';
 import {describe, expect, jest} from '@jest/globals';
+import {Request, Response} from 'express';
 
 describe('HostController', () => {
   let controller: HostController;
@@ -37,12 +38,12 @@ describe('HostController', () => {
       body: {
         uuid: mockUuid,
       },
-    } as any;
+    } as unknown as Request;
 
     const res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
-    } as any;
+    } as unknown as Response;
 
     await controller.generateStreamKey(req, res);
 
@@ -61,12 +62,12 @@ describe('HostController', () => {
       body: {
         // uuid가 없는 비정상적인 요청
       },
-    } as any;
+    } as unknown as Request;
 
     const res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
-    } as any;
+    } as unknown as Response;
 
     await controller.generateStreamKey(req, res);
 
@@ -84,12 +85,12 @@ describe('HostController', () => {
       body: {
         uuid: 'test-uuid',
       },
-    } as any;
+    } as unknown as Request;
 
     const res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
-    } as any;
+    } as unknown as Response;
 
     await controller.generateStreamKey(req, res);
 
