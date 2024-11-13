@@ -8,23 +8,37 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Set reviewers based on repository
+      - name: Set reviewers based on branch
         id: set-reviewers
         run: |
-          REPO_NAME="${{ github.repository }}"
-          if [[ $REPO_NAME == *"dev-fe"* ]]; then
+          TARGET_BRANCH="${{ github.event.pull_request.base.ref }}"
+          if [[ $TARGET_BRANCH == "dev-fe" ]]; then
             echo "team=FE" >> $GITHUB_OUTPUT
             echo "reviewers=<@U07GSBHPCPR> <@U07H6QLFPBM> <@U07H9CTPC9J>" >> $GITHUB_OUTPUT
             echo "reviewer_names=김지수, 고민지, 홍창현" >> $GITHUB_OUTPUT
-          elif [[ $REPO_NAME == *"dev-be"* ]]; then
+          elif [[ $TARGET_BRANCH == "dev-be" ]]; then
             echo "team=BE" >> $GITHUB_OUTPUT
             echo "reviewers=<@U07GSBPT9ST> <@U07H0978N14>" >> $GITHUB_OUTPUT
             echo "reviewer_names=김영길, 김준서" >> $GITHUB_OUTPUT
-          else
-            echo "team=Team" >> $GITHUB_OUTPUT
-            echo "reviewers=@here" >> $GITHUB_OUTPUT
-            echo "reviewer_names=전체" >> $GITHUB_OUTPUT
           fi
+
+      - name: Process PR title and body
+        id: pr_process
+        run: |
+          # PR 제목 처리
+          title='${{ github.event.pull_request.title }}'
+          title="${title//'"'/'\\"'}"
+          echo "title=${title}" >> $GITHUB_OUTPUT
+
+          # PR 내용 처리
+          body='${{ github.event.pull_request.body }}'
+          # Remove HTML comments and their content
+          body=$(echo "$body" | sed 's/<!--.*-->//g')
+          # Remove empty lines and special characters
+          body=$(echo "$body" | grep -v '^$' | tr -d '\r')
+          # Replace newlines with actual newlines in Slack message
+          body=$(echo "$body" | tr '\n' ' ')
+          echo "body=${body}" >> $GITHUB_OUTPUT
 
       - name: Send Slack notification
         uses: 8398a7/action-slack@v3
@@ -57,14 +71,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*PR 제목:*\n<${{ github.event.pull_request.html_url }}|${{ toJSON(github.event.pull_request.title) }}>"
+                    "text": "*PR 제목:*\n<${{ github.event.pull_request.html_url }}|${{ steps.pr_process.outputs.title }}>"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*PR 설명:*\n${{ toJSON(github.event.pull_request.body) }}"
+                    "text": "*PR 설명:*\n${{ steps.pr_process.outputs.body }}"
                   }
                 },
                 {
