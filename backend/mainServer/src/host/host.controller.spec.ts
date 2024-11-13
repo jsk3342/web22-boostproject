@@ -26,9 +26,9 @@ describe('HostController', () => {
 
   it('should return 200 with host data for valid request', async () => {
     const mockUuid = 'test-uuid';
-    const mockHostData = `session-info-for-${mockUuid}`;
+    const [mockStreamKey, mockSessionKey] = await service.generateStreamKey(mockUuid);
 
-    jest.spyOn(service, 'generateStreamKey').mockResolvedValue(mockHostData);
+    jest.spyOn(service, 'generateStreamKey').mockResolvedValue([mockStreamKey, mockSessionKey]);
 
     const req = {
       headers: {
@@ -48,7 +48,7 @@ describe('HostController', () => {
     await controller.generateStreamKey(req, res);
 
     expect(res.status).toHaveBeenCalledWith(HttpStatus.OK);
-    expect(res.json).toHaveBeenCalledWith({ 'host-data': mockHostData });
+    expect(res.json).toHaveBeenCalledWith({ 'stream-key':mockStreamKey, 'session-key':mockSessionKey });
   });
 
   it('should return 400 for invalid request with missing uuid', async () => {

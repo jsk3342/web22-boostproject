@@ -1,4 +1,3 @@
-// host.controller.ts
 import { Controller, Post, Req, Res, HttpException, HttpStatus } from '@nestjs/common';
 import { HostService } from './host.service';
 import { Request, Response } from 'express';
@@ -21,8 +20,8 @@ export class HostController {
         throw new HttpException('Content-Type must be application/json', HttpStatus.BAD_REQUEST);
       }
 
-      const hostData = await this.hostService.generateStreamKey(uuid);
-      res.status(HttpStatus.OK).json({ 'host-data': hostData });
+      const [streamKey, sessionKey] = await this.hostService.generateStreamKey(uuid);
+      res.status(HttpStatus.OK).json({ 'stream-key': streamKey, 'session-key':sessionKey });
     } catch (error) {
       if ((error as { status: number }).status === 400) {
         res.status(HttpStatus.BAD_REQUEST).json({
