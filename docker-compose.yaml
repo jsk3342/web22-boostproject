@@ -2,15 +2,29 @@
 version: '3.8'
 
 services:
-  frontend:
-    image: liboost/frontend-index-server
+  frontend-builder:
+#    image: liboost/frontend-index-server
     build:
       context: .
       dockerfile: ./frontend/dockerfile
-    depends_on:
-      # - backend
-      - nginx
+    volumes:
+      - ./frontend-dist:/app/.dist  # 빌드 결과를 공유하기 위한 볼륨 설정
+    networks:
+      - default-network
+    command: ["yarn", "build"]
 
+  nginx:
+    build:
+      context: nginx
+      dockerfile: dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend-dist:/usr/share/nginx/html  # 빌드된 결과를 Nginx에서 서빙
+    networks:
+      - default-network
+    depends_on:
+      - frontend-builder
 #  backend:
 #    build:
 #      context: ./backend
@@ -21,13 +35,13 @@ services:
 #    command: docker-compose -f /app/docker-compose.backend.yml up
 #    depends_on:
 #      - nginx
-
-  nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx:/etc/nginx  # Nginx 설정 파일을 컨테이너에 마운트
+#  networks:
+#    - default-network
 
 
+networks:
+  default-network:
+    driver: bridge
 
+volumes:
+  frontend-dist:   # 프론트엔드 빌드 결과를 저장하는 볼륨

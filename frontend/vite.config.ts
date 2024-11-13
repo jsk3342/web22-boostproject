@@ -6,7 +6,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(({ mode }) => ({
   server: {
-    hmr: mode !== 'production',  // 프로덕션 환경에서만 HMR 비활성화
+    hmr: false // mode !== 'production',  // 프로덕션 환경에서만 HMR 비활성화
   },
   plugins: [
     react(),
@@ -20,4 +20,4 @@ export default defineConfig(({ mode }) => ({
     outDir: '.dist'
   },
   cacheDir: '.vite'
-}))
+}));

@@ -1,8 +1,10 @@
 # 1. 베이스 이미지 설정
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 
 # 2. 작업 디렉토리 생성 및 이동
 WORKDIR /app
+
+RUN mkdir .dist
 
 COPY yarn.lock ./
 
@@ -10,26 +12,9 @@ COPY yarn.lock ./
 COPY ./frontend/package.json ./
 
 # 4. 의존성 설치
-RUN yarn install
+RUN yarn install --production
 
 # 5. 소스 코드 복사 및 빌드
 COPY ./frontend .
 
-RUN yarn build
-
-# 6. 실행 환경 설정
-FROM node:20-alpine AS runtime
-
-WORKDIR /app
-
-# 7. 빌드 결과물을 runtime 단계로 복사
-COPY --from=builder /app/.dist /app/vite.config.ts ./
-
-COPY ./frontend/package.json ./
-COPY yarn.lock ./
-# 8. 의존성 설치 (runtime 필요 항목만 설치)
-RUN yarn install --production
-
-EXPOSE 5173
-# 9. 서버 실행
-CMD ["yarn", "prod"]
+# RUN yarn build --mode production
