@@ -12,19 +12,25 @@ jobs:
         id: set-reviewers
         run: |
           REPO_NAME="${{ github.repository }}"
-          if [[ $REPO_NAME == */dev-fe ]]; then
+          if [[ $REPO_NAME == *"dev-fe"* ]]; then
             echo "team=FE" >> $GITHUB_OUTPUT
             echo "reviewers=<@U07GSBHPCPR> <@U07H6QLFPBM> <@U07H9CTPC9J>" >> $GITHUB_OUTPUT
-          elif [[ $REPO_NAME == */dev-be ]]; then
+            echo "reviewer_names=김지수, 고민지, 홍창현" >> $GITHUB_OUTPUT
+          elif [[ $REPO_NAME == *"dev-be"* ]]; then
             echo "team=BE" >> $GITHUB_OUTPUT
             echo "reviewers=<@U07GSBPT9ST> <@U07H0978N14>" >> $GITHUB_OUTPUT
+            echo "reviewer_names=김영길, 김준서" >> $GITHUB_OUTPUT
+          else
+            echo "team=Team" >> $GITHUB_OUTPUT
+            echo "reviewers=@here" >> $GITHUB_OUTPUT
+            echo "reviewer_names=전체" >> $GITHUB_OUTPUT
           fi
 
       - name: Send Slack notification
         uses: 8398a7/action-slack@v3
         with:
           status: custom
-          custom_payload: |
+          custom_payload: >
             {
               "blocks": [
                 {
@@ -51,14 +57,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*PR 제목:*\n<${{ github.event.pull_request.html_url }}|${{ github.event.pull_request.title }}>"
+                    "text": "*PR 제목:*\n<${{ github.event.pull_request.html_url }}|${{ toJSON(github.event.pull_request.title) }}>"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*PR 설명:*\n${{ github.event.pull_request.body }}"
+                    "text": "*PR 설명:*\n${{ toJSON(github.event.pull_request.body) }}"
                   }
                 },
                 {
@@ -67,6 +73,15 @@ jobs:
                     "type": "mrkdwn",
                     "text": "👉 ${{ steps.set-reviewers.outputs.reviewers }} 리뷰 부탁드립니다!"
                   }
+                },
+                {
+                  "type": "context",
+                  "elements": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "✨ 리뷰어: ${{ steps.set-reviewers.outputs.reviewer_names }}"
+                    }
+                  ]
                 }
               ]
             }
