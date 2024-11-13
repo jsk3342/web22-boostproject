@@ -23,7 +23,7 @@ const Chat = () => {
 export default Chat;
 
 const ChatContainer = styled.section`
+  width: 300px;
   border: 1px solid red;
   padding: 10px 20px;
-  flex: 3;
 `;

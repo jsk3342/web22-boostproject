@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-import Header from '@components/client/Header';
-import ClientView from '@components/client/ClientView';
-import Chat from '@components/client/Chat';
+import { Chat, ClientView, Header } from '@components/client';
 
 export default function ClientPage() {
   return (
