@@ -32,4 +32,4 @@ RUN yarn install --production
 
 EXPOSE 5173
 # 9. 서버 실행
-CMD ["yarn", "dev"]
+CMD ["yarn", "prod"]
