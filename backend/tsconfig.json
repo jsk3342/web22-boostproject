@@ -8,6 +8,10 @@
 
     "strict": true,
     "skipLibCheck": true,
-    "baseUrl": "."
-  }
+    "baseUrl": ".",
+
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "exclude": ["**/*spec.ts"]
 }
