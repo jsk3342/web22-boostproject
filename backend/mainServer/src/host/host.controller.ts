@@ -7,7 +7,7 @@ import { Request, Response } from 'express';
 export class HostController {
   constructor(private readonly hostService: HostService) {}
 
-  @Post("/")
+  @Post('/')
   async generateStreamKey(@Req() req: Request, @Res() res: Response) {
     try {
       const host = req.headers['host'] as string;
@@ -18,7 +18,7 @@ export class HostController {
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
       }
       if (contentType !== 'application/json') {
-        throw new HttpException("Content-Type must be application/json", HttpStatus.BAD_REQUEST)
+        throw new HttpException('Content-Type must be application/json', HttpStatus.BAD_REQUEST);
       }
 
       const hostData = await this.hostService.generateStreamKey(uuid);
@@ -27,7 +27,7 @@ export class HostController {
       if (error.status === 400) {
         res.status(HttpStatus.BAD_REQUEST).json({
           error: error.response
-        })
+        });
       }
       else {
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
