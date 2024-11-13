@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import QuestionCard from './QuestionCard';
 import { useEffect, useRef } from 'react';
 
-interface ChatListProps {}
-
 const sampleData = [
   { user: '고양이', message: 'ㅇㅅㅇ', type: 'normal' },
   { user: '강아지', message: 'ㅎㅇㅎㅇ', type: 'normal' },
@@ -23,7 +21,7 @@ function getRandomBrightColor(): string {
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
 
-export const ChatList = ({}: ChatListProps) => {
+export const ChatList = () => {
   const chatListRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {

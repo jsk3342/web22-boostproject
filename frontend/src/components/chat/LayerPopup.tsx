@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-interface LayerPopupProps {}
-
-export const LayerPopup = ({}: LayerPopupProps) => {
+export const LayerPopup = () => {
   return (
     <LayerPopupContainer>
       <LayerPopupWrapper>

@@ -4,9 +4,7 @@ import ChatInput from './ChatInput';
 import ChatList from './ChatList';
 import ChatQuestionSection from './ChatQuestionSection';
 
-interface ChatRoomProps {}
-
-export const ChatRoom = ({}: ChatRoomProps) => {
+export const ChatRoom = () => {
   return (
     <ChatRoomContainer>
       <ChatHeader />

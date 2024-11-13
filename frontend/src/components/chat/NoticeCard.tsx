@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import CloseIcon from '@assets/icons/close.svg';
 
-interface NoticeCardProps {}
-
-export const NoticeCard = ({}: NoticeCardProps) => {
+export const NoticeCard = () => {
   return (
     <NoticeCardContainer>
       <NoticeCardHeader>

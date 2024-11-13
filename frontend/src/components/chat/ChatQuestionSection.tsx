@@ -2,9 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import QuestionCard from './QuestionCard';
 
-interface ChatQuestionSectionProps {}
-
-export const ChatQuestionSection = ({}: ChatQuestionSectionProps) => {
+export const ChatQuestionSection = () => {
   const [expanded, setExpanded] = useState(false);
 
   const toggleSection = () => {
