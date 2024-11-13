@@ -20,4 +20,4 @@ export default defineConfig(({ mode }) => ({
     outDir: '.dist'
   },
   cacheDir: '.vite'
-}))
+}));
