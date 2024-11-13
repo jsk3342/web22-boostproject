@@ -31,7 +31,7 @@ describe('HostController', () => {
 
     const req = {
       headers: {
-        url: 'http://example.com',
+        host: 'http://example.com',
         'content-type': 'application/json',
       },
       body: {
@@ -48,5 +48,51 @@ describe('HostController', () => {
 
     expect(res.status).toHaveBeenCalledWith(HttpStatus.OK);
     expect(res.json).toHaveBeenCalledWith({ 'host-data': mockHostData });
+  });
+
+  it('should return 400 for invalid request with missing uuid', async () => {
+    jest.spyOn(service, 'generateStreamKey').mockResolvedValue(undefined);
+
+    const req = {
+      headers: {
+        host: 'http://example.com',
+        'content-type': 'application/json',
+      },
+      body: {
+        // uuid가 없는 비정상적인 요청
+      },
+    } as any;
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    } as any;
+
+    await controller.generateStreamKey(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(HttpStatus.BAD_REQUEST);
+  });
+
+  it('should return 400 for invalid request with incorrect content-type', async () => {
+    jest.spyOn(service, 'generateStreamKey').mockResolvedValue(undefined);
+
+    const req = {
+      headers: {
+        host: 'http://example.com',
+        'content-type': 'text/plain',
+      },
+      body: {
+        uuid: 'test-uuid',
+      },
+    } as any;
+
+    const res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    } as any;
+
+    await controller.generateStreamKey(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(HttpStatus.BAD_REQUEST);
   });
 });
