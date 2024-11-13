@@ -24,9 +24,9 @@ export class HostController {
       const hostData = await this.hostService.generateStreamKey(uuid);
       res.status(HttpStatus.OK).json({ 'host-data': hostData });
     } catch (error) {
-      if (error.status === 400) {
+      if ((error as { status: number }).status === 400) {
         res.status(HttpStatus.BAD_REQUEST).json({
-          error: error.response
+          error: (error as { response: Response }).response
         });
       }
       else {
