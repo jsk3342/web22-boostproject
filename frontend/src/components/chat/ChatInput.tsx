@@ -45,7 +45,7 @@ export const ChatInput = ({ type }: ChatInputProps) => {
   };
 
   return (
-    <ChatInputContainer $hasInput={hasInput} $isFocused={isFocused}>
+    <ChatInputWrapper $hasInput={hasInput} $isFocused={isFocused}>
       <InputBtn aria-label={type}>
         {type === 'normal' ? <StyledIcon as={SpeechBubbleIcon} /> : <StyledIcon as={QuestionIcon} />}
       </InputBtn>
@@ -58,17 +58,17 @@ export const ChatInput = ({ type }: ChatInputProps) => {
       <InputBtn aria-label="전송">
         <StyledIcon as={SendIcon} />
       </InputBtn>
-    </ChatInputContainer>
+    </ChatInputWrapper>
   );
 };
 export default ChatInput;
 
-const ChatInputContainer = styled.div<{ $hasInput: boolean; $isFocused: boolean }>`
+const ChatInputWrapper = styled.div<{ $hasInput: boolean; $isFocused: boolean }>`
   min-height: 20px;
   display: flex;
-  padding: 13px 15px;
-  gap: 16px;
-  border: 2px solid #373a3f;
+  padding: 5px 10px;
+  gap: 10px;
+  border: 3px solid ${({ theme }) => theme.tokenColors['text-weak']};
   border-radius: 7px;
   background-color: transparent;
 
@@ -76,7 +76,7 @@ const ChatInputContainer = styled.div<{ $hasInput: boolean; $isFocused: boolean 
     !$hasInput &&
     !$isFocused &&
     css`
-      border: 2px solid transparent;
+      border: 3px solid transparent;
       background-color: #373a3f;
     `}
 `;
@@ -89,12 +89,14 @@ const ChatInputArea = styled.textarea`
   border: none;
   outline: none;
   color: ${({ theme }) => theme.tokenColors['text-strong']};
-  ${({ theme }) => theme.tokenTypographys['display-medium14']}
+  ${({ theme }) => theme.tokenTypographys['display-medium16']}
   background-color: transparent;
 `;
 
 const InputBtn = styled.button`
   display: flex;
+  height: 25px;
+  align-items: center;
   color: ${({ theme }) => theme.tokenColors['text-strong']};
   cursor: pointer;
 `;

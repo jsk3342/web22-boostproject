@@ -2,27 +2,27 @@ import styled from 'styled-components';
 import CheckIcon from '@assets/icons/check.svg';
 
 interface QuestionCardProps {
-  type: 'normal' | 'question';
+  type: 'host' | 'client';
+  user: string;
+  message: string;
 }
 
-export const QuestionCard = ({ type }: QuestionCardProps) => {
+export const QuestionCard = ({ type, user, message }: QuestionCardProps) => {
   return (
     <QuestionCardContainer>
       <QuestionCardTop>
         <QuestionInfo>
-          <span className="name_info">💟 J999_부스트</span>
+          <span className="name_info">💟 {user}</span>
           <span className="time_info">n분전</span>
         </QuestionInfo>
-        {type === 'question' && (
+        {type === 'host' && (
           <CheckBtn>
             <StyledCheckIcon />
           </CheckBtn>
         )}
       </QuestionCardTop>
 
-      <QuestionCardBottom>
-        설명해주셨던 내용 중에 yarn-berry를 설정했던 방법이 인상깊었는데 거기서 생겼던 오류가 있나요?
-      </QuestionCardBottom>
+      <QuestionCardBottom>{message}</QuestionCardBottom>
     </QuestionCardContainer>
   );
 };
