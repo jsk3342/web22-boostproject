@@ -26,6 +26,22 @@ jobs:
             echo "reviewer_names=전체" >> $GITHUB_OUTPUT
           fi
 
+      - name: Process PR title and body
+        id: pr_process
+        run: |
+          # PR 제목 처리
+          title='${{ github.event.pull_request.title }}'
+          title="${title//'"'/'\\"'}"
+          echo "title=${title}" >> $GITHUB_OUTPUT
+
+          # PR 내용 처리
+          body='${{ github.event.pull_request.body }}'
+          body="${body//'%'/'%25'}"
+          body="${body//$'\n'/'\\n'}"
+          body="${body//$'\r'/'\\r'}"
+          body="${body//'"'/'\\"'}"
+          echo "body=${body}" >> $GITHUB_OUTPUT
+
       - name: Send Slack notification
         uses: 8398a7/action-slack@v3
         with:
@@ -57,14 +73,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*PR 제목:*\n<${{ github.event.pull_request.html_url }}|${{ toJSON(github.event.pull_request.title) }}>"
+                    "text": "*PR 제목:*\n<${{ github.event.pull_request.html_url }}|${{ steps.pr_process.outputs.title }}>"
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "*PR 설명:*\n${{ toJSON(github.event.pull_request.body) }}"
+                    "text": "*PR 설명:*\n${{ steps.pr_process.outputs.body }}"
                   }
                 },
                 {
