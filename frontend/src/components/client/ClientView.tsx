@@ -8,7 +8,7 @@ const ClientView = () => {
   return (
     <ClientViewContainer>
       <h1 className="hidden">클라이언트 페이지</h1>
-      <Player videoUrl={'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'} isLive={true} />
+      <Player videoUrl={'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'} />
       <PlayerInfo />
       <Footer />
     </ClientViewContainer>
