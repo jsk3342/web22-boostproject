@@ -3,7 +3,7 @@ import Hls from 'hls.js';
 import styled from 'styled-components';
 
 import playerLoading from '@assets/player_loading.gif';
-import CustomPlayIcon from '@assets/custom_play_icon.svg';
+import CustomPlayIcon from '@assets/icons/custom_play_icon.svg';
 import PauseIcon from '@assets/icons/pause_icon.svg';
 import PlayIcon from '@assets/icons/play_icon.svg';
 
@@ -58,14 +58,37 @@ const Player = ({ videoUrl }: { videoUrl: string }) => {
     }
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        handlePlayPause();
+      }
+    };
+
+    const videoElement = videoRef.current;
+    videoElement?.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      videoElement?.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <PlayerContainer $onHLSReady={onHLSReady}>
       <LivePlayerInner>
         {onHLSReady ? (
           <>
-            <Video ref={videoRef} controls onClick={handlePlayPause} />
+            <Video
+              ref={videoRef}
+              controls
+              onClick={handlePlayPause}
+              tabIndex={0} // Video 요소가 포커스를 받을 수 있도록 설정
+            />
             {showIcon && (
-              <IconOverlay $isFullscreen={isFullscreen}>{isPaused ? <PlayIcon /> : <PauseIcon />}</IconOverlay>
+              <IconOverlay $isFullscreen={isFullscreen}>
+                {isPaused ? <PlayIcon /> : <PauseIcon />}
+              </IconOverlay>
             )}
           </>
         ) : (
