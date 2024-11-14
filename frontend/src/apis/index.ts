@@ -1,7 +1,7 @@
 import { QueryClient, DefaultOptions } from '@tanstack/react-query';
 import axios from 'axios';
 
-const BASE_URL = 'http://liboo.kr';
+export const BASE_URL = 'http://liboo.kr';
 
 export const initFetchInstance = (baseURL: string) =>
   axios.create({
