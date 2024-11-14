@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
-import Header from '@components/client/Header';
-import ClientView from '@components/client/ClientView';
-import Chat from '@components/client/Chat';
+import { ClientView, Header } from '@components/client';
+import { ChatRoom } from '@components/chat';
 
 export default function ClientPage() {
   return (
@@ -10,12 +9,16 @@ export default function ClientPage() {
       <Header />
       <ClientContainer>
         <ClientView />
-        <Chat />
+        <ChatRoom />
       </ClientContainer>
     </>
   );
 }
 
 const ClientContainer = styled.div`
+  box-sizing: border-box;
+  padding: 60px 10px 0 10px;
+  height: 100%;
   display: flex;
+  background-color: ${({ theme }) => theme.tokenColors['susrface-default']};
 `;

@@ -23,7 +23,8 @@ const Chat = () => {
 export default Chat;
 
 const ChatContainer = styled.section`
+  min-width: 350px;
   border: 1px solid red;
   padding: 10px 20px;
-  flex: 3;
+  background-color: ${({ theme }) => theme.tokenColors['color-white']};
 `;

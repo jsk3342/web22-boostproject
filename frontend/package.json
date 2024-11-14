@@ -17,7 +17,11 @@
   "dependencies": {
     "@types/node": "^22.9.0",
     "@vitejs/plugin-react": "^4.3.3",
+    "@tanstack/react-query": "^5.59.20",
+    "axios": "^1.7.7",
     "eslint-plugin-react": "^7.37.2",
+    "hls.js": "^1.5.17",
+    "nanoid": "^5.0.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
