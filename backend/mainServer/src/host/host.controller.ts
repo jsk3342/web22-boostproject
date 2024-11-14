@@ -1,5 +1,5 @@
 import { Controller, Post, Req, Res, HttpException, HttpStatus } from '@nestjs/common';
-import { HostService } from './host.service';
+import { HostService } from './host.service.js';
 import { Request, Response } from 'express';
 
 @Controller('host')
