@@ -1616,11 +1616,11 @@ __metadata:
   linkType: hard
 
 "@eslint/plugin-kit@npm:^0.2.0":
-  version: 0.2.2
-  resolution: "@eslint/plugin-kit@npm:0.2.2"
+  version: 0.2.3
+  resolution: "@eslint/plugin-kit@npm:0.2.3"
   dependencies:
     levn: "npm:^0.4.1"
-  checksum: 10c0/ec533ccc99f2ab003d6f64495cff853730fb7d8bc0eaf031ffccc68de7c34c74a2eda50dfa759cacfb409f014c98d306714c995348d5383c9d3140f9f80a5895
+  checksum: 10c0/89a8035976bb1780e3fa8ffe682df013bd25f7d102d991cecd3b7c297f4ce8c1a1b6805e76dd16465b5353455b670b545eff2b4ec3133e0eab81a5f9e99bd90f
   languageName: node
   linkType: hard
 
@@ -3169,6 +3169,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.59.20":
+  version: 5.59.20
+  resolution: "@tanstack/query-core@npm:5.59.20"
+  checksum: 10c0/c93a8d41e21db532e92c1c90916bec578729d32d1f39d655603b9e81a9d5aebc8588a4d6a75928e04d3ddc90e71a1f8dc066a61d0ba24108eaf60cc2ce024a2f
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.59.20":
+  version: 5.60.2
+  resolution: "@tanstack/react-query@npm:5.60.2"
+  dependencies:
+    "@tanstack/query-core": "npm:5.59.20"
+  peerDependencies:
+    react: ^18 || ^19
+  checksum: 10c0/be52cff84d3c38f2205816ef48f806d7a025d0daa6d92c08eedf4a0839782fbcf01ae2899ae2ae92f7b0c189254b1a8d6363791576950154d8dc7016bf81b4bf
+  languageName: node
+  linkType: hard
+
 "@tsconfig/node10@npm:^1.0.7":
   version: 1.0.11
   resolution: "@tsconfig/node10@npm:1.0.11"
@@ -4380,6 +4398,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^1.7.7":
+  version: 1.7.7
+  resolution: "axios@npm:1.7.7"
+  dependencies:
+    follow-redirects: "npm:^1.15.6"
+    form-data: "npm:^4.0.0"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10c0/4499efc89e86b0b49ffddc018798de05fab26e3bf57913818266be73279a6418c3ce8f9e934c7d2d707ab8c095e837fc6c90608fb7715b94d357720b5f568af7
+  languageName: node
+  linkType: hard
+
 "babel-jest@npm:^29.7.0":
   version: 29.7.0
   resolution: "babel-jest@npm:29.7.0"
@@ -5438,9 +5467,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.41":
-  version: 1.5.57
-  resolution: "electron-to-chromium@npm:1.5.57"
-  checksum: 10c0/42b969681985016be6069ae68cf29e84ba3f2191fcb7f9d3355e83e81da8dbd100e4b5c9d69b88637003e06dc1860125a50332ec0caee49fd9c2c4ab62feb288
+  version: 1.5.58
+  resolution: "electron-to-chromium@npm:1.5.58"
+  checksum: 10c0/a3f5544ef12a84a7046b297195d19937f396683be8f245e1569cb9a877afd59f3630c8de9bb07f57aee1e6cda564c1a80c7d0b2fd28effb70db1558ca4669996
   languageName: node
   linkType: hard
 
@@ -6472,6 +6501,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"follow-redirects@npm:^1.15.6":
+  version: 1.15.9
+  resolution: "follow-redirects@npm:1.15.9"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: 10c0/5829165bd112c3c0e82be6c15b1a58fa9dcfaede3b3c54697a82fe4a62dd5ae5e8222956b448d2f98e331525f05d00404aba7d696de9e761ef6e42fdc780244f
+  languageName: node
+  linkType: hard
+
 "for-each@npm:^0.3.3":
   version: 0.3.3
   resolution: "for-each@npm:0.3.3"
@@ -6555,6 +6594,7 @@ __metadata:
   resolution: "frontend@workspace:frontend"
   dependencies:
     "@eslint/js": "npm:^9.13.0"
+    "@tanstack/react-query": "npm:^5.59.20"
     "@types/node": "npm:^22.9.0"
     "@types/react": "npm:^18.3.12"
     "@types/react-dom": "npm:^18.3.1"
@@ -6563,11 +6603,14 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^8.14.0"
     "@typescript-eslint/parser": "npm:^8.14.0"
     "@vitejs/plugin-react": "npm:^4.3.3"
+    axios: "npm:^1.7.7"
     eslint: "npm:^9.13.0"
     eslint-plugin-react: "npm:^7.37.2"
     eslint-plugin-react-hooks: "npm:^5.0.0"
     eslint-plugin-react-refresh: "npm:^0.4.14"
     globals: "npm:^15.11.0"
+    hls.js: "npm:^1.5.17"
+    nanoid: "npm:^5.0.8"
     react: "npm:^18.3.1"
     react-dom: "npm:^18.3.1"
     react-router-dom: "npm:^6.27.0"
@@ -6971,6 +7014,13 @@ __metadata:
   version: 2.0.0
   resolution: "hexoid@npm:2.0.0"
   checksum: 10c0/a9d5e6f4adeaefcb4a53803dd48bf0a242d92e8ec699555aea616c4bf8f91788f03093595085976f63d6830815dd080c063503540fabc7e854ebfb11161687c6
+  languageName: node
+  linkType: hard
+
+"hls.js@npm:^1.5.17":
+  version: 1.5.17
+  resolution: "hls.js@npm:1.5.17"
+  checksum: 10c0/37b6fe2c8ed961b0b45ae961035aeafd203ff43aea26f0b63ac1382a05c45415e0e5d2302a2c4e316444e93d438ccd12e7cd36159e4f1fe2c3bfe57f53be3e98
   languageName: node
   linkType: hard
 
@@ -8772,6 +8822,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^5.0.8":
+  version: 5.0.8
+  resolution: "nanoid@npm:5.0.8"
+  bin:
+    nanoid: bin/nanoid.js
+  checksum: 10c0/0281d3cc0f3d03fb3010b479f28e8ddedfafb9b5d60e54315589ef0a54a0e9cfcb0bf382dd3b620fdad6b72b8c1f5b89a15d55c6b6a9134b58b16eb230b3a3d7
+  languageName: node
+  linkType: hard
+
 "natural-compare@npm:^1.4.0":
   version: 1.4.0
   resolution: "natural-compare@npm:1.4.0"
@@ -9394,6 +9453,13 @@ __metadata:
     forwarded: "npm:0.2.0"
     ipaddr.js: "npm:1.9.1"
   checksum: 10c0/c3eed999781a35f7fd935f398b6d8920b6fb00bbc14287bc6de78128ccc1a02c89b95b56742bf7cf0362cc333c61d138532049c7dedc7a328ef13343eff81210
+  languageName: node
+  linkType: hard
+
+"proxy-from-env@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "proxy-from-env@npm:1.1.0"
+  checksum: 10c0/fe7dd8b1bdbbbea18d1459107729c3e4a2243ca870d26d34c2c1bcd3e4425b7bcc5112362df2d93cc7fb9746f6142b5e272fd1cc5c86ddf8580175186f6ad42b
   languageName: node
   linkType: hard
 

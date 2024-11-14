@@ -18,5 +18,6 @@ export default function Setting() {
 }
 
 const Container = styled.main`
-  flex: 7;
+  flex: 1;
+  overflow-y: auto;
 `;

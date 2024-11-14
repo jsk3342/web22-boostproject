@@ -1,12 +1,22 @@
 import styled from 'styled-components';
 import OBSIcon from '@assets/img_studio_obs.png';
 import DownloadIcon from '@assets/download.svg';
+import { getOrCreateId } from '@utils/id';
+import useFetchStreamKey from '@queries/host/useFetchStreamKey';
+import { useEffect } from 'react';
 
 interface SettingInfoProps {
   closeModal: () => void;
 }
 
 export default function SettingInfo({ closeModal }: SettingInfoProps) {
+  const userId = getOrCreateId();
+  const { mutate: fetchKey, data } = useFetchStreamKey();
+
+  useEffect(() => {
+    fetchKey(userId);
+  }, []);
+
   return (
     <PopupOverlay onClick={closeModal}>
       <PopupContainer
@@ -54,8 +64,10 @@ export default function SettingInfo({ closeModal }: SettingInfoProps) {
                   <SettingRow>
                     <Label htmlFor="stream-key">스트림 키</Label>
                     <ValueWithButton>
-                      <StreamKeyInput type="password" readOnly value="djjrx3ufdxqbrv1apr9lo5y9ly07nuyp" />
-                      <CopyButton onClick={() => navigator.clipboard.writeText('djjrx3ufdxqbrv1apr9lo5y9ly07nuyp')}>
+                      <StreamKeyInput type="password" readOnly value={data?.['stream-key'] ?? ''} />
+                      <CopyButton
+                        onClick={() => data?.['stream-key'] && navigator.clipboard.writeText(data['stream-key'])}
+                      >
                         복사
                       </CopyButton>
                     </ValueWithButton>

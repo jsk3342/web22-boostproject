@@ -1,7 +1,7 @@
 // host.controller.spec.ts
 import { Test, TestingModule } from '@nestjs/testing';
-import { HostController } from './host.controller';
-import { HostService } from './host.service';
+import { HostController } from './host.controller.js';
+import { HostService } from './host.service.js';
 import { HttpStatus } from '@nestjs/common';
 import {describe, expect, jest} from '@jest/globals';
 import {Request, Response} from 'express';
