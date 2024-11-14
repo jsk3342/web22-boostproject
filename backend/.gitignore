@@ -2,6 +2,6 @@ node_modules
 ffmpeg
 rtmpServer/nodeMediaServer/media/*
 media
-.env
+../.env
 
 .dist
