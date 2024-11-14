@@ -34,17 +34,24 @@ jobs:
           body='${{ github.event.pull_request.body }}'
           # Remove HTML comments and their content
           body=$(echo "$body" | sed 's/<!--.*-->//g')
-          # Remove empty lines and special characters
-          body=$(echo "$body" | grep -v '^$' | tr -d '\r')
-          # Replace newlines with actual newlines in Slack message
-          body=$(echo "$body" | tr '\n' ' ')
+          # Remove image markdown
+          body=$(echo "$body" | sed 's/<img[^>]*>//g')
+          # Remove issue numbers
+          body=$(echo "$body" | sed 's/#[0-9]*//g')
+          # Clean up markdown headers and special characters
+          body=$(echo "$body" | sed 's/##/*/g' | tr -d '\r')
+          # Escape quotes and backslashes
+          body="${body//\\/\\\\}"
+          body="${body//\"/\\\"}"
+          # Convert newlines to spaces
+          body=$(echo "$body" | tr '\n' ' ' | sed 's/  */ /g')
           echo "body=${body}" >> $GITHUB_OUTPUT
 
       - name: Send Slack notification
         uses: 8398a7/action-slack@v3
         with:
           status: custom
-          custom_payload: >
+          custom_payload: |
             {
               "blocks": [
                 {
