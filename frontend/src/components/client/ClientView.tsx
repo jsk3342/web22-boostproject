@@ -18,6 +18,9 @@ const ClientView = () => {
 export default ClientView;
 
 const ClientViewContainer = styled.main`
-  padding: 0 24px;
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 60px;
   background-color: ${({ theme }) => theme.tokenColors['surface-default']};
+  scrollbar-width: none;
 `;

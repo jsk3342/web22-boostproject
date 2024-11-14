@@ -7,8 +7,10 @@ const Header = () => {
 export default Header;
 
 const HeaderContainer = styled.div`
-  display: flex;
+  width: 100%;
   height: 60px;
-  padding: 0 60px;
+  position: fixed;
+  display: flex;
   background-color: ${({ theme }) => theme.tokenColors['surface-default']};
+  z-index: 11000;
 `;
