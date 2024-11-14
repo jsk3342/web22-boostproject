@@ -58,14 +58,6 @@ const Player = ({ videoUrl, isLive }: { videoUrl: string; isLive: boolean }) => 
     }
   };
 
-  function toggleFullscreen() {
-    if (!document.fullscreenElement) {
-      videoRef.current?.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
-  }
-
   return (
     <PlayerContainer $onHLSReady={onHLSReady}>
       <LivePlayerInner>
@@ -82,9 +74,6 @@ const Player = ({ videoUrl, isLive }: { videoUrl: string; isLive: boolean }) => 
           </PlayButton>
         )}
       </LivePlayerInner>
-      <TopOverlay $isFullscreen={isFullscreen}>
-        <button onClick={toggleFullscreen}>Fullscreen</button>
-      </TopOverlay>
     </PlayerContainer>
   );
 };
@@ -141,33 +130,4 @@ const IconOverlay = styled.div<{ $isFullscreen: boolean }>`
 const Video = styled.video`
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  position: relative;
-  display: block;
-`;
-
-const TopOverlay = styled.div<{ $isFullscreen: boolean }>`
-  position: ${({ $isFullscreen }) => ($isFullscreen ? 'absolute' : 'absolute')};
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  z-index: 9999;
-`;
-
-const BottomOverlay = styled.div<{ $isFullscreen: boolean }>`
-  position: ${({ $isFullscreen }) => ($isFullscreen ? 'fixed' : 'absolute')};
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  z-index: 9999;
 `;
