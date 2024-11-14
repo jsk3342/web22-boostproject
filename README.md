@@ -1,180 +1,131 @@
 <div align="center">
   <h1> 라이부 LiBoo </h1>
   <h3> 컨퍼런스를 더 가까이, LiBoo 에서 라이브로 🚀 </h3>
-</div>
-
-<br/>
-
-<p align=center>
-  <a href="https://gominzip.notion.site/TEAM-127673f3719e803faf63c70322560d3b?pvs=4"> 팀 노션 </a> &nbsp; ╎ &nbsp; 
-  <!-- <a href="https://github.com/orgs/boostcampwm2023/projects/80">백로그</a> &nbsp; ╎ &nbsp; -->
-  <!-- <a href="https://www.notion.so/04317c11a3d240408383dab9249527a2">기획서</a> &nbsp; ╎ &nbsp; -->
-  <a href="https://www.figma.com/design/op5Ui6oZ4Zx2D8VUgWOKM0/LiBoo-%F0%9F%9A%80?node-id=1-3&t=WOh9pRJjrJinyUFT-1"> Figma </a> &nbsp; ╎ &nbsp;
-  <a href="https://gominzip.notion.site/12d673f3719e8109b9d4d3d63f74a988?pvs=4"> 그라운드 룰 </a> &nbsp; ╎ &nbsp;
-  <a href="https://gominzip.notion.site/12d673f3719e8098ad94ed6b71b10ac0?pvs=4"> 기술 정리 노트 </a> &nbsp; ╎ &nbsp;
-  <a href="https://gominzip.notion.site/12d673f3719e8012b6a9fa08b8662ad3?pvs=4"> 회의록 </a>
+  <br/>
+  <p align=center>
+  <a href="https://gominzip.notion.site/TEAM-127673f3719e803faf63c70322560d3b?pvs=4"> Notion </a> &nbsp; ｜ &nbsp; 
+  <a href="https://www.figma.com/design/op5Ui6oZ4Zx2D8VUgWOKM0/LiBoo-%F0%9F%9A%80?node-id=1-2&node-type=canvas&t=zcYYT1qCtckcUdcs-0"> Figma </a> &nbsp; ｜ &nbsp;
+  <a href="https://github.com/boostcampwm-2024/web22-LiBoo/wiki"> Wiki </a> &nbsp; ｜ &nbsp;
+  <a href="https://github.com/orgs/boostcampwm-2024/projects/17"> BackLog </a>
 </p>
-
-<br/>
-  
-<div align="center">
-<h3> 🧡 팀원 소개 </h3>
-
-|                                     김준서                                     |                                    김영길                                      |                                    고민지                                    |                                    김지수                                    |                                    홍창현                                    |
-| :----------------------------------------------------------------------------: | :-----------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: |
-| <img src="https://avatars.githubusercontent.com/u/45356754?v=4" width="120" /> | <img src="https://avatars.githubusercontent.com/u/46553489?v=4" width="120" /> | <img src="https://avatars.githubusercontent.com/u/101329724?v=4" width="120"> | <img src="https://avatars.githubusercontent.com/u/85912592?v=4" width="120"> | <img src="https://avatars.githubusercontent.com/u/48922050?v=4" width="120"> |
-|                                     **BE**                                     |                                     **BE**                                      |                                    **FE**                                    |                                    **FE**                                    |                                    **FE**                                    |
-|                    [@i3kae](https://github.com/i3kae)                    |                    [@hoeeeeeh](https://github.com/hoeeeeeh)                     |                   [@gominzip](https://github.com/gominzip)                   |                [@jsk3342](https://github.com/jsk3342)                |                    [@spearStr](https://github.com/spearStr)                    |
-
-
-
 </div>
+
 <br/>
 
-# 프로젝트 개요
-## LiBoo를 만들게 된 계기
-토스, 배달의 민족, 카카오 등 다양한 컨퍼런스들이 있지만 실제로 신청해서 당첨되는 것은 쉬운 일이 아닙니다.  
+## 프로젝트 개요
 
-저희는 이러한 컨퍼런스 문화가 더욱 활발해지고, 더 많은 사람들이 기회를 얻을 수 있기를 바라는 마음으로 LiBoo 프로젝트를 기획하게 되었습니다.  
+> 토스, 배달의 민족, 카카오 등 다양한 컨퍼런스들이 있지만 실제로 신청해서 당첨되는 것은 쉬운 일이 아닙니다.
+> <br>저희는 이러한 컨퍼런스 문화가 더욱 활발해지고, 더 많은 사람들이 기회를 얻을 수 있기를 바라는 마음으로 LiBoo 프로젝트를 기획하게 되었습니다.
+> <br>작게는 팀원 간 소규모 기술 공유부터, 크게는 네이버 부스트캠프 발표나 기업의 컨퍼런스과도 함께할 수 있는 서비스를 만들고자 합니다!
 
-작게는 팀원 간 소규모 기술 공유부터, 크게는 네이버 부스트캠프 발표나 기업의 컨퍼런스과도 함께할 수 있는 서비스를 만들고자 합니다!
+<br/>
 
-## 주요 기능
+# 📺 핵심 기능
 
-- **실시간 컨퍼런스 스트리밍**
-- **실시간 채팅 기능**
-- 컨퍼런스 실시간 뒤로가기 / 다시보기
-- 메인 대시 보드
-    - 실시간 영상 하나 크게
-    - 다시보기
-    - 다른 컨텐츠들
-- Q&A 기능
-    - 채팅 시 질문 채팅으로 설정 가능
-    - 가장 좋아요 많은 질문 하나 상단에 고정
-    - 질문 영역 클릭시 질문 모아둔 영영 보이게
-- 중간 광고 (다시보기 정적 영상에 한해서)
-- 컨퍼런스 내용 정리 AI
+### 실시간 컨퍼런스 스트리밍
 
-# 그라운드 룰
+실시간 컨퍼런스를 시청하거나 호스트가 되어 컨퍼런스를 직접 스트리밍 할 수 있습니다.
 
-## **팀문화**
-- 긍정적 마인드. 불안한 마음이 들때는 회고시간에 공유하기
-- 비난이 아닌 상대를 존중하는 솔직한 피드백
-- 감사한 일에 대해서 표현을 아끼지 말기
-- 맡은 일에 책임감을 갖되 어려움이 있을 때는 혼자서 너무 앓지 말고 동료에게 바로 질문하기
-- 피곤할 때 말하고 쉬기
-- 빠른 응답. 읽었다면 체크 표시 남기기. (✅)
-    - 진짜 긴급한 사안은 카톡 핫라인 남기기
+### 실시간 채팅
 
-## **일정 및 지각 관리**
-- 1주차 : 오후 6시까지 논의 마무리하고 회고 후 해산
-- 만나는 주기
-  - 주 4회 오프라인 작업 기조
-    - 첫주는 주4회(월, 화, 수, 목)
-    - 혹시 문제가 있을경우 사전에 공지
-    - 금요일 팀 회고 때 다음주 미팅 일자 정하기
-    - 오후 5시는 기술 공유시간 → 공유할 내용이 있다면 미리 슬랙에 알리기
-    - 목요일 → 멘토링 일지와 기획공유 발표자료 준비
-  - 시간 약속 지키는 것은 필수
-    - [부스트캠프 생활수칙](https://www.notion.so/6d45714905d24fa89d3693db1704edac?pvs=21) 참고. 해당하는 경우가 아닐때에는 약속한 시간에 꼭 맞춰서 오기
-    - 정말 부득이한 경우에는 최대한 빨리 팀에게 알리기
-    - 10시 5분부터 지각처리. (분당 1000원, 최대 10000원)
-      - 말 안할경우 괘씸죄 2배
-      - 모인 돈으로 마지막 날 회식하기 (소고기)
-     
-## **의사결정**
-- 결정된 의견 사항에 대해서 반대되는 의견이 있을 시 다른 해결책 가져오기
-- 모두의 의견이 통일되지 않을 경우
-  - 다수결이라고 무조건 넘어가지는 않기
-    - 최대한 모두가 납득될 수 있는 안건만 통과시키기
-  - 모두가 프로젝트에 대한 이해가 있어야 한다.
-  - 기조에 맞게 의사결정하기
-    - ex) 이 토론을 통해 가져가고 싶은 것이 학습or 성능개선 or … 무엇인지 정하고 토론 진행하기
-  - 학습을 완벽하게 하는 기조?
-  - 아무리 사전에 정해진 것들이라도 다시 정해야 할 필요가 있다면 의견 적극적으로 내기
-    - 비난하지 않는 선에서 얼마든지 의견 제시하기
-  - 점심 메뉴 슈퍼패스
+컨퍼런스를 보며 채팅으로 소통할 수 있습니다. 질문이 있다면 질문 채팅으로 전송이 가능합니다.
 
-## 데일리 스크럼
+### 메인 대시보드
 
-- [참고] JK님의 데일리 스크럼 규칙
-    
-    <img width="606" alt="image" src="https://github.com/user-attachments/assets/6963d838-c1f8-4312-a4ab-8bf44024ba6c">
+동영상 미리보기, 카테고리 등을 통해 원하는 컨퍼런스를 탐색해 볼 수 있습니다.
 
-    - 어제 무엇을 했는가
-    - 오늘 무엇을 할 예정인가
-    - 문제점/이슈는 무엇인가
-- 공유 내용
-    - 오늘의 컨디션 공유하기
-    - 어제 무엇을 했는가
-    - 오늘 무엇을 할 예정인가
-    - 문제점/이슈는 무엇인가
-- 스크럼 마스터는 하루에 한명씩 돌아가면서
-    - 스크럼 분위기 중재 및 진행
-- 주말에 추가 작업할거 같다면 금요일 스크럼에 미리 적어두도록 해보기
+### 컨퍼런스 다시보기
 
-## 회의
+실시간으로 방송되었던 컨퍼런스를 다시 돌려볼 수 있습니다.
 
-- 데일리 스크럼이 끝나고 바로 진행
-- 진행자와 서기
-    - 시계방향으로 옆자리 사람의 의견을 적어주기
-    - 스크럼마스터가 그날의 진행자
-- 안건 등록
-    - 사전 설명이 필요한 + 의견 작성에 생각이 필요한 안건의 경우 전날에 안건 등록 + 슬랙에 알려주기
-    - 그 외에는 회의하면서 자유롭게 추가적으로 논의하기
-- 분야별 회의도 노션에 태그로 필터링해두기
+<br/>
 
-## 회고
+# ⚙️ 서비스 아키텍처
 
-- 팀 회고 : 피그잼을 활용해서 아쉬운 점, 좋았던 점, 개선할 점을 적고 wiki에 업로드
-- 개인회고도 열심히 써서 올리기. 개인 멘토링때 멘토님이 봄
-    - 문제해결 위주로 작성하기
+![라이부아키텍처 drawio (1)](https://github.com/user-attachments/assets/8867cbf9-99b6-4b24-a02b-a35952c5bf0d)
 
-## 기획 공유
+```mermaid
+sequenceDiagram
+    participant H as Host/OBS
+    participant HP as Host Page
+    participant MS as Main Server
+    participant RTMP as RTMP Server
+    participant OS as Object Storage
+    participant V as Viewer
 
-- 목요일에 멘토링일지와 함께 작업
-- 발표자는 5주 동안 한명씩 돌아가며 → 최종발표는 돌아가면서?
+    Note over H,V: 방송 시작 전 (OBS 시작됨)
 
-## 문서화
+    HP->>MS: HTTP: Stream Key 요청
+    MS->>MS: Unique Stream Key 생성
+    MS->>HP: Stream Key 반환
+    HP->>H: Stream Key 전달
 
-- 데일리스크럼/ 회의록/ 멘토링일지/ 세션(마클, 강연)
-- 기술 관련 정리 (개발 과정/ 궁금한 부분/ 트러블 슈팅/ 학습/ 테스트)
-- 백로그 태스크 단위로 문서화
-- 노션과 위키 이중으로 작성
-    - 노션에는 실시간으로 작성하고 위키에는 정리된 내용을 업로드하는 형식으로
-    - 위키에 들어갈 내용
-        - 팀문화 (wiki에 바로)
-            - 그라운드룰
-            - 컨벤션
-            - 브랜치 전략
-        - 노션 링크로 걸기
-            - 데일리 스크럼
-            - 회고
-            - 멘토링
-            - 발표
-            - 기술관련 정리 DB(링크 하나만)
+    H->>RTMP: RTMP: 스트림 전송 (Stream Key 포함)
 
-## 일정산정
+    RTMP->>RTMP: HLS 변환 (m3u8, segment 생성)
+    RTMP->>H: HTTP: HLS 스트림 전송
+    Note right of H: 호스트가 자신의 방송을<br/>모니터링 할 수 있음
 
-- 백로그 양식은 이전 기수 템플릿 바탕으로 만들기
-- 태스크 예상 시간은 다같이 포커치기
+    Note over H,V: 방송 시작 후 (호스트 페이지에서 시작 버튼 클릭)
 
-- 브랜치 전략
-    
-    <img width="524" alt="image" src="https://github.com/user-attachments/assets/1164a0bd-022f-4641-8434-a114197af730">
+    HP->>MS: 방송 시작 신호
+    MS->>RTMP: 방송 시작 알림
 
-    
+    loop HLS 스트리밍
+        RTMP->>OS: HLS 파일 업로드 (m3u8, segment)
+    end
 
-## 커밋 컨벤션
-  - **feat** : 새로운 기능 추가, 기존의 기능을 요구 사항에 맞추어 수정
-  - **fix** : 기능에 대한 버그 수정
-  - **build** : 빌드 관련 수정
-  - **chore** : 패키지 매니저 수정, 그 외 기타 수정 ex) .gitignore
-  - **ci** : CI 관련 설정 수정
-  - **docs** : 문서(주석) 수정
-  - **style** : 코드 스타일, 포맷팅에 대한 수정
-  - **refactor** : 기능의 변화가 아닌 코드 리팩터링 ex) 변수 이름 변경
-  - **test** : 테스트 코드 추가/수정
-  - **release** : 버전 릴리즈
-  - Typo : 오타 수정(?)
+    V->>MS: 컨퍼런스 선택 (대시보드에서)
+    MS->>V: Object Storage URL 반환
 
+    loop 스트리밍 시청
+        V->>OS: m3u8 요청
+        OS->>V: m3u8 파일 전송
+        V->>OS: segment 요청
+        OS->>V: segment 파일 전송
+    end
+```
+
+<br/>
+
+# 🛠️ 기술 스택
+
+| Part       | Stack                                                                                           |
+| ---------- | ----------------------------------------------------------------------------------------------- |
+| 공통       | ![fullstack 2](https://github.com/user-attachments/assets/1a7f6b03-9d59-4ecc-adc9-39ad17ac67a4) |
+| 프론트엔드 | ![fullstack 1](https://github.com/user-attachments/assets/64fdaa86-289d-42f0-80ce-4f01df4bfe75) |
+| 백엔드     | ![fullstack 3](https://github.com/user-attachments/assets/8a01cd0b-f324-4c6e-85f6-f75c74239bdb) |
+
+<br/>
+
+# 🏃 주차별 진행 상황
+
+| 주차  | 내용 요약                                                | 발표자료                                                                                          |
+| ----- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| 1주차 | 기획 공유 및 팀 목표 설정                                | [보러가기](https://gominzip.notion.site/Week1-Web22-LiBoo-56af3bb7b2314f878667bdbbf99e791f?pvs=4) |
+| 2주차 | 백로그 작성, 퍼블리싱, 동영상 스트리밍 아키텍처 설계     | [보러가기](https://gominzip.notion.site/Week2-Web22-LiBoo-137673f3719e805baab4e0a9855ed885?pvs=4) |
+| 3주차 | CI/CD, 메인 api 서버 개발, 플레이어 커스텀, 웹소켓 학습, | [보러가기](https://gominzip.notion.site/Week3-Web22-LiBoo-13e673f3719e80e2a6b0cf5fe10d603a?pvs=4) |
+
+<br/>
+
+# 🔥 기술적 도전
+
+꾸준한 문서화를 통해 지식을 공유하고, 깊이 있는 기술적 도전을 이어나가고자 합니다.
+
+- [[학습] 동영상 스트리밍 처리 프로토콜을 알아보자](https://gominzip.notion.site/b987e92eb6c84eef9af1301877eb7c91?pvs=4)
+- [[학습] 웹 소켓의 실시간 양방향 통신](https://gominzip.notion.site/13b673f3719e8037b430ff7b6af397b7?pvs=4)
+- [[과정/근거] 패키지 매니저 및 모노레포 정하기](https://gominzip.notion.site/7677c9cf96464b1d9e9c1d8afd4ab0b6?pvs=4)
+- [[트러블슈팅] 외부의 사용자가 Object Storage에 접근하지 못하는 권한 제어](https://gominzip.notion.site/Object-Storage-1cf0c1bde758437ea595c57cf704a029?pvs=4)
+- [[트러블슈팅] Docker yarn-berry workspace 를 찾지 못하는 오류](https://gominzip.notion.site/docker-yarn-berry-workspace-eff32ce3f695470a8a2d9ef4d02be1e0?pvs=4)
+
+[더 많은 기술정리 보러 가기](https://gominzip.notion.site/12d673f3719e8098ad94ed6b71b10ac0?pvs=4)
+
+<br/>
+
+# TEAM 정권지르기 👊
+
+|                                     김준서                                     |                                     김영길                                     |                                    고민지                                     |                                    김지수                                    |                                    홍창현                                    |
+| :----------------------------------------------------------------------------: | :----------------------------------------------------------------------------: | :---------------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :--------------------------------------------------------------------------: |
+| <img src="https://avatars.githubusercontent.com/u/45356754?v=4" width="120" /> | <img src="https://avatars.githubusercontent.com/u/46553489?v=4" width="120" /> | <img src="https://avatars.githubusercontent.com/u/101329724?v=4" width="120"> | <img src="https://avatars.githubusercontent.com/u/85912592?v=4" width="120"> | <img src="https://avatars.githubusercontent.com/u/48922050?v=4" width="120"> |
+|                                     **BE**                                     |                                     **BE**                                     |                                    **FE**                                     |                                    **FE**                                    |                                    **FE**                                    |
+|                       [@i3kae](https://github.com/i3kae)                       |                    [@hoeeeeeh](https://github.com/hoeeeeeh)                    |                   [@gominzip](https://github.com/gominzip)                    |                    [@jsk3342](https://github.com/jsk3342)                    |                   [@spearStr](https://github.com/spearStr)                   |
