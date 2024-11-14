@@ -19,3 +19,6 @@ backend/rtmpServer/.env
 .pnp.*
 
 frontend-dist
+
+.dist
+.env
