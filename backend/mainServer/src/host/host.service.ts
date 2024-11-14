@@ -5,8 +5,8 @@ import crypto from 'crypto';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class keyGenerateRequestDto {
-  @ApiProperty({example: 'this_is_uuid', description: '클라이언트마다 가지는 랜덤한 uuid 값'})
-    uuid: string = '';
+  @ApiProperty({example: 'this_is_userId', description: '클라이언트마다 가지는 랜덤한 userId 값'})
+    userId: string = '';
 }
 
 function generateRandomKey(uuid: string, salt: string) {
@@ -18,8 +18,8 @@ function generateRandomKey(uuid: string, salt: string) {
 export class HostService {
   async generateStreamKey(requestDto: keyGenerateRequestDto): Promise<Array<string>> {
     dotenv.config({path: path.resolve('../.env')});
-    const streamKey = generateRandomKey(requestDto.uuid, process.env.STREAM_KEY_SALT || '');
-    const sessionKey = generateRandomKey(requestDto.uuid, process.env.SESSION_KEY_SALT || '');
+    const streamKey = generateRandomKey(requestDto.userId, process.env.STREAM_KEY_SALT || '');
+    const sessionKey = generateRandomKey(requestDto.userId, process.env.SESSION_KEY_SALT || '');
     return [streamKey, sessionKey];
   }
 }

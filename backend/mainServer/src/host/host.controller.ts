@@ -10,13 +10,13 @@ export class HostController {
 
   @Post('/key')
   @ApiOperation({ summary: 'Host Stream, Session Key Generate API', description: 'Host용 스트림키와 세션키를 생성합니다.' })
-  @ApiCreatedResponse({ description: '스트림키, 세션키를 생성한다.', type: Array<string> })
+  @ApiCreatedResponse({ description: '스트림키, 세션키를 생성한다.' })
   async generateStreamKey(@Body() requestDto: keyGenerateRequestDto, @Req() req: Request, @Res() res: Response) {
     try {
       const host = req.headers['host'] as string;
       const contentType = req.headers['content-type'];
 
-      if (!host || !contentType || !requestDto.uuid) {
+      if (!host || !contentType || !requestDto.userId) {
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
       }
       if (contentType !== 'application/json') {
