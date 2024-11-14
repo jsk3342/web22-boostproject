@@ -12,10 +12,16 @@
   font-style: normal;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
 body {
   font-family: 'NanumGothic', sans-serif;
   font-weight: 400;
-  margin: 0;
 }
 
 .hidden {
