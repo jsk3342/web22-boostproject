@@ -9,8 +9,11 @@ export default function Header() {
 }
 
 const Container = styled.header`
+  width: 100%;
+  height: 60px;
+  position: fixed;
   background-color: #222222;
-  padding: 10px 20px;
   color: #fff;
   font-weight: bold;
+  z-index: 11000;
 `;

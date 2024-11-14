@@ -7,7 +7,7 @@ import CustomPlayIcon from '@assets/custom_play_icon.svg';
 import PauseIcon from '@assets/icons/pause_icon.svg';
 import PlayIcon from '@assets/icons/play_icon.svg';
 
-const Player = ({ videoUrl }: { videoUrl: string; }) => {
+const Player = ({ videoUrl }: { videoUrl: string }) => {
   const [onHLSReady, setOnHLSReady] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [showIcon, setShowIcon] = useState(false);
