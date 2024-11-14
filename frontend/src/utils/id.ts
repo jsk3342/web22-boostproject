@@ -6,7 +6,7 @@ export const getStoredId = (key: StorageKey): string | null => localStorage.getI
 
 export const setStoredId = (key: StorageKey, id: string): void => localStorage.setItem(key, id);
 
-export const getOrCreateId = (key: StorageKey): string => {
+export const getOrCreateId = (key: StorageKey = 'userId'): string => {
   const savedId = getStoredId(key);
   if (savedId) return savedId;
 

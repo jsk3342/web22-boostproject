@@ -1,12 +1,15 @@
 import styled from 'styled-components';
 import OBSIcon from '@assets/img_studio_obs.png';
 import DownloadIcon from '@assets/download.svg';
+import { getOrCreateId } from '@utils/id';
 
 interface SettingInfoProps {
   closeModal: () => void;
 }
 
 export default function SettingInfo({ closeModal }: SettingInfoProps) {
+  const userId = getOrCreateId();
+
   return (
     <PopupOverlay onClick={closeModal}>
       <PopupContainer
