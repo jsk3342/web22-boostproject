@@ -1,5 +1,6 @@
 import { Controller, Post, Req, Res, HttpException, HttpStatus, Body } from '@nestjs/common';
-import { keyGenerateRequestDto, HostService } from './host.service.js';
+import { HostService } from './host.service.js';
+import { hostKeyPairDto } from './dto/hostKeyPairDto.js';
 import { Request, Response } from 'express';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
@@ -11,7 +12,7 @@ export class HostController {
   @Post('/key')
   @ApiOperation({ summary: 'Host Stream, Session Key Generate API', description: 'Host용 스트림키와 세션키를 생성합니다.' })
   @ApiCreatedResponse({ description: '스트림키, 세션키를 생성한다.' })
-  async generateStreamKey(@Body() requestDto: keyGenerateRequestDto, @Req() req: Request, @Res() res: Response) {
+  async generateStreamKey(@Body() requestDto: hostKeyPairDto, @Req() req: Request, @Res() res: Response) {
     try {
       const host = req.headers['host'] as string;
       const contentType = req.headers['content-type'];
