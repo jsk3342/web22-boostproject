@@ -2,6 +2,8 @@ import { QueryClient, DefaultOptions } from '@tanstack/react-query';
 import axios from 'axios';
 
 export const BASE_URL = 'http://liboo.kr';
+export const RTMP_PORT = '1935';
+export const RTMP_HTTP_PORT = '8000';
 
 export const initFetchInstance = (baseURL: string) =>
   axios.create({
