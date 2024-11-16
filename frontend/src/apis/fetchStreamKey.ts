@@ -9,7 +9,7 @@ export type StreamKeyResponse = {
 };
 
 export const fetchStreamKey = async (userId: NanoId): Promise<StreamKeyResponse> => {
-  const response: AxiosResponse<StreamKeyResponse> = await fetchInstance().post(`/host/key`, {
+  const response: AxiosResponse<StreamKeyResponse> = await fetchInstance().post('/host/key', {
     userId
   });
   return response.data;

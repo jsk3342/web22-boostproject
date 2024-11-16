@@ -18,7 +18,7 @@ export default function SettingInfo({ closeModal }: SettingInfoProps) {
 
   useEffect(() => {
     fetchKey(userId);
-  }, []);
+  }, [fetchKey, userId]);
 
   return (
     <PopupOverlay onClick={closeModal}>
