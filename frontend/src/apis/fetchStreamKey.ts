@@ -4,8 +4,8 @@ import { fetchInstance } from '.';
 type NanoId = string;
 
 export type StreamKeyResponse = {
-  'stream-key': string;
-  'session-key': string;
+  streamKey: string;
+  sessionKey: string;
 };
 
 export const fetchStreamKey = async (userId: NanoId): Promise<StreamKeyResponse> => {
