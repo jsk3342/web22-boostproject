@@ -7,5 +7,5 @@ export default function useGetHostVideo(streamKey: string) {
     queryFn: () => getHostVideoURL(streamKey)
   });
 
-  return data ?? [];
+  return data?.url ?? '';
 }
