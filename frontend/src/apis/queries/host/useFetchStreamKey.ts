@@ -1,10 +1,5 @@
-import { fetchStreamKey } from '@apis/fetchStreamKey';
+import { fetchStreamKey, StreamKeyResponse } from '@apis/fetchStreamKey';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
-
-type StreamKeyResponse = {
-  'stream-key': string;
-  'session-key': string;
-};
 
 type Params = {
   onSuccess?: (data: StreamKeyResponse) => void;
