@@ -51,12 +51,8 @@ export default function SettingInfo({ closeModal }: SettingInfoProps) {
                   <SettingRow>
                     <Label htmlFor="stream-url">스트림 URL</Label>
                     <ValueWithButton>
-                      <StreamURL>rtmp://global-rtmp.lip2.navercorp.com:8080/relay</StreamURL>
-                      <CopyButton
-                        onClick={() =>
-                          navigator.clipboard.writeText('rtmp://global-rtmp.lip2.navercorp.com:8080/relay')
-                        }
-                      >
+                      <StreamURL>rtmp://liboo.kr:1935/live</StreamURL>
+                      <CopyButton onClick={() => navigator.clipboard.writeText('rtmp://liboo.kr:1935/live')}>
                         복사
                       </CopyButton>
                     </ValueWithButton>
