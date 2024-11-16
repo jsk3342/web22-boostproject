@@ -7,7 +7,7 @@ import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 @Controller('host')
 @ApiTags('Host API')
 export class HostController {
-  _inMemory;
+  _inMemory: { [key: string]: string };
   constructor(private readonly hostService: HostService) {
     this._inMemory = {
       'web22':'web22_session'
