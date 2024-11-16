@@ -1,4 +1,4 @@
-import { fetchStreamKey } from '@apis/host/fetchStreamKey';
+import { fetchStreamKey } from '@apis/fetchStreamKey';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 type StreamKeyResponse = {

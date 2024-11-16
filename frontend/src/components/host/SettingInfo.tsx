@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import OBSIcon from '@assets/img_studio_obs.png';
 import DownloadIcon from '@assets/download.svg';
 import { getOrCreateId } from '@utils/id';
-import useFetchStreamKey from '@queries/host/useFetchStreamKey';
+import useFetchStreamKey from '@apis/queries/host/useFetchStreamKey';
 import { useEffect } from 'react';
 
 interface SettingInfoProps {

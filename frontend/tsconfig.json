@@ -19,7 +19,7 @@
       "@styles/*": ["src/styles/*"],
       "@type/*": ["src/type/*"],
       "@apis/*": ["src/apis/*"],
-      "@queries/*": ["src/queries/*"]
+      "@queries/*": ["src/apis/queries/*"]
     },
     "types": ["vite/client"]
   },

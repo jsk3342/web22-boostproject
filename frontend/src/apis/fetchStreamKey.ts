@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { BASE_URL, fetchInstance } from '..';
+import { BASE_URL, fetchInstance } from '.';
 
 type StreamKeyResponse = {
   'stream-key': string;
