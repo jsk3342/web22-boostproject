@@ -12,6 +12,7 @@ services:
       - "443:443"
       - "8000:8000"
       - "1935:1935"
+      - "3000:3000"
     volumes:
       - /etc/letsencrypt/live/liboo.kr:/etc/letsencrypt/live/liboo.kr:ro
       - /etc/letsencrypt/archive/liboo.kr:/etc/letsencrypt/archive/liboo.kr:ro
