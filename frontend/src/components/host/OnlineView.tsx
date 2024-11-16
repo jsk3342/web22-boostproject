@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Hls from 'hls.js';
 
-import useGetHostVideo from '@apis/queries/host/useGetHostVideo';
-import { getStreamKey } from '@utils/streamKey';
+import { getHostURL } from '@utils/hostURL';
 
 export default function OnlineView() {
-  const hostURL = useGetHostVideo(getStreamKey());
+  const hostURL = getHostURL();
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
