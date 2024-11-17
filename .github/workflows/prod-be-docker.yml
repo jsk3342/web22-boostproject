@@ -40,3 +40,17 @@ jobs:
           docker compose -f be.build.yaml push
         env:
           DOCKER_BUILDKIT: 1
+
+      - name: Execute deployment script on remote server
+        env:
+          SSH_PEM_KEY: ${{ secrets.SSH_PEM_KEY }}
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          SSH_PORT: ${{ secrets.SSH_PORT }}
+
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PEM_KEY" > ~/.ssh/SSH_PEM_KEY.pem
+          chmod 600 ~/.ssh/SSH_PEM_KEY.pem
+          ssh -p $SSH_PORT -i ~/.ssh/SSH_PEM_KEY.pem -o StrictHostKeyChecking=no $SSH_USERNAME@liboo.kr 'bash /home/$SSH_USERNAME/prod/prod_be.sh'
+
+
