@@ -1624,9 +1624,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hoeeeeeh/node-media-server@npm:2.7.30":
-  version: 2.7.30
-  resolution: "@hoeeeeeh/node-media-server@npm:2.7.30"
+"@hoeeeeeh/node-media-server@npm:2.8.3":
+  version: 2.8.3
+  resolution: "@hoeeeeeh/node-media-server@npm:2.8.3"
   dependencies:
     "@aws-sdk/client-s3": "npm:^3.688.0"
     "@types/node": "npm:^22.9.0"
@@ -1642,7 +1642,7 @@ __metadata:
     ws: "npm:^8.13.0"
   bin:
     node-media-server: bin/app.js
-  checksum: 10c0/9beef351952cb451b7cdca27a0d9d61511b18505bfc85de8bb312cf10af6722fc6034039ad492b239de9f51f0b5e074b7f4de0ee1b53658f61233b0ed08ea5a8
+  checksum: 10c0/a407cb85fb4da71f02ecc7ac20e7d6af085003ab477230251d445665ec1df897004143843453b9eb9be853163fb8f6db0ad91e60dcdb2e72981d0fea890dee89
   languageName: node
   linkType: hard
 
@@ -9968,7 +9968,7 @@ __metadata:
   resolution: "rtmpServer@workspace:backend/rtmpServer"
   dependencies:
     "@eslint/js": "npm:^9.13.0"
-    "@hoeeeeeh/node-media-server": "npm:2.7.30"
+    "@hoeeeeeh/node-media-server": "npm:2.8.3"
     "@types/node": "npm:^22.9.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.14.0"
     "@typescript-eslint/parser": "npm:^8.14.0"
