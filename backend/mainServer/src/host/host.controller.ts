@@ -4,7 +4,7 @@ import { hostKeyPairDto } from '../dto/hostKeyPairDto.js';
 import { Request, Response } from 'express';
 import { ApiCreatedResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MemoryDBService } from '../memory-db/memory-db.service.js';
-import { updateMemoryDbDtoFromLiveVideoRequestDto } from '../dto/memoryDbDto.js';
+import { memoryDbDtoFromLiveVideoRequestDto } from '../dto/memoryDbDto.js';
 import { LiveVideoRequestDto } from '../dto/liveVideoDto.js';
 
 
@@ -53,8 +53,11 @@ export class HostController {
   async findSession(@Query('streamKey') streamKey: string, @Req() req: Request, @Res() res: Response) {
     try {
       const sessionKey = this.memoryDBService.findByStreamKey(streamKey);
-      if (!sessionKey)
+      if (!sessionKey) {
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
+      }
+      sessionKey.state = true;
+      this.memoryDBService.updateBySessionKey(streamKey, sessionKey);
       res.status(HttpStatus.OK).json({'session-key': sessionKey});
     } catch (error) {
       if ((error as { status: number }).status === 400) {
@@ -78,8 +81,11 @@ export class HostController {
       const nowUserData = this.memoryDBService.findByUserId(requestDto.userId);
       if (!nowUserData)
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
-      this.memoryDBService.update(requestDto.userId, updateMemoryDbDtoFromLiveVideoRequestDto(nowUserData, requestDto));
-      res.status(HttpStatus.OK).send();
+      this.memoryDBService.updateByUserId(requestDto.userId, memoryDbDtoFromLiveVideoRequestDto(nowUserData, requestDto));
+      res.status(HttpStatus.OK).json({
+        status : 'success',
+        data : requestDto
+      });
     } catch (error) {
       if ((error as { status: number }).status === 400) {
         res.status(HttpStatus.BAD_REQUEST).json({
@@ -92,5 +98,18 @@ export class HostController {
         });
       }
     }
+  }
+
+  @Get('/state')
+  @ApiOperation({summary : 'Response this session is live", description: "현재 방송 세션이 라이브 상태인지 반환합니다.'})
+  @ApiResponse({status : 200, description : '현재 방송 상태에 대한 응답'})
+  async getBroadcastState(@Query('sessionKey') sessionKey : string, @Res() res : Response) {
+    const liveState = this.memoryDBService.findBySessionKey(sessionKey);
+    if (!liveState) {
+      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
+    }
+    res.status(200).json({
+      state : liveState.state
+    });
   }
 }

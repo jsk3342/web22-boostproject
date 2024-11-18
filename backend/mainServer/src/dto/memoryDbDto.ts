@@ -21,6 +21,7 @@ export class MemoryDbDto {
   };
   category: string = '';
   tags: Array<string> = [];
+  state : boolean = false;
 
   constructor(data?: Partial<MemoryDbDto>) {
     if (data) {
@@ -29,7 +30,7 @@ export class MemoryDbDto {
   }
 }
 
-export function updateMemoryDbDtoFromLiveVideoRequestDto(
+export function memoryDbDtoFromLiveVideoRequestDto(
   memoryDbDto: MemoryDbDto,
   liveVideoDto: LiveVideoRequestDto
 ): MemoryDbDto {
