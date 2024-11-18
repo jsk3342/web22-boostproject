@@ -1,17 +1,26 @@
-import { Controller, Post, Get, Req, Res, HttpException, HttpStatus, Body, Query } from '@nestjs/common';
+import { Controller, Post, Get, Req, Res, HttpException, HttpStatus, Body, Query, Inject } from '@nestjs/common';
 import { HostService } from './host.service.js';
-import { hostKeyPairDto } from './dto/hostKeyPairDto.js';
+import { hostKeyPairDto } from '../dto/hostKeyPairDto.js';
 import { Request, Response } from 'express';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { MemoryDBService, MemoryDBManager } from '../memory-db/memory-db.service.js';
+import { MemoryDB } from '../memory-db/memory-db.decorator.js';
+
+
+@MemoryDB
+class User {
+  id: number;
+  name: string;
+}
 
 @Controller('host')
 @ApiTags('Host API')
 export class HostController {
+  private readonly inMemoryDBService: MemoryDBService<User>;
   _inMemory: { [key: string]: string };
-  constructor(private readonly hostService: HostService) {
-    this._inMemory = {
-      'web22':'web22_session'
-    };
+  constructor( @Inject(MemoryDBManager) private readonly dbManager: MemoryDBManager,  private readonly hostService: HostService) {
+    this.inMemoryDBService = new MemoryDBService<User>();
+    this.dbManager.register(User, this.inMemoryDBService);
   }
 
   @Post('/key')
