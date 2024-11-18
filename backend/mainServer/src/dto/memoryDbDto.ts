@@ -30,7 +30,7 @@ export class MemoryDbDto {
   }
 }
 
-export function updateMemoryDbDtoFromLiveVideoRequestDto(
+export function memoryDbDtoFromLiveVideoRequestDto(
   memoryDbDto: MemoryDbDto,
   liveVideoDto: LiveVideoRequestDto
 ): MemoryDbDto {
