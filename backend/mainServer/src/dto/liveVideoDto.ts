@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { MemoryDB } from "../memory-db/memory-db.decorator.js";
+import { ChannelDto } from './memoryDbDto.js';
 
 @MemoryDB
 export class LiveVideoDto {
@@ -9,8 +10,11 @@ export class LiveVideoDto {
   liveImageUrl: string = "";
   defaultThumbnailImageUrl: string = "";
   concurrentUserCount: number = 0;
-  channelId: string = "";
-  channelName: string = "";
+  channel : ChannelDto = {
+    channelId: "",
+    channelName: "",
+  }
+
   category: string = "";
   tags: Array<string> = [];
 }
