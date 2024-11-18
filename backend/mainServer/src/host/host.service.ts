@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import path from 'path';
 import { Injectable } from '@nestjs/common';
-import { hostKeyPairDto } from './dto/hostKeyPairDto.js';
+import { hostKeyPairDto } from '../dto/hostKeyPairDto.js';
 import { randomKey } from '../util/generator.js';
 
 @Injectable()
