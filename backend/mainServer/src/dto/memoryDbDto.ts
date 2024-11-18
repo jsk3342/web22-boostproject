@@ -21,6 +21,7 @@ export class MemoryDbDto {
   };
   category: string = '';
   tags: Array<string> = [];
+  state : boolean = false;
 
   constructor(data?: Partial<MemoryDbDto>) {
     if (data) {
