@@ -11,7 +11,6 @@ import { LiveVideoRequestDto } from '../dto/liveVideoDto.js';
 @Controller('host')
 @ApiTags('Host API')
 export class HostController {
-  _inMemory: { [key: string]: string };
   constructor( private readonly memoryDBService: MemoryDBService,  private readonly hostService: HostService) { }
 
   @Post('/key')
@@ -53,9 +52,10 @@ export class HostController {
   @ApiCreatedResponse({ description: '스트림 키를 통해 세션키를 전달 받습니다.' })
   async findSession(@Query('streamKey') streamKey: string, @Req() req: Request, @Res() res: Response) {
     try {
-      if (!this.memoryDBService.findByStreamKey(streamKey))
+      const sessionKey = this.memoryDBService.findByStreamKey(streamKey);
+      if (!sessionKey)
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
-      res.status(HttpStatus.OK).json({'session-key': this.memoryDBService.findByStreamKey(streamKey).sessionKey });
+      res.status(HttpStatus.OK).json({'session-key': sessionKey});
     } catch (error) {
       if ((error as { status: number }).status === 400) {
         res.status(HttpStatus.BAD_REQUEST).json({
@@ -76,6 +76,8 @@ export class HostController {
   async updateBroadcastData(@Body() requestDto: LiveVideoRequestDto, @Res() res: Response) {
     try {
       const nowUserData = this.memoryDBService.findByUserId(requestDto.userId);
+      if (!nowUserData)
+        throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
       this.memoryDBService.update(requestDto.userId, updateMemoryDbDtoFromLiveVideoRequestDto(nowUserData, requestDto));
       res.status(HttpStatus.OK).send();
     } catch (error) {

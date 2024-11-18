@@ -1,4 +1,3 @@
-import { MemoryDB } from '../memory-db/memory-db.decorator.js';
 import { LiveVideoRequestDto } from './liveVideoDto.js';
 
 export class ChannelDto {
@@ -6,7 +5,6 @@ export class ChannelDto {
   channelName: string = '';
 }
 
-@MemoryDB
 export class MemoryDbDto {
   id: number = 0;
   userId: string = '';
