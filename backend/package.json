@@ -4,7 +4,8 @@
   "packageManager": "yarn@4.5.1",
   "workspaces": [
     "mainServer",
-    "rtmpServer"
+    "rtmpServer",
+    "chatServer"
   ],
   "devDependencies": {
     "@eslint/js": "^9.14.0",
