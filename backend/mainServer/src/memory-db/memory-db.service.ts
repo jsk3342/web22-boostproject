@@ -27,8 +27,8 @@ export class MemoryDBService {
     this.db.push(newItem);
   }
 
-  update(id: string | number, updatedItem: Partial<MemoryDbDto>): boolean {
-    const index = this.db.findIndex(item => item.id === id);
+  update(userId: string, updatedItem: Partial<MemoryDbDto>): boolean {
+    const index = this.db.findIndex(item => item.userId === userId);
     if (index === -1) return false;
     this.db[index] = { ...this.db[index], ...updatedItem } as MemoryDbDto;
     return true;
@@ -42,16 +42,15 @@ export class MemoryDBService {
   }
 }
 
-
 @Injectable()
 export class MemoryDBManager {
-  private readonly databases = new Map<Function, any>();
+  private readonly databases = new Map<new (...args: unknown[]) => unknown, MemoryDBService>();
 
-  register(target: Function, service: MemoryDBService): void {
+  register(target: new (...args: unknown[]) => unknown, service: MemoryDBService): void {
     this.databases.set(target, service);
   }
 
-  get(target: Function): MemoryDBService | undefined {
+  get(target: new (...args: unknown[]) => unknown): MemoryDBService | undefined {
     return this.databases.get(target);
   }
 }
