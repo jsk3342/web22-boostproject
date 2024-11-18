@@ -18,7 +18,7 @@ export class LiveCurationDto {
 export function fromLiveCurationDto(memoryDbDto: MemoryDbDto): LiveCurationDto {
   const {
     id,
-    liveId,
+    sessionKey,
     liveTitle,
     liveImageUrl,
     defaultThumbnailImageUrl = 'https://kr.object.ncloudstorage.com/web22/static/liboo_default_thumbnail.png',
@@ -28,11 +28,11 @@ export function fromLiveCurationDto(memoryDbDto: MemoryDbDto): LiveCurationDto {
 
   return {
     id,
-    liveId,
+    liveId : sessionKey,
     liveTitle,
     liveImageUrl,
     defaultThumbnailImageUrl,
     concurrentUserCount,
-    channel
+    channel,
   };
 }

@@ -33,7 +33,6 @@ export class HostController {
       if (!this.memoryDBService.findByUserId(requestDto.userId)) {
         this.memoryDBService.create({userId: requestDto.userId, streamKey: streamKey, sessionKey:sessionKey});
       }
-      console.log(this.memoryDBService.findAll());
       res.status(HttpStatus.OK).json({ 'streamKey': streamKey, 'sessionKey':sessionKey });
     } catch (error) {
       if ((error as { status: number }).status === 400) {
@@ -77,10 +76,7 @@ export class HostController {
   async updateBroadcastData(@Body() requestDto: LiveVideoRequestDto, @Res() res: Response) {
     try {
       const nowUserData = this.memoryDBService.findByUserId(requestDto.userId);
-      console.log(nowUserData);
       this.memoryDBService.update(requestDto.userId, updateMemoryDbDtoFromLiveVideoRequestDto(nowUserData, requestDto));
-      console.log('TEST3');
-      console.log(this.memoryDBService.findAll());
       res.status(HttpStatus.OK).send();
     } catch (error) {
       if ((error as { status: number }).status === 400) {
