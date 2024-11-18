@@ -14,6 +14,14 @@ export class MemoryDBService {
     return this.db.find(item => item.id === id);
   }
 
+  findByUserId(userId: string): MemoryDbDto | undefined {
+    return this.db.find(item => item.userId === userId);
+  }
+
+  findByStreamKey(streamKey: string): MemoryDbDto | undefined {
+    return this.db.find(item => item.streamKey === streamKey);
+  }
+
   create(item: Partial<MemoryDbDto>): void {
     const newItem = new MemoryDbDto({ ...item, id: ++this.currentId });
     this.db.push(newItem);

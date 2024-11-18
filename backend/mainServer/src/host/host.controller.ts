@@ -33,7 +33,10 @@ export class HostController {
       }
 
       const [streamKey, sessionKey] = await this.hostService.generateStreamKey(requestDto);
-      this.memoryDBService.create({id: 0, userId: requestDto.userId, streamKey: streamKey, sessionKey:sessionKey});
+      if (!this.memoryDBService.findByUserId(requestDto.userId)) {
+        this.memoryDBService.create({userId: requestDto.userId, streamKey: streamKey, sessionKey:sessionKey});
+      }
+      console.log(this.memoryDBService.findAll());
       res.status(HttpStatus.OK).json({ 'streamKey': streamKey, 'sessionKey':sessionKey });
     } catch (error) {
       if ((error as { status: number }).status === 400) {
@@ -54,9 +57,9 @@ export class HostController {
   @ApiCreatedResponse({ description: '스트림 키를 통해 세션키를 전달 받습니다.' })
   async findSession(@Query('streamKey') streamKey: string, @Req() req: Request, @Res() res: Response) {
     try {
-      if (!(streamKey in this._inMemory))
+      if (!this.memoryDBService.findByStreamKey(streamKey))
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
-      res.status(HttpStatus.OK).json({'session-key':this._inMemory[streamKey] });
+      res.status(HttpStatus.OK).json({'session-key': this.memoryDBService.findByStreamKey(streamKey).sessionKey });
     } catch (error) {
       if ((error as { status: number }).status === 400) {
         res.status(HttpStatus.BAD_REQUEST).json({
