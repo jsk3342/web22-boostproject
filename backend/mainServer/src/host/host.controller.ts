@@ -57,7 +57,7 @@ export class HostController {
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
       }
       sessionKey.state = true;
-      this.memoryDBService.updateBySessionKey(streamKey, sessionKey)
+      this.memoryDBService.updateBySessionKey(streamKey, sessionKey);
       res.status(HttpStatus.OK).json({'session-key': sessionKey});
     } catch (error) {
       if ((error as { status: number }).status === 400) {
@@ -83,9 +83,9 @@ export class HostController {
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
       this.memoryDBService.updateByUserId(requestDto.userId, memoryDbDtoFromLiveVideoRequestDto(nowUserData, requestDto));
       res.status(HttpStatus.OK).json({
-        status : "success",
+        status : 'success',
         data : requestDto
-      })
+      });
     } catch (error) {
       if ((error as { status: number }).status === 400) {
         res.status(HttpStatus.BAD_REQUEST).json({
@@ -100,9 +100,9 @@ export class HostController {
     }
   }
 
-  @Get("/state")
-  @ApiOperation({summary : "Response this session is live", description: "현재 방송 세션이 라이브 상태인지 반환합니다."})
-  @ApiResponse({status : 200, description : "현재 방송 상태에 대한 응답"})
+  @Get('/state')
+  @ApiOperation({summary : 'Response this session is live", description: "현재 방송 세션이 라이브 상태인지 반환합니다.'})
+  @ApiResponse({status : 200, description : '현재 방송 상태에 대한 응답'})
   async getBroadcastState(@Query('sessionKey') sessionKey : string, @Res() res : Response) {
     const liveState = this.memoryDBService.findBySessionKey(sessionKey);
     if (!liveState) {
@@ -110,6 +110,6 @@ export class HostController {
     }
     res.status(200).json({
       state : liveState.state
-    })
+    });
   }
 }
