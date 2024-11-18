@@ -1,22 +1,18 @@
-import { Controller, Post, Get, Req, Res, HttpException, HttpStatus, Body, Query, Inject } from '@nestjs/common';
+import { Controller, Post, Get, Req, Res, HttpException, HttpStatus, Body, Query } from '@nestjs/common';
 import { HostService } from './host.service.js';
 import { hostKeyPairDto } from '../dto/hostKeyPairDto.js';
 import { Request, Response } from 'express';
 import { ApiCreatedResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { MemoryDBService, MemoryDBManager } from '../memory-db/memory-db.service.js';
-import { MemoryDbDto, updateMemoryDbDtoFromLiveVideoRequestDto } from '../dto/memoryDbDto.js';
+import { MemoryDBService } from '../memory-db/memory-db.service.js';
+import { updateMemoryDbDtoFromLiveVideoRequestDto } from '../dto/memoryDbDto.js';
 import { LiveVideoRequestDto } from '../dto/liveVideoDto.js';
 
 
 @Controller('host')
 @ApiTags('Host API')
 export class HostController {
-  private readonly memoryDBService: MemoryDBService;
   _inMemory: { [key: string]: string };
-  constructor( @Inject(MemoryDBManager) private readonly dbManager: MemoryDBManager,  private readonly hostService: HostService) {
-    this.memoryDBService = new MemoryDBService();
-    this.dbManager.register(MemoryDbDto, this.memoryDBService);
-  }
+  constructor( private readonly memoryDBService: MemoryDBService,  private readonly hostService: HostService) { }
 
   @Post('/key')
   @ApiOperation({ summary: 'Host Stream, Session Key Generate API', description: 'Host용 스트림키와 세션키를 생성합니다.' })

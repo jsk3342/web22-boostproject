@@ -1,5 +1,5 @@
 import { MemoryDB } from '../memory-db/memory-db.decorator.js';
-import { MemoryDbDto } from './memoryDbDto.js';
+import { MemoryDbDto, ChannelDto } from './memoryDbDto.js';
 
 @MemoryDB
 export class LiveCurationDto {
@@ -9,8 +9,10 @@ export class LiveCurationDto {
   liveImageUrl: string = '';
   defaultThumbnailImageUrl: string = 'https://kr.object.ncloudstorage.com/web22/static/liboo_default_thumbnail.png';
   concurrentUserCount: number = 0;
-  channelId: string = '';
-  channelName: string = '';
+  channel: ChannelDto = {
+    channelId : '',
+    channelName : ''
+  };
 }
 
 export function fromLiveCurationDto(memoryDbDto: MemoryDbDto): LiveCurationDto {
@@ -21,7 +23,7 @@ export function fromLiveCurationDto(memoryDbDto: MemoryDbDto): LiveCurationDto {
     liveImageUrl,
     defaultThumbnailImageUrl = 'https://kr.object.ncloudstorage.com/web22/static/liboo_default_thumbnail.png',
     concurrentUserCount,
-    channel: { channelId, channelName }
+    channel,
   } = memoryDbDto;
 
   return {
@@ -31,7 +33,6 @@ export function fromLiveCurationDto(memoryDbDto: MemoryDbDto): LiveCurationDto {
     liveImageUrl,
     defaultThumbnailImageUrl,
     concurrentUserCount,
-    channelId,
-    channelName
+    channel
   };
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MemoryDbDto } from '../dto/memoryDbDto.js';
+import { getRandomElementsFromArray } from '../util/util.js';
 
 @Injectable()
 export class MemoryDBService {
@@ -20,6 +21,10 @@ export class MemoryDBService {
 
   findByStreamKey(streamKey: string): MemoryDbDto | undefined {
     return this.db.find(item => item.streamKey === streamKey);
+  }
+
+  getRandomBroadcastInfo(count: number) {
+    return getRandomElementsFromArray(this.db, count);
   }
 
   create(item: Partial<MemoryDbDto>): void {
