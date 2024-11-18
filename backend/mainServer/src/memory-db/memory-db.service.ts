@@ -23,6 +23,10 @@ export class MemoryDBService {
     return this.db.find(item => item.streamKey === streamKey);
   }
 
+  findBySessionKey(sessionKey: string): MemoryDbDto | undefined {
+    return this.db.find(item => item.sessionKey === sessionKey);
+  }
+  
   getRandomBroadcastInfo(count: number) {
     return getRandomElementsFromArray(this.db, count);
   }
