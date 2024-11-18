@@ -4,5 +4,5 @@ import { getStreamKey } from './streamKey';
 export function getHostURL() {
   const streamKey = getStreamKey();
 
-  return `${BASE_URL}:${RTMP_HTTP_PORT}}/live/${streamKey}}/index.m3u8`;
+  return `${BASE_URL}:${RTMP_HTTP_PORT}/live/${streamKey}/index.m3u8`;
 }
