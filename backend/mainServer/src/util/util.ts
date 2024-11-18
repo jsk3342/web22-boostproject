@@ -11,7 +11,7 @@ export function getRandomElementsFromArray(array: Array<MemoryDbDto>, n: number)
   while (result.length < n) {
     const randomIndex = Math.floor(Math.random() * array.length);
     if (!usedIndices.has(randomIndex)) {
-      const liveCurationDto = fromLiveCurationDto(array[randomIndex])
+      const liveCurationDto = fromLiveCurationDto(array[randomIndex]);
       result.push(liveCurationDto);
       usedIndices.add(randomIndex);
     }
