@@ -15,7 +15,7 @@ export class MemoryDbDto {
   liveId: string = '';
   liveTitle: string = '';
   liveImageUrl: string = '';
-  defaultThumbnailImageUrl: string = '';
+  defaultThumbnailImageUrl: string = 'https://kr.object.ncloudstorage.com/web22/static/liboo_default_thumbnail.png';
   concurrentUserCount: number = 0;
   channel: ChannelDto = {
     channelId : 'null',
