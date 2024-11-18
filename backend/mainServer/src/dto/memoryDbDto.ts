@@ -1,9 +1,11 @@
-import { ApiProperty } from '@nestjs/swagger';
 import { MemoryDB } from "../memory-db/memory-db.decorator.js";
 
 @MemoryDB
-export class LiveVideoDto {
+export class MemoryDbDto {
   id: number = 0;
+  userId: string = "";
+  streamKey: string = "";
+  sessionKey: string = "";
   liveId: string = "";
   liveTitle: string = "";
   liveImageUrl: string = "";
@@ -13,4 +15,10 @@ export class LiveVideoDto {
   channelName: string = "";
   category: string = "";
   tags: Array<string> = [];
+
+  constructor(data?: Partial<MemoryDbDto>) {
+    if (data) {
+      Object.assign(this, data);
+    }
+  }
 }

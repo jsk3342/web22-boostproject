@@ -4,23 +4,17 @@ import { hostKeyPairDto } from '../dto/hostKeyPairDto.js';
 import { Request, Response } from 'express';
 import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { MemoryDBService, MemoryDBManager } from '../memory-db/memory-db.service.js';
-import { MemoryDB } from '../memory-db/memory-db.decorator.js';
+import { MemoryDbDto } from '../dto/memoryDbDto.js';
 
-
-@MemoryDB
-class User {
-  id: number;
-  name: string;
-}
 
 @Controller('host')
 @ApiTags('Host API')
 export class HostController {
-  private readonly inMemoryDBService: MemoryDBService<User>;
+  private readonly memoryDBService: MemoryDBService;
   _inMemory: { [key: string]: string };
   constructor( @Inject(MemoryDBManager) private readonly dbManager: MemoryDBManager,  private readonly hostService: HostService) {
-    this.inMemoryDBService = new MemoryDBService<User>();
-    this.dbManager.register(User, this.inMemoryDBService);
+    this.memoryDBService = new MemoryDBService();
+    this.dbManager.register(MemoryDbDto, this.memoryDBService);
   }
 
   @Post('/key')
@@ -39,8 +33,7 @@ export class HostController {
       }
 
       const [streamKey, sessionKey] = await this.hostService.generateStreamKey(requestDto);
-      this._inMemory[streamKey] = sessionKey;
-      console.log(this._inMemory);
+      this.memoryDBService.create({id: 0, userId: requestDto.userId, streamKey: streamKey, sessionKey:sessionKey});
       res.status(HttpStatus.OK).json({ 'streamKey': streamKey, 'sessionKey':sessionKey });
     } catch (error) {
       if ((error as { status: number }).status === 400) {
