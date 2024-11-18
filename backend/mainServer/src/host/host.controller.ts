@@ -82,7 +82,10 @@ export class HostController {
       if (!nowUserData)
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
       this.memoryDBService.updateByUserId(requestDto.userId, memoryDbDtoFromLiveVideoRequestDto(nowUserData, requestDto));
-      res.status(HttpStatus.OK).send();
+      res.status(HttpStatus.OK).json({
+        status : "success",
+        data : requestDto
+      })
     } catch (error) {
       if ((error as { status: number }).status === 400) {
         res.status(HttpStatus.BAD_REQUEST).json({
