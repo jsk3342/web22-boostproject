@@ -23,6 +23,10 @@ export class MemoryDBService {
     return this.db.find(item => item.streamKey === streamKey);
   }
 
+  findBySessionKey(sessionKey: string): MemoryDbDto | undefined {
+    return this.db.find(item => item.sessionKey === sessionKey);
+  }
+  
   getRandomBroadcastInfo(count: number) {
     return getRandomElementsFromArray(this.db, count);
   }
@@ -32,8 +36,15 @@ export class MemoryDBService {
     this.db.push(newItem);
   }
 
-  update(userId: string, updatedItem: Partial<MemoryDbDto>): boolean {
+  updateByUserId(userId: string, updatedItem: Partial<MemoryDbDto>): boolean {
     const index = this.db.findIndex(item => item.userId === userId);
+    if (index === -1) return false;
+    this.db[index] = { ...this.db[index], ...updatedItem } as MemoryDbDto;
+    return true;
+  }
+
+  updateBySessionKey(sessionKey: string, updatedItem: Partial<MemoryDbDto>): boolean {
+    const index = this.db.findIndex(item => item.sessionKey === sessionKey);
     if (index === -1) return false;
     this.db[index] = { ...this.db[index], ...updatedItem } as MemoryDbDto;
     return true;
