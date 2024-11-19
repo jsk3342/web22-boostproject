@@ -1,7 +1,7 @@
 export type ChattingTypes = 'normal' | 'question' | 'notice';
 
 export interface MessageReceiveData {
-  socketId: string;
+  userId: string;
   nickname: string;
   color: string;
   msg: string;
@@ -15,7 +15,6 @@ export interface MessageReceiveDataWithType extends MessageReceiveData {
 
 export interface MessageSendData {
   roomId: string;
-  socketId: string;
   userId: string;
   msg: string | null;
 }

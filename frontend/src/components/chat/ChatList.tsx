@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 import QuestionCard from './QuestionCard';
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { MessageReceiveDataWithType } from '@type/chat';
 import { CHATTING_TYPES } from '@constants/chat';
+import { ChatContext } from 'src/contexts/chatContext';
+import NoticeCard from './NoticeCard';
 
 export interface ChatListProps {
   messages: MessageReceiveDataWithType[];
-  socketId: string | undefined;
+  userId: string | undefined;
 }
 
-export const ChatList = ({ messages, socketId }: ChatListProps) => {
+export const ChatList = ({ messages, userId }: ChatListProps) => {
+  const { state } = useContext(ChatContext);
   const chatListRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -19,33 +22,52 @@ export const ChatList = ({ messages, socketId }: ChatListProps) => {
   }, [messages]);
 
   return (
-    <ChatListWrapper ref={chatListRef}>
-      {messages.map((chat, index) => (
-        <ChatItemWrapper key={index}>
-          {chat.msgType === CHATTING_TYPES.QUESTION ? (
-            <QuestionCard type="client" user={chat.nickname} message={chat.msg} />
-          ) : (
-            <NormalChat $pointColor={'skyblue'}>
-              {socketId === chat.socketId && <span className="text_point">🧀</span>}
-              <span className="text_point">{chat.nickname}</span>
-              <span>{chat.msg}</span>
-            </NormalChat>
-          )}
-        </ChatItemWrapper>
-      ))}
-    </ChatListWrapper>
+    <ChatListSection>
+      <ChatListWrapper ref={chatListRef}>
+        {messages.map((chat, index) => (
+          <ChatItemWrapper key={index}>
+            {chat.msgType === CHATTING_TYPES.QUESTION ? (
+              <QuestionCard type="client" user={chat.nickname} message={chat.msg} />
+            ) : (
+              <NormalChat $pointColor={'skyblue'}>
+                {userId === chat.userId && <span className="text_point">🧀</span>}
+                <span className="text_point">{chat.nickname}</span>
+                <span>{chat.msg}</span>
+              </NormalChat>
+            )}
+          </ChatItemWrapper>
+        ))}
+      </ChatListWrapper>
+      {state.isNoticePopupOpen && (
+        <PopupWrapper>
+          <NoticeCard />
+        </PopupWrapper>
+      )}
+    </ChatListSection>
   );
 };
 
 export default ChatList;
 
-const ChatListWrapper = styled.div`
-  max-height: 100%;
+const ChatListSection = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  justify-content: end;
+  position: relative;
+  height: 100%;
+`;
+
+const ChatListWrapper = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  max-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   padding: 50px 20px 0 20px;
+  overflow-y: auto;
   scrollbar-width: none;
+  z-index: 100;
 `;
 
 const ChatItemWrapper = styled.div`
@@ -60,4 +82,12 @@ const NormalChat = styled.div<{ $pointColor: string }>`
     color: ${({ $pointColor }) => $pointColor};
     margin-right: 5px;
   }
+`;
+
+const PopupWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  right: 5%;
+  z-index: 1000;
 `;
