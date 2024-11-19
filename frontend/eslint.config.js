@@ -36,7 +36,7 @@ export default tseslint.config({ ignores: ['.*'] }, js.configs.recommended, ...t
     ],
     'react/react-in-jsx-scope': 'off',
     eqeqeq: ['error', 'always'],
-    indent: ['error', 2],
+    indent: ['error', 2, { SwitchCase: 1 }],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
     '@typescript-eslint/no-unused-vars': ['error'],
