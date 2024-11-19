@@ -4,7 +4,7 @@ import { fetchInstance } from '.';
 export interface HostInfo {
   userId: string;
   liveTitle: string;
-  defaultThumbnailImageUrl: '';
+  defaultThumbnailImageUrl: string;
   category: string;
   tags: string[];
 }
