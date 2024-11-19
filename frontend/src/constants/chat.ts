@@ -9,11 +9,11 @@ export const CHATTING_SOCKET_DEFAULT_EVENT = {
   LEAVE_ROOM: 'leave_room'
 } as const;
 
-export const CHATTING_SOCKET_RECIEVE_EVENT = {
-  NORMAL: 'recieve_normal_chat',
-  QUESTION: 'recieve_question',
-  QUESTION_DONE: 'recieve_question_done',
-  NOTICE: 'recieve_notice'
+export const CHATTING_SOCKET_RECEIVE_EVENT = {
+  NORMAL: 'receive_normal_chat',
+  QUESTION: 'receive_question',
+  QUESTION_DONE: 'receive_question_done',
+  NOTICE: 'receive_notice'
 } as const;
 
 export const CHATTING_SOCKET_SEND_EVENT = {

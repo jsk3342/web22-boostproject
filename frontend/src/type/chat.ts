@@ -10,11 +10,12 @@ export interface MessageReceiveData {
 
 export interface MessageReceiveDataWithType extends MessageReceiveData {
   msgType: ChattingTypes;
+  questionList?: MessageReceiveData[];
 }
 
 export interface MessageSendData {
   roomId: string;
   socketId: string;
   userId: string;
-  msg?: string;
+  msg: string | null;
 }
