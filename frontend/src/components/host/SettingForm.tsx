@@ -1,16 +1,21 @@
 import styled from 'styled-components';
 import { ChangeEvent, useState } from 'react';
+import useUpdateHost from '@apis/queries/host/useUpdateHost';
+import { getStoredId } from '@utils/id';
 
-interface SettingFormProps {
-  toggleStreaming: () => void;
-}
+export default function SettingForm() {
+  const { mutate: updateHost } = useUpdateHost();
 
-export default function SettingForm({ toggleStreaming }: SettingFormProps) {
-  const [title, setTitle] = useState('');
+  const [liveTitle, setLiveTitle] = useState('');
   const [category, setCategory] = useState('');
   const [tag, setTag] = useState('');
+  const [tags, setTags] = useState<string[]>([]);
   const [notice, setNotice] = useState('');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+
+  const onRemoveTag = (indexToRemove: number) => {
+    setTags((prev) => prev.filter((_, index) => index !== indexToRemove));
+  };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files && e.target.files[0]) {
@@ -27,17 +32,16 @@ export default function SettingForm({ toggleStreaming }: SettingFormProps) {
           </Label>
           <Input
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={liveTitle}
+            onChange={(e) => setLiveTitle(e.target.value)}
             placeholder="방송 제목을 입력해주세요."
             maxLength={100}
           />
           <CharCount>
-            <Bold>{title.length}</Bold>
+            <Bold>{liveTitle.length}</Bold>
             /100
           </CharCount>
         </FormCell>
-
         <FormCell>
           <Label>카테고리</Label>
           <Input
@@ -49,7 +53,28 @@ export default function SettingForm({ toggleStreaming }: SettingFormProps) {
         </FormCell>
         <FormCell>
           <Label>태그</Label>
-          <Input type="text" value={tag} onChange={(e) => setTag(e.target.value)} placeholder="태그 추가하기" />
+          <Flex>
+            <Input type="text" value={tag} onChange={(e) => setTag(e.target.value)} placeholder="태그 추가하기" />
+            <Button
+              onClick={() => {
+                setTags((prev) => [...prev, tag.trim()]);
+                setTag('');
+              }}
+            >
+              추가
+            </Button>
+          </Flex>
+          {tags.length > 0 && (
+            <TagContainer>
+              {tags.map((tag, index) => (
+                <TagChip key={index}>
+                  {tag}
+                  <RemoveButton onClick={() => onRemoveTag(index)}>×</RemoveButton>
+                </TagChip>
+              ))}
+            </TagContainer>
+          )}
+          <UploadText>공백 및 특수 문자 없이 15자까지 입력할 수 있습니다.</UploadText>
         </FormCell>
         <FormCell>
           <Label>공지</Label>
@@ -76,7 +101,19 @@ export default function SettingForm({ toggleStreaming }: SettingFormProps) {
           </ImageUpload>
         </FormCell>
 
-        <Button onClick={toggleStreaming}>업데이트</Button>
+        <Button
+          onClick={() =>
+            updateHost({
+              userId: getStoredId(),
+              liveTitle,
+              category,
+              defaultThumbnailImageUrl: '',
+              tags
+            })
+          }
+        >
+          업데이트
+        </Button>
       </FormArea>
     </Container>
   );
@@ -87,6 +124,15 @@ const Container = styled.div`
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const Flex = styled.div`
+  display: flex;
+  gap: 20px;
+
+  input {
+    flex: 1;
+  }
 `;
 
 const FormArea = styled.div`
@@ -192,5 +238,45 @@ const Button = styled.button`
   cursor: pointer;
   &:hover {
     background-color: rgba(78, 65, 219, 0.2);
+  }
+`;
+
+const TagContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+`;
+
+const TagChip = styled.span`
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  background-color: #f3f4f6;
+  border-radius: 9999px;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #e5e7eb;
+  }
+`;
+
+const RemoveButton = styled.button`
+  margin-left: 8px;
+  color: #6b7280;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  padding: 0 4px;
+  line-height: 1;
+
+  &:hover {
+    color: #374151;
+  }
+
+  &:focus {
+    outline: none;
   }
 `;

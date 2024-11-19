@@ -4,7 +4,7 @@ import DownloadIcon from '@assets/download.svg';
 import { getOrCreateId } from '@utils/id';
 import useFetchStreamKey from '@apis/queries/host/useFetchStreamKey';
 import { useEffect } from 'react';
-import { setStreamKey } from '@utils/streamKey';
+import { setSessionKey, setStreamKey } from '@utils/streamKey';
 
 interface SettingInfoProps {
   closeModal: () => void;
@@ -13,7 +13,10 @@ interface SettingInfoProps {
 export default function SettingInfo({ closeModal }: SettingInfoProps) {
   const userId = getOrCreateId();
   const { mutate: fetchKey, data } = useFetchStreamKey({
-    onSuccess: ({ streamKey }) => setStreamKey(streamKey)
+    onSuccess: ({ streamKey, sessionKey }) => {
+      setStreamKey(streamKey);
+      setSessionKey(sessionKey);
+    }
   });
 
   useEffect(() => {

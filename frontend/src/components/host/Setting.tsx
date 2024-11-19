@@ -1,18 +1,15 @@
 import styled from 'styled-components';
 import Player from './Player';
 import SettingForm from './SettingForm';
-import { useState } from 'react';
+import { useBroadcastStatusPolling } from '@apis/queries/host/useBroadcastStatusPolling';
 
 export default function Setting() {
-  const [onStreaming, setOnStreaming] = useState(false);
-  const toggleStreaming = () => {
-    setOnStreaming((prev) => !prev);
-  };
+  const { data: onStreaming } = useBroadcastStatusPolling();
 
   return (
     <Container>
       <Player onStreaming={onStreaming} />
-      <SettingForm toggleStreaming={toggleStreaming} />
+      <SettingForm />
     </Container>
   );
 }
