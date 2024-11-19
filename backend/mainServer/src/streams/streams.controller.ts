@@ -1,16 +1,16 @@
-import { Controller, Get, Res, HttpStatus, Query } from '@nestjs/common';
-import { ViewerService } from './viewer.service.js';
+import { Controller, Get, Res, HttpStatus } from '@nestjs/common';
+import { StreamsService } from './streams.service.js';
 import { Response } from 'express';
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MemoryDBService } from '../memory-db/memory-db.service.js';
 
-@ApiTags('Viewer API')
-@Controller('viewer')
-export class ViewerController {
-  constructor( private readonly memoryDBService: MemoryDBService,  private readonly viewerService: ViewerService) { }
+@ApiTags('Stream Information API')
+@Controller('streams')
+export class StreamsController {
+  constructor( private readonly memoryDBService: MemoryDBService,  private readonly streamsService: StreamsService) { }
 
-  @Get('/main/random')
-  @ApiOperation({ summary: 'get 4ea broadcast data API', description: '랜덤하게 4개의 방송 정보를 받아온다.' })
+  @Get('/random')
+  @ApiOperation({ summary: 'Get 4ea Broadcas Info API', description: '랜덤하게 4개의 방송 정보를 받아온다.' })
   @ApiResponse({ status: 200, description: '랜덤한 4개의 방송 정보를 받았습니다.' })
   async findSession(@Res() res: Response) {
     try {
@@ -30,7 +30,7 @@ export class ViewerController {
     }
   }
 
-  @Get('/main/live')
+  @Get('/live')
   @ApiOperation({summary : 'Get 8ea Live Session Info', description:'현재 진행 중인 라이브 정보를 최신부터 8개씩 불러옵니다.'})
   async getSession(@Res() res: Response) {
     try {
