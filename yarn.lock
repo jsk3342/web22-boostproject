@@ -1624,9 +1624,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hoeeeeeh/node-media-server@npm:2.8.3":
+"@hoeeeeeh/node-media-server@npm:2.8.4":
   version: 2.8.3
-  resolution: "@hoeeeeeh/node-media-server@npm:2.8.3"
+  resolution: "@hoeeeeeh/node-media-server@npm:2.8.4"
   dependencies:
     "@aws-sdk/client-s3": "npm:^3.688.0"
     "@types/node": "npm:^22.9.0"
