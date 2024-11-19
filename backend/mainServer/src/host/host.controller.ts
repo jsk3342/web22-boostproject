@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 import { ApiCreatedResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MemoryDBService } from '../memory-db/memory-db.service.js';
 import { memoryDbDtoFromLiveVideoRequestDto } from '../dto/memoryDbDto.js';
-import { LiveVideoRequestDto } from '../dto/liveVideoDto.js';
+import { LiveVideoRequestDto } from '../dto/liveSessionDto.js';
 
 
 @Controller('host')

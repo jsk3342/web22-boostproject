@@ -1,4 +1,4 @@
-import { LiveVideoRequestDto } from './liveVideoDto.js';
+import { LiveVideoRequestDto } from './liveSessionDto.js';
 
 export class ChannelDto {
   channelId: string = '';
