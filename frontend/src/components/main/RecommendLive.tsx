@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import Hls from 'hls.js';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { LiveBadgeLarge } from './ThumbnailBadge';
@@ -8,6 +10,50 @@ import sampleProfile from '@assets/sample_profile.png';
 const RecommendLive = () => {
   const navigate = useNavigate();
   const { data: randomLiveData, isLoading, error } = useRandomLive();
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // const videoUrl = `https://kr.object.ncloudstorage.com/web22/live/${liveData.liveId}/index.m3u8`;
+  const videoUrl = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+
+useEffect(() => {
+  if (!randomLiveData || randomLiveData.length === 0) return;
+
+  const videoElement = videoRef.current;
+  if (videoElement && Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(videoUrl);
+    hls.attachMedia(videoElement);
+    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      videoElement?.play();
+    });
+
+    return () => {
+      hls.destroy();
+    };
+  } else if (videoElement) {
+    videoElement.src = videoUrl;
+    videoElement.play();
+  }
+}, [randomLiveData, videoUrl]);useEffect(() => {
+  if (!randomLiveData || randomLiveData.length === 0) return;
+
+  const videoElement = videoRef.current;
+  if (videoElement && Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(videoUrl);
+    hls.attachMedia(videoElement);
+    hls.on(Hls.Events.MANIFEST_PARSED, () => {
+      videoElement?.play();
+    });
+
+    return () => {
+      hls.destroy();
+    };
+  } else if (videoElement) {
+    videoElement.src = videoUrl;
+    videoElement.play();
+  }
+}, [randomLiveData, videoUrl]);
 
   if (error) {
     return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
@@ -19,9 +65,12 @@ const RecommendLive = () => {
 
   const liveData = randomLiveData[0];
   console.log('liveData', liveData);
+
   return (
     <RecommendLiveContainer>
-      <RecommendLiveBox $isLoading={isLoading} />
+      <RecommendLiveBox $isLoading={isLoading}>
+        <video ref={videoRef} autoPlay muted />
+      </RecommendLiveBox>
       <RecommendLiveWrapper onClick={() => navigate(`/live/${liveData.liveId}`)}>
         <RecommendLiveHeader>
           <div className="recommend_live_status">
@@ -68,6 +117,16 @@ const RecommendLiveBox = styled.div<{ $isLoading: boolean }>`
   width: 100%;
   z-index: -1;
   box-shadow: inset 180px -180px 300px 0px #141517;
+  opacity: 0.6;
+
+  video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+  }
 `;
 
 const RecommendLiveWrapper = styled.div`
