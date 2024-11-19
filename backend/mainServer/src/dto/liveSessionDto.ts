@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { MemoryDB } from '../memory-db/memory-db.decorator.js';
-import { ChannelDto } from './memoryDbDto.js';
+import { ChannelDto, MemoryDbDto } from './memoryDbDto.js';
 
 @MemoryDB
 export class LiveVideoRequestDto {
@@ -21,7 +21,7 @@ export class LiveVideoRequestDto {
 }
 
 @MemoryDB
-export class LiveVideoResponseDto {
+export class LiveSessionResponseDto {
   id: number = 0;
   liveId: string = '';
   liveTitle: string = '';
@@ -35,4 +35,31 @@ export class LiveVideoResponseDto {
 
   category: string = '';
   tags: Array<string> = [];
+}
+
+
+export function fromLiveSessionDto(memoryDbDto: MemoryDbDto): LiveSessionResponseDto {
+  const {
+    id,
+    sessionKey,
+    liveTitle,
+    liveImageUrl,
+    defaultThumbnailImageUrl = 'https://kr.object.ncloudstorage.com/web22/static/liboo_default_thumbnail.png',
+    concurrentUserCount,
+    channel,
+    category,
+    tags,
+  } = memoryDbDto;
+
+  return {
+    id,
+    liveId : sessionKey,
+    liveTitle,
+    liveImageUrl,
+    defaultThumbnailImageUrl,
+    concurrentUserCount,
+    channel,
+    category,
+    tags,
+  };
 }
