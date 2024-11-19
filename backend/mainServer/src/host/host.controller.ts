@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Req, Res, HttpException, HttpStatus, Body, Query } from '@nestjs/common';
+import { Controller, Post, Get, Req, Res, HttpException, HttpStatus, Body, Query, Delete } from '@nestjs/common';
 import { HostService } from './host.service.js';
 import { hostKeyPairDto } from '../dto/hostKeyPairDto.js';
 import { Request, Response } from 'express';
@@ -12,6 +12,46 @@ import { LiveVideoRequestDto } from '../dto/liveVideoDto.js';
 @ApiTags('Host API')
 export class HostController {
   constructor( private readonly memoryDBService: MemoryDBService,  private readonly hostService: HostService) { }
+
+  @Get('/session')
+  @ApiOperation({ summary: 'Session Key To Session Key API', description: 'Host의 Stream Key를 통해 Session Key를 찾습니다.' })
+  @ApiCreatedResponse({ description: '스트림 키를 통해 세션키를 전달 받습니다.' })
+  async findSession(@Query('streamKey') streamKey: string, @Req() req: Request, @Res() res: Response) {
+    try {
+      const sessionKey = this.memoryDBService.findByStreamKey(streamKey);
+      if (!sessionKey) {
+        throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
+      }
+      sessionKey.state = true;
+      this.memoryDBService.updateBySessionKey(streamKey, sessionKey);
+      res.status(HttpStatus.OK).json({'session-key': sessionKey});
+    } catch (error) {
+      if ((error as { status: number }).status === 400) {
+        res.status(HttpStatus.BAD_REQUEST).json({
+          error: (error as { response: Response }).response
+        });
+      }
+      else {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+          error: 'Server logic error',
+        });
+      }
+    }
+  }
+
+  @Get('/state')
+  @ApiOperation({summary : 'Response this session is live", description: "현재 방송 세션이 라이브 상태인지 반환합니다.'})
+  @ApiResponse({status : 200, description : '현재 방송 상태에 대한 응답'})
+  async getBroadcastState(@Query('sessionKey') sessionKey : string, @Res() res : Response) {
+    const liveState = this.memoryDBService.findBySessionKey(sessionKey);
+    if (!liveState) {
+      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
+    }
+    res.status(200).json({
+      state : liveState.state
+    });
+  }
+
 
   @Post('/key')
   @ApiOperation({ summary: 'Host Stream, Session Key Generate API', description: 'Host용 스트림키와 세션키를 생성합니다.' })
@@ -33,32 +73,6 @@ export class HostController {
         this.memoryDBService.create({userId: requestDto.userId, streamKey: streamKey, sessionKey:sessionKey});
       }
       res.status(HttpStatus.OK).json({ 'streamKey': streamKey, 'sessionKey':sessionKey });
-    } catch (error) {
-      if ((error as { status: number }).status === 400) {
-        res.status(HttpStatus.BAD_REQUEST).json({
-          error: (error as { response: Response }).response
-        });
-      }
-      else {
-        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-          error: 'Server logic error',
-        });
-      }
-    }
-  }
-
-  @Get('/session')
-  @ApiOperation({ summary: 'Session Key To Session Key API', description: 'Host의 Stream Key를 통해 Session Key를 찾습니다.' })
-  @ApiCreatedResponse({ description: '스트림 키를 통해 세션키를 전달 받습니다.' })
-  async findSession(@Query('streamKey') streamKey: string, @Req() req: Request, @Res() res: Response) {
-    try {
-      const sessionKey = this.memoryDBService.findByStreamKey(streamKey);
-      if (!sessionKey) {
-        throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
-      }
-      sessionKey.state = true;
-      this.memoryDBService.updateBySessionKey(streamKey, sessionKey);
-      res.status(HttpStatus.OK).json({'session-key': sessionKey});
     } catch (error) {
       if ((error as { status: number }).status === 400) {
         res.status(HttpStatus.BAD_REQUEST).json({
@@ -99,17 +113,30 @@ export class HostController {
       }
     }
   }
-
-  @Get('/state')
-  @ApiOperation({summary : 'Response this session is live", description: "현재 방송 세션이 라이브 상태인지 반환합니다.'})
-  @ApiResponse({status : 200, description : '현재 방송 상태에 대한 응답'})
-  async getBroadcastState(@Query('sessionKey') sessionKey : string, @Res() res : Response) {
-    const liveState = this.memoryDBService.findBySessionKey(sessionKey);
-    if (!liveState) {
-      throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
+  
+  @Delete('/session')
+  @ApiOperation({ summary: 'Broadcast Close API', description: 'Host의 스트림키를 기준으로 방송을 종료로 설정합니다.' })
+  @ApiCreatedResponse({ description: '스트림 키를 통해 방송 종료 여부를 받습니다.' })
+  async closeBroadcast(@Query('streamKey') streamKey: string, @Req() req: Request, @Res() res: Response) {
+    try {
+      const sessionKey = this.memoryDBService.findByStreamKey(streamKey);
+      if (!sessionKey) {
+        throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
+      }
+      sessionKey.state = false;
+      this.memoryDBService.updateBySessionKey(streamKey, sessionKey);
+      res.status(HttpStatus.OK).send();
+    } catch (error) {
+      if ((error as { status: number }).status === 400) {
+        res.status(HttpStatus.BAD_REQUEST).json({
+          error: (error as { response: Response }).response
+        });
+      }
+      else {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+          error: 'Server logic error',
+        });
+      }
     }
-    res.status(200).json({
-      state : liveState.state
-    });
   }
 }
