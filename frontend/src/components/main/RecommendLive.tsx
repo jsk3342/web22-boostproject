@@ -45,7 +45,6 @@ useEffect(() => {
   }
 
   const liveData = randomLiveData[0];
-  console.log('liveData', liveData);
 
   return (
     <RecommendLiveContainer>
