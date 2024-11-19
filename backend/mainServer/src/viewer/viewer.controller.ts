@@ -4,7 +4,7 @@ import { Response } from 'express';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { MemoryDBService } from '../memory-db/memory-db.service.js';
 
-@ApiTags('/viewer')
+@ApiTags('Viewer API')
 @Controller('viewer')
 export class ViewerController {
   constructor( private readonly memoryDBService: MemoryDBService,  private readonly viewerService: ViewerService) { }
