@@ -1,12 +1,20 @@
+import { getSessionKey } from '@utils/streamKey';
 import { fetchInstance } from '.';
 
 export type BroadcastStatusResponse = {
-  status: boolean;
+  state: boolean;
 };
 
 export const fetchBroadcastStatus = async (): Promise<BroadcastStatusResponse> => {
-  const response = await fetchInstance().get<BroadcastStatusResponse>('/host/status');
+  const sessionKey = getSessionKey();
+
+  const response = await fetchInstance().get<BroadcastStatusResponse>('/host/state', {
+    params: {
+      sessionKey
+    }
+  });
+
   return {
-    status: response.data.status
+    state: response.data.state
   };
 };

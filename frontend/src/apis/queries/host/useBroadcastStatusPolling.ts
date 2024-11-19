@@ -3,13 +3,13 @@ import { fetchBroadcastStatus } from '@apis/fetchBroadcastStatus';
 
 export const useBroadcastStatusPolling = (pollingInterVal = 10000) => {
   return useQuery({
-    queryKey: ['broadcastStatus'],
+    queryKey: ['broadcastState'],
     queryFn: fetchBroadcastStatus,
     refetchInterval: pollingInterVal,
     refetchIntervalInBackground: true,
     refetchOnWindowFocus: true,
     retry: 3,
-    initialData: { status: false },
-    select: (data) => data.status
+    initialData: { state: false },
+    select: (data) => data.state
   });
 };
