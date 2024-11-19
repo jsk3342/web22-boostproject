@@ -34,25 +34,6 @@ useEffect(() => {
     videoElement.src = videoUrl;
     videoElement.play();
   }
-}, [randomLiveData, videoUrl]);useEffect(() => {
-  if (!randomLiveData || randomLiveData.length === 0) return;
-
-  const videoElement = videoRef.current;
-  if (videoElement && Hls.isSupported()) {
-    const hls = new Hls();
-    hls.loadSource(videoUrl);
-    hls.attachMedia(videoElement);
-    hls.on(Hls.Events.MANIFEST_PARSED, () => {
-      videoElement?.play();
-    });
-
-    return () => {
-      hls.destroy();
-    };
-  } else if (videoElement) {
-    videoElement.src = videoUrl;
-    videoElement.play();
-  }
 }, [randomLiveData, videoUrl]);
 
   if (error) {
