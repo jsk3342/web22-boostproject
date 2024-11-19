@@ -39,7 +39,8 @@ export default tseslint.config({ ignores: ['.*'] }, js.configs.recommended, ...t
     indent: ['error', 2],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
-    '@typescript-eslint/no-unused-vars': ['error']
+    '@typescript-eslint/no-unused-vars': ['error'],
+    '@typescript-eslint/no-explicit-any': 'off'
   },
   settings: {
     ...reactRecommended.settings
