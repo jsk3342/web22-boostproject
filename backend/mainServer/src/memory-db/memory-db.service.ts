@@ -32,9 +32,9 @@ export class MemoryDBService {
     return getRandomElementsFromArray(this.db, count);
   }
 
-  getBroadcastInfo(cnt: number, size: number) {
-    const len: number = this.db.length - 1;
-    return this.db.slice(len - size, len).reverse().map((info) => fromLiveSessionDto(info));
+  getBroadcastInfo(size: number, id : number = 0 ) {
+    const startId: number = this.db.length - id;
+    return this.db.slice(startId - size, startId).reverse().map((info) => fromLiveSessionDto(info));
   }
 
   create(item: Partial<MemoryDbDto>): void {
