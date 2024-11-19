@@ -1,6 +1,34 @@
-type Key = 'StreamKey';
+const STORAGE_KEYS = {
+  STREAM: 'STREAM_KEY',
+  SESSION: 'SESSION_KEY'
+};
 
-const key: Key = 'StreamKey';
+export const getStreamKey = () => {
+  const streamKey = localStorage.getItem(STORAGE_KEYS.STREAM);
 
-export const getStreamKey = (): string => localStorage.getItem(key) ?? '';
-export const setStreamKey = (StreamKey: string): void => localStorage.setItem(key, StreamKey);
+  return streamKey ?? '';
+};
+
+export const setStreamKey = (key: string) => {
+  if (!key.trim()) {
+    localStorage.removeItem(STORAGE_KEYS.STREAM);
+    return;
+  }
+
+  localStorage.setItem(STORAGE_KEYS.STREAM, key);
+};
+
+export const getSessionKey = (): string => {
+  const sessionKey = localStorage.getItem(STORAGE_KEYS.SESSION);
+
+  return sessionKey ?? '';
+};
+
+export const setSessionKey = (key: string): void => {
+  if (!key.trim()) {
+    localStorage.removeItem(STORAGE_KEYS.SESSION);
+    return;
+  }
+  
+  localStorage.setItem(STORAGE_KEYS.SESSION, key);
+};
