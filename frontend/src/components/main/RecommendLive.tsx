@@ -1,18 +1,35 @@
 import styled from 'styled-components';
+
 import { LiveBadgeLarge } from './ThumbnailBadge';
+import { useRandomLive } from '@apis/queries/main/useFetchRandomLive';
 
 const RecommendLive = () => {
+  const { data: randomLiveData, isLoading, error } = useRandomLive();
+
+  if (isLoading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (error) {
+    return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
+  }
+
+  if (!randomLiveData || randomLiveData.length === 0) {
+    return <div>추천 라이브 데이터가 없습니다.</div>;
+  }
+
+  const liveData = randomLiveData[0];
+  console.log("liveData", liveData);
   return (
     <RecommendLiveContainer>
       <RecommendLiveBox></RecommendLiveBox>
-
       <RecommendLiveWrapper>
         <RecommendLiveHeader>
           <div className="recommend_live_status">
             <LiveBadgeLarge />
-            <span>1,204명 시청</span>
+            <span>{liveData.concurrentUserCount}명 시청</span>
           </div>
-          <p className="recommend_live_title">라이부로 배우는 동영상 스트리밍 서비스</p>
+          <p className="recommend_live_title">{liveData.liveTitle}</p>
         </RecommendLiveHeader>
 
         <RecommendLiveInformation>
@@ -20,8 +37,9 @@ const RecommendLive = () => {
             <img />
           </RecommendLiveProfile>
           <RecommendLiveArea>
-            <span className="video_card_name">네이버 부스트캠프</span>
-            <span className="video_card_category">🧑🏻‍💻 기술 공유</span>
+            <span className="video_card_name">{liveData.channel.channelName}</span>
+            <span className="video_card_category">{liveData.category}</span>
+            {/* <span className="video_card_category">기술 공유</span> */}
           </RecommendLiveArea>
         </RecommendLiveInformation>
       </RecommendLiveWrapper>
