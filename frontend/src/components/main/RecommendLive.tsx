@@ -1,14 +1,13 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import { LiveBadgeLarge } from './ThumbnailBadge';
 import { useRandomLive } from '@apis/queries/main/useFetchRandomLive';
+import sampleProfile from '@assets/sample_profile.png';
 
 const RecommendLive = () => {
+  const navigate = useNavigate();
   const { data: randomLiveData, isLoading, error } = useRandomLive();
-
-  if (isLoading) {
-    return <div>로딩 중...</div>;
-  }
 
   if (error) {
     return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
@@ -19,11 +18,11 @@ const RecommendLive = () => {
   }
 
   const liveData = randomLiveData[0];
-  console.log("liveData", liveData);
+  console.log('liveData', liveData);
   return (
     <RecommendLiveContainer>
-      <RecommendLiveBox></RecommendLiveBox>
-      <RecommendLiveWrapper>
+      <RecommendLiveBox $isLoading={isLoading} />
+      <RecommendLiveWrapper onClick={() => navigate(`/live/${liveData.liveId}`)}>
         <RecommendLiveHeader>
           <div className="recommend_live_status">
             <LiveBadgeLarge />
@@ -34,12 +33,11 @@ const RecommendLive = () => {
 
         <RecommendLiveInformation>
           <RecommendLiveProfile>
-            <img />
+            <img src={sampleProfile} />
           </RecommendLiveProfile>
           <RecommendLiveArea>
             <span className="video_card_name">{liveData.channel.channelName}</span>
             <span className="video_card_category">{liveData.category}</span>
-            {/* <span className="video_card_category">기술 공유</span> */}
           </RecommendLiveArea>
         </RecommendLiveInformation>
       </RecommendLiveWrapper>
@@ -60,8 +58,8 @@ const RecommendLiveContainer = styled.div`
   z-index: 0;
 `;
 
-const RecommendLiveBox = styled.div`
-  background: #4f4f4f;
+const RecommendLiveBox = styled.div<{ $isLoading: boolean }>`
+  background: ${({ $isLoading, theme }) => ($isLoading ? theme.tokenColors['surface-default'] : '')};
   padding-top: 56.25%;
   position: absolute;
   right: 0;
@@ -79,6 +77,7 @@ const RecommendLiveWrapper = styled.div`
   justify-content: space-between;
   padding: 24px 30px 30px;
   position: relative;
+  cursor: pointer;
 `;
 
 const RecommendLiveHeader = styled.div`
@@ -108,13 +107,17 @@ const RecommendLiveInformation = styled.div`
 const RecommendLiveProfile = styled.div`
   margin-right: 10px;
   background: ${({ theme }) => theme.tokenColors['surface-alt']} no-repeat 50% / cover;
-  border: 4px solid ${({ theme }) => theme.tokenColors['brand-default']};
+  border: 2px solid ${({ theme }) => theme.tokenColors['brand-default']};
   border-radius: 50%;
   display: block;
   overflow: hidden;
   position: relative;
   width: 70px;
   height: 70px;
+
+  &:hover {
+    border: 4px solid ${({ theme }) => theme.tokenColors['brand-default']};
+  }
 
   img {
     width: 100%;
