@@ -7,6 +7,7 @@ import { Socket } from 'socket.io-client';
 import { useParams } from 'react-router-dom';
 import { CHATTING_SOCKET_SEND_EVENT, CHATTING_TYPES } from '@constants/chat';
 import { ChattingTypes, MessageSendData } from '@type/chat';
+import { getStoredId } from '@utils/id';
 
 interface ChatInputProps {
   socket: Socket | null;
@@ -21,6 +22,8 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
 
   const { id } = useParams();
 
+  const userId = getStoredId();
+
   const handleMsgType = () => {
     setMsgType(msgType === CHATTING_TYPES.NORMAL ? CHATTING_TYPES.QUESTION : CHATTING_TYPES.NORMAL);
   };
@@ -33,7 +36,7 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
 
     socket.emit(eventName, {
       roomId: id,
-      userId: '테스트용',
+      userId,
       msg: message
     } as MessageSendData);
 
@@ -49,8 +52,10 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
   useEffect(() => {
     const handleResize = () => {
       if (textareaRef.current) {
-        textareaRef.current.style.height = '14px';
-        textareaRef.current.style.height = `${textareaRef.current.scrollHeight - 5}px`;
+        requestAnimationFrame(() => {
+          textareaRef.current!.style.height = '14px';
+          textareaRef.current!.style.height = `${textareaRef.current!.scrollHeight - 5}px`;
+        });
       }
     };
 
@@ -77,16 +82,24 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
     setIsFocused(true);
   };
 
+  const getButtonIcon = () => {
+    switch (msgType) {
+      case CHATTING_TYPES.NORMAL: {
+        return <StyledIcon as={SpeechBubbleIcon} />;
+      }
+      case CHATTING_TYPES.QUESTION: {
+        return <StyledIcon as={QuestionIcon} />;
+      }
+      default: {
+        return <StyledIcon as={SendIcon} />;
+      }
+    }
+  };
+
   return (
     <ChatInputWrapper $hasInput={hasInput} $isFocused={isFocused}>
       <InputBtn aria-label={msgType} onClick={handleMsgType}>
-        {msgType === CHATTING_TYPES.NORMAL ? (
-          <StyledIcon as={SpeechBubbleIcon} />
-        ) : msgType === CHATTING_TYPES.QUESTION ? (
-          <StyledIcon as={QuestionIcon} />
-        ) : (
-          <StyledIcon as={SendIcon} />
-        )}
+        {getButtonIcon()}
       </InputBtn>
 
       <ChatInputArea

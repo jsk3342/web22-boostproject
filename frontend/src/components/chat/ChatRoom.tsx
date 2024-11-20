@@ -10,9 +10,10 @@ import { createSocket } from '@utils/createSocket';
 import { CHATTING_SOCKET_DEFAULT_EVENT, CHATTING_SOCKET_RECEIVE_EVENT, CHATTING_TYPES } from '@constants/chat';
 import { MessageReceiveData, MessageReceiveDataWithType } from '@type/chat';
 import { ChatProvider } from 'src/contexts/chatContext';
+import { getStoredId } from '@utils/id';
 
-const TEST_SOCKET_URL = 'http://localhost:8080';
-// const TEST_SOCKET_URL = 'http://192.168.10.18:3000';
+// const TEST_SOCKET_URL = 'http://localhost:8080';
+const TEST_SOCKET_URL = 'http://192.168.10.27:3000';
 
 export const ChatRoom = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -20,6 +21,8 @@ export const ChatRoom = () => {
   const [isChatRoomVisible, setIsChatRoomVisible] = useState(true);
 
   const { id } = useParams();
+
+  const userId = getStoredId();
 
   useEffect(() => {
     setMessages([]);
@@ -37,7 +40,7 @@ export const ChatRoom = () => {
     };
 
     const newSocket = createSocket(TEST_SOCKET_URL, eventMap, (socket) => {
-      socket.emit(CHATTING_SOCKET_DEFAULT_EVENT.JOIN_ROOM, { roomId: id });
+      socket.emit(CHATTING_SOCKET_DEFAULT_EVENT.JOIN_ROOM, { roomId: id, userId });
     });
 
     setSocket(newSocket);
@@ -48,7 +51,7 @@ export const ChatRoom = () => {
         newSocket.disconnect();
       }
     };
-  }, [id]);
+  }, [id, createSocket]);
 
   return (
     <ChatProvider>

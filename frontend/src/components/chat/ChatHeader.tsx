@@ -28,7 +28,7 @@ export const ChatHeader = ({ outBtnHandler }: ChatHeaderProps) => {
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, []);
+  }, [handleClickOutside]);
 
   return (
     <ChatHeaderContainer ref={headerRef}>
