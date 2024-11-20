@@ -34,6 +34,9 @@ export class MemoryDBService {
 
   getBroadcastInfo(size: number, id : number = 0 ) {
     const startId: number = this.db.length - id;
+    if (this.db.length < 8) {
+      return this.db.reverse().map((info) => fromLiveSessionDto(info));
+    }
     return this.db.slice(startId - size, startId).reverse().map((info) => fromLiveSessionDto(info));
   }
 
