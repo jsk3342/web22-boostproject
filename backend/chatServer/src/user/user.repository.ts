@@ -5,20 +5,20 @@ import { User } from './user.interface';
 export class UserRepository {
   users = new Map<string, User>();
 
-  createUser(clientId: string, user: User) {
-    this.users.set(clientId, user);
+  createUser(userId: string, user: User) {
+    this.users.set(userId, user);
     return user;
   }
 
-  getUserByClientId(clientId: string) {
-    if(this.users.has(clientId)) return this.users.get(clientId)!;
+  getUserByClientId(userId: string) {
+    if(this.users.has(userId)) return this.users.get(userId)!;
     return undefined;
   }
 
-  deleteUserByClientId(clientId: string) {
-    if(!this.users.has(clientId)) return false;
+  deleteUserByClientId(userId: string) {
+    if(!this.users.has(userId)) return false;
 
-    this.users.delete(clientId);
+    this.users.delete(userId);
     return true;
   }
 }

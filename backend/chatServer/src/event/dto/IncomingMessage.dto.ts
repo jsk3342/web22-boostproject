@@ -1,9 +1,7 @@
 class IncomingMessageDto {
-  socketId: string = '';
-  nickname: string = '';
-  color: string = '';
+  roomId: string = '';
+  userId: string = '';
   msg: string = '';
-  msgTime: Date = new Date();
 }
 
 export { IncomingMessageDto };

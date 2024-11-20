@@ -1,7 +1,9 @@
 class OutgoingMessageDto {
-  socketId: string = '';
   userId: string = '';
+  nickname: string = '';
+  color: string = '';
   msg?: string;
+  msgTime: string = new Date().toISOString();
 }
 
 export { OutgoingMessageDto };
