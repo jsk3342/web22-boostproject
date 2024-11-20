@@ -1,8 +1,8 @@
-import { getOrCreateId } from '@utils/id';
+import { initializeUserId } from '@utils/id';
 
 export default function withUserId(WrappedComponent: React.ComponentType) {
   return function WithUserIdComponent(props: any) {
-    getOrCreateId();
+    initializeUserId();
     return <WrappedComponent {...props} />;
   };
 }
