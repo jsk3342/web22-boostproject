@@ -156,7 +156,8 @@ const RecommendLiveProfile = styled.div`
   height: 70px;
 
   &:hover {
-    border: 4px solid ${({ theme }) => theme.tokenColors['brand-default']};
+    outline: 4px solid ${({ theme }) => theme.tokenColors['brand-default']};
+    outline-offset: -2px;
   }
 
   img {

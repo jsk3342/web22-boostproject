@@ -1,21 +1,34 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+
 import sampleThumbnail from '@assets/sampleThumbnail.png';
+import { RecentLive } from '@type/live';
 import { LiveBadge, LiveViewCountBadge, ReplayBadge, ReplayViewCountBadge } from './ThumbnailBadge';
 import ShowInfoBadge from './ShowInfoBadge';
 
 interface VideoCardProps {
   type: 'live' | 'replay';
+  videoData: RecentLive;
 }
 
-const VideoCard = ({ type }: VideoCardProps) => {
+const VideoCard = ({ type, videoData }: VideoCardProps) => {
+  const navigate = useNavigate();
+
+  const { concurrentUserCount, category, channel, tags, defaultThumbnailImageUrl, liveId, liveImageUrl, liveTitle } =
+    videoData;
+
+  const handleLiveClick = () => {
+    navigate(`/live/${liveId}`);
+  };
+
   return (
     <VideoCardContainer>
-      <VideoCardThumbnail>
-        <VideoCardImage src={sampleThumbnail} />
+      <VideoCardThumbnail onClick={handleLiveClick}>
+        <VideoCardImage src={defaultThumbnailImageUrl ?? liveImageUrl} />
         {type === 'live' ? (
           <VideoCardDescription>
             <LiveBadge />
-            <LiveViewCountBadge count={1125} />
+            <LiveViewCountBadge count={concurrentUserCount} />
           </VideoCardDescription>
         ) : (
           <VideoCardDescription>
@@ -28,11 +41,15 @@ const VideoCard = ({ type }: VideoCardProps) => {
       <VideoCardWrapper>
         <VideoCardProfile></VideoCardProfile>
         <VideoCardArea>
-          <span className="video_card_title">방송 제목 방송 제목</span>
-          <span className="video_card_name">라이부</span>
+          <span className="video_card_title" style={{ cursor: 'pointer' }} onClick={handleLiveClick}>
+            {liveTitle}
+          </span>
+          <span className="video_card_name">{channel.channelName}</span>
           <VideoCardInformation>
-            <ShowInfoBadge badgeType="category" text="프론트엔드" />
-            <ShowInfoBadge badgeType="tag" text="태그" />
+            <ShowInfoBadge badgeType="category" text={category} />
+            {tags.map((tag, index) => (
+              <ShowInfoBadge key={index} badgeType="tag" text={tag} />
+            ))}
           </VideoCardInformation>
         </VideoCardArea>
       </VideoCardWrapper>
@@ -54,6 +71,7 @@ const VideoCardThumbnail = styled.div`
   display: block;
   padding-top: 56.25%;
   position: relative;
+  cursor: pointer;
 `;
 
 const VideoCardImage = styled.img`
