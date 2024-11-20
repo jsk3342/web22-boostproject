@@ -10,8 +10,8 @@ export class LiveVideoRequestDto {
   @ApiProperty({example: 'live title', description: '방송 제목'})
     liveTitle: string = '';
 
-  @ApiProperty({example: '', description: '방송 썸네일'})
-    defaultThumbnailImageUrl: string = 'https://kr.object.ncloudstorage.com/web22/static/liboo_default_thumbnail.png';
+  @ApiProperty({example: '', description: '방송 썸네일 이미지(base64)'})
+    defaultThumbnailImageUrl: string = '';
 
   @ApiProperty({example: 'category', description: '방송 카테고리'})
     category: string = '';

@@ -18,13 +18,13 @@ export class HostController {
   @ApiCreatedResponse({ description: '스트림 키를 통해 세션키를 전달 받습니다.' })
   async findSession(@Query('streamKey') streamKey: string, @Req() req: Request, @Res() res: Response) {
     try {
-      const sessionKey = this.memoryDBService.findByStreamKey(streamKey);
-      if (!sessionKey) {
+      const sessionInfo = this.memoryDBService.findByStreamKey(streamKey);
+      if (!sessionInfo) {
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
       }
-      sessionKey.state = true;
-      this.memoryDBService.updateBySessionKey(streamKey, sessionKey);
-      res.status(HttpStatus.OK).json({'session-key': sessionKey});
+      sessionInfo.state = true;
+      this.memoryDBService.updateBySessionKey(streamKey, sessionInfo);
+      res.status(HttpStatus.OK).json({'session-key': sessionInfo.sessionKey});
     } catch (error) {
       if ((error as { status: number }).status === 400) {
         res.status(HttpStatus.BAD_REQUEST).json({
@@ -95,10 +95,16 @@ export class HostController {
       const nowUserData = this.memoryDBService.findByUserId(requestDto.userId);
       if (!nowUserData)
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
-      this.memoryDBService.updateByUserId(requestDto.userId, memoryDbDtoFromLiveVideoRequestDto(nowUserData, requestDto));
+      const objectStorageUrl = `https://kr.object.ncloudstorage.com/web22/live/${nowUserData.sessionKey}/thumbnail.png`;
+
+      // TODO
+      // - Object Storage Upload
+      
+      const newSessionInfo = {...requestDto, defaultThumbnailImageUrl : objectStorageUrl};
+      this.memoryDBService.updateByUserId(requestDto.userId, memoryDbDtoFromLiveVideoRequestDto(nowUserData, newSessionInfo));
       res.status(HttpStatus.OK).json({
         status : 'success',
-        data : requestDto
+        data : newSessionInfo
       });
     } catch (error) {
       if ((error as { status: number }).status === 400) {
