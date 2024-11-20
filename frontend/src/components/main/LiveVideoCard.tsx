@@ -33,7 +33,7 @@ const LiveVideoCard = ({ videoData }: LiveVideoCardProps) => {
 
       <VideoCardWrapper>
         <VideoCardProfile>
-        <img src={sampleProfile} />
+          <img src={sampleProfile} />
         </VideoCardProfile>
         <VideoCardArea>
           <span className="video_card_title" style={{ cursor: 'pointer' }} onClick={handleLiveClick}>

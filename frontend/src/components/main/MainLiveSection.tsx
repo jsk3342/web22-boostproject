@@ -13,6 +13,10 @@ const MainLiveSection = ({ title, type }: MainLiveSectionProps) => {
   // TODO: 다시보기가 만들어지면 useRecentReplay 삼항연산자로 변경
   const { data = [], isLoading, error } = useRecentLive();
 
+  if (error) {
+    return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
+  }
+
   return (
     <MainSectionContainer>
       <MainSectionHeader>
