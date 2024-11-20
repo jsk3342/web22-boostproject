@@ -1,27 +1,53 @@
 import styled from 'styled-components';
 import ThreePointIcon from '@assets/icons/three-point.svg';
 import OutIcon from '@assets/icons/out.svg';
+import { useContext, useEffect, useRef } from 'react';
+import LayerPopup from './LayerPopup';
+import { ChatContext } from 'src/contexts/chatContext';
 
 interface ChatHeaderProps {
   outBtnHandler?: () => void;
 }
 
 export const ChatHeader = ({ outBtnHandler }: ChatHeaderProps) => {
+  const { state, dispatch } = useContext(ChatContext);
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  const toggleSettings = () => {
+    dispatch({ type: 'TOGGLE_SETTINGS' });
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+      dispatch({ type: 'CLOSE_SETTINGS' });
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [handleClickOutside]);
+
   return (
-    <ChatHeaderContainer>
+    <ChatHeaderContainer ref={headerRef}>
       <HeaderBtn onClick={outBtnHandler}>
         <StyledIcon as={OutIcon} />
       </HeaderBtn>
       <h2>채팅</h2>
-      <HeaderBtn>
+      <HeaderBtn onClick={toggleSettings}>
         <StyledIcon as={ThreePointIcon} />
       </HeaderBtn>
+      <PopupWrapper>{state.isSettingsOpen && <LayerPopup />}</PopupWrapper>
     </ChatHeaderContainer>
   );
 };
+
 export default ChatHeader;
 
 const ChatHeaderContainer = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -41,4 +67,11 @@ const StyledIcon = styled.svg`
   width: 25px;
   height: 25px;
   cursor: pointer;
+`;
+
+const PopupWrapper = styled.div`
+  position: absolute;
+  top: 60px;
+  right: 0;
+  z-index: 1000;
 `;
