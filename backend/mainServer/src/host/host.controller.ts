@@ -18,13 +18,13 @@ export class HostController {
   @ApiCreatedResponse({ description: '스트림 키를 통해 세션키를 전달 받습니다.' })
   async findSession(@Query('streamKey') streamKey: string, @Req() req: Request, @Res() res: Response) {
     try {
-      const sessionKey = this.memoryDBService.findByStreamKey(streamKey);
-      if (!sessionKey) {
+      const sessionInfo = this.memoryDBService.findByStreamKey(streamKey);
+      if (!sessionInfo) {
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
       }
-      sessionKey.state = true;
-      this.memoryDBService.updateBySessionKey(streamKey, sessionKey);
-      res.status(HttpStatus.OK).json({'session-key': sessionKey});
+      sessionInfo.state = true;
+      this.memoryDBService.updateBySessionKey(streamKey, sessionInfo);
+      res.status(HttpStatus.OK).json({'session-key': sessionInfo.sessionKey});
     } catch (error) {
       if ((error as { status: number }).status === 400) {
         res.status(HttpStatus.BAD_REQUEST).json({
