@@ -12,8 +12,7 @@ const RecommendLive = () => {
   const { data: mainLiveData, isLoading, error } = useMainLive();
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  // const videoUrl = `https://kr.object.ncloudstorage.com/web22/live/${liveData.liveId}/index.m3u8`;
-  const videoUrl = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+  // const videoUrl = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 
   useEffect(() => {
     if (!mainLiveData || mainLiveData.length === 0) return;
@@ -34,7 +33,7 @@ const RecommendLive = () => {
       videoElement.src = videoUrl;
       videoElement.play();
     }
-  }, [mainLiveData, videoUrl]);
+  }, [mainLiveData]);
 
   if (error) {
     return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
@@ -46,6 +45,7 @@ const RecommendLive = () => {
 
   const liveData = mainLiveData[0];
   const { liveId, liveTitle, concurrentUserCount, channel, category } = liveData;
+  const videoUrl = `https://kr.object.ncloudstorage.com/web22/live/${liveId}/index.m3u8`;
 
   return (
     <RecommendLiveContainer>
