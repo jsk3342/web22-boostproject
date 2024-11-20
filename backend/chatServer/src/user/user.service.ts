@@ -1,39 +1,41 @@
 import { Injectable } from '@nestjs/common';
 import { getRandomAdjective, getRandomBrightColor, getRandomNoun } from '../utils/random';
 import { User } from './user.interface';
+import { UserRepository } from './user.repository';
 
-function createRandomUsername(){
+function createRandomNickname(){
   return `${getRandomAdjective()} ${getRandomNoun()}`;
 }
 
 function createRandomUserInstance(): User {
   return {
-    username: createRandomUsername(),
+    nickname: createRandomNickname(),
     color: getRandomBrightColor()
   };
 }
 
 @Injectable()
 export class UserService {
-  users = new Map<string, User>();
-
+  constructor(private readonly userRepository: UserRepository) {};
   createUser(clientId: string): User {
-    if(this.users.has(clientId)) return this.users.get(clientId)!;
+    // 이미 존재하는 유저인지 확인
+    const isUserAlreadyExist = this.userRepository.getUserByClientId(clientId);
+    if(isUserAlreadyExist) return isUserAlreadyExist;
 
+    // 랜덤 닉네임, 랜덤 색상으로 새로운 유저 하나 생성
     const newUser = createRandomUserInstance();
-    this.users.set(clientId, newUser);
-    return newUser;
+    return this.userRepository.createUser(clientId, newUser);
   }
 
   deleteUser(clientId: string): boolean {
-    if(!this.users.has(clientId)) return false;
+    // 이미 존재하는 유저인지 확인
+    const isUserAlreadyExist = this.userRepository.getUserByClientId(clientId);
+    if(!isUserAlreadyExist) return false;
 
-    this.users.delete(clientId);
-    return true;
+    return this.userRepository.deleteUserByClientId(clientId);
   }
 
   getUserByClientId(clientId: string) {
-    if(!this.users.has(clientId)) return undefined;
-    return this.users.get(clientId);
+    return this.userRepository.getUserByClientId(clientId);
   }
 }

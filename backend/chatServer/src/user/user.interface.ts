@@ -1,5 +1,5 @@
 interface User {
-  username: string;
+  nickname: string;
   color: string;
 }
 
