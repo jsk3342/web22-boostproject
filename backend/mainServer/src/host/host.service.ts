@@ -12,4 +12,8 @@ export class HostService {
     const sessionKey = randomKey(requestDto.userId, process.env.SESSION_KEY_SALT || '');
     return [streamKey, sessionKey];
   }
+
+  async uploadObjectStorage() {
+    
+  }
 }

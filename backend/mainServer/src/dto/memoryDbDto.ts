@@ -36,7 +36,7 @@ export function memoryDbDtoFromLiveVideoRequestDto(
 ): MemoryDbDto {
   memoryDbDto.userId = liveVideoDto.userId;
   memoryDbDto.liveTitle = liveVideoDto.liveTitle;
-  memoryDbDto.defaultThumbnailImageUrl = liveVideoDto.defaultThumbnailImageUrl;
+  memoryDbDto.defaultThumbnailImageUrl = liveVideoDto.defaultThumbnailImage;
   memoryDbDto.category = liveVideoDto.category;
   memoryDbDto.tags = [...liveVideoDto.tags];
 

@@ -95,10 +95,16 @@ export class HostController {
       const nowUserData = this.memoryDBService.findByUserId(requestDto.userId);
       if (!nowUserData)
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
-      this.memoryDBService.updateByUserId(requestDto.userId, memoryDbDtoFromLiveVideoRequestDto(nowUserData, requestDto));
+      const objectStorageUrl = `https://kr.object.ncloudstorage.com/web22/live/${nowUserData.sessionKey}/thumbnail.png`;
+
+      // TODO
+      // - Object Storage Upload
+      
+      const newSessionInfo = {...requestDto, defaultThumbnailImage : objectStorageUrl};
+      this.memoryDBService.updateByUserId(requestDto.userId, memoryDbDtoFromLiveVideoRequestDto(nowUserData, newSessionInfo));
       res.status(HttpStatus.OK).json({
         status : 'success',
-        data : requestDto
+        data : newSessionInfo
       });
     } catch (error) {
       if ((error as { status: number }).status === 400) {
