@@ -4,10 +4,9 @@ import { theme } from './styles/theme';
 import { MainPage, ClientPage, HostPage } from './pages';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from '@apis/index';
-
 import withUserId from '@hocs/withUserId';
 
-function App() {
+function AppComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
@@ -30,4 +29,6 @@ function App() {
   );
 }
 
-export default withUserId(App);
+const App = withUserId(AppComponent);
+
+export default App;

@@ -1,7 +1,8 @@
+import { ComponentType } from 'react';
 import { initializeUserId } from '@utils/id';
 
-export default function withUserId(WrappedComponent: React.ComponentType) {
-  return function WithUserIdComponent(props: any) {
+export default function withUserId<P extends object>(WrappedComponent: ComponentType<P>) {
+  return function WithUserIdComponent(props: P) {
     initializeUserId();
     return <WrappedComponent {...props} />;
   };
