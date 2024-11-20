@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import OBSIcon from '@assets/img_studio_obs.png';
 import DownloadIcon from '@assets/download.svg';
-import { getOrCreateId } from '@utils/id';
+import { getStoredId } from '@utils/id';
 import useFetchStreamKey from '@apis/queries/host/useFetchStreamKey';
 import { useEffect } from 'react';
 import { setSessionKey, setStreamKey } from '@utils/streamKey';
@@ -11,7 +11,7 @@ interface SettingInfoProps {
 }
 
 export default function SettingInfo({ closeModal }: SettingInfoProps) {
-  const userId = getOrCreateId();
+  const userId = getStoredId();
   const { mutate: fetchKey, data } = useFetchStreamKey({
     onSuccess: ({ streamKey, sessionKey }) => {
       setStreamKey(streamKey);

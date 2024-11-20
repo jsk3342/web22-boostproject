@@ -21,6 +21,7 @@
       "@apis/*": ["src/apis/*"],
       "@queries/*": ["src/apis/queries/*"],
       "@constants/*": ["src/constants/*"]
+      "@hocs/*": ["src/hocs/*"]
     },
     "types": ["vite/client"]
   },
