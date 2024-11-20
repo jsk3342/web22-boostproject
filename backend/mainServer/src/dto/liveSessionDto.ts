@@ -11,7 +11,7 @@ export class LiveVideoRequestDto {
     liveTitle: string = '';
 
   @ApiProperty({example: '', description: '방송 썸네일 이미지(base64)'})
-    defaultThumbnailImage: string = '';
+    defaultThumbnailImageUrl: string = '';
 
   @ApiProperty({example: 'category', description: '방송 카테고리'})
     category: string = '';

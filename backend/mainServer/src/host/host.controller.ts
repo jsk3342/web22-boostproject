@@ -100,7 +100,7 @@ export class HostController {
       // TODO
       // - Object Storage Upload
       
-      const newSessionInfo = {...requestDto, defaultThumbnailImage : objectStorageUrl};
+      const newSessionInfo = {...requestDto, defaultThumbnailImageUrl : objectStorageUrl};
       this.memoryDBService.updateByUserId(requestDto.userId, memoryDbDtoFromLiveVideoRequestDto(nowUserData, newSessionInfo));
       res.status(HttpStatus.OK).json({
         status : 'success',
