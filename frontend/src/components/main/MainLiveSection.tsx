@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import VideoCard from './VideoCard';
+import ReplayVideoCard from './ReplayVideoCard';
+import LiveVideoCard from './LiveVideoCard';
 import LoadMoreDivider from './LoadMoreDivider';
 import { useRecentLive } from '@apis/queries/main/useFetchRecentLive';
 
@@ -23,10 +24,16 @@ const MainLiveSection = ({ title, type }: MainLiveSectionProps) => {
 
       {data.length === 0 && !isLoading && <div>데이터가 없습니다.</div>}
 
-      {data.length !== 0 && (
+      {type === 'live' ? (
         <MainSectionContentList>
           {data.map((video) => (
-            <VideoCard key={video.id} type={type} videoData={video} />
+            <LiveVideoCard key={video.id} videoData={video} />
+          ))}
+        </MainSectionContentList>
+      ) : (
+        <MainSectionContentList>
+          {data.map((video) => (
+            <ReplayVideoCard key={video.id} videoData={video} />
           ))}
         </MainSectionContentList>
       )}

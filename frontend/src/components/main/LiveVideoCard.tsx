@@ -2,16 +2,16 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import sampleThumbnail from '@assets/sampleThumbnail.png';
+import sampleProfile from '@assets/sample_profile.png';
 import { RecentLive } from '@type/live';
-import { LiveBadge, LiveViewCountBadge, ReplayBadge, ReplayViewCountBadge } from './ThumbnailBadge';
+import { LiveBadge, LiveViewCountBadge } from './ThumbnailBadge';
 import ShowInfoBadge from './ShowInfoBadge';
 
-interface VideoCardProps {
-  type: 'live' | 'replay';
+interface LiveVideoCardProps {
   videoData: RecentLive;
 }
 
-const VideoCard = ({ type, videoData }: VideoCardProps) => {
+const LiveVideoCard = ({ videoData }: LiveVideoCardProps) => {
   const navigate = useNavigate();
 
   const { concurrentUserCount, category, channel, tags, defaultThumbnailImageUrl, liveId, liveImageUrl, liveTitle } =
@@ -25,21 +25,16 @@ const VideoCard = ({ type, videoData }: VideoCardProps) => {
     <VideoCardContainer>
       <VideoCardThumbnail onClick={handleLiveClick}>
         <VideoCardImage src={defaultThumbnailImageUrl ?? liveImageUrl} />
-        {type === 'live' ? (
-          <VideoCardDescription>
-            <LiveBadge />
-            <LiveViewCountBadge count={concurrentUserCount} />
-          </VideoCardDescription>
-        ) : (
-          <VideoCardDescription>
-            <ReplayBadge />
-            <ReplayViewCountBadge count={1125} />
-          </VideoCardDescription>
-        )}
+        <VideoCardDescription>
+          <LiveBadge />
+          <LiveViewCountBadge count={concurrentUserCount} />
+        </VideoCardDescription>
       </VideoCardThumbnail>
 
       <VideoCardWrapper>
-        <VideoCardProfile></VideoCardProfile>
+        <VideoCardProfile>
+        <img src={sampleProfile} />
+        </VideoCardProfile>
         <VideoCardArea>
           <span className="video_card_title" style={{ cursor: 'pointer' }} onClick={handleLiveClick}>
             {liveTitle}
@@ -57,7 +52,7 @@ const VideoCard = ({ type, videoData }: VideoCardProps) => {
   );
 };
 
-export default VideoCard;
+export default LiveVideoCard;
 
 const VideoCardContainer = styled.div`
   word-wrap: break-word;
