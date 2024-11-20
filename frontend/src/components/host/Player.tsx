@@ -10,13 +10,17 @@ interface PlayerProps {
   onStreaming: boolean;
 }
 
+interface ContainerProps {
+  $onStreaming: boolean;
+}
+
 export default function Player({ onStreaming }: PlayerProps) {
   const { isOpen, closeModal, openModal } = useModal();
   const createPortal = usePortal();
 
   return (
     <>
-      <Container onStreaming={onStreaming}>
+      <Container $onStreaming={onStreaming}>
         <StreamingView onStreaming={onStreaming} openModal={openModal} />
       </Container>
       <StreamingStatus onStreaming={onStreaming} />
@@ -25,8 +29,8 @@ export default function Player({ onStreaming }: PlayerProps) {
   );
 }
 
-const Container = styled.div<{ onStreaming: boolean }>`
-  background: ${({ onStreaming }) => (onStreaming ? '#000' : `url(${playerLoading}) no-repeat center / cover`)};
+const Container = styled.div<ContainerProps>`
+  background: ${({ $onStreaming }) => ($onStreaming ? '#000' : `url(${playerLoading}) no-repeat center / cover`)};
   width: 100%;
   padding-top: 56.25%;
   position: relative;

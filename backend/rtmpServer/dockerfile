@@ -2,27 +2,17 @@ FROM node:20-alpine
 
 RUN corepack enable
 
-# Setting working directory
 WORKDIR /app
 
-# Copying package.json and package-lock.json
-COPY package*.json ./
+COPY . .
 
-# Copying all the files
-COPY . ./
+RUN yarn workspaces focus
 
-# Install FFmpeg. This is needed to convert the video to HLS
 RUN apk add --no-cache ffmpeg
 
-# /usr/bin/ffmpeg is the default path for ffmpeg, copy it to /app
-RUN cp /usr/bin/ffmpeg ./nodeMediaServer
+RUN cp /usr/bin/ffmpeg ./
 
-# Installing dependencies
-RUN yarn install
-
-# Exposing ports
 EXPOSE 8000
 EXPOSE 1935
 
-# Running the app
-CMD ["yarn", "start"]
+CMD ["yarn", "prod"]
