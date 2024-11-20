@@ -1,7 +1,10 @@
-import { MainHeader, MainLiveSection, RecommendLive, ServiceBanner } from '@components/main';
 import { styled } from 'styled-components';
 
+import { MainHeader, MainLiveSection, RecommendLive, ServiceBanner } from '@components/main';
+
 export default function MainPage() {
+
+
   return (
     <>
       <MainHeader />

@@ -74,7 +74,8 @@ const SearchInput = styled.input`
   border-radius: 20px;
   color: ${({ theme }) => theme.tokenColors['text-strong']};
   background-color: ${({ theme }) => theme.tokenColors['surface-default']};
-
+  ${({ theme }) => theme.tokenTypographys['display-medium16']};
+  
   &:focus {
     border-color: ${({ theme }) => theme.tokenColors['brand-default']};
     outline: none;
