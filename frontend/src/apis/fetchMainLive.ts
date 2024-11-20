@@ -6,7 +6,7 @@ type ChannelInfo = {
   channelName: string;
 };
 
-export type RandomLive = {
+export type MainLive = {
   id: number;
   liveId: string;
   liveTitle: string;
@@ -17,12 +17,12 @@ export type RandomLive = {
   channel: ChannelInfo;
 };
 
-type RandomLiveResponse = {
-  info: RandomLive[];
+type MainLiveResponse = {
+  info: MainLive[];
 };
 
-export const fetchRandomLive = async (): Promise<RandomLive[]> => {
-  const response: AxiosResponse<RandomLiveResponse> = await fetchInstance().get('/viewer/main/random');
+export const fetchMainLive = async (): Promise<MainLive[]> => {
+  const response: AxiosResponse<MainLiveResponse> = await fetchInstance().get('/streams/random');
 
   return response.data.info;
 };

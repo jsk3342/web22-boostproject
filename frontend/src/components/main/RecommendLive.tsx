@@ -4,60 +4,61 @@ import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { LiveBadgeLarge } from './ThumbnailBadge';
-import { useRandomLive } from '@apis/queries/main/useFetchRandomLive';
+import { useMainLive } from '@apis/queries/main/useFetchMainLive';
 import sampleProfile from '@assets/sample_profile.png';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
-  const { data: randomLiveData, isLoading, error } = useRandomLive();
+  const { data: mainLiveData, isLoading, error } = useMainLive();
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   // const videoUrl = `https://kr.object.ncloudstorage.com/web22/live/${liveData.liveId}/index.m3u8`;
   const videoUrl = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 
-useEffect(() => {
-  if (!randomLiveData || randomLiveData.length === 0) return;
+  useEffect(() => {
+    if (!mainLiveData || mainLiveData.length === 0) return;
 
-  const videoElement = videoRef.current;
-  if (videoElement && Hls.isSupported()) {
-    const hls = new Hls();
-    hls.loadSource(videoUrl);
-    hls.attachMedia(videoElement);
-    hls.on(Hls.Events.MANIFEST_PARSED, () => {
-      videoElement?.play();
-    });
+    const videoElement = videoRef.current;
+    if (videoElement && Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoUrl);
+      hls.attachMedia(videoElement);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        videoElement?.play();
+      });
 
-    return () => {
-      hls.destroy();
-    };
-  } else if (videoElement) {
-    videoElement.src = videoUrl;
-    videoElement.play();
-  }
-}, [randomLiveData, videoUrl]);
+      return () => {
+        hls.destroy();
+      };
+    } else if (videoElement) {
+      videoElement.src = videoUrl;
+      videoElement.play();
+    }
+  }, [mainLiveData, videoUrl]);
 
   if (error) {
     return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
   }
 
-  if (!randomLiveData || randomLiveData.length === 0) {
+  if (!mainLiveData || mainLiveData.length === 0) {
     return <div>추천 라이브 데이터가 없습니다.</div>;
   }
 
-  const liveData = randomLiveData[0];
+  const liveData = mainLiveData[0];
+  const { liveId, liveTitle, concurrentUserCount, channel, category } = liveData;
 
   return (
     <RecommendLiveContainer>
       <RecommendLiveBox $isLoading={isLoading}>
         <video ref={videoRef} autoPlay muted />
       </RecommendLiveBox>
-      <RecommendLiveWrapper onClick={() => navigate(`/live/${liveData.liveId}`)}>
+      <RecommendLiveWrapper onClick={() => navigate(`/live/${liveId}`)}>
         <RecommendLiveHeader>
           <div className="recommend_live_status">
             <LiveBadgeLarge />
-            <span>{liveData.concurrentUserCount}명 시청</span>
+            <span>{concurrentUserCount}명 시청</span>
           </div>
-          <p className="recommend_live_title">{liveData.liveTitle}</p>
+          <p className="recommend_live_title">{liveTitle}</p>
         </RecommendLiveHeader>
 
         <RecommendLiveInformation>
@@ -65,8 +66,8 @@ useEffect(() => {
             <img src={sampleProfile} />
           </RecommendLiveProfile>
           <RecommendLiveArea>
-            <span className="video_card_name">{liveData.channel.channelName}</span>
-            <span className="video_card_category">{liveData.category}</span>
+            <span className="video_card_name">{channel.channelName}</span>
+            <span className="video_card_category">{category}</span>
           </RecommendLiveArea>
         </RecommendLiveInformation>
       </RecommendLiveWrapper>
