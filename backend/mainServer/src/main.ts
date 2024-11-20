@@ -7,8 +7,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   setupSwagger(app);
 
-    app.use(json({ limit: '200mb' }));
-    app.use(urlencoded({ limit: '200mb', extended: true }));
+  app.use(json({ limit: '200mb' }));
+  app.use(urlencoded({ limit: '200mb', extended: true}));
 
   app.enableCors({
     origin: '*', // 프론트엔드 URL로 설정
