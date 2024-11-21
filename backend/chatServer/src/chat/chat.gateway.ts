@@ -34,11 +34,8 @@ export class checkValidUser implements CanActivate {
     if(!user) throw new WsException(CHATTING_SOCKET_ERROR.INVALID_USER);
 
     console.log('guard', user , client.id , user?.clientId);
-    if(!!user && client.id === user?.clientId) {
-      if(!client.data.userId) client.data = {roomId, userId, ...user};
-      return true;
-    }
-    throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
+    if(!client.data.userId) client.data = {roomId, userId, ...user};
+    return true;
   }
 }
 
@@ -83,11 +80,8 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   // 특정 방에 참여하기 위한 메서드
   @SubscribeMessage(CHATTING_SOCKET_DEFAULT_EVENT.JOIN_ROOM)
   handleJoinRoom(client: Socket, payload: JoiningRoomDto) {
-    // DM 용 room 나가기
-    client.leave(client.id);
     const { roomId, userId } = payload;
     client.join(roomId);
-    // TODO: 만약 RoomList 에 없던 roomId 라면 RoomList 에 현재 userId 를 호스트로 등록해야한다.
 
     const room = this.roomService.getRoom(roomId);
     if(!room){

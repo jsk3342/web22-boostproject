@@ -98,7 +98,7 @@ export class RoomService {
     const room = this.rooms.get(roomId);
     if(!room) throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
 
-    if(room.users.has(userId)) return room.users.get(userId)!;
+    // if(room.users.has(userId)) return room.users.get(userId)!;
 
     // 랜덤 닉네임, 랜덤 색상으로 새로운 유저 하나 생성
     const newUser = createRandomUserInstance(clientId);
