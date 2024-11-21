@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import useUpdateHost from '@apis/queries/host/useUpdateHost';
 import { getStoredId } from '@utils/id';
+import { convertToBase64 } from '@utils/convertToBase64';
 
 export default function SettingForm() {
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { mutate: updateHost } = useUpdateHost();
 
   const [liveTitle, setLiveTitle] = useState('');
@@ -17,9 +19,29 @@ export default function SettingForm() {
     setTags((prev) => prev.filter((_, index) => index !== indexToRemove));
   };
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    if (e.target.files && e.target.files[0]) {
-      setPreviewImage(URL.createObjectURL(e.target.files[0]));
+  const handleImageChange = async (e: ChangeEvent<HTMLInputElement>): Promise<void> => {
+    const files = e.target.files;
+    if (!files) return;
+
+    const base64 = await convertToBase64(files[0]);
+    setPreviewImage(base64);
+  };
+
+  const handleUpdate = () => {
+    updateHost({
+      userId: getStoredId(),
+      liveTitle,
+      category,
+      defaultThumbnailImageUrl: previewImage || '',
+      tags
+    });
+  };
+
+  const handleImageDelete = () => {
+    setPreviewImage(null);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
     }
   };
 
@@ -82,12 +104,22 @@ export default function SettingForm() {
         </FormCell>
 
         <FormCell>
-          <Label htmlFor="preview-image-input">미리보기 이미지</Label>
+          <Label>미리보기 이미지</Label>
           <ImageUpload>
-            <FileInputLabel htmlFor="preview-image-input">
-              {previewImage ? (
+            {previewImage ? (
+              <ImageContainer>
                 <PreviewImage src={previewImage} alt="미리보기 이미지" />
-              ) : (
+                <ImageActionButtons>
+                  <ImageButton as="label" htmlFor="preview-image-input">
+                    수정
+                  </ImageButton>
+                  <ImageButton onClick={handleImageDelete} type="button">
+                    삭제
+                  </ImageButton>
+                </ImageActionButtons>
+              </ImageContainer>
+            ) : (
+              <FileInputLabel htmlFor="preview-image-input">
                 <PlaceholderImage>
                   <UploadIcon xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" fill="none">
                     <path d="M1 7H13" stroke="#AEB4C2" strokeWidth="1.5" strokeLinecap="round" />
@@ -95,25 +127,19 @@ export default function SettingForm() {
                   </UploadIcon>
                   <UploadText>업로드 (1280x720)</UploadText>
                 </PlaceholderImage>
-              )}
-            </FileInputLabel>
-            <FileInput id="preview-image-input" type="file" accept="image/*" onChange={handleImageChange} />
+              </FileInputLabel>
+            )}
+            <FileInput
+              ref={fileInputRef}
+              id="preview-image-input"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
           </ImageUpload>
         </FormCell>
 
-        <Button
-          onClick={() =>
-            updateHost({
-              userId: getStoredId(),
-              liveTitle,
-              category,
-              defaultThumbnailImageUrl: '',
-              tags
-            })
-          }
-        >
-          업데이트
-        </Button>
+        <Button onClick={handleUpdate}>업데이트</Button>
       </FormArea>
     </Container>
   );
@@ -278,5 +304,32 @@ const RemoveButton = styled.button`
 
   &:focus {
     outline: none;
+  }
+`;
+
+const ImageContainer = styled.div`
+  position: relative;
+`;
+
+const ImageActionButtons = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+`;
+
+const ImageButton = styled.button`
+  flex: 1;
+  padding: 8px;
+  background-color: #f3f4f6;
+  border: none;
+  border-radius: 4px;
+  color: #4e41db;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #e5e7eb;
   }
 `;
