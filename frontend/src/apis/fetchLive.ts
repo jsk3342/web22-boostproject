@@ -7,7 +7,11 @@ type ClientLiveResponse = {
 };
 
 export const fetchLive = async ({ liveId }: { liveId: string }): Promise<ClientLive> => {
-  const response: AxiosResponse<ClientLiveResponse> = await fetchInstance().get(`/streams/live?liveId=${liveId}`);
+  const response: AxiosResponse<ClientLiveResponse> = await fetchInstance().get('/streams/live', {
+    params: {
+      liveId
+    }
+  });
 
   return response.data.info;
 };
