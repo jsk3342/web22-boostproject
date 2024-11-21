@@ -41,8 +41,6 @@ export const HostChatRoom = ({ userType }: ChatRoomProps) => {
   }, [userId, fetchSessionKey, sessionKey]);
 
   useEffect(() => {
-    console.log(sessionKey);
-    console.log(socket);
     if (sessionKey && !socket) {
       const eventMap = {
         [CHATTING_SOCKET_RECEIVE_EVENT.INIT]: (initData: ChatInitData) => {

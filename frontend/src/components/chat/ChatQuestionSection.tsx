@@ -12,9 +12,10 @@ export interface ChatQuestionSectionProps {
   questions: MessageReceiveData[];
   socket: Socket | null;
   userType: UserType;
+  roomId?: string;
 }
 
-export const ChatQuestionSection = ({ questions, socket, userType }: ChatQuestionSectionProps) => {
+export const ChatQuestionSection = ({ questions, socket, userType, roomId }: ChatQuestionSectionProps) => {
   const [expanded, setExpanded] = useState(false);
 
   const { id } = useParams();
@@ -29,7 +30,7 @@ export const ChatQuestionSection = ({ questions, socket, userType }: ChatQuestio
     if (!socket) return;
 
     socket.emit(CHATTING_SOCKET_SEND_EVENT.QUESTION_DONE, {
-      roomId: id,
+      roomId: id ? id : roomId,
       userId,
       questionId
     } as MessageSendData);

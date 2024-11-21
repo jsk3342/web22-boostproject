@@ -26,7 +26,7 @@ const chatReducer = (state: ChatState, action: Action): ChatState => {
     case 'SET_SETTING': {
       const newSettingOption = action.payload;
       const isNoticePopupOpen = newSettingOption === 'chat_notice';
-      console.log(isNoticePopupOpen);
+
       return {
         ...state,
         settingOption: newSettingOption,
