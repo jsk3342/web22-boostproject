@@ -5,7 +5,7 @@ export const createSocket = (
   eventMap: Record<string, (data: any) => void>,
   initCallback?: (socket: Socket) => void
 ): Socket => {
-  const socket = io(url);
+  const socket = io(url, { path: '/chat/socket.io', transports: ['websocket'] });
 
   socket.on('connect', () => {
     console.log('Connected:', socket.id);

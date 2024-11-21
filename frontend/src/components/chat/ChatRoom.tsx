@@ -13,7 +13,7 @@ import { ChatProvider } from 'src/contexts/chatContext';
 import { getStoredId } from '@utils/id';
 import { UserType } from '@type/user';
 
-const TEST_SOCKET_URL = 'https://liboo.kr/chat';
+const TEST_SOCKET_URL = 'https://liboo.kr';
 
 interface ChatRoomProps {
   userType: UserType;

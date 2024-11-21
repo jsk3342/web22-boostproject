@@ -80,6 +80,7 @@ const SectionContainer = styled.div`
   min-height: 25px;
   max-height: 300px;
   overflow-y: scroll;
+  scrollbar-width: none;
   padding: 13px 20px 25px 20px;
   gap: 10px;
   border-top: 1px solid ${({ theme }) => theme.tokenColors['surface-alt']};
