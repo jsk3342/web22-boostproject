@@ -25,9 +25,9 @@ export class HostService {
     return [streamKey, sessionKey];
   }
 
-  async uploadBase64ToS3(base64Data: string, sessionKey: string, fileName: string): Promise<string | boolean> {
+  async uploadBase64ToS3(base64Data: string, sessionKey: string, fileName: string): Promise<string | null> {
     try {
-      if (!base64Data) return false;
+      if (!base64Data) return null;
       const { buffer, fileType } = decodeBase64Image(base64Data);
 
       const bucketName = process.env.OBJECT_STORAGE_BUCKET_NAME!;

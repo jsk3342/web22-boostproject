@@ -107,8 +107,7 @@ export class HostController {
         nowUserData.sessionKey,
         'thumbnail'
       );
-      const newSessionInfo = { ...requestDto, defaultThumbnailImageUrl: (objectStorageUrl ?? DEFAULT_VALUE.THUMBNAIL_IMG_URL) as string};
-
+      const newSessionInfo = { ...requestDto, defaultThumbnailImageUrl: objectStorageUrl || DEFAULT_VALUE.NOTICE, notice : requestDto.notice || DEFAULT_VALUE.THUMBNAIL_IMG_URL, hostName : requestDto.hostName || DEFAULT_VALUE.HOST_NAME};
       this.memoryDBService.updateByUserId(
         requestDto.userId,
         memoryDbDtoFromLiveVideoRequestDto(nowUserData, newSessionInfo)
