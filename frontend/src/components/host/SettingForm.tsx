@@ -2,8 +2,9 @@ import { useForm, FormProvider } from 'react-hook-form';
 import styled from 'styled-components';
 import useUpdateHost from '@apis/queries/host/useUpdateHost';
 import { getStoredId } from '@utils/id';
-import { CategoryField, FormValues, HostNameField, ImageField, LiveTitleField, NoticeField, TagField } from './Form';
+import { CategoryField, HostNameField, ImageField, LiveTitleField, NoticeField, TagField } from './Form';
 import { Button } from './Form/style';
+import { FormValues } from '@type/hostInfo';
 
 export default function SettingForm() {
   const { mutate: updateHost } = useUpdateHost();

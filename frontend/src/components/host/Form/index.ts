@@ -4,5 +4,3 @@ export { default as TagField } from './TagField';
 export { default as NoticeField } from './NoticeField';
 export { default as ImageField } from './ImageField';
 export { default as HostNameField } from './HostNameField';
-
-export type { FormValues } from './types';
