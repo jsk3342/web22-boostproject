@@ -41,7 +41,7 @@ export class MemoryDBService {
     // return getRandomElementsFromArray(this.db, count);
   }
 
-  getBroadcastInfo(size: number, id : number = 0 ) {
+  getBroadcastInfo(size: number) {
     const liveSession = this.db.filter(item => item.state);
     if (this.db.length < size) {
       return this.db.reverse().map((info) => fromLiveSessionDto(info));
