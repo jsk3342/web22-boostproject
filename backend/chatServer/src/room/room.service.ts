@@ -2,14 +2,22 @@ import { Injectable } from '@nestjs/common';
 import { Question } from '../event/dto/OutgoingMessage.dto';
 import { WsException } from '@nestjs/websockets';
 import { CHATTING_SOCKET_ERROR } from '../event/constants';
+import { User } from './user.interface';
+import { Room } from './room.interface';
+import { getRandomAdjective, getRandomBrightColor, getRandomNoun } from '../utils/random';
 
-interface Room {
-  hostId: string;
-  questions: Question[]
+function createRandomNickname(){
+  return `${getRandomAdjective()} ${getRandomNoun()}`;
 }
 
+function createRandomUserInstance(clientId: string): User {
+  return {
+    clientId,
+    nickname: createRandomNickname(),
+    color: getRandomBrightColor()
+  };
+}
 
-//TODO: Error WSException 으로 바꾸기
 
 @Injectable()
 export class RoomService {
@@ -18,10 +26,10 @@ export class RoomService {
   // 방 생성
   createRoom(roomId: string, hostId: string) {
     if (this.rooms.has(roomId)) throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EXISTED);
-
     this.rooms.set(roomId, {
       hostId,
       questions: [],
+      users: new Map(),
     });
   }
 
@@ -84,5 +92,33 @@ export class RoomService {
     if (!room) throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
 
     return room.questions.find((q) => q.questionId === questionId) || undefined;
+  }
+  createUser(roomId:string, userId:string, clientId: string): User {
+    // 이미 존재하는 유저인지 확인
+    const room = this.rooms.get(roomId);
+    if(!room) throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
+
+    if(room.users.has(userId)) return room.users.get(userId)!;
+
+    // 랜덤 닉네임, 랜덤 색상으로 새로운 유저 하나 생성
+    const newUser = createRandomUserInstance(clientId);
+    room.users.set(userId, newUser);
+    return newUser;
+  }
+
+  deleteUser(roomId:string, userId:string): boolean {
+    // 이미 존재하는 유저인지 확인
+    const room = this.rooms.get(roomId);
+    if(!room) throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
+
+    if(room.users.has(userId)) return room.users.delete(userId)!;
+    return false;
+  }
+
+  getUserByUserId(roomId: string, userId: string) {
+    const room = this.rooms.get(roomId);
+    if(!room) throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
+    if(room.users.has(userId)) return room.users.get(userId)!;
+    return undefined;
   }
 }
