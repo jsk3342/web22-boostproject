@@ -42,9 +42,9 @@ const PlayerInfo = ({ clientLiveData }: { clientLiveData: ClientLive }) => {
           <VideoUploader>{channel.channelName}</VideoUploader>
           <Category>{category}</Category>
           <TagBox>
-          {tags.map((tag, index) => (
-            <ShowInfoBadge key={index} badgeType="tag" text={tag} />
-          ))}
+            {tags.map((tag, index) => (
+              <ShowInfoBadge key={index} badgeType="tag" text={tag} />
+            ))}
           </TagBox>
           <LiveInfo>
             <p>{concurrentUserCount}명 시청 중</p>
@@ -144,7 +144,7 @@ const Category = styled.p`
 const TagBox = styled.div`
   display: flex;
   gap: 8px;
-`
+`;
 
 const LiveInfo = styled.div`
   display: flex;
