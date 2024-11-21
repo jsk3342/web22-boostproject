@@ -28,10 +28,10 @@ export class checkValidUser implements CanActivate {
     const { roomId, userId } = payload;
     const room = this.roomService.getRoom(roomId);
     if(!room) throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
-
+    console.log('guard', room.users);
     const user = this.roomService.getRoom(roomId)!.users.get(userId);
 
-    if(!user) throw new WsException(CHATTING_SOCKET_ERROR.INVALID_USER);
+    // if(!user) throw new WsException(CHATTING_SOCKET_ERROR.INVALID_USER);
 
     console.log('guard', user , client.id , user?.clientId);
     if(!client.data.userId) client.data = {roomId, userId, ...user};
