@@ -4,11 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@assets/icons/search_icon.svg';
 import VideoIcon from '@assets/icons/video_icon.svg';
 import { ASSETS } from '@constants/assets';
-import { getStoredId } from '@utils/id';
 
 const Header = () => {
   const navigate = useNavigate();
-  const userId = getStoredId();
 
   return (
     <HeaderContainer>
@@ -22,7 +20,7 @@ const Header = () => {
         </SearchInputWrapper>
         <SearchButton />
       </SearchBox>
-      <StudioBox onClick={() => navigate(`/host/${userId}`)}>
+      <StudioBox onClick={() => navigate('/host')}>
         <VideoIconStyled />
         스튜디오
       </StudioBox>
