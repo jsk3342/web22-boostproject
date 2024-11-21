@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Logo from '@assets/logo.gif';
 import { useNavigate } from 'react-router-dom';
+import { ASSETS } from '@constants/assets';
 
 export default function Header() {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ export default function Header() {
   return (
     <Container>
       <LogoContainer onClick={() => navigate('/')}>
-        <img src={Logo} alt="로고" />
+        <img src={ASSETS.IMAGES.LOGO.GIF} alt="로고" />
       </LogoContainer>
       STUDIO
     </Container>

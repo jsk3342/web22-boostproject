@@ -1,8 +1,8 @@
+import { ASSETS } from '@constants/assets';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import sampleProfile from '@assets/sample_profile.png';
-import ServiceBanner from '@common/ServiceBanner';
 import ShowInfoBadge from '@common/ShowInfoBadge';
 import { ClientLive } from '@type/live';
 import { updateElapsedTime } from '@utils/updateElapsedTime';
@@ -49,7 +49,9 @@ const PlayerInfo = ({ clientLiveData }: { clientLiveData: ClientLive }) => {
           </LiveInfo>
         </VideoInfo>
       </PlayerInfoBox>
-      <ServiceBanner />
+      <BannerLink href="https://boostcamp.connect.or.kr/" target="_blank" rel="noopener noreferrer">
+        <Banner src={ASSETS.IMAGES.BANNER.CLIENT} alt="Client Banner" />
+      </BannerLink>
     </PlayerInfoContainer>
   );
 };
@@ -147,4 +149,23 @@ const LiveInfo = styled.div`
   gap: 8px;
   color: ${({ theme }) => theme.tokenColors['text-bold']};
   ${({ theme }) => theme.tokenTypographys['display-bold12']};
+`;
+
+const BannerLink = styled.a`
+  display: block;
+  margin-top: 24px;
+  border-radius: 7px;
+  overflow: hidden;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+`;
+
+const Banner = styled.img`
+  width: 100%;
+  aspect-ratio: 16 / 2;
+  object-fit: cover;
+  display: block;
 `;

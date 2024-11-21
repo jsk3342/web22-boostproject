@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-import Logo from '@assets/logo.gif';
 import SearchIcon from '@assets/icons/search_icon.svg';
 import VideoIcon from '@assets/icons/video_icon.svg';
+import { ASSETS } from '@constants/assets';
 
 const MainHeader = () => {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const MainHeader = () => {
   return (
     <HeaderContainer>
       <LogoContainer onClick={() => window.location.reload()}>
-        <img src={Logo} alt="로고" />
+        <img src={ASSETS.IMAGES.LOGO.GIF} alt="로고" />
       </LogoContainer>
       <SearchBox>
         <SearchInputWrapper>
@@ -49,7 +49,7 @@ const HeaderContainer = styled.div`
 const LogoContainer = styled.div`
   height: 30px;
   cursor: pointer;
-  
+
   img {
     height: 100%;
   }
@@ -75,7 +75,7 @@ const SearchInput = styled.input`
   color: ${({ theme }) => theme.tokenColors['text-strong']};
   background-color: ${({ theme }) => theme.tokenColors['surface-default']};
   ${({ theme }) => theme.tokenTypographys['display-medium16']};
-  
+
   &:focus {
     border-color: ${({ theme }) => theme.tokenColors['brand-default']};
     outline: none;
