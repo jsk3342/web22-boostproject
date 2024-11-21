@@ -16,6 +16,12 @@ export class LiveVideoRequestDto {
   @ApiProperty({example: 'category', description: '방송 카테고리'})
     category: string = '';
 
+  @ApiProperty({example: '쾌적한 컨퍼런스 환경을 위해 상대방을 존중하는 언어를 사용해 주시길 바랍니다. 모두가 배움과 소통을 즐길 수 있는 문화를 함께 만들기에 동참해주세요.', description: '방송 공지 (비어있을 경우 기본 값으로 설정)'})
+    notice: string = '';
+
+  @ApiProperty({example: 'host name', description: '호스트 이름'})
+    hostName: string = '';
+
   @ApiProperty({example: ['tag1', 'tag2', 'tag3'], description: '방송 태그'})
     tags: Array<string> = [];
 }
@@ -32,7 +38,6 @@ export class LiveSessionResponseDto {
     channelId: '',
     channelName: '',
   };
-
   category: string = '';
   tags: Array<string> = [];
 }
@@ -44,7 +49,7 @@ export function fromLiveSessionDto(memoryDbDto: MemoryDbDto): LiveSessionRespons
     sessionKey,
     liveTitle,
     liveImageUrl,
-    defaultThumbnailImageUrl = 'https://kr.object.ncloudstorage.com/web22/static/liboo_default_thumbnail.png',
+    defaultThumbnailImageUrl,
     concurrentUserCount,
     channel,
     category,

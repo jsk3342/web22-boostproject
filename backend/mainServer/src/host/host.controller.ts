@@ -6,6 +6,7 @@ import { ApiCreatedResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/
 import { MemoryDBService } from '../memory-db/memory-db.service.js';
 import { memoryDbDtoFromLiveVideoRequestDto } from '../dto/memoryDbDto.js';
 import { LiveVideoRequestDto } from '../dto/liveSessionDto.js';
+import { DEFAULT_VALUE } from '../common/constants.js';
 
 @Controller('host')
 @ApiTags('Host API')
@@ -106,7 +107,7 @@ export class HostController {
         nowUserData.sessionKey,
         'thumbnail'
       );
-      const newSessionInfo = { ...requestDto, defaultThumbnailImageUrl: objectStorageUrl };
+      const newSessionInfo = { ...requestDto, defaultThumbnailImageUrl: (objectStorageUrl ?? DEFAULT_VALUE.THUMBNAIL_IMG_URL) as string};
 
       this.memoryDBService.updateByUserId(
         requestDto.userId,

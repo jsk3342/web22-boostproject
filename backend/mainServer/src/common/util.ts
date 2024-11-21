@@ -1,5 +1,6 @@
+import crypto from 'crypto';
 import { fromLiveCurationDto } from '../dto/liveCurationDto.js';
-import { MemoryDbDto } from '../dto/memoryDbDto';
+import { MemoryDbDto } from '../dto/memoryDbDto.js';
 
 export function getRandomElementsFromArray(array: Array<MemoryDbDto>, n: number) {
   if (n >= array.length) {
@@ -36,4 +37,9 @@ export function decodeBase64Image(base64Data: string): { buffer: Buffer; fileTyp
     console.error('Error saving Base64 image:', error);
     throw error;
   }
+}
+
+export function randomKey(uuid: string, salt: string, length: number = 20) {
+  const hash = crypto.createHmac('sha256', salt).update(uuid).digest('hex');
+  return hash.substring(0, length);
 }
