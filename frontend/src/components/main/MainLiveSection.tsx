@@ -1,23 +1,47 @@
 import styled from 'styled-components';
-import VideoCard from './VideoCard';
+
+import ReplayVideoCard from './ReplayVideoCard';
+import LiveVideoCard from './LiveVideoCard';
 import LoadMoreDivider from './LoadMoreDivider';
+import { useRecentLive } from '@apis/queries/main/useFetchRecentLive';
 
 interface MainLiveSectionProps {
   title: string;
   type: 'live' | 'replay';
 }
 const MainLiveSection = ({ title, type }: MainLiveSectionProps) => {
+  // TODO: 다시보기가 만들어지면 useRecentReplay 삼항연산자로 변경
+  const { data = [], isLoading, error } = useRecentLive();
+
+  if (error) {
+    return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
+  }
+
   return (
     <MainSectionContainer>
       <MainSectionHeader>
         <p className="live_section_title">{title}</p>
         <button className="live_section_button">전체보기</button>
       </MainSectionHeader>
-      <MainSectionContentList>
-        {[1, 2, 3, 4, 5, 6].map((_, index) => (
-          <VideoCard key={index} type={type} />
-        ))}
-      </MainSectionContentList>
+
+      {isLoading && <div>로딩 중...</div>}
+
+      {data.length === 0 && !isLoading && <div>데이터가 없습니다.</div>}
+
+      {type === 'live' ? (
+        <MainSectionContentList>
+          {data.map((video) => (
+            <LiveVideoCard key={video.id} videoData={video} />
+          ))}
+        </MainSectionContentList>
+      ) : (
+        <MainSectionContentList>
+          {data.map((video) => (
+            <ReplayVideoCard key={video.id} videoData={video} />
+          ))}
+        </MainSectionContentList>
+      )}
+
       <LoadMoreDivider text="더보기" />
       <div className="parent">
         <div className="child"></div>

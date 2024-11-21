@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchMainLive, MainLive } from '@apis/fetchMainLive';
+
+import { fetchMainLive } from '@apis/fetchMainLive';
+import { MainLive } from '@type/live';
 
 export const useMainLive = () => {
   return useQuery<MainLive[], Error>({

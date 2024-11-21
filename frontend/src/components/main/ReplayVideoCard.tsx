@@ -1,38 +1,50 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+
 import sampleThumbnail from '@assets/sampleThumbnail.png';
-import { LiveBadge, LiveViewCountBadge, ReplayBadge, ReplayViewCountBadge } from './ThumbnailBadge';
+import sampleProfile from '@assets/sample_profile.png';
+import { RecentLive } from '@type/live';
+import { ReplayBadge, ReplayViewCountBadge } from './ThumbnailBadge';
 import ShowInfoBadge from './ShowInfoBadge';
 
-interface VideoCardProps {
-  type: 'live' | 'replay';
+interface ReplayVideoCardProps {
+  videoData: RecentLive;
 }
 
-const VideoCard = ({ type }: VideoCardProps) => {
+const ReplayVideoCard = ({ videoData }: ReplayVideoCardProps) => {
+  const navigate = useNavigate();
+
+  const { concurrentUserCount, category, channel, tags, defaultThumbnailImageUrl, liveId, liveImageUrl, liveTitle } =
+    videoData;
+
+  const handleLiveClick = () => {
+    navigate(`/live/${liveId}`);
+  };
+
   return (
     <VideoCardContainer>
-      <VideoCardThumbnail>
-        <VideoCardImage src={sampleThumbnail} />
-        {type === 'live' ? (
-          <VideoCardDescription>
-            <LiveBadge />
-            <LiveViewCountBadge count={1125} />
-          </VideoCardDescription>
-        ) : (
-          <VideoCardDescription>
-            <ReplayBadge />
-            <ReplayViewCountBadge count={1125} />
-          </VideoCardDescription>
-        )}
+      <VideoCardThumbnail onClick={handleLiveClick}>
+        <VideoCardImage src={defaultThumbnailImageUrl ?? liveImageUrl} />
+        <VideoCardDescription>
+          <ReplayBadge />
+          <ReplayViewCountBadge count={concurrentUserCount} />
+        </VideoCardDescription>
       </VideoCardThumbnail>
 
       <VideoCardWrapper>
-        <VideoCardProfile></VideoCardProfile>
+        <VideoCardProfile>
+          <img src={sampleProfile} />
+        </VideoCardProfile>
         <VideoCardArea>
-          <span className="video_card_title">방송 제목 방송 제목</span>
-          <span className="video_card_name">라이부</span>
+          <span className="video_card_title" style={{ cursor: 'pointer' }} onClick={handleLiveClick}>
+            {liveTitle}
+          </span>
+          <span className="video_card_name">{channel.channelName}</span>
           <VideoCardInformation>
-            <ShowInfoBadge badgeType="category" text="프론트엔드" />
-            <ShowInfoBadge badgeType="tag" text="태그" />
+            <ShowInfoBadge badgeType="category" text={category} />
+            {tags.map((tag, index) => (
+              <ShowInfoBadge key={index} badgeType="tag" text={tag} />
+            ))}
           </VideoCardInformation>
         </VideoCardArea>
       </VideoCardWrapper>
@@ -40,7 +52,7 @@ const VideoCard = ({ type }: VideoCardProps) => {
   );
 };
 
-export default VideoCard;
+export default ReplayVideoCard;
 
 const VideoCardContainer = styled.div`
   word-wrap: break-word;
@@ -54,6 +66,7 @@ const VideoCardThumbnail = styled.div`
   display: block;
   padding-top: 56.25%;
   position: relative;
+  cursor: pointer;
 `;
 
 const VideoCardImage = styled.img`
