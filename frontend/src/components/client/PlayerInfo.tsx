@@ -12,9 +12,12 @@ const PlayerInfo = ({ clientLiveData }: { clientLiveData: ClientLive }) => {
 
   const [elapsedTime, setElapsedTime] = useState<string>('00:00:00');
 
+  const startDateTime = new Date(startDate).getTime();
+
   useEffect(() => {
     const interval = setInterval(() => {
-      const updatedTime = updateElapsedTime(startDate);
+      const now = Date.now();
+      const updatedTime = updateElapsedTime({ startDateTime, now });
       setElapsedTime(updatedTime);
     }, 1000);
 
