@@ -81,7 +81,7 @@ const HostProfileBox = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 100px;
 `;
@@ -112,7 +112,7 @@ const HostProfile = styled.div`
 
 const LiveBox = styled.div`
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   padding: 2px 8px;
