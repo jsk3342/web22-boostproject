@@ -11,9 +11,9 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      {footerItem.map((item, index) => (
-        <a key={index} href={item.link} className="footer-link">
-          {item.title}
+      {footerItem.map(({ title, link }, index) => (
+        <a key={index} href={link} className="footer-link">
+          {title}
         </a>
       ))}
     </FooterContainer>
