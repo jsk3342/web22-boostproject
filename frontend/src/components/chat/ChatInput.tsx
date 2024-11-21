@@ -14,11 +14,12 @@ import { UserType } from '@type/user';
 interface ChatInputProps {
   socket: Socket | null;
   userType: UserType;
+  roomId?: string;
 }
 
 const INITIAL_TEXTAREA_HEIGHT = 15;
 
-export const ChatInput = ({ socket, userType }: ChatInputProps) => {
+export const ChatInput = ({ socket, userType, roomId }: ChatInputProps) => {
   const [hasInput, setHasInput] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [msgType, setMsgType] = useState<ChattingTypes>(CHATTING_TYPES.NORMAL);
@@ -52,7 +53,7 @@ export const ChatInput = ({ socket, userType }: ChatInputProps) => {
     const eventName = eventMap[msgType];
 
     socket.emit(eventName, {
-      roomId: id,
+      roomId: id ? id : roomId,
       userId,
       msg: message
     } as MessageSendData);
@@ -177,7 +178,7 @@ const ChatInputArea = styled.textarea`
   outline: none;
   color: ${({ theme }) => theme.tokenColors['text-strong']};
   ${({ theme }) => theme.tokenTypographys['display-medium16']};
-  background-color:transparent;
+  background-color: transparent;
   white-space: normal;
   line-height: 20px;
 `;
