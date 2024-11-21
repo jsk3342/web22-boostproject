@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MemoryDbDto } from '../dto/memoryDbDto.js';
-import { getRandomElementsFromArray } from '../util/util.js';
+import { getRandomElementsFromArray } from '../common/util.js';
 import { fromLiveSessionDto } from '../dto/liveSessionDto.js';
 
 @Injectable()
