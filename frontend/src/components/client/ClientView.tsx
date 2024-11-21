@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useClientLive } from '@apis/queries/client/useFetchLive';
 import Player from './Player';
 import PlayerInfo from './PlayerInfo';
-import Footer from './Footer';
+import Footer from '@components/common/Footer';
 
 const ClientView = () => {
   const { id: liveId } = useParams();

@@ -1,11 +1,10 @@
 import { styled } from 'styled-components';
 
+import Footer from '@common/Footer';
 import ServiceBanner from '@common/ServiceBanner';
 import { MainHeader, MainLiveSection, RecommendLive } from '@components/main';
 
 export default function MainPage() {
-
-
   return (
     <>
       <MainHeader />
@@ -14,6 +13,7 @@ export default function MainPage() {
         <ServiceBanner />
         <MainLiveSection title="🚀 라이브 중인 컨퍼런스" type="live" />
         <MainLiveSection title="컨퍼런스 다시보기 👀" type="replay" />
+        <Footer />
       </MainPageContainer>
     </>
   );
