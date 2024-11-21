@@ -13,11 +13,10 @@ import {
 } from '../event/constants';
 import { IncomingMessageDto } from '../event/dto/IncomingMessage.dto';
 import { JoiningRoomDto } from '../event/dto/JoiningRoom.dto';
-import { CanActivate, ExecutionContext, Injectable, UseFilters, UseGuards } from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable, UseGuards } from '@nestjs/common';
 import { OutgoingMessageDto } from '../event/dto/OutgoingMessage.dto';
 import { User } from '../room/user.interface';
 import { RoomService } from '../room/room.service';
-import { WebSocketExceptionFilter } from './exception.handler';
 
 @Injectable()
 export class checkValidUser implements CanActivate {
