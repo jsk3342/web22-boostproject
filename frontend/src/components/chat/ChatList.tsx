@@ -28,8 +28,13 @@ export const ChatList = ({ messages, userId }: ChatListProps) => {
           <ChatItemWrapper key={index}>
             {chat.msgType === CHATTING_TYPES.QUESTION ? (
               <QuestionCard type="client" question={chat} />
+            ) : chat.msgType === CHATTING_TYPES.NOTICE ? (
+              <NoticeChat>
+                <span>📢</span>
+                <span>{chat.msg}</span>
+              </NoticeChat>
             ) : (
-              <NormalChat $pointColor={'skyblue'}>
+              <NormalChat $pointColor={chat.color}>
                 {userId === chat.userId && <span className="text_point">🧀</span>}
                 <span className="text_point">{chat.nickname}</span>
                 <span>{chat.msg}</span>
@@ -73,6 +78,17 @@ const ChatListWrapper = styled.div`
 const ChatItemWrapper = styled.div`
   margin-top: auto;
   padding: 5px 0;
+`;
+
+const NoticeChat = styled.div`
+  display: flex;
+  padding: 10px 15px;
+  gap: 10px;
+  ${({ theme }) => theme.tokenTypographys['display-medium12']};
+  color: ${({ theme }) => theme.tokenColors['text-default']};
+  background-color: #0e0f10;
+  overflow-wrap: break-word;
+  word-break: break-word;
 `;
 
 const NormalChat = styled.div<{ $pointColor: string }>`

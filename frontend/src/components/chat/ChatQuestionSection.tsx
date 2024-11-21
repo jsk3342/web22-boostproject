@@ -68,7 +68,7 @@ const SectionContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 95px;
+  min-height: 25px;
   padding: 13px 20px 0px 20px;
   gap: 10px;
   border-top: 1px solid ${({ theme }) => theme.tokenColors['surface-alt']};
@@ -78,8 +78,8 @@ const SectionContainer = styled.div`
 
 const NoQuestionMessage = styled.div`
   text-align: center;
+  ${({ theme }) => theme.tokenTypographys['display-medium14']};
   color: ${({ theme }) => theme.tokenColors['text-weak']};
-  font-size: 14px;
   padding: 20px 0;
 `;
 

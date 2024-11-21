@@ -13,7 +13,7 @@ interface ChatInputProps {
   socket: Socket | null;
 }
 
-const INITIAL_TEXTAREA_HEIGHT = 14;
+const INITIAL_TEXTAREA_HEIGHT = 15;
 
 export const ChatInput = ({ socket }: ChatInputProps) => {
   const [hasInput, setHasInput] = useState(false);
@@ -30,12 +30,6 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
     setMsgType(msgType === CHATTING_TYPES.NORMAL ? CHATTING_TYPES.QUESTION : CHATTING_TYPES.NORMAL);
   };
 
-  const resetTextareaHeight = () => {
-    if (textareaRef.current) {
-      textareaRef.current!.style.height = `${INITIAL_TEXTAREA_HEIGHT}px`;
-    }
-  };
-
   const handleMessageSend = () => {
     if (!socket || !message.trim()) return;
 
@@ -48,14 +42,20 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
       msg: message
     } as MessageSendData);
 
+    resetTextareaHeight();
     setMessage('');
     setHasInput(false);
-    resetTextareaHeight();
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
     setHasInput(e.target.value.length > 0);
+  };
+
+  const resetTextareaHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = `${INITIAL_TEXTAREA_HEIGHT}px`;
+    }
   };
 
   useEffect(() => {
@@ -80,7 +80,7 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
         textarea.removeEventListener('input', handleResize);
       }
     };
-  }, []);
+  }, [textareaRef.current]);
 
   const handleBlur = () => {
     if (textareaRef.current) {
@@ -135,7 +135,7 @@ export default ChatInput;
 const ChatInputWrapper = styled.div<{ $hasInput: boolean; $isFocused: boolean }>`
   min-height: 20px;
   display: flex;
-  padding: 5px 10px;
+  padding: 7px 10px 5px 10px;
   gap: 10px;
   border: 3px solid ${({ theme }) => theme.tokenColors['text-weak']};
   border-radius: 7px;
@@ -152,14 +152,16 @@ const ChatInputWrapper = styled.div<{ $hasInput: boolean; $isFocused: boolean }>
 
 const ChatInputArea = styled.textarea`
   width: 100%;
-  max-height: 40px;
+  max-height: 65px;
   scrollbar-width: none;
   resize: none;
   border: none;
   outline: none;
   color: ${({ theme }) => theme.tokenColors['text-strong']};
   ${({ theme }) => theme.tokenTypographys['display-medium16']}
-  background-color: transparent;
+  background-color:transparent;
+  white-space: normal;
+  line-height: 20px;
 `;
 
 const InputBtn = styled.button`
