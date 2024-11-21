@@ -5,6 +5,7 @@ import sampleProfile from '@assets/sample_profile.png';
 import ServiceBanner from '@common/ServiceBanner';
 import ShowInfoBadge from '@common/ShowInfoBadge';
 import { ClientLive } from '@type/live';
+import { updateElapsedTime } from '@utils/updateElapsedTime';
 
 const PlayerInfo = ({ clientLiveData }: { clientLiveData: ClientLive }) => {
   const { channel, concurrentUserCount, liveTitle, category, tags, startDate } = clientLiveData;
@@ -12,18 +13,10 @@ const PlayerInfo = ({ clientLiveData }: { clientLiveData: ClientLive }) => {
   const [elapsedTime, setElapsedTime] = useState<string>('00:00:00');
 
   useEffect(() => {
-    const startDateTime = new Date(startDate).getTime();
-
-    const updateElapsedTime = () => {
-      const now = Date.now();
-      const diffInSeconds = Math.floor((now - startDateTime) / 1000);
-      const hours = String(Math.floor(diffInSeconds / 3600)).padStart(2, '0');
-      const minutes = String(Math.floor((diffInSeconds % 3600) / 60)).padStart(2, '0');
-      const seconds = String(diffInSeconds % 60).padStart(2, '0');
-      setElapsedTime(`${hours}:${minutes}:${seconds}`);
-    };
-
-    const interval = setInterval(updateElapsedTime, 1000);
+    const interval = setInterval(() => {
+      const updatedTime = updateElapsedTime(startDate);
+      setElapsedTime(updatedTime);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [startDate]);
