@@ -27,6 +27,8 @@ export class checkValidUser implements CanActivate {
     const payload = context.switchToWs().getData();
     const { roomId, userId } = payload;
     const room = this.roomService.getRoom(roomId);
+
+    console.log(roomId, userId, payload, room);
     if(!room) throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
     console.log('guard', room.users);
     const user = this.roomService.getRoom(roomId)!.users.get(userId);
