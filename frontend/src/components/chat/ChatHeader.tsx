@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ThreePointIcon from '@assets/icons/three-point.svg';
 import OutIcon from '@assets/icons/out.svg';
-import { useContext, useEffect, useRef } from 'react';
+import { useCallback, useContext, useEffect, useRef } from 'react';
 import LayerPopup from './LayerPopup';
 import { ChatContext } from 'src/contexts/chatContext';
 
@@ -17,11 +17,14 @@ export const ChatHeader = ({ outBtnHandler }: ChatHeaderProps) => {
     dispatch({ type: 'TOGGLE_SETTINGS' });
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
-      dispatch({ type: 'CLOSE_SETTINGS' });
-    }
-  };
+  const handleClickOutside = useCallback(
+    (event: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        dispatch({ type: 'CLOSE_SETTINGS' });
+      }
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);

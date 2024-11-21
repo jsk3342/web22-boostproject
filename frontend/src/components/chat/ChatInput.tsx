@@ -13,6 +13,8 @@ interface ChatInputProps {
   socket: Socket | null;
 }
 
+const INITIAL_TEXTAREA_HEIGHT = 14;
+
 export const ChatInput = ({ socket }: ChatInputProps) => {
   const [hasInput, setHasInput] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
@@ -26,6 +28,12 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
 
   const handleMsgType = () => {
     setMsgType(msgType === CHATTING_TYPES.NORMAL ? CHATTING_TYPES.QUESTION : CHATTING_TYPES.NORMAL);
+  };
+
+  const resetTextareaHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current!.style.height = `${INITIAL_TEXTAREA_HEIGHT}px`;
+    }
   };
 
   const handleMessageSend = () => {
@@ -42,6 +50,7 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
 
     setMessage('');
     setHasInput(false);
+    resetTextareaHeight();
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -50,23 +59,25 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
   };
 
   useEffect(() => {
+    const textarea = textareaRef.current;
+
     const handleResize = () => {
-      if (textareaRef.current) {
+      if (textarea) {
         requestAnimationFrame(() => {
-          textareaRef.current!.style.height = '14px';
-          textareaRef.current!.style.height = `${textareaRef.current!.scrollHeight - 5}px`;
+          textarea.style.height = `${INITIAL_TEXTAREA_HEIGHT}px`;
+          textarea.style.height = `${textarea.scrollHeight - 5}px`;
         });
       }
     };
 
-    if (textareaRef.current) {
-      textareaRef.current.addEventListener('input', handleResize);
+    if (textarea) {
+      textarea.addEventListener('input', handleResize);
       handleResize();
     }
 
     return () => {
-      if (textareaRef.current) {
-        textareaRef.current.removeEventListener('input', handleResize);
+      if (textarea) {
+        textarea.removeEventListener('input', handleResize);
       }
     };
   }, []);
