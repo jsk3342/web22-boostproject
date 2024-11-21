@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import sampleProfile from '@assets/sample_profile.png';
-import ServiceBanner from '@common/ServiceBanner';
 import ShowInfoBadge from '@common/ShowInfoBadge';
 import { ClientLive } from '@type/live';
 import { updateElapsedTime } from '@utils/updateElapsedTime';
