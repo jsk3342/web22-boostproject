@@ -6,8 +6,19 @@ const keywords = [
   { text: 'Development', gradient: 'linear-gradient(90deg, #FF6B00, #FFD700)' },
   { text: 'Growth', gradient: 'linear-gradient(90deg, #FFD700, #FFFF66)' },
   { text: 'Innovation', gradient: 'linear-gradient(90deg, #6600FF, #CC99FF)' },
-  { text: 'Technology', gradient: 'linear-gradient(90deg, #FF00CC, #FFCCFF)' }
+  { text: 'Technology', gradient: 'linear-gradient(90deg, #FF00CC, #FFCCFF)' },
+  { text: 'Workshop', gradient: 'linear-gradient(90deg, #00FFCC, #66FFE6)' },
+  { text: 'Networking', gradient: 'linear-gradient(90deg, #FF3366, #FF99CC)' },
+  { text: 'Leadership', gradient: 'linear-gradient(90deg, #9933FF, #CC99FF)' },
+  { text: 'Creativity', gradient: 'linear-gradient(90deg, #FF9900, #FFCC66)' },
+  { text: 'Learning', gradient: 'linear-gradient(90deg, #33CC33, #99FF99)' },
+  { text: 'Strategy', gradient: 'linear-gradient(90deg, #3366FF, #99CCFF)' },
+  { text: 'Mentoring', gradient: 'linear-gradient(90deg, #FF6699, #FFCCCC)' },
+  { text: 'Agile', gradient: 'linear-gradient(90deg, #00CC99, #66FFB2)' },
+  { text: 'Scaling', gradient: 'linear-gradient(90deg, #FF9933, #FFCC99)' },
+  { text: 'Community', gradient: 'linear-gradient(90deg, #6633FF, #CC99FF)' }
 ];
+
 interface GradientTextProps {
   gradient: string;
 }
@@ -16,24 +27,26 @@ const ServiceBanner = () => {
   return (
     <BannerContainer>
       <ContentWrapper>
-        <AnimatedContainer
-          initial={{ x: '100%' }}
-          animate={{ x: '-100%' }}
-          transition={{
-            x: {
-              duration: 15,
-              repeat: Infinity,
-              ease: 'linear',
-              repeatType: 'loop'
-            }
-          }}
-        >
-          <TextContainer>
-            {keywords.map(({ text, gradient }, index) => (
-              <GradientText key={index} gradient={gradient}>
-                {text}
-              </GradientText>
-            ))}
+        <AnimatedContainer>
+          <TextContainer
+            initial={{ x: '0%' }}
+            animate={{ x: `-${100 / 3}%` }}
+            transition={{
+              x: {
+                duration: 60,
+                repeat: Infinity,
+                ease: 'linear',
+                repeatType: 'loop'
+              }
+            }}
+          >
+            {[...Array(4)].map((_, setIndex) =>
+              keywords.map(({ text, gradient }, index) => (
+                <GradientText key={`set-${setIndex}-keyword-${index}`} gradient={gradient}>
+                  {text}
+                </GradientText>
+              ))
+            )}
           </TextContainer>
         </AnimatedContainer>
       </ContentWrapper>
@@ -46,7 +59,7 @@ const BannerContainer = styled.div`
   height: 5rem;
   border-radius: 0.5rem;
   overflow: hidden;
-  background: linear-gradient(to right, #01f89f, #01c4e7);
+  background: #1a1a1a;
 `;
 
 const ContentWrapper = styled.div`
@@ -57,13 +70,16 @@ const ContentWrapper = styled.div`
   overflow: hidden;
 `;
 
-const AnimatedContainer = styled(motion.div)`
+const AnimatedContainer = styled.div`
+  position: absolute;
   display: flex;
   flex: 1;
+  width: 100%;
 `;
 
-const TextContainer = styled.div`
+const TextContainer = styled(motion.div)`
   display: flex;
+  white-space: nowrap;
 `;
 
 const GradientText = styled.div<GradientTextProps>`
@@ -71,10 +87,10 @@ const GradientText = styled.div<GradientTextProps>`
   font-weight: 800;
   flex-shrink: 0;
   font-size: 2rem;
-  white-space: nowrap;
   margin-right: 3rem;
   background-image: ${({ gradient }) => gradient};
   background-clip: text;
+  -webkit-background-clip: text;
   color: transparent;
   display: inline-block;
 `;
