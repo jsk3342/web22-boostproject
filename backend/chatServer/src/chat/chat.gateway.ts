@@ -48,7 +48,7 @@ export class checkHostUser implements CanActivate {
 
     const { userId, roomId } = payload;
     const hostId = this.roomService.getRoom(roomId)?.hostId;
-    if(userId !== hostId) throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
+    if(userId !== hostId) throw new WsException(CHATTING_SOCKET_ERROR.INVALID_USER);
     return true;
   }
 }
