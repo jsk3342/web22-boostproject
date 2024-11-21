@@ -8,12 +8,12 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { createSocket } from '@utils/createSocket';
 import { CHATTING_SOCKET_DEFAULT_EVENT, CHATTING_SOCKET_RECEIVE_EVENT } from '@constants/chat';
-import { MessageReceiveData } from '@type/chat';
+import { ChatInitData, MessageReceiveData } from '@type/chat';
 import { ChatProvider } from 'src/contexts/chatContext';
 import { getStoredId } from '@utils/id';
 import { UserType } from '@type/user';
 
-const TEST_SOCKET_URL = 'http://192.168.10.18:3000';
+const TEST_SOCKET_URL = 'http://192.168.10.18:4000';
 
 interface ChatRoomProps {
   userType: UserType;
@@ -33,6 +33,9 @@ export const ChatRoom = ({ userType }: ChatRoomProps) => {
     setMessages([]);
 
     const eventMap = {
+      [CHATTING_SOCKET_RECEIVE_EVENT.INIT]: (initData: ChatInitData) => {
+        setQuestions(initData.questionList);
+      },
       [CHATTING_SOCKET_RECEIVE_EVENT.NORMAL]: (newMessage: MessageReceiveData) => {
         setMessages((prevMessages) => [...prevMessages, newMessage]);
       },
@@ -76,7 +79,7 @@ export const ChatRoom = ({ userType }: ChatRoomProps) => {
         <ChatQuestionSection questions={questions} socket={socket} userType={userType} />
 
         <ChatListContainer>
-          <ChatList messages={messages} userId={socket?.id} />
+          <ChatList messages={messages} userId={userId} />
         </ChatListContainer>
 
         <ChatInputContainer>

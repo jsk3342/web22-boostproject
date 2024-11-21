@@ -59,10 +59,10 @@ export const ChatQuestionSection = ({ questions, socket, userType }: ChatQuestio
                     handleQuestionDone={handleQuestionDone}
                   />
                 ))}
+            <SwipeBtn onClick={toggleSection} />
           </>
         )}
       </SectionContainer>
-      <SwipeBtn onClick={toggleSection} />
     </SectionWrapper>
   );
 };

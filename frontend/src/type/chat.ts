@@ -18,3 +18,7 @@ export interface MessageSendData {
   questionId?: number;
   msg?: string;
 }
+
+export interface ChatInitData {
+  questionList: MessageReceiveData[];
+}
