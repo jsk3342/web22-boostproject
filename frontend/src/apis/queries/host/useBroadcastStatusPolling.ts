@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchBroadcastStatus } from '@apis/fetchBroadcastStatus';
 
-export const useBroadcastStatusPolling = (pollingInterVal = 10000) => {
+export const useBroadcastStatusPolling = (sessionKey: string, pollingInterVal = 10000) => {
   return useQuery({
-    queryKey: ['broadcastState'],
-    queryFn: fetchBroadcastStatus,
+    queryKey: ['broadcastState', sessionKey],
+    queryFn: () => fetchBroadcastStatus(sessionKey),
     refetchInterval: pollingInterVal,
     refetchIntervalInBackground: true,
     refetchOnWindowFocus: true,

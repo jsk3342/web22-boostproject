@@ -9,7 +9,7 @@ export default function ClientPage() {
       <Header />
       <ClientContainer>
         <ClientView />
-        <ChatRoom />
+        <ChatRoom userType="client" />
       </ClientContainer>
     </>
   );

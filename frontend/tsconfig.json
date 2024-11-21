@@ -19,7 +19,10 @@
       "@styles/*": ["src/styles/*"],
       "@type/*": ["src/type/*"],
       "@apis/*": ["src/apis/*"],
-      "@queries/*": ["src/apis/queries/*"]
+      "@queries/*": ["src/apis/queries/*"],
+      "@constants/*": ["src/constants/*"],
+      "@hocs/*": ["src/hocs/*"],
+      "@common/*": ["src/components/common/*"],
     },
     "types": ["vite/client"]
   },

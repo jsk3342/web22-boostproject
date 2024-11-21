@@ -1,28 +1,29 @@
 import styled from 'styled-components';
 import CheckIcon from '@assets/icons/check.svg';
+import { MessageReceiveData } from '@type/chat';
 
 interface QuestionCardProps {
   type: 'host' | 'client';
-  user: string;
-  message: string;
+  question: MessageReceiveData;
+  handleQuestionDone?: (questionId: number) => void;
 }
 
-export const QuestionCard = ({ type, user, message }: QuestionCardProps) => {
+export const QuestionCard = ({ type, question, handleQuestionDone }: QuestionCardProps) => {
   return (
     <QuestionCardContainer>
       <QuestionCardTop>
         <QuestionInfo>
-          <span className="name_info">💟 {user}</span>
+          <span className="name_info">💟 {question.nickname}</span>
           <span className="time_info">n분전</span>
         </QuestionInfo>
-        {type === 'host' && (
-          <CheckBtn>
+        {type === 'host' && handleQuestionDone && (
+          <CheckBtn onClick={() => handleQuestionDone(question.questionId as number)}>
             <StyledCheckIcon />
           </CheckBtn>
         )}
       </QuestionCardTop>
 
-      <QuestionCardBottom>{message}</QuestionCardBottom>
+      <QuestionCardBottom>{question.msg}</QuestionCardBottom>
     </QuestionCardContainer>
   );
 };

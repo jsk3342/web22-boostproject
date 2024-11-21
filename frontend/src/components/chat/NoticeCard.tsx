@@ -1,7 +1,15 @@
 import styled from 'styled-components';
 import CloseIcon from '@assets/icons/close.svg';
+import { useContext } from 'react';
+import { ChatContext } from 'src/contexts/chatContext';
 
 export const NoticeCard = () => {
+  const { dispatch } = useContext(ChatContext);
+
+  const toggleSettings = () => {
+    dispatch({ type: 'TOGGLE_ANNOUNCEMENT_POPUP' });
+  };
+
   return (
     <NoticeCardContainer>
       <NoticeCardHeader>
@@ -15,7 +23,7 @@ export const NoticeCard = () => {
             <div className="text_strong">컨퍼런스 공지 📢</div>
           </NoticeCardArea>
         </NoticeCardWrapper>
-        <CloseBtn>
+        <CloseBtn onClick={toggleSettings}>
           <StyledCloseIcon />
         </CloseBtn>
       </NoticeCardHeader>
@@ -38,8 +46,8 @@ const NoticeCardContainer = styled.div`
   padding: 20px;
   gap: 13px;
   border-radius: 7px;
-  box-shadow: 0px 4px 4px 0px #3c444b3c;
-  background-color: #373a3f;
+  box-shadow: 0px 4px 4px 0px #0d0d0da2;
+  background-color: #202224;
   color: ${({ theme }) => theme.tokenColors['color-white']};
 `;
 
