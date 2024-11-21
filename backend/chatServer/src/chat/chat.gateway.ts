@@ -13,25 +13,30 @@ import {
 } from '../event/constants';
 import { IncomingMessageDto } from '../event/dto/IncomingMessage.dto';
 import { JoiningRoomDto } from '../event/dto/JoiningRoom.dto';
-import { UserService } from '../user/user.service';
-import { CanActivate, ExecutionContext, Injectable, UseGuards } from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable, UseFilters, UseGuards } from '@nestjs/common';
 import { OutgoingMessageDto } from '../event/dto/OutgoingMessage.dto';
-import { User } from '../user/user.interface';
+import { User } from '../room/user.interface';
 import { RoomService } from '../room/room.service';
+import { WebSocketExceptionFilter } from './exception.handler';
 
 @Injectable()
 export class checkValidUser implements CanActivate {
-  constructor(private userService: UserService) {};
+  constructor(private roomService: RoomService) {};
 
   canActivate(context: ExecutionContext): boolean {
     const client = context.switchToWs().getClient<Socket>();
     const payload = context.switchToWs().getData();
-    const { userId } = payload;
-    const user = this.userService.getUserByUserId(userId);
+    const { roomId, userId } = payload;
+    const room = this.roomService.getRoom(roomId);
+    if(!room) throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
+
+    const user = this.roomService.getRoom(roomId)!.users.get(userId);
+
+    if(!user) throw new WsException(CHATTING_SOCKET_ERROR.INVALID_USER);
 
     console.log('guard', user , client.id , user?.clientId);
     if(!!user && client.id === user?.clientId) {
-      if(!client.data.userId) client.data = {userId, ...user};
+      if(!client.data.userId) client.data = {roomId, userId, ...user};
       return true;
     }
     throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
@@ -53,9 +58,10 @@ export class checkHostUser implements CanActivate {
   }
 }
 
+
 @WebSocketGateway({ cors: true })
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
-  constructor(private userService: UserService, private roomService: RoomService){};
+  constructor(private roomService: RoomService){};
 
   @WebSocketServer()
     server!: Server;
@@ -67,7 +73,12 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   handleDisconnect(client: Socket) {
     console.log('Client disconnected: ', client.id, client.data);
-    this.userService.deleteUser(client.data.userId);
+    const { roomId, userId } = client.data;
+    try {
+      this.roomService.deleteUser(roomId, userId);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // 특정 방에 참여하기 위한 메서드
@@ -87,7 +98,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     console.log(`cliend id = ${ client.id }, user id = ${ userId } 가 ${roomId} 에 입장했습니다.`);
     const questionList = this.roomService.getQuestionsNotDone(roomId);
 
-    console.log('new user join', this.userService.createUser(userId, client.id));
+    console.log('new user join', this.roomService.createUser(roomId, userId, client.id));
 
     client.emit(CHATTING_SOCKET_RECEIVE_EVENT.INIT, { questionList });
   }
@@ -97,7 +108,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   handleLeaveRoom(client: Socket, payload: IncomingMessageDto) {
     const { roomId, userId } = payload;
     console.log('leave', roomId, userId);
-    this.userService.deleteUser(userId);
+    this.roomService.deleteUser(roomId, userId);
     client.leave(roomId);
   }
 
