@@ -102,7 +102,7 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   }
 
   // 방에 NORMAL 메시지를 보내기 위한 메서드
-  @UseGuards(checkValidUser)
+  // @UseGuards(checkValidUser)
   @SubscribeMessage(CHATTING_SOCKET_SEND_EVENT.NORMAL)
   handleNormalMessage(client: Socket, payload: IncomingMessageDto) {
     const room = client.rooms.values().next().value;
