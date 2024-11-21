@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
-import { FormValues } from './types';
+import { FormValues } from '@type/hostInfo';
 import { convertToBase64 } from '@utils/convertToBase64';
 import {
   FileInput,

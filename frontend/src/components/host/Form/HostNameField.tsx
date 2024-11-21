@@ -1,6 +1,6 @@
 import { Controller, useFormContext } from 'react-hook-form';
 import { FormCell, Input, Label, Required } from './style';
-import { FormValues } from './types';
+import { FormValues } from '@type/hostInfo';
 
 export default function HostNameField() {
   const { control } = useFormContext<FormValues>();

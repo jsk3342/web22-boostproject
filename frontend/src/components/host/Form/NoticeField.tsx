@@ -1,5 +1,5 @@
 import { Controller, useFormContext } from 'react-hook-form';
-import { FormValues } from './types';
+import { FormValues } from '@type/hostInfo';
 import { FormCell, Input, Label } from './style';
 
 export default function NoticeField() {

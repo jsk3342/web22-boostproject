@@ -1,5 +1,5 @@
 import { Controller, useFormContext } from 'react-hook-form';
-import { FormValues } from './types';
+import { FormValues } from '@type/hostInfo';
 import {
   Button,
   Flex,
@@ -36,7 +36,7 @@ export default function TagField() {
     const currentTags = getValues('tags');
     setValue(
       'tags',
-      currentTags.filter((_, index) => index !== indexToRemove)
+      currentTags.filter((_: string, index: number) => index !== indexToRemove)
     );
   };
 

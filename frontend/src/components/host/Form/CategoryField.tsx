@@ -1,6 +1,6 @@
 import { Controller, useFormContext } from 'react-hook-form';
-import { FormValues } from './types';
 import { FormCell, Input, Label } from './style';
+import { FormValues } from '@type/hostInfo';
 
 export default function CategoryField() {
   const { control } = useFormContext<FormValues>();
