@@ -3,7 +3,7 @@ import SpeechBubbleIcon from '@assets/icons/speech-bubble.svg';
 import QuestionIcon from '@assets/icons/question.svg';
 import SpeakerIcon from '@assets/icons/speaker.svg';
 import SendIcon from '@assets/icons/send.svg';
-import { useRef, useEffect, useState, ChangeEvent } from 'react';
+import { useRef, useEffect, useState, ChangeEvent, KeyboardEvent } from 'react';
 import { Socket } from 'socket.io-client';
 import { useParams } from 'react-router-dom';
 import { CHATTING_SOCKET_SEND_EVENT, CHATTING_TYPES } from '@constants/chat';
@@ -109,6 +109,13 @@ export const ChatInput = ({ socket, userType, roomId }: ChatInputProps) => {
     setIsFocused(true);
   };
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleMessageSend();
+    }
+  };
+
   const getButtonIcon = () => {
     switch (msgType) {
       case CHATTING_TYPES.NORMAL: {
@@ -141,6 +148,7 @@ export const ChatInput = ({ socket, userType, roomId }: ChatInputProps) => {
         } 입력해주세요`}
         onBlur={handleBlur}
         onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
       />
       <InputBtn aria-label="전송" onClick={handleMessageSend}>
         <StyledIcon as={SendIcon} />
