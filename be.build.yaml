@@ -16,3 +16,10 @@ services:
       dockerfile: dockerfile
     image: liboost/backend-main-server:latest
 
+  backend-chat-server:
+    container_name: chat-container
+    build:
+      context: backend/chatServer
+      dockerfile: dockerfile
+    image: liboost/backend-chat-server:latest
+
