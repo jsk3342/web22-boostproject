@@ -2,14 +2,15 @@ import { HttpStatus } from '@nestjs/common';
 
 const CHATTING_SOCKET_DEFAULT_EVENT = {
   JOIN_ROOM: 'join_room',
-  LEAVE_ROOM: 'leave_room'
+  LEAVE_ROOM: 'leave_room',
 };
 
 const CHATTING_SOCKET_RECEIVE_EVENT = {
   NORMAL: 'receive_normal_chat',
   QUESTION: 'receive_question',
   QUESTION_DONE: 'receive_question_done',
-  NOTICE: 'receive_notice'
+  NOTICE: 'receive_notice',
+  INIT: 'receive_init_data'
 };
 
 const CHATTING_SOCKET_SEND_EVENT = {

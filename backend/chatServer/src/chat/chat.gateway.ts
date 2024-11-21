@@ -29,11 +29,11 @@ export class checkValidUser implements CanActivate {
     const { userId } = payload;
     const user = this.userService.getUserByUserId(userId);
 
+    console.log('guard', user , client.id , user?.clientId);
     if(!!user && client.id === user?.clientId) {
       if(!client.data.userId) client.data = {userId, ...user};
       return true;
     }
-
     throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
   }
 }
@@ -62,14 +62,12 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   handleConnection(client: Socket) {
     console.log(`Client connected: ${client.id}`);
-    console.log('rooms=',client.rooms);
     client.leave(client.id);
   }
 
   handleDisconnect(client: Socket) {
-    console.log(client.data);
+    console.log('Client disconnected: ', client.id, client.data);
     this.userService.deleteUser(client.data.userId);
-    console.log(this.userService.getUserByUserId(client.data.userId));
   }
 
   // 특정 방에 참여하기 위한 메서드
@@ -80,20 +78,26 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     const { roomId, userId } = payload;
     client.join(roomId);
     // TODO: 만약 RoomList 에 없던 roomId 라면 RoomList 에 현재 userId 를 호스트로 등록해야한다.
-    if(!this.roomService.getRoom(roomId)){
+
+    const room = this.roomService.getRoom(roomId);
+    if(!room){
       this.roomService.createRoom(roomId, userId);
     }
 
     console.log(`cliend id = ${ client.id }, user id = ${ userId } 가 ${roomId} 에 입장했습니다.`);
+    const questionList = this.roomService.getQuestionsNotDone(roomId);
 
-    console.log(this.userService.createUser(userId, client.id));
+    console.log('new user join', this.userService.createUser(userId, client.id));
+    this.server.to(roomId).emit(CHATTING_SOCKET_RECEIVE_EVENT.INIT, questionList);
   }
 
   // 특정 방에서 나가기 위한 메서드
   @SubscribeMessage(CHATTING_SOCKET_DEFAULT_EVENT.LEAVE_ROOM)
-  handleLeaveRoom(client: Socket, room: string) {
-    this.userService.deleteUser(client.id);
-    client.leave(room);
+  handleLeaveRoom(client: Socket, payload: IncomingMessageDto) {
+    const { roomId, userId } = payload;
+    console.log('leave', roomId, userId);
+    this.userService.deleteUser(userId);
+    client.leave(roomId);
   }
 
   // 방에 NORMAL 메시지를 보내기 위한 메서드
