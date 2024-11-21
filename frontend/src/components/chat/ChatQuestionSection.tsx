@@ -6,13 +6,15 @@ import { Socket } from 'socket.io-client';
 import { CHATTING_SOCKET_SEND_EVENT } from '@constants/chat';
 import { useParams } from 'react-router-dom';
 import { getStoredId } from '@utils/id';
+import { UserType } from '@type/user';
 
 export interface ChatQuestionSectionProps {
   questions: MessageReceiveData[];
   socket: Socket | null;
+  userType: UserType;
 }
 
-export const ChatQuestionSection = ({ questions, socket }: ChatQuestionSectionProps) => {
+export const ChatQuestionSection = ({ questions, socket, userType }: ChatQuestionSectionProps) => {
   const [expanded, setExpanded] = useState(false);
 
   const { id } = useParams();
@@ -34,60 +36,64 @@ export const ChatQuestionSection = ({ questions, socket }: ChatQuestionSectionPr
   };
 
   return (
-    <SectionContainer>
-      {questions.length === 0 ? (
-        <NoQuestionMessage>아직 질문이 없어요</NoQuestionMessage>
-      ) : (
-        <>
-          <QuestionCard
-            key={questions[0].questionId}
-            type="host"
-            question={questions[0]}
-            handleQuestionDone={handleQuestionDone}
-          />
-          {expanded &&
-            questions
-              .slice(1)
-              .map((question) => (
-                <QuestionCard
-                  key={question.questionId}
-                  type="host"
-                  question={question}
-                  handleQuestionDone={handleQuestionDone}
-                />
-              ))}
-          <SwipeBtn onClick={toggleSection} />
-        </>
-      )}
-    </SectionContainer>
+    <SectionWrapper>
+      <SectionContainer>
+        {questions.length === 0 ? (
+          <NoQuestionMessage>아직 질문이 없어요</NoQuestionMessage>
+        ) : (
+          <>
+            <QuestionCard
+              key={questions[0].questionId}
+              type={userType}
+              question={questions[0]}
+              handleQuestionDone={handleQuestionDone}
+            />
+            {expanded &&
+              questions
+                .slice(1)
+                .map((question) => (
+                  <QuestionCard
+                    key={question.questionId}
+                    type={userType}
+                    question={question}
+                    handleQuestionDone={handleQuestionDone}
+                  />
+                ))}
+          </>
+        )}
+      </SectionContainer>
+      <SwipeBtn onClick={toggleSection} />
+    </SectionWrapper>
   );
 };
 export default ChatQuestionSection;
 
+const SectionWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+`;
+
 const SectionContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   min-height: 25px;
-  padding: 13px 20px 0px 20px;
+  max-height: 300px;
+  overflow-y: scroll;
+  padding: 13px 20px 25px 20px;
   gap: 10px;
   border-top: 1px solid ${({ theme }) => theme.tokenColors['surface-alt']};
   border-bottom: 1px solid ${({ theme }) => theme.tokenColors['surface-alt']};
-  overflow: hidden;
-`;
-
-const NoQuestionMessage = styled.div`
-  text-align: center;
-  ${({ theme }) => theme.tokenTypographys['display-medium14']};
-  color: ${({ theme }) => theme.tokenColors['text-weak']};
-  padding: 20px 0;
 `;
 
 const SwipeBtn = styled.button`
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: 25px;
   cursor: pointer;
+  background-color: ${({ theme }) => theme.tokenColors['surface-default']};
 
   &::before {
     content: '';
@@ -100,4 +106,11 @@ const SwipeBtn = styled.button`
     width: 50px;
     transform: translate(-50%, -50%);
   }
+`;
+
+const NoQuestionMessage = styled.div`
+  text-align: center;
+  ${({ theme }) => theme.tokenTypographys['display-medium14']};
+  color: ${({ theme }) => theme.tokenColors['text-weak']};
+  padding: 20px 0;
 `;

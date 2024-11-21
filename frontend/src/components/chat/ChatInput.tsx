@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import SpeechBubbleIcon from '@assets/icons/speech-bubble.svg';
 import QuestionIcon from '@assets/icons/question.svg';
+import SpeakerIcon from '@assets/icons/speaker.svg';
 import SendIcon from '@assets/icons/send.svg';
 import { useRef, useEffect, useState, ChangeEvent } from 'react';
 import { Socket } from 'socket.io-client';
@@ -8,14 +9,16 @@ import { useParams } from 'react-router-dom';
 import { CHATTING_SOCKET_SEND_EVENT, CHATTING_TYPES } from '@constants/chat';
 import { ChattingTypes, MessageSendData } from '@type/chat';
 import { getStoredId } from '@utils/id';
+import { UserType } from '@type/user';
 
 interface ChatInputProps {
   socket: Socket | null;
+  userType: UserType;
 }
 
 const INITIAL_TEXTAREA_HEIGHT = 15;
 
-export const ChatInput = ({ socket }: ChatInputProps) => {
+export const ChatInput = ({ socket, userType }: ChatInputProps) => {
   const [hasInput, setHasInput] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [msgType, setMsgType] = useState<ChattingTypes>(CHATTING_TYPES.NORMAL);
@@ -27,14 +30,26 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
   const userId = getStoredId();
 
   const handleMsgType = () => {
-    setMsgType(msgType === CHATTING_TYPES.NORMAL ? CHATTING_TYPES.QUESTION : CHATTING_TYPES.NORMAL);
+    if (!userType) return;
+
+    setMsgType(() => {
+      if (userType === 'host') {
+        return msgType === CHATTING_TYPES.NORMAL ? CHATTING_TYPES.NOTICE : CHATTING_TYPES.NORMAL;
+      }
+      return msgType === CHATTING_TYPES.NORMAL ? CHATTING_TYPES.QUESTION : CHATTING_TYPES.NORMAL;
+    });
   };
 
   const handleMessageSend = () => {
     if (!socket || !message.trim()) return;
 
-    const eventName =
-      msgType === CHATTING_TYPES.NORMAL ? CHATTING_SOCKET_SEND_EVENT.NORMAL : CHATTING_SOCKET_SEND_EVENT.QUESTION;
+    const eventMap = {
+      [CHATTING_TYPES.NORMAL]: CHATTING_SOCKET_SEND_EVENT.NORMAL,
+      [CHATTING_TYPES.QUESTION]: CHATTING_SOCKET_SEND_EVENT.QUESTION,
+      [CHATTING_TYPES.NOTICE]: CHATTING_SOCKET_SEND_EVENT.NOTICE
+    };
+
+    const eventName = eventMap[msgType];
 
     socket.emit(eventName, {
       roomId: id,
@@ -101,6 +116,9 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
       case CHATTING_TYPES.QUESTION: {
         return <StyledIcon as={QuestionIcon} />;
       }
+      case CHATTING_TYPES.NOTICE: {
+        return <StyledIcon as={SpeakerIcon} />;
+      }
       default: {
         return <StyledIcon as={SendIcon} />;
       }
@@ -118,8 +136,8 @@ export const ChatInput = ({ socket }: ChatInputProps) => {
         value={message}
         onChange={handleInputChange}
         placeholder={`${
-          msgType === CHATTING_TYPES.NORMAL ? '채팅' : msgType === CHATTING_TYPES.QUESTION ? '질문' : '공지'
-        }을 입력해주세요`}
+          msgType === CHATTING_TYPES.NORMAL ? '채팅을' : msgType === CHATTING_TYPES.QUESTION ? '질문을' : '공지를'
+        } 입력해주세요`}
         onBlur={handleBlur}
         onFocus={handleFocus}
       />
@@ -170,6 +188,9 @@ const InputBtn = styled.button`
   align-items: center;
   color: ${({ theme }) => theme.tokenColors['text-strong']};
   cursor: pointer;
+  :hover {
+    color: ${({ theme }) => theme.tokenColors['brand-default']};
+  }
 `;
 
 const StyledIcon = styled.svg`

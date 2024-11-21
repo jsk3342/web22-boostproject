@@ -11,11 +11,15 @@ import { CHATTING_SOCKET_DEFAULT_EVENT, CHATTING_SOCKET_RECEIVE_EVENT } from '@c
 import { MessageReceiveData } from '@type/chat';
 import { ChatProvider } from 'src/contexts/chatContext';
 import { getStoredId } from '@utils/id';
+import { UserType } from '@type/user';
 
-// const TEST_SOCKET_URL = 'http://localhost:8080';
 const TEST_SOCKET_URL = 'http://192.168.10.18:3000';
 
-export const ChatRoom = () => {
+interface ChatRoomProps {
+  userType: UserType;
+}
+
+export const ChatRoom = ({ userType }: ChatRoomProps) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [messages, setMessages] = useState<MessageReceiveData[]>([]);
   const [questions, setQuestions] = useState<MessageReceiveData[]>([]);
@@ -69,14 +73,14 @@ export const ChatRoom = () => {
       <ChatRoomContainer $isVisible={isChatRoomVisible}>
         <ChatHeader outBtnHandler={() => setIsChatRoomVisible(false)} />
 
-        <ChatQuestionSection questions={questions} socket={socket} />
+        <ChatQuestionSection questions={questions} socket={socket} userType={userType} />
 
         <ChatListContainer>
           <ChatList messages={messages} userId={socket?.id} />
         </ChatListContainer>
 
         <ChatInputContainer>
-          <ChatInput socket={socket} />
+          <ChatInput socket={socket} userType={userType} />
         </ChatInputContainer>
       </ChatRoomContainer>
     </ChatProvider>

@@ -8,7 +8,7 @@ export default function HostPage() {
       <Header />
       <FlexContainer>
         <Setting />
-        <ChatRoom />
+        <ChatRoom userType="host" />
       </FlexContainer>
     </>
   );
