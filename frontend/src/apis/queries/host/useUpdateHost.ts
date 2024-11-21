@@ -1,5 +1,6 @@
-import { HostInfo, updateHost } from '@apis/updateHost';
+import { updateHost } from '@apis/updateHost';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
+import { HostInfo } from '@type/hostInfo';
 
 type Params = {
   onSuccess?: (data: HostInfo) => void;
