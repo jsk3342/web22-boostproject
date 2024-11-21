@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import sampleThumbnail from '@assets/sampleThumbnail.png';
 import sampleProfile from '@assets/sample_profile.png';
+import ShowInfoBadge from '@common/ShowInfoBadge';
 import { RecentLive } from '@type/live';
 import { LiveBadge, LiveViewCountBadge } from './ThumbnailBadge';
-import ShowInfoBadge from './ShowInfoBadge';
 
 interface LiveVideoCardProps {
   videoData: RecentLive;
