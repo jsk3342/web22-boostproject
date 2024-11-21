@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import Player from './Player';
 import PlayerInfo from './PlayerInfo';
-import Footer from './Footer';
+import Footer from '@components/common/Footer';
 
 const ClientView = () => {
   return (
