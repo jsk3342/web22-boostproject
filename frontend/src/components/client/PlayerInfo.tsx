@@ -1,3 +1,4 @@
+import { ASSETS } from '@constants/assets';
 import { useState } from 'react';
 import styled from 'styled-components';
 
@@ -21,13 +22,9 @@ const PlayerInfo = () => {
           )}
         </VideoInfo>
       </PlayerInfoBox>
-      <VideoDescription>
-        <DescriptionTitle>컨퍼런스 설명</DescriptionTitle>
-        <DescriptionContent>
-          크롱님의 혼신의 상태관리 설명입니다. 어쩌구저쩌구 엄청 긴 내용의 설명도 감당할 수 있도록 컨테이너 크기를
-          조절해야합니다.
-        </DescriptionContent>
-      </VideoDescription>
+      <BannerLink href="https://boostcamp.connect.or.kr/" target="_blank" rel="noopener noreferrer">
+        <Banner src={ASSETS.IMAGES.BANNER.CLIENT} alt="Client Banner" />
+      </BannerLink>
     </PlayerInfoContainer>
   );
 };
@@ -96,22 +93,21 @@ const LiveInfo = styled.div`
   ${({ theme }) => theme.tokenTypographys['display-bold12']};
 `;
 
-const VideoDescription = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 16px 24px;
+const BannerLink = styled.a`
+  display: block;
   margin-top: 24px;
-  gap: 16px;
   border-radius: 7px;
-  color: ${({ theme }) => theme.tokenColors['text-strong']};
-  ${({ theme }) => theme.tokenTypographys['display-medium14']};
-  background-color: ${({ theme }) => theme.tokenColors['surface-alt']};
+  overflow: hidden;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 
-const DescriptionTitle = styled.p`
-  ${({ theme }) => theme.tokenTypographys['display-bold12']};
-`;
-
-const DescriptionContent = styled.p`
-  ${({ theme }) => theme.tokenTypographys['display-medium14']};
+const Banner = styled.img`
+  width: 100%;
+  aspect-ratio: 16 / 2;
+  object-fit: cover;
+  display: block;
 `;
