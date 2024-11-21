@@ -91,7 +91,7 @@ export const HostChatRoom = ({ userType }: ChatRoomProps) => {
       <ChatRoomContainer $isVisible={isChatRoomVisible}>
         <ChatHeader outBtnHandler={() => setIsChatRoomVisible(false)} />
 
-        <ChatQuestionSection questions={questions} socket={socket} userType={userType} />
+        <ChatQuestionSection questions={questions} socket={socket} userType={userType} roomId={sessionKey} />
 
         <ChatListContainer>
           <ChatList messages={messages} userId={userId} />
