@@ -23,8 +23,9 @@ export class MemoryDbDto {
   notice : string = DEFAULT_VALUE.NOTICE;
   category: string = '';
   tags: Array<string> = [];
-  startDate : Date | null = null;
   state : boolean = false;
+  startDate : Date | null = null;
+  endDate : Date | null = null;
 
   constructor(data?: Partial<MemoryDbDto>) {
     if (data) {

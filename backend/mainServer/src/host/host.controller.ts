@@ -135,12 +135,13 @@ export class HostController {
   @ApiCreatedResponse({ description: '스트림 키를 통해 방송 종료 여부를 받습니다.' })
   async closeBroadcast(@Query('streamKey') streamKey: string, @Req() req: Request, @Res() res: Response) {
     try {
-      const sessionKey = this.memoryDBService.findByStreamKey(streamKey);
-      if (!sessionKey) {
+      const sessionInfo = this.memoryDBService.findByStreamKey(streamKey);
+      if (!sessionInfo) {
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
       }
-      sessionKey.state = false;
-      this.memoryDBService.updateBySessionKey(streamKey, sessionKey);
+      sessionInfo.state = false;
+      sessionInfo.endDate = new Date();
+      this.memoryDBService.updateBySessionKey(streamKey, sessionInfo);
       res.status(HttpStatus.OK).send();
     } catch (error) {
       if ((error as { status: number }).status === 400) {
