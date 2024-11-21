@@ -22,7 +22,16 @@ const CHATTING_SOCKET_SEND_EVENT = {
 const CHATTING_SOCKET_ERROR = {
   ROOM_EMPTY : {
     statusCode: HttpStatus.BAD_REQUEST,
-    message: '사용자가 참여하고 있는 채팅방이 없습니다.'
+    message: '유저가 참여하고 있는 채팅방이 없습니다.'
+  },
+  INVALID_USER: {
+    statusCode: HttpStatus.UNAUTHORIZED,
+    message: '유효하지 않는 유저입니다.'
+  },
+
+  QUESTION_EMPTY: {
+    statusCode: HttpStatus.BAD_REQUEST,
+    message: '유효하지 않은 질문입니다.'
   }
 };
 

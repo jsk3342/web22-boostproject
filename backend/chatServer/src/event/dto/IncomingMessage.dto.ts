@@ -1,7 +1,8 @@
 class IncomingMessageDto {
   roomId: string = '';
   userId: string = '';
-  msg: string = '';
+  msg?: string;
+  questionId?:number;
 }
 
-export { IncomingMessageDto };
+export { IncomingMessageDto, };
