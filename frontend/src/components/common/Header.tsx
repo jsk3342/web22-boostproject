@@ -6,13 +6,13 @@ import VideoIcon from '@assets/icons/video_icon.svg';
 import { ASSETS } from '@constants/assets';
 import { getStoredId } from '@utils/id';
 
-const MainHeader = () => {
+const Header = () => {
   const navigate = useNavigate();
   const userId = getStoredId();
 
   return (
     <HeaderContainer>
-      <LogoContainer onClick={() => window.location.reload()}>
+      <LogoContainer onClick={() => navigate('/')}>
         <img src={ASSETS.IMAGES.LOGO.GIF} alt="로고" />
       </LogoContainer>
       <SearchBox>
@@ -30,7 +30,7 @@ const MainHeader = () => {
   );
 };
 
-export default MainHeader;
+export default Header;
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -49,7 +49,7 @@ const HeaderContainer = styled.div`
 `;
 
 const LogoContainer = styled.div`
-  height: 30px;
+  height: 20px;
   cursor: pointer;
 
   img {

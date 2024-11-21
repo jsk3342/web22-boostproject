@@ -83,6 +83,7 @@ const VideoCardDescription = styled.div`
   top: 10px;
   left: 10px;
   display: flex;
+  gap: 4px;
 `;
 
 const VideoCardWrapper = styled.div`
