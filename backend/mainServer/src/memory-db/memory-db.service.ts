@@ -43,14 +43,13 @@ export class MemoryDBService {
 
   getBroadcastInfo(size: number, id : number = 0 ) {
     const liveSession = this.db.filter(item => item.state);
-    const startId: number = this.db.length - id;
     if (this.db.length < size) {
       return this.db.reverse().map((info) => fromLiveSessionDto(info));
     }
     if (liveSession.length < size) {
       const liveSessionRev = liveSession.reverse().map((info) => fromLiveSessionDto(info));
       const sessionRev = this.db.filter(item => !item.state).slice(liveSession.length - size).reverse().map((info) => fromLiveSessionDto(info));
-      return [...liveSessionRev, ...sessionRev]
+      return [...liveSessionRev, ...sessionRev];
     }
     return liveSession.slice(-size).reverse().map((info) => fromLiveSessionDto(info));
 
