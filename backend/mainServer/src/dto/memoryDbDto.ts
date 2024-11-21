@@ -23,6 +23,7 @@ export class MemoryDbDto {
   notice : string = DEFAULT_VALUE.NOTICE;
   category: string = '';
   tags: Array<string> = [];
+  startDate : Date | null = null;
   state : boolean = false;
 
   constructor(data?: Partial<MemoryDbDto>) {

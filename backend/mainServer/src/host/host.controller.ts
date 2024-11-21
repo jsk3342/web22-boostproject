@@ -29,6 +29,7 @@ export class HostController {
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
       }
       sessionInfo.state = true;
+      sessionInfo.startDate = new Date();
       this.memoryDBService.updateBySessionKey(streamKey, sessionInfo);
       res.status(HttpStatus.OK).json({ 'session-key': sessionInfo.sessionKey });
     } catch (error) {

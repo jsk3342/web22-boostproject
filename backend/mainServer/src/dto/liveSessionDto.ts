@@ -40,6 +40,7 @@ export class LiveSessionResponseDto {
   };
   category: string = '';
   tags: Array<string> = [];
+  startDate : Date | null = null;
 }
 
 
@@ -54,6 +55,7 @@ export function fromLiveSessionDto(memoryDbDto: MemoryDbDto): LiveSessionRespons
     channel,
     category,
     tags,
+    startDate,
   } = memoryDbDto;
 
   return {
@@ -66,5 +68,6 @@ export function fromLiveSessionDto(memoryDbDto: MemoryDbDto): LiveSessionRespons
     channel,
     category,
     tags,
+    startDate,
   };
 }
