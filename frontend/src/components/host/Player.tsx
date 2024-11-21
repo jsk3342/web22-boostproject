@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import SettingInfo from './SettingInfo';
 import { usePortal } from '@hooks/usePortal';
 import { useModal } from '@hooks/useModal';
-import playerLoading from '@assets/player_loading.gif';
 import StreamingView from './StreamingView';
 import StreamingStatus from './StreamingStatus';
+import { ASSETS } from '@constants/assets';
 
 interface PlayerProps {
   onStreaming: boolean;
@@ -30,7 +30,8 @@ export default function Player({ onStreaming }: PlayerProps) {
 }
 
 const Container = styled.div<ContainerProps>`
-  background: ${({ $onStreaming }) => ($onStreaming ? '#000' : `url(${playerLoading}) no-repeat center / cover`)};
+  background: ${({ $onStreaming }) =>
+    $onStreaming ? '#000' : `url(${ASSETS.IMAGES.PLAYER.LOADING}) no-repeat center / cover`};
   width: 100%;
   padding-top: 56.25%;
   position: relative;
