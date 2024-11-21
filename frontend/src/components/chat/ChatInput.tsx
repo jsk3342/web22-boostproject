@@ -176,7 +176,7 @@ const ChatInputArea = styled.textarea`
   border: none;
   outline: none;
   color: ${({ theme }) => theme.tokenColors['text-strong']};
-  ${({ theme }) => theme.tokenTypographys['display-medium16']}
+  ${({ theme }) => theme.tokenTypographys['display-medium16']};
   background-color:transparent;
   white-space: normal;
   line-height: 20px;
