@@ -12,8 +12,6 @@ const RecommendLive = () => {
   const { data: mainLiveData, isLoading, error } = useMainLive();
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  // const videoUrl = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
-
   useEffect(() => {
     if (!mainLiveData || mainLiveData.length === 0) return;
 
