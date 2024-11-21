@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { MemoryDbDto } from '../dto/memoryDbDto.js';
 import { getRandomElementsFromArray } from '../common/util.js';
 import { fromLiveSessionDto } from '../dto/liveSessionDto.js';
+import { fromLiveCurationDto } from '../dto/liveCurationDto.js';
 
 @Injectable()
 export class MemoryDBService {
@@ -29,15 +30,37 @@ export class MemoryDBService {
   }
   
   getRandomBroadcastInfo(count: number) {
-    return getRandomElementsFromArray(this.db, count);
+    // 데모용 테스트 코드
+    const liveSession = this.db.filter(item => item.state);
+    if (liveSession.length < 4) {
+      const randomSession = getRandomElementsFromArray(this.db.filter(item => !item.state), count - liveSession.length);
+      return [...liveSession.map(data => fromLiveCurationDto(data)), ...randomSession];
+    }
+    return getRandomElementsFromArray(liveSession, count);
+    // 기존 코드
+    // return getRandomElementsFromArray(this.db, count);
   }
 
-  getBroadcastInfo(size: number, id : number = 0 ) {
-    const startId: number = this.db.length - id;
-    if (this.db.length < 8) {
+  getBroadcastInfo(size: number) {
+    const liveSession = this.db.filter(item => item.state);
+    if (this.db.length < size) {
       return this.db.reverse().map((info) => fromLiveSessionDto(info));
     }
-    return this.db.slice(startId - size, startId).reverse().map((info) => fromLiveSessionDto(info));
+    if (liveSession.length < size) {
+      const liveSessionRev = liveSession.reverse().map((info) => fromLiveSessionDto(info));
+      const sessionRev = this.db.filter(item => !item.state).slice(liveSession.length - size).reverse().map((info) => fromLiveSessionDto(info));
+      return [...liveSessionRev, ...sessionRev];
+    }
+    return liveSession.slice(-size).reverse().map((info) => fromLiveSessionDto(info));
+
+
+
+    // 기존 코드
+    // const startId: number = this.db.length - id;
+    // if (this.db.length < 8) {
+    //   return this.db.reverse().map((info) => fromLiveSessionDto(info));
+    // }
+    // return this.db.slice(startId - size, startId).reverse().map((info) => fromLiveSessionDto(info));
   }
 
   create(item: Partial<MemoryDbDto>): void {
