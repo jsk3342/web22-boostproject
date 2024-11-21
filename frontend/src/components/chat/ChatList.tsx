@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import QuestionCard from './QuestionCard';
 import { useContext, useEffect, useRef } from 'react';
-import { MessageReceiveDataWithType } from '@type/chat';
+import { MessageReceiveData } from '@type/chat';
 import { CHATTING_TYPES } from '@constants/chat';
 import { ChatContext } from 'src/contexts/chatContext';
 import NoticeCard from './NoticeCard';
 
 export interface ChatListProps {
-  messages: MessageReceiveDataWithType[];
+  messages: MessageReceiveData[];
   userId: string | undefined;
 }
 
@@ -27,7 +27,7 @@ export const ChatList = ({ messages, userId }: ChatListProps) => {
         {messages.map((chat, index) => (
           <ChatItemWrapper key={index}>
             {chat.msgType === CHATTING_TYPES.QUESTION ? (
-              <QuestionCard type="client" user={chat.nickname} message={chat.msg} />
+              <QuestionCard type="client" question={chat} />
             ) : (
               <NormalChat $pointColor={'skyblue'}>
                 {userId === chat.userId && <span className="text_point">🧀</span>}
@@ -82,6 +82,8 @@ const NormalChat = styled.div<{ $pointColor: string }>`
     color: ${({ $pointColor }) => $pointColor};
     margin-right: 5px;
   }
+  overflow-wrap: break-word;
+  word-break: break-word;
 `;
 
 const PopupWrapper = styled.div`

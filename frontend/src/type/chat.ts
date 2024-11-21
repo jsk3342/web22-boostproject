@@ -1,20 +1,20 @@
 export type ChattingTypes = 'normal' | 'question' | 'notice';
 
+// 기본 서버 응답 데이터
 export interface MessageReceiveData {
   userId: string;
   nickname: string;
   color: string;
-  msg: string;
+  msg: string | null;
   msgTime: Date;
-}
-
-export interface MessageReceiveDataWithType extends MessageReceiveData {
   msgType: ChattingTypes;
-  questionList?: MessageReceiveData[];
+  questionId?: number;
+  questionDone?: boolean;
 }
 
 export interface MessageSendData {
   roomId: string;
   userId: string;
-  msg: string | null;
+  questionId?: number;
+  msg?: string;
 }

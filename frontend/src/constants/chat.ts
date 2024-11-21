@@ -5,11 +5,11 @@ export const CHATTING_TYPES = {
 } as const;
 
 export const CHATTING_SOCKET_DEFAULT_EVENT = {
-  JOIN_ROOM: 'join_room',
-  LEAVE_ROOM: 'leave_room'
+  JOIN_ROOM: 'join_room'
 } as const;
 
 export const CHATTING_SOCKET_RECEIVE_EVENT = {
+  INIT: 'receive_init_data',
   NORMAL: 'receive_normal_chat',
   QUESTION: 'receive_question',
   QUESTION_DONE: 'receive_question_done',
