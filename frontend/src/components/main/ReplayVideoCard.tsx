@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-import sampleThumbnail from '@assets/sampleThumbnail.png';
 import sampleProfile from '@assets/sample_profile.png';
 import { RecentLive } from '@type/live';
 import { ReplayBadge, ReplayViewCountBadge } from './ThumbnailBadge';
 import ShowInfoBadge from './ShowInfoBadge';
+import { ASSETS } from '@constants/assets';
 
 interface ReplayVideoCardProps {
   videoData: RecentLive;
@@ -60,7 +60,7 @@ const VideoCardContainer = styled.div`
 `;
 
 const VideoCardThumbnail = styled.div`
-  background: #21242a url(${sampleThumbnail}) no-repeat center center / cover;
+  background: #21242a url(${ASSETS.IMAGES.THUMBNAIL.DEFAULT}) no-repeat center center / cover;
   overflow: hidden;
   border-radius: 12px;
   display: block;
