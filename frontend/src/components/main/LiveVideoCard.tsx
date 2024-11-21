@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import sampleProfile from '@assets/sample_profile.png';
+import ShowInfoBadge from '@common/ShowInfoBadge';
+import { ASSETS } from '@constants/assets';
 import { RecentLive } from '@type/live';
 import { LiveBadge, LiveViewCountBadge } from './ThumbnailBadge';
-import ShowInfoBadge from './ShowInfoBadge';
-import { ASSETS } from '@constants/assets';
 
 interface LiveVideoCardProps {
   videoData: RecentLive;

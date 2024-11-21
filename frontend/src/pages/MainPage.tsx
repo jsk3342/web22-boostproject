@@ -1,7 +1,8 @@
 import { styled } from 'styled-components';
 
-import { MainHeader, MainLiveSection, RecommendLive, ServiceBanner } from '@components/main';
-import Footer from '@components/common/Footer';
+import Footer from '@common/Footer';
+import ServiceBanner from '@common/ServiceBanner';
+import { MainHeader, MainLiveSection, RecommendLive } from '@components/main';
 
 export default function MainPage() {
   return (

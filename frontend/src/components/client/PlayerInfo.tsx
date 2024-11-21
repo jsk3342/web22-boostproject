@@ -1,25 +1,53 @@
 import { ASSETS } from '@constants/assets';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const PlayerInfo = () => {
-  const [videoStatus] = useState(true);
+import sampleProfile from '@assets/sample_profile.png';
+import ServiceBanner from '@common/ServiceBanner';
+import ShowInfoBadge from '@common/ShowInfoBadge';
+import { ClientLive } from '@type/live';
+import { updateElapsedTime } from '@utils/updateElapsedTime';
+
+const PlayerInfo = ({ clientLiveData }: { clientLiveData: ClientLive }) => {
+  const { channel, concurrentUserCount, liveTitle, category, tags, startDate } = clientLiveData;
+
+  const [elapsedTime, setElapsedTime] = useState<string>('00:00:00');
+
+  const startDateTime = new Date(startDate).getTime();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = Date.now();
+      const updatedTime = updateElapsedTime({ startDateTime, now });
+      setElapsedTime(updatedTime);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [startDate]);
 
   return (
     <PlayerInfoContainer>
-      <VideoTitle>크롱의 클라이언트 상태관리 라이부</VideoTitle>
+      <VideoTitle>{liveTitle}</VideoTitle>
       <PlayerInfoBox>
-        <ImageBox>{videoStatus && <LiveBox>LIVE</LiveBox>}</ImageBox>
+        <HostProfileBox>
+          <HostProfile>
+            <img src={sampleProfile} />
+          </HostProfile>
+          <LiveBox>LIVE</LiveBox>
+        </HostProfileBox>
         <VideoInfo>
-          <VideoUploader>네이버 부스트캠프</VideoUploader>
-          <Category>frontend</Category>
-          {videoStatus && (
-            <LiveInfo>
-              <p>192명 시청 중</p>
-              <p>·</p>
-              <p>45:13 스트리밍 중</p>
-            </LiveInfo>
-          )}
+          <VideoUploader>{channel.channelName}</VideoUploader>
+          <Category>{category}</Category>
+          <TagBox>
+            {tags.map((tag, index) => (
+              <ShowInfoBadge key={index} badgeType="tag" text={tag} />
+            ))}
+          </TagBox>
+          <LiveInfo>
+            <p>{concurrentUserCount}명 시청 중</p>
+            <p>·</p>
+            <p>{elapsedTime} 스트리밍 중</p>
+          </LiveInfo>
         </VideoInfo>
       </PlayerInfoBox>
       <BannerLink href="https://boostcamp.connect.or.kr/" target="_blank" rel="noopener noreferrer">
@@ -34,7 +62,8 @@ export default PlayerInfo;
 const PlayerInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 32px 0;
+  padding: 16px 0;
+  gap: 8px;
   background-color: ${({ theme }) => theme.tokenColors['surface-default']};
 `;
 
@@ -49,24 +78,49 @@ const PlayerInfoBox = styled.div`
   gap: 16px;
 `;
 
-const ImageBox = styled.div`
+const HostProfileBox = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+`;
+
+const HostProfile = styled.div`
+  position: relative;
+  background: ${({ theme }) => theme.tokenColors['surface-alt']} no-repeat 50% / cover;
+  border: 2px solid ${({ theme }) => theme.tokenColors['brand-default']};
+  border-radius: 50%;
+  display: block;
+  overflow: hidden;
+  position: relative;
   width: 70px;
   height: 70px;
-  position: relative;
-  border-radius: 100%;
-  background-color: ${({ theme }) => theme.tokenColors['brand-default']};
+
+  &:hover {
+    outline: 4px solid ${({ theme }) => theme.tokenColors['brand-default']};
+    outline-offset: -2px;
+    cursor: pointer;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const LiveBox = styled.div`
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   padding: 2px 8px;
-  border-radius: 7px;
+  border-radius: 4px;
   background-color: ${({ theme }) => theme.tokenColors['red-default']};
   color: ${({ theme }) => theme.tokenColors['text-strong']};
-  ${({ theme }) => theme.tokenTypographys['display-bold16']};
+  ${({ theme }) => theme.tokenTypographys['display-bold14']};
   line-height: 1.2;
 `;
 
@@ -84,6 +138,11 @@ const VideoUploader = styled.p`
 const Category = styled.p`
   color: ${({ theme }) => theme.tokenColors['brand-default']};
   ${({ theme }) => theme.tokenTypographys['display-bold12']};
+`;
+
+const TagBox = styled.div`
+  display: flex;
+  gap: 8px;
 `;
 
 const LiveInfo = styled.div`

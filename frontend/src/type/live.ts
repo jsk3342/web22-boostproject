@@ -16,4 +16,12 @@ export interface MainLive {
 
 export interface RecentLive extends MainLive {
   tags: string[];
+  startDate: Date;
+  endDate: Date;
+}
+
+export interface ClientLive extends MainLive {
+  tags: string[];
+  startDate: Date;
+  endDate: Date;
 }

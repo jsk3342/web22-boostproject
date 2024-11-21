@@ -7,7 +7,7 @@ type RecentLiveResponse = {
 };
 
 export const fetchRecentLive = async (): Promise<RecentLive[]> => {
-  const response: AxiosResponse<RecentLiveResponse> = await fetchInstance().get('/streams/live');
+  const response: AxiosResponse<RecentLiveResponse> = await fetchInstance().get('/streams/latest');
 
   return response.data.info;
 };
