@@ -20,12 +20,12 @@
     "typescript-eslint": "^8.14.0"
   },
   "scripts": {
+    "start": "yarn start_rtmp & yarn start_main",
+    "build": "yarn build_rtmp & yarn build_main",
     "start_rtmp": "yarn workspace rtmpServer run start",
     "start_main": "yarn workspace mainServer run start",
     "build_rtmp": "yarn workspace rtmpServer run build",
     "build_main": "yarn workspace mainServer run build",
-    "start": "yarn start_rtmp & yarn start_main",
-    "build": "yarn build_rtmp & yarn build_main",
     "lint": "eslint ."
   }
 }
