@@ -17,7 +17,7 @@ export default function TagField() {
   const { control, setValue, getValues } = useFormContext<FormValues>();
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
       e.preventDefault();
       onAddTag();
     }
