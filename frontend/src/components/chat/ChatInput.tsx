@@ -110,7 +110,7 @@ export const ChatInput = ({ socket, userType, roomId }: ChatInputProps) => {
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
       e.preventDefault();
       handleMessageSend();
     }

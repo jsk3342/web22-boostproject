@@ -30,7 +30,7 @@ export const ChatQuestionSection = ({ questions, socket, userType, roomId }: Cha
     if (!socket) return;
 
     socket.emit(CHATTING_SOCKET_SEND_EVENT.QUESTION_DONE, {
-      roomId: id ? id : roomId,
+      roomId: userType === 'client' ? id : roomId,
       userId,
       questionId
     } as MessageSendData);
