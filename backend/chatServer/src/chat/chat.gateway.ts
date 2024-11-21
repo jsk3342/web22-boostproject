@@ -88,7 +88,8 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
     const questionList = this.roomService.getQuestionsNotDone(roomId);
 
     console.log('new user join', this.userService.createUser(userId, client.id));
-    this.server.to(roomId).emit(CHATTING_SOCKET_RECEIVE_EVENT.INIT, questionList);
+
+    client.emit(CHATTING_SOCKET_RECEIVE_EVENT.INIT, { questionList });
   }
 
   // 특정 방에서 나가기 위한 메서드
