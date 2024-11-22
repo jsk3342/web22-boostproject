@@ -3,9 +3,23 @@ import Player from './Player';
 import SettingForm from './SettingForm';
 import { useBroadcastStatusPolling } from '@apis/queries/host/useBroadcastStatusPolling';
 import { getSessionKey } from '@utils/streamKey';
+import { useEffect, useState } from 'react';
 
 export default function Setting() {
-  const { data: onStreaming } = useBroadcastStatusPolling(getSessionKey());
+  const [sessionKey, setSessionKey] = useState(getSessionKey());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const currentKey = getSessionKey();
+      if (currentKey !== sessionKey) {
+        setSessionKey(currentKey);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [sessionKey]);
+
+  const { data: onStreaming } = useBroadcastStatusPolling(sessionKey);
 
   return (
     <Container>
