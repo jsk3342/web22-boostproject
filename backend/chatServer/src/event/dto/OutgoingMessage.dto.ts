@@ -1,6 +1,7 @@
 type OutgoingMessageType = 'normal' | 'question' | 'notice';
 
 class OutgoingMessageDto {
+  roomId?: string = '';
   userId: string = '';
   nickname: string = '';
   color: string = '';
