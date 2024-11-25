@@ -6,7 +6,7 @@ import { ApiCreatedResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/
 import { MemoryDBService } from '../memory-db/memory-db.service.js';
 import { memoryDbDtoFromLiveVideoRequestDto } from '../dto/memoryDbDto.js';
 import { LiveVideoRequestDto } from '../dto/liveSessionDto.js';
-import { DEFAULT_VALUE } from '../common/constants.js';
+import { DEFAULT_VALUE, REPLAY_VIDEO_LATENCY } from '../common/constants.js';
 import { calculateSecondsBetweenDates, generatePlaylist } from '../common/util.js';
 
 @Controller('host')
@@ -147,7 +147,7 @@ export class HostController {
       sessionInfo.endDate = new Date();
       if (sessionInfo.startDate) {
         const liveTime = calculateSecondsBetweenDates(sessionInfo.startDate, sessionInfo.endDate);
-        const m3u8Data = generatePlaylist(Math.floor(liveTime / 2));
+        const m3u8Data = generatePlaylist(Math.floor(liveTime / 2) - REPLAY_VIDEO_LATENCY);
         this.hostService.uploadToS3(m3u8Data, sessionInfo.sessionKey, 'replay', 'm3u8');
       }
       this.memoryDBService.updateBySessionKey(streamKey, sessionInfo);
