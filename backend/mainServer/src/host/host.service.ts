@@ -57,7 +57,7 @@ export class HostService {
   async uploadToS3(data: string,  sessionKey: string, fileName: string, fileType: string = '') {
     try {
       const bucketName = process.env.OBJECT_STORAGE_BUCKET_NAME!;
-      const key = `live/${sessionKey}/${fileName}${fileType || '.' + fileType}`;
+      const key = `live/${sessionKey}/${fileName}.${fileType || fileType}`;
       const params = {
         Bucket: bucketName,
         Key: key, 
