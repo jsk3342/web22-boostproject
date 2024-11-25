@@ -7,6 +7,7 @@ import { MemoryDBService } from '../memory-db/memory-db.service.js';
 import { memoryDbDtoFromLiveVideoRequestDto } from '../dto/memoryDbDto.js';
 import { LiveVideoRequestDto } from '../dto/liveSessionDto.js';
 import { DEFAULT_VALUE } from '../common/constants.js';
+import { calculateSecondsBetweenDates, generatePlaylist } from '../common/util.js';
 
 @Controller('host')
 @ApiTags('Host API')
@@ -144,6 +145,11 @@ export class HostController {
       }
       sessionInfo.state = false;
       sessionInfo.endDate = new Date();
+      if (sessionInfo.startDate) {
+        const liveTime = calculateSecondsBetweenDates(sessionInfo.startDate, sessionInfo.endDate);
+        const m3u8Data = generatePlaylist(Math.floor(liveTime / 2));
+        this.hostService.uploadToS3(m3u8Data, sessionInfo.sessionKey, 'replay', 'm3u8');
+      }
       this.memoryDBService.updateBySessionKey(streamKey, sessionInfo);
       res.status(HttpStatus.OK).send();
     } catch (error) {

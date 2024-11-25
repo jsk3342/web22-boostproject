@@ -53,4 +53,29 @@ export class HostService {
       throw error;
     }
   }
+
+  async uploadToS3(data: string,  sessionKey: string, fileName: string, fileType: string = '') {
+    try {
+      const bucketName = process.env.OBJECT_STORAGE_BUCKET_NAME!;
+      const key = `live/${sessionKey}/${fileName}.${fileType || fileType}`;
+      const params = {
+        Bucket: bucketName,
+        Key: key, 
+        Body: data,
+        ContentType: fileType,
+        ACL: 'public-read' as ObjectCannedACL
+      };
+
+      // PutObjectCommand로 파일 업로드
+      const command = new PutObjectCommand(params);
+      await s3Client.send(command);
+
+      // 업로드된 파일의 URL 반환
+      const location = `${process.env.OBJECT_STORAGE_ENDPOINT}/${bucketName}/${key}`;
+      return location;
+    } catch (error) {
+      console.error('Error uploading to S3:', error);
+      throw error;
+    }
+  }
 }
