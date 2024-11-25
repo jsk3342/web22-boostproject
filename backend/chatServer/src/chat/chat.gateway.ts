@@ -112,10 +112,11 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @UseGuards(checkValidUser)
   @SubscribeMessage(CHATTING_SOCKET_SEND_EVENT.NORMAL)
   handleNormalMessage(client: Socket, payload: IncomingMessageDto) {
-    const room = client.rooms.values().next().value;
+    const room = payload.roomId;
     if(!room) throw new WsException(CHATTING_SOCKET_ERROR.ROOM_EMPTY);
     const user: User = client.data;
     const outgoingMessage: OutgoingMessageDto = {
+      roomId: room,
       userId: payload.userId,
       nickname: user.nickname,
       color: user.color,
