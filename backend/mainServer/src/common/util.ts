@@ -53,7 +53,7 @@ export function generatePlaylist(N: number): string {
 index${i}.ts`;
   }).join('\n');
 
-  const footer = `#EXT-X-ENDLIST`;
+  const footer = '#EXT-X-ENDLIST';
 
   return `${header}\n${body}\n${footer}`;
 }
