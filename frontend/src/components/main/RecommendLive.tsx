@@ -1,37 +1,25 @@
 import styled from 'styled-components';
-import Hls from 'hls.js';
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { LiveBadgeLarge } from './ThumbnailBadge';
 import { useMainLive } from '@apis/queries/main/useFetchMainLive';
 import sampleProfile from '@assets/sample_profile.png';
+import useRotatingPlayer from '@hooks/useRotatePlayer';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
+  const { videoRef, initPlayer } = useRotatingPlayer();
   const { data: mainLiveData, isLoading, error } = useMainLive();
-  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
 
   useEffect(() => {
-    if (!mainLiveData || mainLiveData.length === 0) return;
+    if (!mainLiveData || !mainLiveData[currentUrlIndex]) return;
 
-    const videoElement = videoRef.current;
-    if (videoElement && Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(videoUrl);
-      hls.attachMedia(videoElement);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => {
-        videoElement?.play();
-      });
-
-      return () => {
-        hls.destroy();
-      };
-    } else if (videoElement) {
-      videoElement.src = videoUrl;
-      videoElement.play();
-    }
-  }, [mainLiveData]);
+    const liveId = mainLiveData[currentUrlIndex].liveId;
+    const videoUrl = `https://kr.object.ncloudstorage.com/web22/live/${liveId}/index.m3u8`;
+    initPlayer(videoUrl);
+  }, [mainLiveData, currentUrlIndex, initPlayer]);
 
   if (error) {
     return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
@@ -41,9 +29,8 @@ const RecommendLive = () => {
     return <div>추천 라이브 데이터가 없습니다.</div>;
   }
 
-  const liveData = mainLiveData[0];
+  const liveData = mainLiveData[currentUrlIndex];
   const { liveId, liveTitle, concurrentUserCount, channel, category } = liveData;
-  const videoUrl = `https://kr.object.ncloudstorage.com/web22/live/${liveId}/index.m3u8`;
 
   return (
     <RecommendLiveContainer>
