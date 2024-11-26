@@ -3,7 +3,7 @@ import {
   CHATTING_SOCKET_DEFAULT_EVENT,
   CHATTING_SOCKET_RECEIVE_EVENT,
   CHATTING_SOCKET_SEND_EVENT
-} from '@constants/chat';
+} from '../constants/chat';
 import { io } from 'socket.io-client';
 
 const TEST_SOCKET_URL = 'https://liboo.kr';
