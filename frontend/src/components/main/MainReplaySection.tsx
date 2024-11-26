@@ -1,22 +1,22 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import LiveVideoCard from './LiveVideoCard';
+import ReplayVideoCard from './ReplayVideoCard';
 import LoadMoreDivider from './LoadMoreDivider';
-import { useRecentLive } from '@queries/main/useFetchRecentLive';
+import { useRecentReplay } from '@queries/main/useFetchRecentReplay';
 import ChevronDownIcon from '@assets/icons/chevron-down.svg';
 import ChevronUpIcon from '@assets/icons/chevron-up.svg';
 
-interface MainLiveSectionProps {
+interface MainReplaySectionProps {
   title: string;
 }
 
-const MainLiveSection = ({ title }: MainLiveSectionProps) => {
+const MainReplaySection = ({ title }: MainReplaySectionProps) => {
   const [textStatus, setTextStatus] = useState<'더보기' | '접기'>('더보기');
 
-  const { data: liveData = { info: [], appendInfo: [] }, isLoading, error } = useRecentLive();
+  const { data: replayData = { info: [], appendInfo: [] }, isLoading, error } = useRecentReplay();
 
-  const displayedData = textStatus === '접기' ? [...liveData.info, ...liveData.appendInfo] : liveData.info;
+  const displayedData = textStatus === '접기' ? [...replayData.info, ...replayData.appendInfo] : replayData.info;
 
   const handleTextChange = () => {
     setTextStatus(textStatus === '더보기' ? '접기' : '더보기');
@@ -39,7 +39,7 @@ const MainLiveSection = ({ title }: MainLiveSectionProps) => {
 
       <MainSectionContentList>
         {displayedData.map((video) => (
-          <LiveVideoCard key={video.id} videoData={video} />
+          <ReplayVideoCard key={video.videoNo} videoData={video} />
         ))}
       </MainSectionContentList>
 
@@ -55,7 +55,7 @@ const MainLiveSection = ({ title }: MainLiveSectionProps) => {
   );
 };
 
-export default MainLiveSection;
+export default MainReplaySection;
 
 const MainSectionContainer = styled.section`
   display: flex;

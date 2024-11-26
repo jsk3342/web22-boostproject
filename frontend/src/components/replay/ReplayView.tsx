@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
-import { useClientReplay } from '@apis/queries/replay/useFetchReplay';
+import { useClientReplay } from '@queries/replay/useFetchReplay';
 import Footer from '@common/Footer';
 import Header from '@common/Header';
 import Player from './Player';

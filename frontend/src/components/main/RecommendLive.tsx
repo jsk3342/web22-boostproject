@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { LiveBadgeLarge } from './ThumbnailBadge';
-import { useMainLive } from '@apis/queries/main/useFetchMainLive';
+import { useMainLive } from '@queries/main/useFetchMainLive';
 import sampleProfile from '@assets/sample_profile.png';
 import useRotatingPlayer from '@hooks/useRotatePlayer';
 import RecommendList from './RecommendList';

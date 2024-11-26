@@ -11,7 +11,7 @@ import { ChatInitData, MessageReceiveData } from '@type/chat';
 import { ChatProvider } from 'src/contexts/chatContext';
 import { getStoredId } from '@utils/id';
 import { UserType } from '@type/user';
-import useFetchStreamKey from '@apis/queries/host/useFetchStreamKey';
+import useFetchStreamKey from '@queries/host/useFetchStreamKey';
 
 const TEST_SOCKET_URL = 'https://liboo.kr';
 
