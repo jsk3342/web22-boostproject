@@ -150,6 +150,7 @@ const RecommendLiveProfile = styled.div`
   display: block;
   overflow: hidden;
   position: relative;
+  flex-shrink: 0;
   width: 70px;
   height: 70px;
 

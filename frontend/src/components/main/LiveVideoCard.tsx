@@ -98,6 +98,7 @@ const VideoCardProfile = styled.div`
   border-radius: 50%;
   display: block;
   overflow: hidden;
+  margin-top: 5px;
   width: 40px;
   height: 40px;
 

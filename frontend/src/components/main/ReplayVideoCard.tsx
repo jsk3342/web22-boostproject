@@ -96,6 +96,7 @@ const VideoCardProfile = styled.div`
   margin-right: 10px;
   background: ${({ theme }) => theme.tokenColors['surface-alt']} no-repeat 50% / cover;
   border-radius: 50%;
+  margin-top: 5px;
   display: block;
   overflow: hidden;
   width: 40px;
