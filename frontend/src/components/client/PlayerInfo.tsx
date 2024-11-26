@@ -11,20 +11,6 @@ import { updateElapsedTime } from '@utils/updateElapsedTime';
 const PlayerInfo = ({ clientLiveData }: { clientLiveData: ClientLive }) => {
   const { channel, concurrentUserCount, liveTitle, category, tags, startDate } = clientLiveData;
 
-  const [elapsedTime, setElapsedTime] = useState<string>('00:00:00');
-
-  // const startDateTime = new Date(startDate).getTime();
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     const now = Date.now();
-  //     const updatedTime = updateElapsedTime({ startDateTime, now });
-  //     setElapsedTime(updatedTime);
-  //   }, 1000);
-
-  //   return () => clearInterval(interval);
-  // }, [startDate]);
-
   return (
     <PlayerInfoContainer>
       <VideoTitle>{liveTitle}</VideoTitle>
