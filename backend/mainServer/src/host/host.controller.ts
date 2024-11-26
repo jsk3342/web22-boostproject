@@ -6,7 +6,8 @@ import { ApiCreatedResponse, ApiOperation, ApiResponse, ApiTags } from '@nestjs/
 import { MemoryDBService } from '../memory-db/memory-db.service.js';
 import { memoryDbDtoFromLiveVideoRequestDto } from '../dto/memoryDbDto.js';
 import { LiveVideoRequestDto } from '../dto/liveSessionDto.js';
-import { DEFAULT_VALUE } from '../common/constants.js';
+import { DEFAULT_VALUE, REPLAY_VIDEO_LATENCY } from '../common/constants.js';
+import { calculateSecondsBetweenDates, generatePlaylist } from '../common/util.js';
 
 @Controller('host')
 @ApiTags('Host API')
@@ -46,9 +47,7 @@ export class HostController {
   }
 
   @Get('/state')
-  @ApiOperation({
-    summary: 'Response this session is live", description: "현재 방송 세션이 라이브 상태인지 반환합니다.'
-  })
+  @ApiOperation({summary: 'Response this session is live', description: '현재 방송 세션이 라이브 상태인지 반환합니다.'})
   @ApiResponse({ status: 200, description: '현재 방송 상태에 대한 응답' })
   async getBroadcastState(@Query('sessionKey') sessionKey: string, @Res() res: Response) {
     const liveState = this.memoryDBService.findBySessionKey(sessionKey);
@@ -144,6 +143,11 @@ export class HostController {
       }
       sessionInfo.state = false;
       sessionInfo.endDate = new Date();
+      if (sessionInfo.startDate) {
+        const liveTime = calculateSecondsBetweenDates(sessionInfo.startDate, sessionInfo.endDate);
+        const m3u8Data = generatePlaylist(Math.floor(liveTime / 2) - REPLAY_VIDEO_LATENCY);
+        this.hostService.uploadToS3(m3u8Data, sessionInfo.sessionKey, 'replay', 'm3u8');
+      }
       this.memoryDBService.updateBySessionKey(streamKey, sessionInfo);
       res.status(HttpStatus.OK).send();
     } catch (error) {
