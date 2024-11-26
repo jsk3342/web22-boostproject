@@ -1,24 +1,24 @@
 import styled from 'styled-components';
-import ChevronDownIcon from '@assets/icons/chevron-down.svg';
 
 interface LoadMoreDividerProps {
   text: string;
   onClick?: () => void;
+  component?: React.ReactNode;
 }
 
-const MoreButton = ({ text, onClick }: LoadMoreDividerProps) => {
+const MoreButton = ({ text, onClick, component }: LoadMoreDividerProps) => {
   return (
     <MoreButtonBox onClick={onClick}>
       <span>{text}</span>
-      <StyledChevronDown />
+      {component}
     </MoreButtonBox>
   );
 };
 
-const LoadMoreDivider = ({ text, onClick = () => {} }: LoadMoreDividerProps) => {
+const LoadMoreDivider = ({ text, onClick = () => {}, component }: LoadMoreDividerProps) => {
   return (
     <LoadMoreDividerBox>
-      <MoreButton text={text} onClick={onClick} />
+      <MoreButton text={text} onClick={onClick} component={component} />
     </LoadMoreDividerBox>
   );
 };
@@ -41,11 +41,6 @@ const MoreButtonBox = styled.button`
   span {
     padding-left: 5px;
   }
-`;
-
-const StyledChevronDown = styled(ChevronDownIcon)`
-  width: 16px;
-  height: 16px;
 `;
 
 const LoadMoreDividerBox = styled.div`

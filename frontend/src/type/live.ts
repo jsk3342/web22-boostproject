@@ -21,3 +21,8 @@ export interface ClientLive extends MainLive {
   startDate: Date;
   endDate: Date;
 }
+
+export type RecentLiveResponse = {
+  info: RecentLive[];
+  appendInfo: RecentLive[];
+};

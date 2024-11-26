@@ -1,13 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { fetchInstance } from '.';
-import { RecentLive } from '@type/live';
+import { RecentLiveResponse } from '@type/live';
 
-type RecentLiveResponse = {
-  info: RecentLive[];
-};
-
-export const fetchRecentLive = async (): Promise<RecentLive[]> => {
+export const fetchRecentLive = async (): Promise<RecentLiveResponse> => {
   const response: AxiosResponse<RecentLiveResponse> = await fetchInstance().get('/streams/latest');
 
-  return response.data.info;
+  return { info: response.data.info, appendInfo: response.data.appendInfo };
 };

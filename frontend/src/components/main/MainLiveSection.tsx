@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import ReplayVideoCard from './ReplayVideoCard';
@@ -5,6 +6,8 @@ import LiveVideoCard from './LiveVideoCard';
 import LoadMoreDivider from './LoadMoreDivider';
 import { useRecentLive } from '@apis/queries/main/useFetchRecentLive';
 import { useRecentReplay } from '@apis/queries/main/useFetchRecentReplay';
+import ChevronDownIcon from '@assets/icons/chevron-down.svg';
+import ChevronUpIcon from '@assets/icons/chevron-up.svg';
 import { RecentLive } from '@type/live';
 import { ReplayStream } from '@type/replay';
 
@@ -13,7 +16,12 @@ interface MainLiveSectionProps {
   type: 'live' | 'replay';
 }
 const MainLiveSection = ({ title, type }: MainLiveSectionProps) => {
+  const [textStatus, setTextStatus] = useState<'더보기' | '접기'>('더보기');
   const { data = [], isLoading, error } = type === 'live' ? useRecentLive() : useRecentReplay();
+
+  const handleTextChange = () => {
+    setTextStatus(textStatus === '더보기' ? '접기' : '더보기');
+  };
 
   if (error) {
     return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
@@ -44,7 +52,11 @@ const MainLiveSection = ({ title, type }: MainLiveSectionProps) => {
         </MainSectionContentList>
       )}
 
-      <LoadMoreDivider text="더보기" />
+      <LoadMoreDivider
+        text={textStatus}
+        onClick={handleTextChange}
+        component={textStatus === '더보기' ? <StyledChevronDown /> : <StyledChevronUp />}
+      />
       <div className="parent">
         <div className="child"></div>
       </div>
@@ -97,4 +109,14 @@ const MainSectionContentList = styled.div`
       max-width: calc(33.33% - 10px);
     }
   }
+`;
+
+const StyledChevronDown = styled(ChevronDownIcon)`
+  width: 16px;
+  height: 16px;
+`;
+
+const StyledChevronUp = styled(ChevronUpIcon)`
+  width: 16px;
+  height: 16px;
 `;

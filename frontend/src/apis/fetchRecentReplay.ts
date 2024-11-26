@@ -1,13 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { fetchInstance } from '.';
-import { ReplayStream } from '@type/replay';
+import { RecentReplayResponse } from '@type/replay';
 
-type RecentReplayResponse = {
-  info: ReplayStream[];
-};
-
-export const fetchRecentReplay = async (): Promise<ReplayStream[]> => {
+export const fetchRecentReplay = async (): Promise<RecentReplayResponse> => {
   const response: AxiosResponse<RecentReplayResponse> = await fetchInstance().get('/replay/latest');
 
-  return response.data.info;
+  return { info: response.data.info, appendInfo: response.data.appendInfo };
 };
