@@ -3,6 +3,7 @@ import { ChatRoomLayout } from './ChatRoomLayout';
 import { getStoredId } from '@utils/id';
 import { useChatRoom } from '@hooks/useChatRoom';
 import { useState } from 'react';
+import { ChatProvider } from 'src/contexts/chatContext';
 
 const ClientChatRoom = () => {
   const userId = getStoredId();
@@ -11,16 +12,18 @@ const ClientChatRoom = () => {
   const [isChatRoomVisible, setIsChatRoomVisible] = useState(true);
 
   return (
-    <ChatRoomLayout
-      worker={worker?.port ?? null}
-      messages={messages}
-      questions={questions}
-      userId={userId}
-      userType={'client'}
-      roomId={roomId as string}
-      isChatRoomVisible={isChatRoomVisible}
-      setIsChatRoomVisible={setIsChatRoomVisible}
-    />
+    <ChatProvider>
+      <ChatRoomLayout
+        worker={worker?.port ?? null}
+        messages={messages}
+        questions={questions}
+        userId={userId}
+        userType={'client'}
+        roomId={roomId as string}
+        isChatRoomVisible={isChatRoomVisible}
+        setIsChatRoomVisible={setIsChatRoomVisible}
+      />
+    </ChatProvider>
   );
 };
 
