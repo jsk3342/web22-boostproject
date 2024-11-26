@@ -2,7 +2,7 @@ import { ChatRoomLayout } from './ChatRoomLayout';
 import { getStoredId } from '@utils/id';
 import useFetchStreamKey from '@apis/queries/host/useFetchStreamKey';
 import { useEffect, useState } from 'react';
-import { useChatRoom } from '@hooks/useChatRoom';
+
 import { ChatProvider } from 'src/contexts/chatContext';
 
 const HostChatRoom = () => {
@@ -16,20 +16,11 @@ const HostChatRoom = () => {
     if (userId && !sessionKey) fetchSessionKey(userId);
   }, [userId, fetchSessionKey, sessionKey]);
 
-  const { worker, messages, questions } = useChatRoom(sessionKey as string, userId);
-
   if (!sessionKey) return <div>세션 키 로딩 중...</div>;
 
   return (
     <ChatProvider>
-      <ChatRoomLayout
-        worker={worker?.port ?? null}
-        messages={messages}
-        questions={questions}
-        userId={userId}
-        userType={'host'}
-        roomId={sessionKey}
-      />
+      <ChatRoomLayout userType={'host'} roomId={sessionKey} />
     </ChatProvider>
   );
 };

@@ -3,21 +3,23 @@ import ChatHeader from './ChatHeader';
 import ChatInput from './ChatInput';
 import ChatList from './ChatList';
 import ChatQuestionSection from './ChatQuestionSection';
-import { MessageReceiveData } from '@type/chat';
+
 import { UserType } from '@type/user';
 import { useState } from 'react';
+import { useChatRoom } from '@hooks/useChatRoom';
+import { getStoredId } from '@utils/id';
 
 interface ChatRoomLayoutProps {
-  worker: SharedWorker['port'] | null;
-  messages: MessageReceiveData[];
-  questions: MessageReceiveData[];
-  userId: string;
   userType: UserType;
   roomId: string;
 }
 
-export const ChatRoomLayout = ({ worker, messages, questions, userId, userType, roomId }: ChatRoomLayoutProps) => {
+export const ChatRoomLayout = ({ userType, roomId }: ChatRoomLayoutProps) => {
   const [isChatRoomVisible, setIsChatRoomVisible] = useState(true);
+
+  const userId = getStoredId();
+  const { worker, messages, questions } = useChatRoom(roomId as string, userId);
+
   return (
     <>
       <ChatOpenBtn $isVisible={!isChatRoomVisible} onClick={() => setIsChatRoomVisible(true)}>
