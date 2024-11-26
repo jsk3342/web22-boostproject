@@ -6,7 +6,6 @@ import ElapsedTime from './ElapsedTime';
 import sampleProfile from '@assets/sample_profile.png';
 import ShowInfoBadge from '@common/ShowInfoBadge';
 import { ClientLive } from '@type/live';
-import { updateElapsedTime } from '@utils/updateElapsedTime';
 
 const PlayerInfo = ({ clientLiveData }: { clientLiveData: ClientLive }) => {
   const { channel, concurrentUserCount, liveTitle, category, tags, startDate } = clientLiveData;
