@@ -15,9 +15,28 @@ interface MainLiveSectionProps {
   title: string;
   type: 'live' | 'replay';
 }
+
 const MainLiveSection = ({ title, type }: MainLiveSectionProps) => {
   const [textStatus, setTextStatus] = useState<'더보기' | '접기'>('더보기');
-  const { data = [], isLoading, error } = type === 'live' ? useRecentLive() : useRecentReplay();
+
+  const {
+    data: liveData = { info: [], appendInfo: [] },
+    isLoading: isLiveLoading,
+    error: liveError
+  } = type === 'live' ? useRecentLive() : { data: undefined, isLoading: false, error: null };
+
+  const {
+    data: replayData = { info: [], appendInfo: [] },
+    isLoading: isReplayLoading,
+    error: replayError
+  } = type === 'replay' ? useRecentReplay() : { data: undefined, isLoading: false, error: null };
+
+  const isLoading = isLiveLoading || isReplayLoading;
+  const error = liveError || replayError;
+
+  const data = type === 'live' ? liveData : replayData;
+
+  const displayedData = textStatus === '접기' ? [...data.info, ...data.appendInfo] : data.info;
 
   const handleTextChange = () => {
     setTextStatus(textStatus === '더보기' ? '접기' : '더보기');
@@ -36,21 +55,13 @@ const MainLiveSection = ({ title, type }: MainLiveSectionProps) => {
 
       {isLoading && <div>로딩 중...</div>}
 
-      {data.length === 0 && !isLoading && <div>데이터가 없습니다.</div>}
+      {displayedData.length === 0 && !isLoading && <div>데이터가 없습니다.</div>}
 
-      {type === 'live' ? (
-        <MainSectionContentList>
-          {(data as RecentLive[]).map((video) => (
-            <LiveVideoCard key={video.id} videoData={video} />
-          ))}
-        </MainSectionContentList>
-      ) : (
-        <MainSectionContentList>
-          {(data as ReplayStream[]).map((video) => (
-            <ReplayVideoCard key={video.videoNo} videoData={video} />
-          ))}
-        </MainSectionContentList>
-      )}
+      <MainSectionContentList>
+        {type === 'live'
+          ? (displayedData as RecentLive[]).map((video) => <LiveVideoCard key={video.id} videoData={video} />)
+          : (displayedData as ReplayStream[]).map((video) => <ReplayVideoCard key={video.videoNo} videoData={video} />)}
+      </MainSectionContentList>
 
       <LoadMoreDivider
         text={textStatus}
