@@ -2,6 +2,7 @@ import { ASSETS } from '@constants/assets';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import ElapsedTime from './ElapsedTime';
 import sampleProfile from '@assets/sample_profile.png';
 import ShowInfoBadge from '@common/ShowInfoBadge';
 import { ClientLive } from '@type/live';
@@ -12,17 +13,17 @@ const PlayerInfo = ({ clientLiveData }: { clientLiveData: ClientLive }) => {
 
   const [elapsedTime, setElapsedTime] = useState<string>('00:00:00');
 
-  const startDateTime = new Date(startDate).getTime();
+  // const startDateTime = new Date(startDate).getTime();
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = Date.now();
-      const updatedTime = updateElapsedTime({ startDateTime, now });
-      setElapsedTime(updatedTime);
-    }, 1000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     const now = Date.now();
+  //     const updatedTime = updateElapsedTime({ startDateTime, now });
+  //     setElapsedTime(updatedTime);
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, [startDate]);
+  //   return () => clearInterval(interval);
+  // }, [startDate]);
 
   return (
     <PlayerInfoContainer>
@@ -45,7 +46,7 @@ const PlayerInfo = ({ clientLiveData }: { clientLiveData: ClientLive }) => {
           <LiveInfo>
             <p>{concurrentUserCount}명 시청 중</p>
             <p>·</p>
-            <p>{elapsedTime} 스트리밍 중</p>
+            <ElapsedTime startDate={startDate} />
           </LiveInfo>
         </VideoInfo>
       </PlayerInfoBox>
