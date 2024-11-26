@@ -1,8 +1,4 @@
-type ChannelInfo = {
-  channelId: string | null;
-  channelName: string;
-};
-
+import { ChannelInfo } from './channel';
 export interface MainLive {
   id: number;
   liveId: string;

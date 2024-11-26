@@ -4,14 +4,16 @@ import ReplayVideoCard from './ReplayVideoCard';
 import LiveVideoCard from './LiveVideoCard';
 import LoadMoreDivider from './LoadMoreDivider';
 import { useRecentLive } from '@apis/queries/main/useFetchRecentLive';
+import { useRecentReplay } from '@apis/queries/main/useFetchRecentReplay';
+import { RecentLive } from '@type/live';
+import { ReplayStream } from '@type/replay';
 
 interface MainLiveSectionProps {
   title: string;
   type: 'live' | 'replay';
 }
 const MainLiveSection = ({ title, type }: MainLiveSectionProps) => {
-  // TODO: 다시보기가 만들어지면 useRecentReplay 삼항연산자로 변경
-  const { data = [], isLoading, error } = useRecentLive();
+  const { data = [], isLoading, error } = type === 'live' ? useRecentLive() : useRecentReplay();
 
   if (error) {
     return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
@@ -30,14 +32,14 @@ const MainLiveSection = ({ title, type }: MainLiveSectionProps) => {
 
       {type === 'live' ? (
         <MainSectionContentList>
-          {data.map((video) => (
+          {(data as RecentLive[]).map((video) => (
             <LiveVideoCard key={video.id} videoData={video} />
           ))}
         </MainSectionContentList>
       ) : (
         <MainSectionContentList>
-          {data.map((video) => (
-            <ReplayVideoCard key={video.id} videoData={video} />
+          {(data as ReplayStream[]).map((video) => (
+            <ReplayVideoCard key={video.videoNo} videoData={video} />
           ))}
         </MainSectionContentList>
       )}

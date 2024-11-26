@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
-import { useClientLive } from '@apis/queries/client/useFetchLive';
+import { useClientReplay } from '@apis/queries/replay/useFetchReplay';
 import Footer from '@common/Footer';
 import Header from '@common/Header';
 import Player from './Player';
 import PlayerInfo from './PlayerInfo';
 
 const ReplayView = () => {
-  const { id: liveId } = useParams();
-  const { data: clientLiveData } = useClientLive({ liveId: liveId as string });
+  const { id: videoId } = useParams();
+  const { data: clientReplayData } = useClientReplay({ videoId: videoId as string });
 
-  if (!clientLiveData) {
+  if (!clientReplayData) {
     return <div>로딩 중...</div>;
   }
 
@@ -19,8 +19,8 @@ const ReplayView = () => {
     <ReplayViewContainer>
       <Header />
       <h1 className="hidden">다시보기 페이지</h1>
-      <Player videoUrl={`https://kr.object.ncloudstorage.com/web22/live/${liveId}/index.m3u8`} />
-      <PlayerInfo clientLiveData={clientLiveData} />
+      <Player videoUrl={`https://kr.object.ncloudstorage.com/web22/live/${videoId}/index.m3u8`} />
+      <PlayerInfo clientReplayData={clientReplayData} />
       <Footer />
     </ReplayViewContainer>
   );
