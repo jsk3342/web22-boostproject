@@ -6,9 +6,12 @@ import { LiveBadgeLarge } from './ThumbnailBadge';
 import { useMainLive } from '@apis/queries/main/useFetchMainLive';
 import sampleProfile from '@assets/sample_profile.png';
 import useRotatingPlayer from '@hooks/useRotatePlayer';
+import RecommendList from './RecommendList';
+import { getVideoURL } from '@utils/getVideoURL';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
+  
   const { videoRef, initPlayer } = useRotatingPlayer();
   const { data: mainLiveData, isLoading, error } = useMainLive();
   const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
@@ -16,9 +19,13 @@ const RecommendLive = () => {
   useEffect(() => {
     if (!mainLiveData || !mainLiveData[currentUrlIndex]) return;
 
-    const liveId = mainLiveData[currentUrlIndex].liveId;
-    const videoUrl = `https://kr.object.ncloudstorage.com/web22/live/${liveId}/index.m3u8`;
-    initPlayer(videoUrl);
+    const playVideo = () => {
+      const liveId = mainLiveData[currentUrlIndex].liveId;
+      const videoUrl = getVideoURL(liveId);
+      initPlayer(videoUrl);
+    };
+
+    playVideo();
   }, [mainLiveData, currentUrlIndex, initPlayer]);
 
   if (error) {
@@ -31,6 +38,10 @@ const RecommendLive = () => {
 
   const liveData = mainLiveData[currentUrlIndex];
   const { liveId, liveTitle, concurrentUserCount, channel, category } = liveData;
+
+  const onSelect = (index: number) => {
+    setCurrentUrlIndex(index);
+  };
 
   return (
     <RecommendLiveContainer>
@@ -47,13 +58,20 @@ const RecommendLive = () => {
         </RecommendLiveHeader>
 
         <RecommendLiveInformation>
-          <RecommendLiveProfile>
-            <img src={sampleProfile} />
-          </RecommendLiveProfile>
-          <RecommendLiveArea>
-            <span className="video_card_name">{channel.channelName}</span>
-            <span className="video_card_category">{category}</span>
-          </RecommendLiveArea>
+          <Flex>
+            <RecommendLiveProfile>
+              <img src={sampleProfile} alt="profile" />
+            </RecommendLiveProfile>
+            <RecommendLiveArea>
+              <span className="video_card_name">{channel.channelName}</span>
+              <span className="video_card_category">{category}</span>
+            </RecommendLiveArea>
+          </Flex>
+          <RecommendList
+            mainLiveData={mainLiveData}
+            onSelect={onSelect}
+            currentLiveId={mainLiveData[currentUrlIndex].liveId}
+          />
         </RecommendLiveInformation>
       </RecommendLiveWrapper>
     </RecommendLiveContainer>
@@ -91,7 +109,12 @@ const RecommendLiveBox = styled.div<{ $isLoading: boolean }>`
     position: absolute;
     left: 0;
     top: 0;
-    object-fit: cover;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+
+    &.transitioning {
+      opacity: 0;
+    }
   }
 `;
 
@@ -127,6 +150,7 @@ const RecommendLiveInformation = styled.div`
   display: flex;
   align-items: center;
   flex-grow: 0.5;
+  justify-content: space-between;
 `;
 
 const RecommendLiveProfile = styled.div`
@@ -166,4 +190,8 @@ const RecommendLiveArea = styled.div`
     color: ${({ theme }) => theme.tokenColors['brand-default']};
     margin-bottom: 4px;
   }
+`;
+
+const Flex = styled.div`
+  display: flex;
 `;
