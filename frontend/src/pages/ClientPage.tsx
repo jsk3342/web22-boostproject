@@ -17,7 +17,7 @@ export default function ClientPage() {
 
 const ClientContainer = styled.div`
   box-sizing: border-box;
-  padding: 60px 10px 0 10px;
+  padding: 70px 10px 0 10px;
   height: 100%;
   display: flex;
   background-color: ${({ theme }) => theme.tokenColors['susrface-default']};
