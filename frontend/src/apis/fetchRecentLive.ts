@@ -3,7 +3,7 @@ import { fetchInstance } from '.';
 import { RecentLiveResponse } from '@type/live';
 
 export const fetchRecentLive = async (): Promise<RecentLiveResponse> => {
-  const response: AxiosResponse<RecentLiveResponse> = await fetchInstance().get('/streams/latest');
+  const response: AxiosResponse = await fetchInstance().get('/streams/latest');
 
-  return { info: response.data.info, appendInfo: response.data.appendInfo };
+  return response.data;
 };

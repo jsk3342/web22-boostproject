@@ -7,7 +7,7 @@ import { useMainLive } from '@queries/main/useFetchMainLive';
 import sampleProfile from '@assets/sample_profile.png';
 import useRotatingPlayer from '@hooks/useRotatePlayer';
 import RecommendList from './RecommendList';
-import { getVideoURL } from '@utils/getVideoURL';
+import { getLiveURL } from '@utils/getVideoURL';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const RecommendLive = () => {
 
     const playVideo = () => {
       const liveId = mainLiveData[currentUrlIndex].liveId;
-      const videoUrl = getVideoURL(liveId);
+      const videoUrl = getLiveURL(liveId);
       initPlayer(videoUrl);
     };
 

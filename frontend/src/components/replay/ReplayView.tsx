@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 
-import { useClientReplay } from '@queries/replay/useFetchReplay';
-import Footer from '@common/Footer';
-import Header from '@common/Header';
 import Player from './Player';
 import PlayerInfo from './PlayerInfo';
+import Footer from '@common/Footer';
+import Header from '@common/Header';
+import { useClientReplay } from '@queries/replay/useFetchReplay';
+import { getReplayURL } from '@utils/getVideoURL';
 
 const ReplayView = () => {
   const { id: videoId } = useParams();
@@ -19,7 +20,7 @@ const ReplayView = () => {
     <ReplayViewContainer>
       <Header />
       <h1 className="hidden">다시보기 페이지</h1>
-      <Player videoUrl={`https://kr.object.ncloudstorage.com/web22/live/${videoId}/replay.m3u8`} />
+      <Player videoUrl={getReplayURL(videoId as string)} />
       <PlayerInfo clientReplayData={clientReplayData} />
       <Footer />
     </ReplayViewContainer>

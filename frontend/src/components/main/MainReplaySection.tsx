@@ -4,22 +4,22 @@ import styled from 'styled-components';
 import ReplayVideoCard from './ReplayVideoCard';
 import LoadMoreDivider from './LoadMoreDivider';
 import { useRecentReplay } from '@queries/main/useFetchRecentReplay';
-import ChevronDownIcon from '@assets/icons/chevron-down.svg';
-import ChevronUpIcon from '@assets/icons/chevron-up.svg';
+import { VIDEO_VIEW } from '@constants/videoView';
 
 interface MainReplaySectionProps {
   title: string;
 }
 
 const MainReplaySection = ({ title }: MainReplaySectionProps) => {
-  const [textStatus, setTextStatus] = useState<'더보기' | '접기'>('더보기');
+  const [textStatus, setTextStatus] = useState(VIDEO_VIEW.MORE_VIEW);
 
   const { data: replayData = { info: [], appendInfo: [] }, isLoading, error } = useRecentReplay();
 
-  const displayedData = textStatus === '접기' ? [...replayData.info, ...replayData.appendInfo] : replayData.info;
+  const { info: infoData, appendInfo: appendInfoData } = replayData;
+  const displayedData = textStatus === VIDEO_VIEW.FOLD ? [...infoData, ...appendInfoData] : infoData;
 
   const handleTextChange = () => {
-    setTextStatus(textStatus === '더보기' ? '접기' : '더보기');
+    setTextStatus(textStatus === VIDEO_VIEW.MORE_VIEW ? VIDEO_VIEW.FOLD : VIDEO_VIEW.MORE_VIEW);
   };
 
   if (error) {
@@ -43,11 +43,7 @@ const MainReplaySection = ({ title }: MainReplaySectionProps) => {
         ))}
       </MainSectionContentList>
 
-      <LoadMoreDivider
-        text={textStatus}
-        onClick={handleTextChange}
-        component={textStatus === '더보기' ? <StyledChevronDown /> : <StyledChevronUp />}
-      />
+      <LoadMoreDivider text={textStatus} onClick={handleTextChange} />
       <div className="parent">
         <div className="child"></div>
       </div>
@@ -100,14 +96,4 @@ const MainSectionContentList = styled.div`
       max-width: calc(33.33% - 10px);
     }
   }
-`;
-
-const StyledChevronDown = styled(ChevronDownIcon)`
-  width: 16px;
-  height: 16px;
-`;
-
-const StyledChevronUp = styled(ChevronUpIcon)`
-  width: 16px;
-  height: 16px;
 `;

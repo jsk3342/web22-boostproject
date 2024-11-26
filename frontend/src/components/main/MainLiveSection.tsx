@@ -4,22 +4,22 @@ import styled from 'styled-components';
 import LiveVideoCard from './LiveVideoCard';
 import LoadMoreDivider from './LoadMoreDivider';
 import { useRecentLive } from '@queries/main/useFetchRecentLive';
-import ChevronDownIcon from '@assets/icons/chevron-down.svg';
-import ChevronUpIcon from '@assets/icons/chevron-up.svg';
+import { VIDEO_VIEW } from '@constants/videoView';
 
 interface MainLiveSectionProps {
   title: string;
 }
 
 const MainLiveSection = ({ title }: MainLiveSectionProps) => {
-  const [textStatus, setTextStatus] = useState<'더보기' | '접기'>('더보기');
+  const [textStatus, setTextStatus] = useState(VIDEO_VIEW.MORE_VIEW);
 
   const { data: liveData = { info: [], appendInfo: [] }, isLoading, error } = useRecentLive();
 
-  const displayedData = textStatus === '접기' ? [...liveData.info, ...liveData.appendInfo] : liveData.info;
+  const { info: infoData, appendInfo: appendInfoData } = liveData;
+  const displayedData = textStatus === VIDEO_VIEW.FOLD ? [...infoData, ...appendInfoData] : infoData;
 
   const handleTextChange = () => {
-    setTextStatus(textStatus === '더보기' ? '접기' : '더보기');
+    setTextStatus(textStatus === VIDEO_VIEW.MORE_VIEW ? VIDEO_VIEW.FOLD : VIDEO_VIEW.MORE_VIEW);
   };
 
   if (error) {
@@ -46,7 +46,6 @@ const MainLiveSection = ({ title }: MainLiveSectionProps) => {
       <LoadMoreDivider
         text={textStatus}
         onClick={handleTextChange}
-        component={textStatus === '더보기' ? <StyledChevronDown /> : <StyledChevronUp />}
       />
       <div className="parent">
         <div className="child"></div>
@@ -100,14 +99,4 @@ const MainSectionContentList = styled.div`
       max-width: calc(33.33% - 10px);
     }
   }
-`;
-
-const StyledChevronDown = styled(ChevronDownIcon)`
-  width: 16px;
-  height: 16px;
-`;
-
-const StyledChevronUp = styled(ChevronUpIcon)`
-  width: 16px;
-  height: 16px;
 `;
