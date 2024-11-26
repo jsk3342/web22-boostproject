@@ -40,3 +40,25 @@ export function randomKey(uuid: string, salt: string, length: number = 20) {
   const hash = crypto.createHmac('sha256', salt).update(uuid).digest('hex');
   return hash.substring(0, length);
 }
+
+export function generatePlaylist(N: number): string {
+  const header = `#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-TARGETDURATION:2
+#EXT-X-MEDIA-SEQUENCE:0`;
+
+  const body = Array.from({ length: N + 1 }, (_, i) => {
+    const duration = 2.000000;
+    return `#EXTINF:${duration.toFixed(6)},
+index${i}.ts`;
+  }).join('\n');
+
+  const footer = '#EXT-X-ENDLIST';
+
+  return `${header}\n${body}\n${footer}`;
+}
+
+export function calculateSecondsBetweenDates(date1: Date, date2: Date): number {
+  const timeDifference = Math.abs(date1.getTime() - date2.getTime());
+  return Math.floor(timeDifference / 1000);
+}
