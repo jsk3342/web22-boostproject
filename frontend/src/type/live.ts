@@ -12,14 +12,14 @@ export interface MainLive {
 
 export interface RecentLive extends MainLive {
   tags: string[];
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
 }
 
 export interface ClientLive extends MainLive {
   tags: string[];
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
 }
 
 export type RecentLiveResponse = {

@@ -10,7 +10,8 @@ const PlayerInfo = ({ clientReplayData }: { clientReplayData: ReplayStream }) =>
   const { channel, category, startDate, readCount, tags, videoTitle } = clientReplayData;
 
   const now = new Date();
-  const formatTime = formatTimeDifference({ startDate, now });
+  const startDateFormat = new Date(startDate);
+  const formatTime = formatTimeDifference({ startDate: startDateFormat, now });
 
   return (
     <PlayerInfoContainer>

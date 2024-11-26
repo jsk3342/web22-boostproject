@@ -4,8 +4,8 @@ export interface ReplayStream {
   videoNo: number;
   videoId: string;
   videoTitle: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   thumbnailImageUrl: string;
   trailerUrl: string;
   duration: number;

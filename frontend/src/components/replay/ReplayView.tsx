@@ -19,7 +19,7 @@ const ReplayView = () => {
     <ReplayViewContainer>
       <Header />
       <h1 className="hidden">다시보기 페이지</h1>
-      <Player videoUrl={`https://kr.object.ncloudstorage.com/web22/live/${videoId}/index.m3u8`} />
+      <Player videoUrl={`https://kr.object.ncloudstorage.com/web22/live/${videoId}/replay.m3u8`} />
       <PlayerInfo clientReplayData={clientReplayData} />
       <Footer />
     </ReplayViewContainer>
