@@ -9,7 +9,6 @@ const ClientChatRoom = () => {
   const userId = getStoredId();
   const { id: roomId } = useParams();
   const { worker, messages, questions } = useChatRoom(roomId as string, userId);
-  const [isChatRoomVisible, setIsChatRoomVisible] = useState(true);
 
   return (
     <ChatProvider>
@@ -20,8 +19,6 @@ const ClientChatRoom = () => {
         userId={userId}
         userType={'client'}
         roomId={roomId as string}
-        isChatRoomVisible={isChatRoomVisible}
-        setIsChatRoomVisible={setIsChatRoomVisible}
       />
     </ChatProvider>
   );

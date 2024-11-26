@@ -17,7 +17,6 @@ const HostChatRoom = () => {
   }, [userId, fetchSessionKey, sessionKey]);
 
   const { worker, messages, questions } = useChatRoom(sessionKey as string, userId);
-  const [isChatRoomVisible, setIsChatRoomVisible] = useState(true);
 
   if (!sessionKey) return <div>세션 키 로딩 중...</div>;
 
@@ -30,8 +29,6 @@ const HostChatRoom = () => {
         userId={userId}
         userType={'host'}
         roomId={sessionKey}
-        isChatRoomVisible={isChatRoomVisible}
-        setIsChatRoomVisible={setIsChatRoomVisible}
       />
     </ChatProvider>
   );

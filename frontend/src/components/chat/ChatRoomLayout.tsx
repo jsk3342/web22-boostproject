@@ -5,6 +5,7 @@ import ChatList from './ChatList';
 import ChatQuestionSection from './ChatQuestionSection';
 import { MessageReceiveData } from '@type/chat';
 import { UserType } from '@type/user';
+import { useState } from 'react';
 
 interface ChatRoomLayoutProps {
   worker: SharedWorker['port'] | null;
@@ -13,40 +14,32 @@ interface ChatRoomLayoutProps {
   userId: string;
   userType: UserType;
   roomId: string;
-  isChatRoomVisible: boolean;
-  setIsChatRoomVisible: (visible: boolean) => void;
 }
 
-export const ChatRoomLayout = ({
-  worker,
-  messages,
-  questions,
-  userId,
-  userType,
-  roomId,
-  isChatRoomVisible,
-  setIsChatRoomVisible
-}: ChatRoomLayoutProps) => (
-  <>
-    <ChatOpenBtn $isVisible={!isChatRoomVisible} onClick={() => setIsChatRoomVisible(true)}>
-      채팅 보기
-    </ChatOpenBtn>
+export const ChatRoomLayout = ({ worker, messages, questions, userId, userType, roomId }: ChatRoomLayoutProps) => {
+  const [isChatRoomVisible, setIsChatRoomVisible] = useState(true);
+  return (
+    <>
+      <ChatOpenBtn $isVisible={!isChatRoomVisible} onClick={() => setIsChatRoomVisible(true)}>
+        채팅 보기
+      </ChatOpenBtn>
 
-    <ChatRoomContainer $isVisible={isChatRoomVisible}>
-      <ChatHeader outBtnHandler={() => setIsChatRoomVisible(false)} />
+      <ChatRoomContainer $isVisible={isChatRoomVisible}>
+        <ChatHeader outBtnHandler={() => setIsChatRoomVisible(false)} />
 
-      <ChatQuestionSection questions={questions} worker={worker} userType={userType} roomId={roomId} />
+        <ChatQuestionSection questions={questions} worker={worker} userType={userType} roomId={roomId} />
 
-      <ChatListContainer>
-        <ChatList messages={messages} userId={userId} />
-      </ChatListContainer>
+        <ChatListContainer>
+          <ChatList messages={messages} userId={userId} />
+        </ChatListContainer>
 
-      <ChatInputContainer>
-        <ChatInput worker={worker} userType={userType} roomId={roomId} />
-      </ChatInputContainer>
-    </ChatRoomContainer>
-  </>
-);
+        <ChatInputContainer>
+          <ChatInput worker={worker} userType={userType} roomId={roomId} />
+        </ChatInputContainer>
+      </ChatRoomContainer>
+    </>
+  );
+};
 
 const ChatOpenBtn = styled.button<{ $isVisible: boolean }>`
   display: ${({ $isVisible }) => ($isVisible ? 'flex' : 'none')};
