@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { LiveBadgeLarge } from './ThumbnailBadge';
-import { useMainLive } from '@apis/queries/main/useFetchMainLive';
+import { useMainLive } from '@queries/main/useFetchMainLive';
 import sampleProfile from '@assets/sample_profile.png';
 import useRotatingPlayer from '@hooks/useRotatePlayer';
 import RecommendList from './RecommendList';
-import { getVideoURL } from '@utils/getVideoURL';
+import { getLiveURL } from '@utils/getVideoURL';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const RecommendLive = () => {
 
     const playVideo = () => {
       const liveId = mainLiveData[currentUrlIndex].liveId;
-      const videoUrl = getVideoURL(liveId);
+      const videoUrl = getLiveURL(liveId);
       initPlayer(videoUrl);
     };
 
@@ -161,6 +161,7 @@ const RecommendLiveProfile = styled.div`
   display: block;
   overflow: hidden;
   position: relative;
+  flex-shrink: 0;
   width: 70px;
   height: 70px;
 
@@ -184,11 +185,17 @@ const RecommendLiveArea = styled.div`
     ${({ theme }) => theme.tokenTypographys['display-bold20']}
     color: ${({ theme }) => theme.tokenColors['text-strong']};
     margin-bottom: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .video_card_category {
     ${({ theme }) => theme.tokenTypographys['display-bold16']}
     color: ${({ theme }) => theme.tokenColors['brand-default']};
     margin-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `;
 

@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
+
 import { ChatRoomLayout } from './ChatRoomLayout';
 import { getStoredId } from '@utils/id';
-import useFetchStreamKey from '@apis/queries/host/useFetchStreamKey';
-import { useEffect, useState } from 'react';
+import useFetchStreamKey from '@queries/host/useFetchStreamKey';
+
 import { useChatRoom } from '@hooks/useChatRoom';
 import { ChatProvider } from 'src/contexts/chatContext';
 

@@ -8,7 +8,7 @@ import { ASSETS } from '@constants/assets';
 import { RecentLive } from '@type/live';
 import { LiveBadge, LiveViewCountBadge } from './ThumbnailBadge';
 import usePlayer from '@hooks/usePlayer';
-import { getVideoURL } from '@utils/getVideoURL';
+import { getLiveURL } from '@utils/getVideoURL';
 
 interface LiveVideoCardProps {
   videoData: RecentLive;
@@ -23,7 +23,7 @@ const LiveVideoCard = ({ videoData }: LiveVideoCardProps) => {
   const { concurrentUserCount, category, channel, tags, defaultThumbnailImageUrl, liveId, liveImageUrl, liveTitle } =
     videoData;
 
-  const videoRef = usePlayer(getVideoURL(liveId));
+  const videoRef = usePlayer(getLiveURL(liveId));
 
   useEffect(() => {
     const video = videoRef.current;
@@ -185,6 +185,7 @@ const VideoCardProfile = styled.div`
   border-radius: 50%;
   display: block;
   overflow: hidden;
+  margin-top: 5px;
   width: 40px;
   height: 40px;
 
