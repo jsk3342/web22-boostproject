@@ -18,5 +18,5 @@ const ReplayContainer = styled.div`
   padding: 60px 10px 0 10px;
   height: 100%;
   display: flex;
-  background-color: ${({ theme }) => theme.tokenColors['susrface-default']};
+  background-color: ${({ theme }) => theme.tokenColors['surface-default']};
 `;
