@@ -11,7 +11,7 @@ import { getLiveURL } from '@utils/getVideoURL';
 const ClientView = () => {
   const { id: liveId } = useParams();
   const { data: clientLiveData } = useClientLive({ liveId: liveId as string });
-  console.log("clientLiveData: ", clientLiveData);
+
   if (!clientLiveData) {
     return <div>로딩 중...</div>;
   }

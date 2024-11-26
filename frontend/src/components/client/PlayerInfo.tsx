@@ -1,5 +1,4 @@
 import { ASSETS } from '@constants/assets';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import ElapsedTime from './ElapsedTime';
