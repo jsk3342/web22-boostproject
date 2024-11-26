@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Player from './Player';
+import Player from './StreamingDisplay';
 import SettingForm from './SettingForm';
 import { useBroadcastStatusPolling } from '@apis/queries/host/useBroadcastStatusPolling';
 import { getSessionKey } from '@utils/streamKey';

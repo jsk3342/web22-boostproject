@@ -30,6 +30,7 @@ export default ClientView;
 
 const ClientViewContainer = styled.main`
   flex: 1;
+  min-width: 400px;
   overflow-y: auto;
   padding: 0 60px;
   background-color: ${({ theme }) => theme.tokenColors['surface-default']};
