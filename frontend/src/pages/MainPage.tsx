@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 
 import Footer from '@common/Footer';
 import ServiceBanner from '@common/ServiceBanner';
+import { RecommendLiveSkeleton } from '@components/skeleton';
 import { MainHeader, MainLiveSection, MainReplaySection, RecommendLive } from '@components/main';
 
 export default function MainPage() {
@@ -10,23 +11,7 @@ export default function MainPage() {
     <>
       <MainHeader />
       <MainPageContainer>
-        <Suspense
-          fallback={
-            <div
-              style={{
-                width: '100%',
-                height: '370px',
-                backgroundColor: 'red',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                color: 'white'
-              }}
-            >
-              로딩중...
-            </div>
-          }
-        >
+        <Suspense fallback={<RecommendLiveSkeleton />}>
           <RecommendLive />
         </Suspense>
         <ServiceBanner />
