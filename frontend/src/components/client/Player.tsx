@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import PauseIcon from '@assets/icons/pause_icon.svg';
 import PlayIcon from '@assets/icons/play_icon.svg';
 import usePlayer from '@hooks/usePlayer';
-import VideoPlayer from './video/VideoPlayer';
-// import VideoPlayer from './VideoPlayer';
+// import VideoPlayer from './video/VideoPlayer';
+import VideoPlayer from './VideoPlayer';
 
 const Player = ({ videoUrl }: { videoUrl: string }) => {
   const [isPaused, setIsPaused] = useState(false);

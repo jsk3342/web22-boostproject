@@ -227,22 +227,26 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, isLive = false, onTimeUp
   };
 
   useEffect(() => {
-    const handleMouseMove = () => {
+    const playerContainer = playerContainerRef.current;
+    if (!playerContainer) return;
+  
+    const handleMouseEnter = () => {
       setIsControlsVisible(true);
-      if (hideTimeoutRef.current) {
-        clearTimeout(hideTimeoutRef.current);
-      }
-      hideTimeoutRef.current = setTimeout(() => setIsControlsVisible(false), 1000);
     };
-
-    window.addEventListener('mousemove', handleMouseMove);
+  
+    const handleMouseLeave = () => {
+      setIsControlsVisible(false);
+    };
+  
+    playerContainer.addEventListener('mouseenter', handleMouseEnter);
+    playerContainer.addEventListener('mouseleave', handleMouseLeave);
+  
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (hideTimeoutRef.current) {
-        clearTimeout(hideTimeoutRef.current);
-      }
+      playerContainer.removeEventListener('mouseenter', handleMouseEnter);
+      playerContainer.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
+  
 
   const handlePlayerClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if ((e.target as HTMLElement).closest('.controls-overlay') || (e.target as HTMLElement).closest('.control-group')) {
