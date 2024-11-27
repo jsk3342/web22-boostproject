@@ -151,5 +151,5 @@ const StyledIcon = styled.svg`
   width: 18px;
   height: 18px;
   cursor: pointer;
-  margin: 0 5px -3px 0;
+  margin: 0 5px -4px 0;
 `;

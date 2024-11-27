@@ -17,12 +17,16 @@ const ChatAutoScroll = ({ currentChat, isAtBottom, scrollToBottom }: ChatAutoScr
           $isHost={currentChat.owner === 'host'}
           $pointColor={currentChat.owner === 'host' ? '#0ADD91' : currentChat.color}
         >
-          {currentChat.owner === 'me' ? (
+          {currentChat.msgType === 'question' ? (
+            <span className="button_badge">질문</span>
+          ) : currentChat.msgType === 'notice' ? (
+            <span className="button_badge">공지</span>
+          ) : currentChat.owner === 'me' ? (
             <span className="text_point">🧀</span>
           ) : currentChat.owner === 'host' ? (
             <StyledIcon as={HostIconGreen} />
           ) : null}
-          <span className="text_point">{currentChat.nickname}</span>
+          {currentChat.msgType !== 'notice' && <span className="text_point">{currentChat.nickname}</span>}
           <span className="chat_message">{currentChat.msg}</span>
         </NormalChat>
       )}
@@ -61,15 +65,14 @@ const StyledChevronDown = styled(ChevronDownIcon)`
 `;
 
 const NormalChat = styled.div<{ $isHost: boolean; $pointColor: string }>`
-  ${({ theme }) => theme.tokenTypographys['display-medium14']};
-  color: ${({ $isHost, theme }) => ($isHost ? theme.tokenColors['color-accent'] : theme.tokenColors['color-white'])};
+  ${({ theme }) => theme.tokenTypographys['display-medium12']};
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: 90%;
 
   .chat_message {
-    color: ${({ $isHost }) => $isHost && '#82e3c4'};
+    color: ${({ theme, $isHost }) => ($isHost ? '#82e3c4' : theme.tokenColors['color-white'])};
     flex: 1 1;
     overflow: hidden;
     text-align: left;
@@ -79,7 +82,15 @@ const NormalChat = styled.div<{ $isHost: boolean; $pointColor: string }>`
   .text_point {
     color: ${({ $pointColor }) => $pointColor};
     margin-right: 5px;
-    ${({ theme }) => theme.tokenTypographys['display-bold14']};
+    ${({ theme }) => theme.tokenTypographys['display-bold12']};
+  }
+  .button_badge {
+    color: ${({ theme }) => theme.tokenColors['color-white']};
+    margin-right: 5px;
+    ${({ theme }) => theme.tokenTypographys['display-medium12']};
+    background-color: #2e2e2e;
+    border-radius: 5px;
+    padding: 1px 5px;
   }
 `;
 
