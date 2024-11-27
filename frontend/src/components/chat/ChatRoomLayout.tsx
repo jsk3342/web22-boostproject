@@ -32,7 +32,7 @@ export const ChatRoomLayout = ({ userType, roomId }: ChatRoomLayoutProps) => {
         <ChatQuestionSection questions={questions} worker={worker} userType={userType} roomId={roomId} />
 
         <ChatListContainer>
-          <ChatList messages={messages} userId={userId} />
+          <ChatList messages={messages} />
         </ChatListContainer>
 
         <ChatInputContainer>
