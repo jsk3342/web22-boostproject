@@ -1,13 +1,11 @@
-// import { Suspense } from 'react';
-// import { ErrorBoundary } from 'react-error-boundary';
 import { styled } from 'styled-components';
 
 import { AsyncBoundary } from '@common/AsyncBoundary';
 import Footer from '@common/Footer';
 import ServiceBanner from '@common/ServiceBanner';
-import { RecommendLiveError } from '@components/error';
+import { RecommendLiveError, VideoSectionError } from '@components/error';
 import { MainHeader, MainLiveSection, MainReplaySection, RecommendLive } from '@components/main';
-import { RecommendLiveSkeleton } from '@components/skeleton';
+import { RecommendLiveSkeleton, VideoSectionSkeleton } from '@components/skeleton';
 
 export default function MainPage() {
   return (
@@ -22,8 +20,18 @@ export default function MainPage() {
         </AsyncBoundary>
 
         <ServiceBanner />
-        <MainLiveSection title="🚀 라이브 중인 컨퍼런스" />
-        <MainReplaySection title="컨퍼런스 다시보기 👀" />
+        <AsyncBoundary
+          pendingFallback={<VideoSectionSkeleton />}
+          rejectedFallback={(error) => <VideoSectionError error={error} />}
+        >
+          <MainLiveSection title="🚀 라이브 중인 컨퍼런스" />
+        </AsyncBoundary>
+        <AsyncBoundary
+          pendingFallback={<VideoSectionSkeleton />}
+          rejectedFallback={(error) => <VideoSectionError error={error} />}
+        >
+          <MainReplaySection title="컨퍼런스 다시보기 👀" />
+        </AsyncBoundary>
         <Footer />
       </MainPageContainer>
     </>

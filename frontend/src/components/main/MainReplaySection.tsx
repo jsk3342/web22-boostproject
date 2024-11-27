@@ -13,7 +13,7 @@ interface MainReplaySectionProps {
 const MainReplaySection = ({ title }: MainReplaySectionProps) => {
   const [textStatus, setTextStatus] = useState(VIDEO_VIEW.MORE_VIEW);
 
-  const { data: replayData = { info: [], appendInfo: [] }, isLoading, error } = useRecentReplay();
+  const { data: replayData = { info: [], appendInfo: [] } } = useRecentReplay();
 
   const { info: infoData, appendInfo: appendInfoData } = replayData;
   const displayedData = textStatus === VIDEO_VIEW.FOLD ? [...infoData, ...appendInfoData] : infoData;
@@ -22,20 +22,12 @@ const MainReplaySection = ({ title }: MainReplaySectionProps) => {
     setTextStatus(textStatus === VIDEO_VIEW.MORE_VIEW ? VIDEO_VIEW.FOLD : VIDEO_VIEW.MORE_VIEW);
   };
 
-  if (error) {
-    return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
-  }
-
   return (
     <MainSectionContainer>
       <MainSectionHeader>
         <p className="live_section_title">{title}</p>
         <button className="live_section_button">전체보기</button>
       </MainSectionHeader>
-
-      {isLoading && <div>로딩 중...</div>}
-
-      {displayedData.length === 0 && !isLoading && <div>데이터가 없습니다.</div>}
 
       <MainSectionContentList>
         {displayedData.map((video) => (
