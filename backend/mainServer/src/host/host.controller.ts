@@ -148,6 +148,7 @@ export class HostController {
         const liveTime = calculateSecondsBetweenDates(sessionInfo.startDate, sessionInfo.endDate);
         const m3u8Data = generatePlaylist(Math.floor(liveTime / 2) - REPLAY_VIDEO_LATENCY);
         this.hostService.uploadToS3(m3u8Data, sessionInfo.sessionKey, 'replay', 'm3u8');
+
         sessionInfo.replay = true;
       }
       this.memoryDBService.updateBySessionKey(streamKey, sessionInfo);
