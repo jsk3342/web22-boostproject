@@ -38,6 +38,8 @@ const QuestionCardContainer = styled.div`
   box-shadow: 0px 4px 4px 0px #3c444b3c;
   background-color: #47336f;
   color: ${({ theme }) => theme.tokenColors['color-white']};
+  overflow-wrap: break-word;
+  word-break: break-word;
 `;
 
 const QuestionCardTop = styled.div`
