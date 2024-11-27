@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { styled } from 'styled-components';
 
 import Footer from '@common/Footer';
@@ -9,7 +10,25 @@ export default function MainPage() {
     <>
       <MainHeader />
       <MainPageContainer>
-        <RecommendLive />
+        <Suspense
+          fallback={
+            <div
+              style={{
+                width: '100%',
+                height: '370px',
+                backgroundColor: 'red',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                color: 'white'
+              }}
+            >
+              로딩중...
+            </div>
+          }
+        >
+          <RecommendLive />
+        </Suspense>
         <ServiceBanner />
         <MainLiveSection title="🚀 라이브 중인 컨퍼런스" />
         <MainReplaySection title="컨퍼런스 다시보기 👀" />

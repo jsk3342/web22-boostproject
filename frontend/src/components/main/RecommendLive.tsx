@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { LiveBadgeLarge } from './ThumbnailBadge';
@@ -11,9 +11,9 @@ import { getLiveURL } from '@utils/getVideoURL';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
-  
+
   const { videoRef, initPlayer } = useRotatingPlayer();
-  const { data: mainLiveData, isLoading, error } = useMainLive();
+  const { data: mainLiveData, error } = useMainLive();
   const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const RecommendLive = () => {
 
   return (
     <RecommendLiveContainer>
-      <RecommendLiveBox $isLoading={isLoading}>
+      <RecommendLiveBox>
         <video ref={videoRef} autoPlay muted />
       </RecommendLiveBox>
       <RecommendLiveWrapper onClick={() => navigate(`/live/${liveId}`)}>
@@ -91,8 +91,8 @@ const RecommendLiveContainer = styled.div`
   z-index: 0;
 `;
 
-const RecommendLiveBox = styled.div<{ $isLoading: boolean }>`
-  background: ${({ $isLoading, theme }) => ($isLoading ? theme.tokenColors['surface-default'] : '')};
+const RecommendLiveBox = styled.div`
+  background: ${({ theme }) => theme.tokenColors['surface-default']};
   padding-top: 56.25%;
   position: absolute;
   right: 0;
