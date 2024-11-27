@@ -1,19 +1,26 @@
-import { Suspense } from 'react';
+// import { Suspense } from 'react';
+// import { ErrorBoundary } from 'react-error-boundary';
 import { styled } from 'styled-components';
 
+import { AsyncBoundary } from '@common/AsyncBoundary';
 import Footer from '@common/Footer';
 import ServiceBanner from '@common/ServiceBanner';
-import { RecommendLiveSkeleton } from '@components/skeleton';
+import { RecommendLiveError } from '@components/error';
 import { MainHeader, MainLiveSection, MainReplaySection, RecommendLive } from '@components/main';
+import { RecommendLiveSkeleton } from '@components/skeleton';
 
 export default function MainPage() {
   return (
     <>
       <MainHeader />
       <MainPageContainer>
-        <Suspense fallback={<RecommendLiveSkeleton />}>
+        <AsyncBoundary
+          pendingFallback={<RecommendLiveSkeleton />}
+          rejectedFallback={(error) => <RecommendLiveError error={error} />}
+        >
           <RecommendLive />
-        </Suspense>
+        </AsyncBoundary>
+
         <ServiceBanner />
         <MainLiveSection title="🚀 라이브 중인 컨퍼런스" />
         <MainReplaySection title="컨퍼런스 다시보기 👀" />

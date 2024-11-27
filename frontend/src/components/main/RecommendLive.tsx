@@ -13,7 +13,7 @@ const RecommendLive = () => {
   const navigate = useNavigate();
 
   const { videoRef, initPlayer } = useRotatingPlayer();
-  const { data: mainLiveData, error } = useMainLive();
+  const { data: mainLiveData } = useMainLive();
   const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
 
   useEffect(() => {
@@ -27,14 +27,6 @@ const RecommendLive = () => {
 
     playVideo();
   }, [mainLiveData, currentUrlIndex, initPlayer]);
-
-  if (error) {
-    return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
-  }
-
-  if (!mainLiveData || mainLiveData.length === 0) {
-    return <div>추천 라이브 데이터가 없습니다.</div>;
-  }
 
   const liveData = mainLiveData[currentUrlIndex];
   const { liveId, liveTitle, concurrentUserCount, channel, category } = liveData;
