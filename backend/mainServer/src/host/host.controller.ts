@@ -30,6 +30,7 @@ export class HostController {
         throw new HttpException('Bad Request', HttpStatus.BAD_REQUEST);
       }
       sessionInfo.state = true;
+      sessionInfo.replay = false;
       sessionInfo.startDate = new Date();
       this.memoryDBService.updateBySessionKey(streamKey, sessionInfo);
       res.status(HttpStatus.OK).json({ 'session-key': sessionInfo.sessionKey });
@@ -47,9 +48,7 @@ export class HostController {
   }
 
   @Get('/state')
-  @ApiOperation({
-    summary: 'Response this session is live", description: "현재 방송 세션이 라이브 상태인지 반환합니다.'
-  })
+  @ApiOperation({summary: 'Response this session is live', description: '현재 방송 세션이 라이브 상태인지 반환합니다.'})
   @ApiResponse({ status: 200, description: '현재 방송 상태에 대한 응답' })
   async getBroadcastState(@Query('sessionKey') sessionKey: string, @Res() res: Response) {
     const liveState = this.memoryDBService.findBySessionKey(sessionKey);
@@ -149,6 +148,8 @@ export class HostController {
         const liveTime = calculateSecondsBetweenDates(sessionInfo.startDate, sessionInfo.endDate);
         const m3u8Data = generatePlaylist(Math.floor(liveTime / 2) - REPLAY_VIDEO_LATENCY);
         this.hostService.uploadToS3(m3u8Data, sessionInfo.sessionKey, 'replay', 'm3u8');
+
+        sessionInfo.replay = true;
       }
       this.memoryDBService.updateBySessionKey(streamKey, sessionInfo);
       res.status(HttpStatus.OK).send();

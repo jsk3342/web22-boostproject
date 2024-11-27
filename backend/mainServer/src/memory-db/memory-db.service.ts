@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { MemoryDbDto } from '../dto/memoryDbDto.js';
 import { getRandomElementsFromArray } from '../common/util.js';
-import { fromLiveSessionDto } from '../dto/liveSessionDto.js';
 
 @Injectable()
 export class MemoryDBService {
@@ -33,13 +32,24 @@ export class MemoryDBService {
     return getRandomElementsFromArray(liveSession, count);
   }
 
-  getBroadcastInfo(size: number) {
-    const liveSession = this.db.filter(item => item.state);
-    if (liveSession.length < size) {
-      const liveSessionRev = liveSession.reverse().map((info) => fromLiveSessionDto(info));
-      return [...liveSessionRev];
+  getBroadcastInfo<T>(size: number, dtoTransformer: (info: MemoryDbDto) => T, checker: (item: MemoryDbDto) => boolean, appender: number = 0) {
+    const findSession = this.db.filter(item => checker(item));
+    if (findSession.length < size) {
+      const findSessionRev = findSession.reverse().map((info) => dtoTransformer(info));
+      return [[...findSessionRev], []];
     }
-    return liveSession.slice(-size).reverse().map((info) => fromLiveSessionDto(info));
+    const latestSession = findSession.slice(-size).reverse().map((info) => dtoTransformer(info));
+    if (appender === 0) {
+      return [[...latestSession], []];
+    }
+    else if (findSession.length < size + appender) {
+      const appendSession = findSession.slice(0, findSession.length - size).reverse().map((info) => dtoTransformer(info));
+      return [[...latestSession], [...appendSession]];
+    }
+    else {
+      const appendSession = findSession.slice(-size - appender, -size).reverse().map((info) => dtoTransformer(info));
+      return [[...latestSession], [...appendSession]];
+    }
   }
 
   create(item: Partial<MemoryDbDto>): void {
