@@ -32,7 +32,8 @@ export type VideoPlayerAction =
   | { type: 'SET_AT_LIVE_EDGE'; payload: boolean }
   | { type: 'SET_BUFFERED_SEGMENTS'; payload: TimeRanges }
   | { type: 'SET_IS_LIVE'; payload: boolean }
-  | { type: 'SET_IS_PLAYING'; payload: boolean };
+  | { type: 'SET_IS_PLAYING'; payload: boolean }
+  | { type: 'SET_MUTED'; payload: boolean };
 
 export const videoPlayerReducer = (state: VideoPlayerState, action: VideoPlayerAction): VideoPlayerState => {
   switch (action.type) {
@@ -42,6 +43,8 @@ export const videoPlayerReducer = (state: VideoPlayerState, action: VideoPlayerA
       return { ...state, isMuted: !state.isMuted };
     case 'SET_VOLUME':
       return { ...state, volume: action.payload, isMuted: action.payload === 0 };
+    case 'SET_MUTED':
+      return { ...state, volume: action.payload ? 0 : 0.1, isMuted: action.payload };
     case 'SET_CURRENT_TIME':
       return { ...state, currentTime: action.payload };
     case 'SET_DURATION':
