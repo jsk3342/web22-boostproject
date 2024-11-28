@@ -3,7 +3,7 @@ import SpeechBubbleIcon from '@assets/icons/speech-bubble.svg';
 import QuestionIcon from '@assets/icons/question.svg';
 import SpeakerIcon from '@assets/icons/speaker.svg';
 import SendIcon from '@assets/icons/send.svg';
-import { useRef, useEffect, useState, ChangeEvent, KeyboardEvent } from 'react';
+import { useRef, useEffect, useState, ChangeEvent, KeyboardEvent, memo } from 'react';
 import { CHATTING_SOCKET_SEND_EVENT, CHATTING_TYPES } from '@constants/chat';
 import { ChattingTypes } from '@type/chat';
 import { getStoredId } from '@utils/id';
@@ -63,6 +63,12 @@ export const ChatInput = ({ worker, userType, roomId }: ChatInputProps) => {
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const inputValue = e.target.value;
+
+    if (inputValue.length > 150) {
+      return;
+    }
+
     setMessage(e.target.value);
     setHasInput(e.target.value.length > 0);
   };
@@ -156,7 +162,7 @@ export const ChatInput = ({ worker, userType, roomId }: ChatInputProps) => {
   );
 };
 
-export default ChatInput;
+export default memo(ChatInput);
 
 const ChatInputWrapper = styled.div<{ $hasInput: boolean; $isFocused: boolean }>`
   min-height: 20px;
