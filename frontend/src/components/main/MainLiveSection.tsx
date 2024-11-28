@@ -1,27 +1,41 @@
+import { useState } from 'react';
 import styled from 'styled-components';
-import VideoCard from './VideoCard';
+
+import LiveVideoCard from './LiveVideoCard';
 import LoadMoreDivider from './LoadMoreDivider';
+import { useRecentLive } from '@queries/main/useFetchRecentLive';
+import { VIDEO_VIEW } from '@constants/videoView';
 
 interface MainLiveSectionProps {
   title: string;
-  type: 'live' | 'replay';
 }
-const MainLiveSection = ({ title, type }: MainLiveSectionProps) => {
+
+const MainLiveSection = ({ title }: MainLiveSectionProps) => {
+  const [textStatus, setTextStatus] = useState(VIDEO_VIEW.MORE_VIEW);
+
+  const { data: liveData } = useRecentLive();
+
+  const { info, appendInfo } = liveData;
+  const displayedData = textStatus === VIDEO_VIEW.FOLD ? [...info, ...appendInfo] : info;
+
+  const handleTextChange = () => {
+    setTextStatus(textStatus === VIDEO_VIEW.MORE_VIEW ? VIDEO_VIEW.FOLD : VIDEO_VIEW.MORE_VIEW);
+  };
+
   return (
     <MainSectionContainer>
       <MainSectionHeader>
         <p className="live_section_title">{title}</p>
         <button className="live_section_button">전체보기</button>
       </MainSectionHeader>
+
       <MainSectionContentList>
-        {[1, 2, 3, 4, 5, 6].map((_, index) => (
-          <VideoCard key={index} type={type} />
+        {displayedData.map((video) => (
+          <LiveVideoCard key={video.id} videoData={video} />
         ))}
       </MainSectionContentList>
-      <LoadMoreDivider text="더보기" />
-      <div className="parent">
-        <div className="child"></div>
-      </div>
+
+      <LoadMoreDivider text={textStatus} onClick={handleTextChange} />
     </MainSectionContainer>
   );
 };
