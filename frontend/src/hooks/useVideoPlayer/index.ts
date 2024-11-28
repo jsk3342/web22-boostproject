@@ -35,7 +35,7 @@ const useVideoPlayer = ({
 
   useHLSPlayer({ url, videoRef, isLive, autoPlay, dispatch: videoDispatch });
   useVideoEvents({ videoRef, dispatch: videoDispatch, isLive, onTimeUpdate, onDuration });
-  useVideoControls({ videoRef, dispatch: controlsDispatch, playerContainerRef });
+  useVideoControls({ dispatch: controlsDispatch, playerContainerRef });
 
   const handlePlayPause = useCallback(() => {
     const video = videoRef.current;

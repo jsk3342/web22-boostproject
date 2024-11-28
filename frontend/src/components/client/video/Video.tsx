@@ -1,11 +1,16 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
-interface VideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {}
+type VideoProps = React.VideoHTMLAttributes<HTMLVideoElement>;
 
 const Video = forwardRef<HTMLVideoElement, VideoProps>((props, ref) => <StyledVideo ref={ref} {...props} />);
 
-export default React.memo(Video);
+Video.displayName = 'Video';
+
+const MemoizedVideo = React.memo(Video);
+MemoizedVideo.displayName = 'MemoizedVideo';
+
+export default MemoizedVideo;
 
 const StyledVideo = styled.video`
   width: 100%;

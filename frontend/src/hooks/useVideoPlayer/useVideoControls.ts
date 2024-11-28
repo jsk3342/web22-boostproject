@@ -2,12 +2,11 @@ import { useEffect, useRef } from 'react';
 import { ControlsAction } from '@reducers/controlsReducer';
 
 interface UseVideoControlsProps {
-  videoRef: React.RefObject<HTMLVideoElement>;
   dispatch: React.Dispatch<ControlsAction>;
   playerContainerRef: React.RefObject<HTMLDivElement>;
 }
 
-const useVideoControls = ({ videoRef, dispatch, playerContainerRef }: UseVideoControlsProps) => {
+const useVideoControls = ({ dispatch, playerContainerRef }: UseVideoControlsProps) => {
   const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {

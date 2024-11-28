@@ -22,7 +22,7 @@ const PlayerInfo = ({ clientLiveData }: { clientLiveData: ClientLive }) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [startDate]);
+  }, [startDate, startDateTime]);
 
   return (
     <PlayerInfoContainer>

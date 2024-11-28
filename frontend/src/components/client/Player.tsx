@@ -36,7 +36,7 @@ const Player = ({ videoUrl }: { videoUrl: string }) => {
     return () => {
       videoElement?.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handlePlayPause]);
 
   return (
     <PlayerContainer>
@@ -84,7 +84,7 @@ const IconOverlay = styled.div`
   transition: opacity 0.3s;
 `;
 
-const Video = styled.video`
-  width: 100%;
-  height: 100%;
-`;
+// const Video = styled.video`
+//   width: 100%;
+//   height: 100%;
+// `;

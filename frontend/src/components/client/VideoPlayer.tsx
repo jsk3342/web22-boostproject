@@ -40,7 +40,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, isLive = false, onTimeUp
   const [isDragging, setIsDragging] = useState(false);
 
   const videoRef = usePlayer(url);
-  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  // const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const progressContainerRef = useRef<HTMLDivElement>(null);
   const playerContainerRef = useRef<HTMLDivElement>(null);
 
@@ -101,7 +101,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, isLive = false, onTimeUp
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [currentTime]);
+  }, [currentTime, videoRef]);
 
   function handlePlayPause() {
     if (!videoRef.current) return;
@@ -217,7 +217,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, isLive = false, onTimeUp
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging]);
+  }, [isDragging, handleMouseMove, handleMouseUp]);
 
   const formatTime = (time: number) => {
     const hours = Math.floor(time / 3600);
@@ -229,24 +229,23 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, isLive = false, onTimeUp
   useEffect(() => {
     const playerContainer = playerContainerRef.current;
     if (!playerContainer) return;
-  
+
     const handleMouseEnter = () => {
       setIsControlsVisible(true);
     };
-  
+
     const handleMouseLeave = () => {
       setIsControlsVisible(false);
     };
-  
+
     playerContainer.addEventListener('mouseenter', handleMouseEnter);
     playerContainer.addEventListener('mouseleave', handleMouseLeave);
-  
+
     return () => {
       playerContainer.removeEventListener('mouseenter', handleMouseEnter);
       playerContainer.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
-  
 
   const handlePlayerClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if ((e.target as HTMLElement).closest('.controls-overlay') || (e.target as HTMLElement).closest('.control-group')) {
