@@ -103,7 +103,9 @@ sequenceDiagram
 | ----- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
 | 1주차 | 기획 공유 및 팀 목표 설정                                | [보러가기](https://gominzip.notion.site/Week1-Web22-LiBoo-56af3bb7b2314f878667bdbbf99e791f?pvs=4) |
 | 2주차 | 백로그 작성, 퍼블리싱, 동영상 스트리밍 아키텍처 설계     | [보러가기](https://gominzip.notion.site/Week2-Web22-LiBoo-137673f3719e805baab4e0a9855ed885?pvs=4) |
-| 3주차 | CI/CD, 메인 api 서버 개발, 플레이어 커스텀, 웹소켓 학습, | [보러가기](https://gominzip.notion.site/Week3-Web22-LiBoo-13e673f3719e80e2a6b0cf5fe10d603a?pvs=4) |
+| 3주차 | CI/CD, 메인 api 서버 개발, 플레이어 커스텀, 웹소켓 학습 | [보러가기](https://gominzip.notion.site/Week3-Web22-LiBoo-a09dcec3adea4b289d22603df59f24be?pvs=4) |
+| 4주차 | 채팅 구현, 서비스 시연 | [보러가기](https://gominzip.notion.site/Week4-Web22-LiBoo-13e673f3719e80e2a6b0cf5fe10d603a) |
+| 5주차 |  | [보러가기](https://gominzip.notion.site/Week5-Web22-LiBoo-14c673f3719e80eeb14fe3f1f668e1fc?pvs=4) |
 
 <br/>
 
