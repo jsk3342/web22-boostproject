@@ -36,9 +36,6 @@ const MainLiveSection = ({ title }: MainLiveSectionProps) => {
       </MainSectionContentList>
 
       <LoadMoreDivider text={textStatus} onClick={handleTextChange} />
-      <div className="parent">
-        <div className="child"></div>
-      </div>
     </MainSectionContainer>
   );
 };

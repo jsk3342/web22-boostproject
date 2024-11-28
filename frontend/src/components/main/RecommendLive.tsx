@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { LiveBadgeLarge } from './ThumbnailBadge';
-import { useMainLive } from '@queries/main/useFetchMainLive';
-import sampleProfile from '@assets/sample_profile.png';
-import useRotatingPlayer from '@hooks/useRotatePlayer';
 import RecommendList from './RecommendList';
+import { LiveBadgeLarge } from './ThumbnailBadge';
+import sampleProfile from '@assets/sample_profile.png';
+import { RECOMMEND_LIVE } from '@constants/recommendLive';
+import useRotatingPlayer from '@hooks/useRotatePlayer';
+import { useMainLive } from '@queries/main/useFetchMainLive';
 import { getLiveURL } from '@utils/getVideoURL';
 
 const RecommendLive = () => {
@@ -36,7 +37,7 @@ const RecommendLive = () => {
   };
 
   return (
-    <RecommendLiveContainer>
+    <RecommendLiveContainer $height={RECOMMEND_LIVE.HEIGHT}>
       <RecommendLiveBox>
         <video ref={videoRef} autoPlay muted />
       </RecommendLiveBox>
@@ -72,11 +73,11 @@ const RecommendLive = () => {
 
 export default RecommendLive;
 
-const RecommendLiveContainer = styled.div`
+const RecommendLiveContainer = styled.div<{ $height: string }>`
   word-wrap: break-word;
   background: #141517;
   border-radius: 12px;
-  height: 370px;
+  height: ${({ $height }) => $height};
   overflow: hidden;
   position: relative;
   word-break: break-all;

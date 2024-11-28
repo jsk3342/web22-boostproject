@@ -1,10 +1,12 @@
 import ContentLoader from 'react-content-loader';
 
+import { RECOMMEND_LIVE } from '@constants/recommendLive';
+
 const RecommendLiveSkeleton = () => {
   return (
     <ContentLoader
       speed={2}
-      height={370}
+      height={RECOMMEND_LIVE.HEIGHT}
       width="100%"
       backgroundColor="#1a1a1a"
       foregroundColor="#363636"
