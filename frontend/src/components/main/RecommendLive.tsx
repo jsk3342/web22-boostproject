@@ -2,18 +2,19 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { LiveBadgeLarge } from './ThumbnailBadge';
-import { useMainLive } from '@queries/main/useFetchMainLive';
-import sampleProfile from '@assets/sample_profile.png';
-import useRotatingPlayer from '@hooks/useRotatePlayer';
 import RecommendList from './RecommendList';
+import { LiveBadgeLarge } from './ThumbnailBadge';
+import sampleProfile from '@assets/sample_profile.png';
+import { RECOMMEND_LIVE } from '@constants/recommendLive';
+import useRotatingPlayer from '@hooks/useRotatePlayer';
+import { useMainLive } from '@queries/main/useFetchMainLive';
 import { getLiveURL } from '@utils/getVideoURL';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
-  
+
   const { videoRef, initPlayer } = useRotatingPlayer();
-  const { data: mainLiveData, isLoading, error } = useMainLive();
+  const { data: mainLiveData } = useMainLive();
   const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
 
   useEffect(() => {
@@ -28,14 +29,6 @@ const RecommendLive = () => {
     playVideo();
   }, [mainLiveData, currentUrlIndex, initPlayer]);
 
-  if (error) {
-    return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
-  }
-
-  if (!mainLiveData || mainLiveData.length === 0) {
-    return <div>추천 라이브 데이터가 없습니다.</div>;
-  }
-
   const liveData = mainLiveData[currentUrlIndex];
   const { liveId, liveTitle, concurrentUserCount, channel, category } = liveData;
 
@@ -44,8 +37,8 @@ const RecommendLive = () => {
   };
 
   return (
-    <RecommendLiveContainer>
-      <RecommendLiveBox $isLoading={isLoading}>
+    <RecommendLiveContainer $height={RECOMMEND_LIVE.HEIGHT}>
+      <RecommendLiveBox>
         <video ref={videoRef} autoPlay muted />
       </RecommendLiveBox>
       <RecommendLiveWrapper onClick={() => navigate(`/live/${liveId}`)}>
@@ -80,19 +73,19 @@ const RecommendLive = () => {
 
 export default RecommendLive;
 
-const RecommendLiveContainer = styled.div`
+const RecommendLiveContainer = styled.div<{ $height: string }>`
   word-wrap: break-word;
   background: #141517;
   border-radius: 12px;
-  height: 370px;
+  height: ${({ $height }) => $height};
   overflow: hidden;
   position: relative;
   word-break: break-all;
   z-index: 0;
 `;
 
-const RecommendLiveBox = styled.div<{ $isLoading: boolean }>`
-  background: ${({ $isLoading, theme }) => ($isLoading ? theme.tokenColors['surface-default'] : '')};
+const RecommendLiveBox = styled.div`
+  background: ${({ theme }) => theme.tokenColors['surface-default']};
   padding-top: 56.25%;
   position: absolute;
   right: 0;
