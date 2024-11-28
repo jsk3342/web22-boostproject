@@ -8,7 +8,6 @@ import { ASSETS } from '@constants/assets';
 import { RecentLive } from '@type/live';
 import { LiveBadge, LiveViewCountBadge } from './ThumbnailBadge';
 import usePlayer from '@hooks/usePlayer';
-import { getLiveURL } from '@utils/getVideoURL';
 
 interface LiveVideoCardProps {
   videoData: RecentLive;

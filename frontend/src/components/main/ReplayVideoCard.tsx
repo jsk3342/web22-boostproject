@@ -8,7 +8,6 @@ import ShowInfoBadge from '@common/ShowInfoBadge';
 import { ASSETS } from '@constants/assets';
 import usePlayer from '@hooks/usePlayer';
 import { ReplayStream } from '@type/replay';
-import { getReplayURL } from '@utils/getVideoURL';
 
 interface ReplayVideoCardProps {
   videoData: ReplayStream;

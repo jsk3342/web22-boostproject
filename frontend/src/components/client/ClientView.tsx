@@ -6,7 +6,6 @@ import PlayerInfo from './PlayerInfo';
 import Footer from '@common/Footer';
 import Header from '@common/Header';
 import { useClientLive } from '@queries/client/useFetchLive';
-import { getLiveURL } from '@utils/getVideoURL';
 
 const ClientView = () => {
   const { id: liveId } = useParams();

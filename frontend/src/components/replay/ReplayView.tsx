@@ -6,7 +6,6 @@ import PlayerInfo from './PlayerInfo';
 import Footer from '@common/Footer';
 import Header from '@common/Header';
 import { useClientReplay } from '@queries/replay/useFetchReplay';
-import { getReplayURL } from '@utils/getVideoURL';
 
 const ReplayView = () => {
   const { id: videoId } = useParams();

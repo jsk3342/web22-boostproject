@@ -9,7 +9,6 @@ import sampleProfile from '@assets/sample_profile.png';
 import { RECOMMEND_LIVE } from '@constants/recommendLive';
 import useRotatingPlayer from '@hooks/useRotatePlayer';
 import { useMainLive } from '@queries/main/useFetchMainLive';
-import { getLiveURL } from '@utils/getVideoURL';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
