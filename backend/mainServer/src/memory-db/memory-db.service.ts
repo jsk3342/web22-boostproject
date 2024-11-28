@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { MemoryDbDto } from '../dto/memoryDbDto.js';
 import { getRandomElementsFromArray } from '../common/util.js';
+import { chzzkMainFetch } from '../common/crawler.js';
+import { fromLiveCurationDto } from '../dto/liveCurationDto.js';
 
 @Injectable()
 export class MemoryDBService {
   private db: MemoryDbDto[] = [];
   private currentId = 0;
+  chzzkSwitch: boolean = false;
 
   findAll(): MemoryDbDto[] {
     return this.db;
@@ -27,7 +30,34 @@ export class MemoryDBService {
     return this.db.find(item => item.sessionKey === sessionKey);
   }
   
-  getRandomBroadcastInfo(count: number) {
+  async getRandomBroadcastInfo(count: number) {
+    if (this.chzzkSwitch) {
+      const chzzkMain = await chzzkMainFetch();
+      if (chzzkMain !== null) {
+        return chzzkMain.map((info) => {
+          const liveInfo = new MemoryDbDto({
+            id: info.liveId,
+            userId: info.channel.channelId,
+            streamKey: info.channel.channelId,
+            sessionKey: info.channel.channelId,
+            liveId: info.channel.channelId,
+            liveTitle: info.liveTitle,
+            defaultThumbnailImageUrl: info.liveImageUrl.replace('image_{type}.jpg', 'image_1080.jpg'),
+            liveImageUrl: info.liveImageUrl.replace('image_{type}.jpg', 'image_1080.jpg'),
+            streamUrl: info.m3u8,
+            channel: {
+              channelId: info.channel.channelId,
+              channelName: info.channel.channelName
+            },
+            category: info.liveCategory,
+            state: true,
+            startDate: new Date(info.openDate.replace(' ', 'T')),
+            concurrentUserCount: info.concurrentUserCount
+          });
+          return fromLiveCurationDto(liveInfo);
+        });
+      }
+    }
     const liveSession = this.db.filter(item => item.state);
     return getRandomElementsFromArray(liveSession, count);
   }
