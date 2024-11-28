@@ -19,9 +19,9 @@ const ReplayVideoCard = ({ videoData }: ReplayVideoCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const { category, channel, tags, thumbnailImageUrl, livePr, videoTitle, videoId } = videoData;
+  const { category, channel, tags, thumbnailImageUrl, livePr, replayUrl, videoTitle, videoId } = videoData;
 
-  const videoRef = usePlayer(getReplayURL(videoId));
+  const videoRef = usePlayer(replayUrl);
 
   useEffect(() => {
     const video = videoRef.current;

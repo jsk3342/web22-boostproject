@@ -20,10 +20,10 @@ const LiveVideoCard = ({ videoData }: LiveVideoCardProps) => {
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const thumbnailRef = useRef<HTMLDivElement>(null);
 
-  const { concurrentUserCount, category, channel, tags, defaultThumbnailImageUrl, liveId, liveImageUrl, liveTitle } =
+  const { concurrentUserCount, category, channel, tags, defaultThumbnailImageUrl, liveId, liveImageUrl, liveTitle, streamUrl } =
     videoData;
 
-  const videoRef = usePlayer(getLiveURL(liveId));
+  const videoRef = usePlayer(streamUrl);
 
   useEffect(() => {
     const video = videoRef.current;

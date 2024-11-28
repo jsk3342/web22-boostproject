@@ -20,7 +20,7 @@ const ReplayView = () => {
     <ReplayViewContainer>
       <Header />
       <h1 className="hidden">다시보기 페이지</h1>
-      <Player videoUrl={getReplayURL(videoId as string)} />
+      <Player videoUrl={clientReplayData.replayUrl} />
       <PlayerInfo clientReplayData={clientReplayData} />
       <Footer />
     </ReplayViewContainer>

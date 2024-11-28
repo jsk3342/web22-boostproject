@@ -21,7 +21,7 @@ const RecommendLive = () => {
 
   useEffect(() => {
     if (!mainLiveData?.[currentUrlIndex]) return;
-    const videoUrl = getLiveURL(mainLiveData[currentUrlIndex].liveId);
+    const videoUrl = mainLiveData[currentUrlIndex].streamUrl;
     initPlayer(videoUrl);
   }, [mainLiveData, currentUrlIndex, initPlayer]);
 

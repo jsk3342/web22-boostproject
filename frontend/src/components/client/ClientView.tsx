@@ -20,7 +20,7 @@ const ClientView = () => {
     <ClientViewContainer>
       <Header />
       <h1 className="hidden">클라이언트 페이지</h1>
-      <Player videoUrl={getLiveURL(liveId as string)} />
+      <Player videoUrl={clientLiveData.streamUrl} />
       <PlayerInfo clientLiveData={clientLiveData} />
       <Footer />
     </ClientViewContainer>
