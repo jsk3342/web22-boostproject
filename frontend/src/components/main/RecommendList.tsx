@@ -35,7 +35,7 @@ export default function RecommendList({ mainLiveData, onSelect, currentLiveId }:
 
 const Container = styled.div`
   display: flex;
-  gap: 8px;
+  gap: 4px;
   padding: 20px 0;
 `;
 
@@ -44,6 +44,7 @@ const TooltipContent = styled.div`
   position: absolute;
   bottom: 100%;
   left: 50%;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.8);
   padding: 4px;
