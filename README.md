@@ -42,7 +42,7 @@
 
 # ⚙️ 서비스 아키텍처
 ![라이부아키텍처 drawio (1)](https://github.com/user-attachments/assets/8867cbf9-99b6-4b24-a02b-a35952c5bf0d)
-![Streaming Data Architecture](https://github.com/user-attachments/assets/f291c8e7-924f-40a9-8225-ea4ee0ab0600)
+![Streaming Data Architecture](https://github.com/user-attachments/assets/02e854c4-4512-482d-bda2-719b7ceabea6)
 ```mermaid
 sequenceDiagram
     participant H as Host/OBS
