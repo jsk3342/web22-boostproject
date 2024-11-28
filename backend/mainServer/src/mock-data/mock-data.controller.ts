@@ -46,9 +46,10 @@ export class MockDataController {
   }
 
   @Get('/chzzk/switch')
-  @ApiOperation({summary: 'Change Curation Data', description: '메인 랜덤 영상을 치지직 영상으로 대체합니다. (true: mode On, false: mode off)'})
+  @ApiOperation({summary: 'Change Curation Data', description: '메인 랜덤 영상을 치지직 영상으로 대체합니다. (true: mode On, false: mode off 전환 시 기존 치지직 데이터 초기화)'})
   async changeCurationData(@Res() res: Response) {
     this.memoryDbService.chzzkSwitch = !this.memoryDbService.chzzkSwitch;
+    this.memoryDbService.chzzkDb = {};
     res.status(200).json({status: this.memoryDbService.chzzkSwitch});
   }
 }
