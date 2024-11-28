@@ -32,7 +32,7 @@ export default function usePlayer(url: string) {
     return () => {
       hls.destroy();
     };
-  }, []);
+  }, [url]);
 
   return videoRef;
 }

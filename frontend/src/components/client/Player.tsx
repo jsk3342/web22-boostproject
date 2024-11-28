@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import PauseIcon from '@assets/icons/pause_icon.svg';
 import PlayIcon from '@assets/icons/play_icon.svg';
 import usePlayer from '@hooks/usePlayer';
+// import VideoPlayer from './video/VideoPlayer';
+import VideoPlayer from './VideoPlayer';
 
 const Player = ({ videoUrl }: { videoUrl: string }) => {
   const [isPaused, setIsPaused] = useState(false);
@@ -34,17 +36,12 @@ const Player = ({ videoUrl }: { videoUrl: string }) => {
     return () => {
       videoElement?.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handlePlayPause]);
 
   return (
     <PlayerContainer>
       <LivePlayerInner>
-        <Video
-          ref={videoRef}
-          controls
-          onClick={handlePlayPause}
-          tabIndex={0} // Video 요소가 포커스를 받을 수 있도록 설정
-        />
+        <VideoPlayer url={videoUrl} isLive={false} />
         {showIcon && <IconOverlay>{isPaused ? <PlayIcon /> : <PauseIcon />}</IconOverlay>}
       </LivePlayerInner>
     </PlayerContainer>
@@ -87,7 +84,7 @@ const IconOverlay = styled.div`
   transition: opacity 0.3s;
 `;
 
-const Video = styled.video`
-  width: 100%;
-  height: 100%;
-`;
+// const Video = styled.video`
+//   width: 100%;
+//   height: 100%;
+// `;
