@@ -10,9 +10,10 @@ interface AsyncBoundaryProps {
 
 export const AsyncBoundary = forwardRef<any, AsyncBoundaryProps>(
   ({ pendingFallback, rejectedFallback, children }, ref) => {
+    // error 추후에 작업예정
     const [, setError] = useState<Error | null>(null);
 
-    // Use `useImperativeHandle` to expose a `reset` method to parent components
+    // Use `useImperativeHandle` to expose a `reset` method to parent component
     useImperativeHandle(ref, () => ({
       reset: () => setError(null)
     }));
