@@ -82,15 +82,13 @@ const StyledCheckIcon = styled(CheckIcon)`
 `;
 
 const QuestionCardBottom = styled.div<{ $ellipsis: boolean }>`
-  /* max-height: 80px; */
-  overflow-y: scroll;
   ${({ theme }) => theme.tokenTypographys['display-bold14']}
   padding: 10px 15px 0 15px;
-  overflow-y: ${({ $ellipsis }) => ($ellipsis ? 'hidden' : 'scroll')};
   white-space: ${({ $ellipsis }) => ($ellipsis ? 'nowrap' : 'normal')};
   text-overflow: ${({ $ellipsis }) => ($ellipsis ? 'ellipsis' : 'clip')};
-  overflow-wrap: ${({ $ellipsis }) => ($ellipsis ? 'unset' : 'break-word')};
-  word-break: ${({ $ellipsis }) => ($ellipsis ? 'unset' : 'break-word')};
+  overflow-wrap: break-word;
+  word-break: break-word;
+  overflow: hidden;
 `;
 
 const StyledIcon = styled.svg`

@@ -100,12 +100,12 @@ const SwipeBtn = styled.button`
   &::before {
     content: '';
     position: absolute;
-    top: 45%;
+    top: 40%;
     left: 50%;
     background-color: ${({ theme }) => theme.tokenColors['text-weak']};
     border-radius: 2px;
-    height: 5px;
-    width: 50px;
+    height: 4px;
+    width: 60px;
     transform: translate(-50%, -50%);
   }
 `;

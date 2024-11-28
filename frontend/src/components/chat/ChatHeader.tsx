@@ -54,10 +54,10 @@ const ChatHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 15px;
+  padding: 10px 10px;
   border-top: 1px solid ${({ theme }) => theme.tokenColors['surface-alt']};
   color: ${({ theme }) => theme.tokenColors['color-white']};
-  ${({ theme }) => theme.tokenTypographys['display-bold20']};
+  ${({ theme }) => theme.tokenTypographys['display-bold16']};
 `;
 
 const HeaderBtn = styled.button`
@@ -67,8 +67,8 @@ const HeaderBtn = styled.button`
 `;
 
 const StyledIcon = styled.svg`
-  width: 25px;
-  height: 25px;
+  width: 22px;
+  height: 22px;
   cursor: pointer;
 `;
 
