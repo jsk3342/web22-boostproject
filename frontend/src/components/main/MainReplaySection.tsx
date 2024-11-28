@@ -13,10 +13,10 @@ interface MainReplaySectionProps {
 const MainReplaySection = ({ title }: MainReplaySectionProps) => {
   const [textStatus, setTextStatus] = useState(VIDEO_VIEW.MORE_VIEW);
 
-  const { data: replayData = { info: [], appendInfo: [] } } = useRecentReplay();
+  const { data: replayData } = useRecentReplay();
 
-  const { info: infoData, appendInfo: appendInfoData } = replayData;
-  const displayedData = textStatus === VIDEO_VIEW.FOLD ? [...infoData, ...appendInfoData] : infoData;
+  const { info, appendInfo } = replayData;
+  const displayedData = textStatus === VIDEO_VIEW.FOLD ? [...info, ...appendInfo] : info;
 
   const handleTextChange = () => {
     setTextStatus(textStatus === VIDEO_VIEW.MORE_VIEW ? VIDEO_VIEW.FOLD : VIDEO_VIEW.MORE_VIEW);

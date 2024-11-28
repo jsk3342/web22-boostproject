@@ -13,10 +13,10 @@ interface MainLiveSectionProps {
 const MainLiveSection = ({ title }: MainLiveSectionProps) => {
   const [textStatus, setTextStatus] = useState(VIDEO_VIEW.MORE_VIEW);
 
-  const { data: liveData = { info: [], appendInfo: [] } } = useRecentLive();
+  const { data: liveData } = useRecentLive();
 
-  const { info: infoData, appendInfo: appendInfoData } = liveData;
-  const displayedData = textStatus === VIDEO_VIEW.FOLD ? [...infoData, ...appendInfoData] : infoData;
+  const { info, appendInfo } = liveData;
+  const displayedData = textStatus === VIDEO_VIEW.FOLD ? [...info, ...appendInfo] : info;
 
   const handleTextChange = () => {
     setTextStatus(textStatus === VIDEO_VIEW.MORE_VIEW ? VIDEO_VIEW.FOLD : VIDEO_VIEW.MORE_VIEW);
