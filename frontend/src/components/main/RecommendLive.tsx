@@ -1,47 +1,31 @@
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
+import styled from 'styled-components';
+import AnimatedProfileSection from './AnimatedProfileSection';
+import AnimatedLiveHeader from './AnimatedLiveHeader';
 import RecommendList from './RecommendList';
-import { LiveBadgeLarge } from './ThumbnailBadge';
 import sampleProfile from '@assets/sample_profile.png';
 import { RECOMMEND_LIVE } from '@constants/recommendLive';
 import useRotatingPlayer from '@hooks/useRotatePlayer';
 import { useMainLive } from '@queries/main/useFetchMainLive';
 import { getLiveURL } from '@utils/getVideoURL';
-import AnimatedProfileSection from './AnimatedProfileSection';
-import AnimatedLiveHeader from './AnimatedLiveHeader';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
-
   const { videoRef, initPlayer } = useRotatingPlayer();
   const { data: mainLiveData } = useMainLive();
   const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
   const recommendListRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (!mainLiveData?.[currentUrlIndex]) return;
-
     const videoUrl = getLiveURL(mainLiveData[currentUrlIndex].liveId);
     initPlayer(videoUrl);
   }, [mainLiveData, currentUrlIndex, initPlayer]);
-
-  const liveData = mainLiveData[currentUrlIndex];
-  const { liveId, liveTitle, concurrentUserCount, channel, category } = liveData;
-
-  const onSelect = (index: number) => {
+  const onSelect = useCallback((index: number) => {
     setCurrentUrlIndex(index);
   }, []);
-
   const currentLiveData = useMemo(() => mainLiveData?.[currentUrlIndex], [mainLiveData, currentUrlIndex]);
-
-  if (error) return <div>데이터를 가져오는 중 에러가 발생했습니다.</div>;
-  if (!mainLiveData?.length) return <div>추천 라이브 데이터가 없습니다.</div>;
-  if (!currentLiveData) return null;
-
   const { liveId, liveTitle, concurrentUserCount, channel, category } = currentLiveData;
-
   return (
     <RecommendLiveContainer $height={RECOMMEND_LIVE.HEIGHT}>
       <RecommendLiveBox>
@@ -49,7 +33,6 @@ const RecommendLive = () => {
       </RecommendLiveBox>
       <RecommendLiveWrapper onClick={() => navigate(`/live/${liveId}`)}>
         <AnimatedLiveHeader concurrentUserCount={concurrentUserCount} liveTitle={liveTitle} />
-
         <RecommendLiveInformation>
           <AnimatedProfileSection channel={channel} category={category} profileImage={sampleProfile} />
           <RecommendList
@@ -88,7 +71,6 @@ const RecommendLiveBox = styled.div`
   z-index: -1;
   box-shadow: inset 180px -180px 300px 0px #141517;
   opacity: 0.6;
-
   video {
     width: 100%;
     height: 100%;
@@ -108,23 +90,6 @@ const RecommendLiveWrapper = styled.div`
   padding: 22px 30px;
   position: relative;
   cursor: pointer;
-`;
-
-const RecommendLiveHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  .recommend_live_status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    ${({ theme }) => theme.tokenTypographys['display-bold16']}
-    color: ${({ theme }) => theme.tokenColors['red-default']};
-  }
-  .recommend_live_title {
-    ${({ theme }) => theme.tokenTypographys['display-bold24']}
-    color: ${({ theme }) => theme.tokenColors['color-white']};
-  }
 `;
 
 const RecommendLiveInformation = styled.div`
