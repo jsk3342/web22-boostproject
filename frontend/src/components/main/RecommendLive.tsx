@@ -8,6 +8,7 @@ import useRotatingPlayer from '@hooks/useRotatePlayer';
 import RecommendList from './RecommendList';
 import { getLiveURL } from '@utils/getVideoURL';
 import AnimatedProfileSection from './AnimatedProfileSection';
+import AnimatedLiveHeader from './AnimatedLiveHeader';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
@@ -41,13 +42,7 @@ const RecommendLive = () => {
         <video ref={videoRef} autoPlay muted />
       </RecommendLiveBox>
       <RecommendLiveWrapper onClick={() => navigate(`/live/${liveId}`)}>
-        <RecommendLiveHeader>
-          <div className="recommend_live_status">
-            <LiveBadgeLarge />
-            <span>{concurrentUserCount}명 시청</span>
-          </div>
-          <p className="recommend_live_title">{liveTitle}</p>
-        </RecommendLiveHeader>
+        <AnimatedLiveHeader concurrentUserCount={concurrentUserCount} liveTitle={liveTitle} />
 
         <RecommendLiveInformation>
           <AnimatedProfileSection channel={channel} category={category} profileImage={sampleProfile} />
