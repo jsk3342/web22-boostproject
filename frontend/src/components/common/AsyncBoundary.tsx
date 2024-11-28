@@ -1,5 +1,6 @@
-import { forwardRef, useImperativeHandle, useState, Suspense } from 'react';
+import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
+import { Suspense } from 'react';
 
 interface AsyncBoundaryProps {
   pendingFallback: React.ReactNode;
@@ -9,7 +10,7 @@ interface AsyncBoundaryProps {
 
 export const AsyncBoundary = forwardRef<any, AsyncBoundaryProps>(
   ({ pendingFallback, rejectedFallback, children }, ref) => {
-    const [error, setError] = useState<Error | null>(null);
+    const [, setError] = useState<Error | null>(null);
 
     // Use `useImperativeHandle` to expose a `reset` method to parent components
     useImperativeHandle(ref, () => ({
