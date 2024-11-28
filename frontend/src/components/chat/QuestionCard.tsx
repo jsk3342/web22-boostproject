@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import CheckIcon from '@assets/icons/check.svg';
 import { MessageReceiveData } from '@type/chat';
@@ -13,7 +13,7 @@ interface QuestionCardProps {
 }
 
 export const QuestionCard = ({ type, question, handleQuestionDone, ellipsis = false }: QuestionCardProps) => {
-  const startDateFormat = new Date(question.msgTime);
+  const startDateFormat = useMemo(() => new Date(question.msgTime), [question.msgTime]);
   const nowRef = useRef<Date>(new Date());
 
   const formatTime = useRef<string>(formatTimeDifference({ startDate: startDateFormat, now: nowRef.current }));
@@ -59,7 +59,7 @@ export const QuestionCard = ({ type, question, handleQuestionDone, ellipsis = fa
   );
 };
 
-export default QuestionCard;
+export default memo(QuestionCard);
 
 const QuestionCardContainer = styled.div`
   display: flex;

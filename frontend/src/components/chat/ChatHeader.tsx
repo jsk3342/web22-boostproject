@@ -6,16 +6,24 @@ import LayerPopup from './LayerPopup';
 import { ChatContext } from 'src/contexts/chatContext';
 
 interface ChatHeaderProps {
-  outBtnHandler?: () => void;
+  outBtnHandler: () => void;
 }
+
+const MemoizedHeaderBtn = memo(({ onClick, icon }: { onClick: () => void; icon: string }) => (
+  <HeaderBtn onClick={onClick}>
+    <StyledIcon as={icon} />
+  </HeaderBtn>
+));
+
+MemoizedHeaderBtn.displayName = 'MemoizedHeaderBtn';
 
 export const ChatHeader = ({ outBtnHandler }: ChatHeaderProps) => {
   const { state, dispatch } = useContext(ChatContext);
   const headerRef = useRef<HTMLDivElement>(null);
 
-  const toggleSettings = () => {
+  const toggleSettings = useCallback(() => {
     dispatch({ type: 'TOGGLE_SETTINGS' });
-  };
+  }, [dispatch]);
 
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
@@ -35,19 +43,16 @@ export const ChatHeader = ({ outBtnHandler }: ChatHeaderProps) => {
 
   return (
     <ChatHeaderContainer ref={headerRef}>
-      <HeaderBtn onClick={outBtnHandler}>
-        <StyledIcon as={OutIcon} />
-      </HeaderBtn>
+      <MemoizedHeaderBtn onClick={outBtnHandler} icon={OutIcon} />
       <h2>채팅</h2>
-      <HeaderBtn onClick={toggleSettings}>
-        <StyledIcon as={ThreePointIcon} />
-      </HeaderBtn>
+      <MemoizedHeaderBtn onClick={toggleSettings} icon={ThreePointIcon} />
+
       <PopupWrapper>{state.isSettingsOpen && <LayerPopup />}</PopupWrapper>
     </ChatHeaderContainer>
   );
 };
 
-export default memo(ChatHeader);
+export default ChatHeader;
 
 const ChatHeaderContainer = styled.div`
   position: relative;
