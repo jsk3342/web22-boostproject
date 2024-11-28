@@ -9,7 +9,8 @@ export class MemoryDBService {
   private db: MemoryDbDto[] = [];
   private currentId = 0;
   chzzkSwitch: boolean = false;
-
+  chzzkDb: {[key: string]: MemoryDbDto} = {};
+  
   findAll(): MemoryDbDto[] {
     return this.db;
   }
@@ -27,6 +28,9 @@ export class MemoryDBService {
   }
 
   findBySessionKey(sessionKey: string): MemoryDbDto | undefined {
+    if (this.chzzkSwitch && this.chzzkDb[sessionKey]) {
+      return this.chzzkDb[sessionKey];
+    }
     return this.db.find(item => item.sessionKey === sessionKey);
   }
   
@@ -42,8 +46,8 @@ export class MemoryDBService {
             sessionKey: info.channel.channelId,
             liveId: info.channel.channelId,
             liveTitle: info.liveTitle,
-            defaultThumbnailImageUrl: info.liveImageUrl.replace('image_{type}.jpg', 'image_1080.jpg'),
-            liveImageUrl: info.liveImageUrl.replace('image_{type}.jpg', 'image_1080.jpg'),
+            defaultThumbnailImageUrl: info.liveImageUrl.replace('image_{type}.jpg', 'image_480.jpg'),
+            liveImageUrl: info.liveImageUrl.replace('image_{type}.jpg', 'image_480.jpg'),
             streamUrl: info.m3u8,
             channel: {
               channelId: info.channel.channelId,
@@ -54,6 +58,7 @@ export class MemoryDBService {
             startDate: new Date(info.openDate.replace(' ', 'T')),
             concurrentUserCount: info.concurrentUserCount
           });
+          this.chzzkDb[liveInfo.userId] = liveInfo;
           return fromLiveCurationDto(liveInfo);
         });
       }

@@ -82,3 +82,16 @@ export async function chzzkMainFetch(): Promise<LiveData[] | null> {
     return null;
   }
 }
+
+export async function getLastSegment(m3u8Url: string): Promise<[number, number] | false> {
+  try {
+    const indexM3u8 = await axios.get(m3u8Url);
+    const durationRegex = /#EXTINF:(\d+\.\d+)/;
+    const indexRegex = /index(\d+).ts/;
+    const [durationData, indexData] = indexM3u8.data.trim().split('\n').slice(-2);
+    return [Number(indexData.match(indexRegex)[1]), Number(durationData.match(durationRegex)[1])];
+  } catch(err) {
+    console.log(err);
+    return false;
+  }
+}

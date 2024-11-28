@@ -41,6 +41,8 @@ export class ReplayController {
       if (!sessionInfo || !sessionInfo.replay) {
         throw new HttpException('No Available Session', HttpStatus.BAD_REQUEST);
       }
+      sessionInfo.readCount = sessionInfo.readCount + 1;
+      this.memoryDBService.updateBySessionKey(sessionKey, sessionInfo);
       res.status(HttpStatus.OK).json({info : memoryDbDtoToReplayVideoDto(sessionInfo)});
     } catch (error) {
       if ((error as { status: number }).status === 400) {
