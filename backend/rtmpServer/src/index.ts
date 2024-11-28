@@ -2,16 +2,22 @@ import NodeMediaServer from '@hoeeeeeh/node-media-server';
 
 import dotenv from 'dotenv';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// 현재 파일의 URL을 파일 경로로 변환
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // 상위 디렉터리의 .env 파일을 불러오기
-dotenv.config({ path: path.resolve('../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 
 const httpConfig = {
   port: 8000,
   allow_origin: '*',
 
   //package.json 기준
-  mediaroot: '../media'
+  mediaroot: path.resolve(__dirname, '../media')
 };
 
 const rtmpConfig = {
@@ -24,17 +30,20 @@ const rtmpConfig = {
 
 const transformationConfig = {
   //package.json 기준
-  ffmpeg: path.resolve('../ffmpeg'),
+  ffmpeg: path.resolve(__dirname, '../ffmpeg'),
   tasks: [
     {
       app: 'live',
       hls: true,
-      hlsFlags: '[hls_time=2:hls_list_size=3:hls_flags=delete_segments]',
-      hlsKeep: false
+      hlsFlags: '[hls_time=10:hls_list_size=3:hls_flags=delete_segments]',
+      vc: 'libx264',
+      vcParam: ['-g', '60', '-keyint_min', '60', '-sc_threshold', '0'],
+      ac: 'copy',
+      ffmpegLogLevel: 'verbose'
     }
   ],
   //package.json 기준
-  MediaRoot: '../media'
+  MediaRoot: path.resolve(__dirname, '../media')
 };
 
 const S3ClientConfig = {

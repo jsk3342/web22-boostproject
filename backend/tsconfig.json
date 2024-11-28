@@ -1,13 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-
-    "module": "CommonJS",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "module": "ESNext",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
 
     "strict": true,
     "skipLibCheck": true,
-    "baseUrl": "."
-  }
+    "baseUrl": ".",
+
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "exclude": ["**/*spec.ts"]
 }
