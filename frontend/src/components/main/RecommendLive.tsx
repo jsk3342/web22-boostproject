@@ -1,19 +1,22 @@
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { LiveBadgeLarge } from './ThumbnailBadge';
-import { useMainLive } from '@queries/main/useFetchMainLive';
-import sampleProfile from '@assets/sample_profile.png';
-import useRotatingPlayer from '@hooks/useRotatePlayer';
+
 import RecommendList from './RecommendList';
+import { LiveBadgeLarge } from './ThumbnailBadge';
+import sampleProfile from '@assets/sample_profile.png';
+import { RECOMMEND_LIVE } from '@constants/recommendLive';
+import useRotatingPlayer from '@hooks/useRotatePlayer';
+import { useMainLive } from '@queries/main/useFetchMainLive';
 import { getLiveURL } from '@utils/getVideoURL';
 import AnimatedProfileSection from './AnimatedProfileSection';
 import AnimatedLiveHeader from './AnimatedLiveHeader';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
+
   const { videoRef, initPlayer } = useRotatingPlayer();
-  const { data: mainLiveData, isLoading, error } = useMainLive();
+  const { data: mainLiveData } = useMainLive();
   const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
   const recommendListRef = useRef<HTMLDivElement>(null);
 
@@ -24,7 +27,10 @@ const RecommendLive = () => {
     initPlayer(videoUrl);
   }, [mainLiveData, currentUrlIndex, initPlayer]);
 
-  const onSelect = useCallback((index: number) => {
+  const liveData = mainLiveData[currentUrlIndex];
+  const { liveId, liveTitle, concurrentUserCount, channel, category } = liveData;
+
+  const onSelect = (index: number) => {
     setCurrentUrlIndex(index);
   }, []);
 
@@ -37,8 +43,8 @@ const RecommendLive = () => {
   const { liveId, liveTitle, concurrentUserCount, channel, category } = currentLiveData;
 
   return (
-    <RecommendLiveContainer>
-      <RecommendLiveBox $isLoading={isLoading}>
+    <RecommendLiveContainer $height={RECOMMEND_LIVE.HEIGHT}>
+      <RecommendLiveBox>
         <video ref={videoRef} autoPlay muted />
       </RecommendLiveBox>
       <RecommendLiveWrapper onClick={() => navigate(`/live/${liveId}`)}>
@@ -60,19 +66,20 @@ const RecommendLive = () => {
 
 export default RecommendLive;
 
-const RecommendLiveContainer = styled.div`
+const RecommendLiveContainer = styled.div<{ $height: string }>`
   word-wrap: break-word;
   background: #141517;
   border-radius: 12px;
-  height: 370px;
+  height: ${({ $height }) => $height};
   overflow: hidden;
   position: relative;
   word-break: break-all;
   z-index: 0;
 `;
 
-const RecommendLiveBox = styled.div<{ $isLoading: boolean }>`
-  background: ${({ $isLoading, theme }) => ($isLoading ? theme.tokenColors['surface-default'] : '')};
+const RecommendLiveBox = styled.div`
+  background: ${({ theme }) => theme.tokenColors['surface-default']};
+  padding-top: 56.25%;
   position: absolute;
   right: 0;
   top: 0;
