@@ -11,7 +11,7 @@ import { getLiveURL } from '@utils/getVideoURL';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
-  
+
   const { videoRef, initPlayer } = useRotatingPlayer();
   const { data: mainLiveData, isLoading, error } = useMainLive();
   const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
@@ -109,21 +109,15 @@ const RecommendLiveBox = styled.div<{ $isLoading: boolean }>`
     position: absolute;
     left: 0;
     top: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 1;
-
-    &.transitioning {
-      opacity: 0;
-    }
   }
 `;
 
 const RecommendLiveWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: -webkit-fill-available;
   justify-content: space-between;
-  padding: 24px 30px 30px;
+  padding: 22px 30px;
   position: relative;
   cursor: pointer;
 `;
@@ -146,11 +140,10 @@ const RecommendLiveHeader = styled.div`
 `;
 
 const RecommendLiveInformation = styled.div`
-  height: fit-content;
   display: flex;
   align-items: center;
-  flex-grow: 0.5;
   justify-content: space-between;
+  gap: 10px;
 `;
 
 const RecommendLiveProfile = styled.div`
@@ -180,6 +173,7 @@ const RecommendLiveProfile = styled.div`
 const RecommendLiveArea = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 300px;
   gap: 5px;
   .video_card_name {
     ${({ theme }) => theme.tokenTypographys['display-bold20']}
