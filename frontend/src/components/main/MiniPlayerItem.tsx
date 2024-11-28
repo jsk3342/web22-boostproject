@@ -41,6 +41,8 @@ const MiniPlayerItem = memo<MiniPlayerItemProps>(
   }
 );
 
+MiniPlayerItem.displayName = 'MiniPlayerItem';
+
 export default MiniPlayerItem;
 
 const TooltipContent = styled.div`

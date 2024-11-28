@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
 import AnimatedProfileSection from './AnimatedProfileSection';
 import AnimatedLiveHeader from './AnimatedLiveHeader';
 import RecommendList from './RecommendList';
@@ -12,20 +13,26 @@ import { getLiveURL } from '@utils/getVideoURL';
 
 const RecommendLive = () => {
   const navigate = useNavigate();
+
   const { videoRef, initPlayer } = useRotatingPlayer();
   const { data: mainLiveData } = useMainLive();
   const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
   const recommendListRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!mainLiveData?.[currentUrlIndex]) return;
     const videoUrl = getLiveURL(mainLiveData[currentUrlIndex].liveId);
     initPlayer(videoUrl);
   }, [mainLiveData, currentUrlIndex, initPlayer]);
+
   const onSelect = useCallback((index: number) => {
     setCurrentUrlIndex(index);
   }, []);
+
   const currentLiveData = useMemo(() => mainLiveData?.[currentUrlIndex], [mainLiveData, currentUrlIndex]);
+
   const { liveId, liveTitle, concurrentUserCount, channel, category } = currentLiveData;
+
   return (
     <RecommendLiveContainer $height={RECOMMEND_LIVE.HEIGHT}>
       <RecommendLiveBox>

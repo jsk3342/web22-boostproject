@@ -34,6 +34,8 @@ const RecommendList = forwardRef<HTMLDivElement, RecommendListProps>(
   }
 );
 
+RecommendList.displayName = 'RecommendList';
+
 export default memo(RecommendList);
 
 const Container = styled.div`
