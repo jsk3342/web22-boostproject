@@ -93,12 +93,11 @@ const RecommendLiveContainer = styled.div`
 
 const RecommendLiveBox = styled.div<{ $isLoading: boolean }>`
   background: ${({ $isLoading, theme }) => ($isLoading ? theme.tokenColors['surface-default'] : '')};
-  padding-top: 56.25%;
   position: absolute;
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
   width: 100%;
+  height: 100%;
   z-index: -1;
   box-shadow: inset 180px -180px 300px 0px #141517;
   opacity: 0.6;
@@ -109,6 +108,8 @@ const RecommendLiveBox = styled.div<{ $isLoading: boolean }>`
     position: absolute;
     left: 0;
     top: 0;
+    object-fit: cover;
+    object-position: center;
   }
 `;
 
