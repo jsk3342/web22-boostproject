@@ -16,7 +16,7 @@ export class StreamsController {
   @ApiResponse({ status: 200, description: '랜덤한 4개의 방송 정보를 받았습니다.' })
   async findSession(@Res() res: Response) {
     try {
-      const serchedData = this.memoryDBService.getRandomBroadcastInfo(4);
+      const serchedData = await this.memoryDBService.getRandomBroadcastInfo(4);
       res.status(HttpStatus.OK).json({info: serchedData});
     } catch (error) {
       if ((error as { status: number }).status === 400) {

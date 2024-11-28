@@ -32,6 +32,7 @@ export class HostController {
       sessionInfo.state = true;
       sessionInfo.replay = false;
       sessionInfo.startDate = new Date();
+      sessionInfo.streamUrl = `https://kr.object.ncloudstorage.com/web22/live/${sessionInfo.sessionKey}/index.m3u8`;
       this.memoryDBService.updateBySessionKey(streamKey, sessionInfo);
       res.status(HttpStatus.OK).json({ 'session-key': sessionInfo.sessionKey });
     } catch (error) {
@@ -150,6 +151,7 @@ export class HostController {
         this.hostService.uploadToS3(m3u8Data, sessionInfo.sessionKey, 'replay', 'm3u8');
 
         sessionInfo.replay = true;
+        sessionInfo.replayUrl = `https://kr.object.ncloudstorage.com/web22/live/${sessionInfo.sessionKey}/replay.m3u8`;
       }
       this.memoryDBService.updateBySessionKey(streamKey, sessionInfo);
       res.status(HttpStatus.OK).send();
