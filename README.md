@@ -118,7 +118,7 @@
 
 - [**동영상 스트리밍 처리 프로토콜을 알아보자**](https://www.notion.so/b987e92eb6c84eef9af1301877eb7c91?pvs=21)
     - **설명**: 실시간 스트리밍의 핵심인 RTMP와 HLS 프로토콜의 차이점과 각각의 장단점을 깊이 있게 분석합니다. LiBoo 프로젝트에서 어떻게 적용되었는지 구체적인 사례를 통해 설명하여, 스트리밍 처리에 관심 있는 개발자들에게 유용한 정보를 제공합니다.
-- [**React Query - Suspense 활용하기](https://www.notion.so/React-Query-useQuery-Suspense-74beaa80dbe34d70942b48a198636afb?pvs=21), [React Query - onError 활용하기](https://www.notion.so/React-Query-useQuery-onError-23e412b69af04c50b5d5da1cca386bba?pvs=21)**
+- [React Query - Suspense 활용하기](https://www.notion.so/React-Query-useQuery-Suspense-74beaa80dbe34d70942b48a198636afb?pvs=21), [React Query - onError 활용하기](https://www.notion.so/React-Query-useQuery-onError-23e412b69af04c50b5d5da1cca386bba?pvs=21)
     - **설명**: React Query의 `Suspense` , `onError`속성으로 데이터 패칭의 상태 관리를 하게된 과정과 트러블 슈팅을 담았습니다.
 
 ### 🎥 호스트 페이지
