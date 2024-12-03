@@ -17,7 +17,7 @@
 
 # 💻 데모 및 배포 링크
 
-- **서비스 링크**: [https://liboo.com](https://liboo.com/)
+- **서비스 링크**: [https://liboo.kr](https://liboo.kr/)
 
 
 <br/>
