@@ -1,7 +1,11 @@
 <div align="center">
-  <h1> 라이부 LiBoo </h1>
-  <h3> 컨퍼런스를 더 가까이, LiBoo 에서 라이브로 🚀 </h3>
+  <img src="https://github.com/user-attachments/assets/cd7e8ab6-4d94-465d-8817-6ecd18f61125" />
   <br/>
+  <h1> 라이부 LiBoo </h1>
+    <a href="https://liboo.kr" target="_blank">
+    <img src="https://github.com/user-attachments/assets/ad322787-ad07-4405-b526-112c882e66ab" width="100" />
+  </a>
+  <h3> 컨퍼런스를 더 가까이, LiBoo 에서 라이브로 🚀 </h3>
   <p align=center>
   <a href="https://gominzip.notion.site/TEAM-127673f3719e803faf63c70322560d3b?pvs=4"> Notion </a> &nbsp; ｜ &nbsp; 
   <a href="https://www.figma.com/design/op5Ui6oZ4Zx2D8VUgWOKM0/LiBoo-%F0%9F%9A%80?node-id=1-2&node-type=canvas&t=zcYYT1qCtckcUdcs-0"> Figma </a> &nbsp; ｜ &nbsp;
@@ -12,12 +16,24 @@
 
 <br/>
 
-## 프로젝트 개요
+![테스트용 (2)](https://github.com/user-attachments/assets/17eb5365-41d0-4982-b866-99639084277f)
 
-> 토스, 배달의 민족, 카카오 등 다양한 컨퍼런스들이 있지만 실제로 신청해서 당첨되는 것은 쉬운 일이 아닙니다.
-> <br>저희는 이러한 컨퍼런스 문화가 더욱 활발해지고, 더 많은 사람들이 기회를 얻을 수 있기를 바라는 마음으로 LiBoo 프로젝트를 기획하게 되었습니다.
-> <br>작게는 팀원 간 소규모 기술 공유부터, 크게는 네이버 부스트캠프 발표나 기업의 컨퍼런스과도 함께할 수 있는 서비스를 만들고자 합니다!
+# 🎯기획 배경
 
+네이버 DAN, 토스 Slash, 카카오 If, 인프콘...
+
+다양한 컨퍼런스가 열리지만 **참여는 여전히 쉽지 않습니다.**
+
+- 높은 경쟁률
+- 제한된 참가 기회
+
+**LiBoo**는 이러한 현실을 바꾸기 위해 시작되었습니다.
+
+## **LiBoo가 만드는 변화와 목표**
+
+- **누구나** 쉽게 기술을 공유하고 배울 수 있는 열린 플랫폼
+- **팀원 간 소규모 공유**부터 **기업 컨퍼런스 협업**까지 지원
+- 더 많은 사람들이 참여할 수 있는 **기술 공유 기회 확대**
 <br/>
 
 # 📺 핵심 기능
