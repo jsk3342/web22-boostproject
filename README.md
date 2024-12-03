@@ -1,18 +1,19 @@
 <div align="center">
   <img src="https://github.com/user-attachments/assets/cd7e8ab6-4d94-465d-8817-6ecd18f61125" />
   <br/>
-  <h1> 라이부 LiBoo </h1>
+  <br/>
+    <br/>
+    <br/>
+    <br/>
     <a href="https://liboo.kr" target="_blank">
-    <img src="https://github.com/user-attachments/assets/ad322787-ad07-4405-b526-112c882e66ab" width="100" />
-  </a>
+      <img src="https://github.com/user-attachments/assets/ad322787-ad07-4405-b526-112c882e66ab" width="250" />
+    </a>
+  <h1> 라이부 LiBoo </h1>
   <h3> 컨퍼런스를 더 가까이, LiBoo 에서 라이브로 🚀 </h3>
-  <p align=center>
-  <a href="https://gominzip.notion.site/TEAM-127673f3719e803faf63c70322560d3b?pvs=4"> Notion </a> &nbsp; ｜ &nbsp; 
-  <a href="https://www.figma.com/design/op5Ui6oZ4Zx2D8VUgWOKM0/LiBoo-%F0%9F%9A%80?node-id=1-2&node-type=canvas&t=zcYYT1qCtckcUdcs-0"> Figma </a> &nbsp; ｜ &nbsp;
-  <a href="https://github.com/boostcampwm-2024/web22-LiBoo/wiki"> Wiki </a> &nbsp; ｜ &nbsp;
-  <a href="https://github.com/orgs/boostcampwm-2024/projects/17"> BackLog </a>
-</p>
 </div>
+<br />
+<br />
+<br />
 
 # 💻 데모 및 배포 링크
 
@@ -62,49 +63,40 @@
 <br/>
 
 # ⚙️ 서비스 아키텍처
-![라이부아키텍처 drawio (1)](https://github.com/user-attachments/assets/8867cbf9-99b6-4b24-a02b-a35952c5bf0d)
 ![Streaming Data Architecture](https://github.com/user-attachments/assets/02e854c4-4512-482d-bda2-719b7ceabea6)
-```mermaid
-sequenceDiagram
-    participant H as Host/OBS
-    participant HP as Host Page
-    participant MS as Main Server
-    participant RTMP as RTMP Server
-    participant OS as Object Storage
-    participant V as Viewer
 
-    Note over H,V: 방송 시작 전 (OBS 시작됨)
+### 🎥 호스트
 
-    HP->>MS: HTTP: Stream Key 요청
-    MS->>MS: Unique Stream Key 생성
-    MS->>HP: Stream Key 반환
-    HP->>H: Stream Key 전달
+- **방송 시작**
+    - 호스트는 **OBS**를 통해 방송을 시작합니다.
+- **스트림 전송**
+    - OBS에서 생성된 **RTMP 스트림**을 **RTMP 서버**로 전송합니다.
+- **스트림 변환 및 업로드**
+    - RTMP 서버는 스트림을 **HLS 세그먼트**(`.ts` 파일)와 **`index.m3u8`** 파일로 변환합니다.
+    - 변환된 파일을 **Object Storage**에 업로드합니다.
+- **방송 정보 관리**
+    - **API 서버**와 방송 정보를 주고받아 클라이언트 대시보드에 방송을 노출시킵니다.
+- **실시간 시청**
+    - 클라이언트는 **Object Storage**에 직접 접근하여 **HLS 세그먼트**와 **`index.m3u8`** 파일을 통해 실시간 영상을 시청합니다.
 
-    H->>RTMP: RTMP: 스트림 전송 (Stream Key 포함)
+<br />
 
-    RTMP->>RTMP: HLS 변환 (m3u8, segment 생성)
-    RTMP->>H: HTTP: HLS 스트림 전송
-    Note right of H: 호스트가 자신의 방송을<br/>모니터링 할 수 있음
+### 💬 클라이언트
 
-    Note over H,V: 방송 시작 후 (호스트 페이지에서 시작 버튼 클릭)
+- **채팅 기능**
+    - 호스트를 포함한 모든 클라이언트는 **채팅 서버**와 통신하여 실시간으로 채팅을 주고받을 수 있습니다.
+- **채팅 종류**
+    - **질문**, **일반**, **공지** 채팅으로 구분됩니다.
+- **질문 채팅 처리**
+    - **질문 채팅**은 1차적으로 **Redis**에 캐싱됩니다.
+    - 방송 종료 후 **MySQL**에 영구 저장됩니다.
 
-    HP->>MS: 방송 시작 신호
-    MS->>RTMP: 방송 시작 알림
+<br />
 
-    loop HLS 스트리밍
-        RTMP->>OS: HLS 파일 업로드 (m3u8, segment)
-    end
+### 🚀 CI/CD
 
-    V->>MS: 컨퍼런스 선택 (대시보드에서)
-    MS->>V: Object Storage URL 반환
-
-    loop 스트리밍 시청
-        V->>OS: m3u8 요청
-        OS->>V: m3u8 파일 전송
-        V->>OS: segment 요청
-        OS->>V: segment 파일 전송
-    end
-```
+- **배포 도구**
+    - **프론트엔드**와 **백엔드** 모두 **GitHub Actions**, **Docker**, **Docker Swarm**을 활용하여 **NCP**에 배포됩니다.
 
 <br/>
 
@@ -151,3 +143,12 @@ sequenceDiagram
 | <img src="https://avatars.githubusercontent.com/u/45356754?v=4" width="120" /> | <img src="https://avatars.githubusercontent.com/u/46553489?v=4" width="120" /> | <img src="https://avatars.githubusercontent.com/u/101329724?v=4" width="120"> | <img src="https://avatars.githubusercontent.com/u/85912592?v=4" width="120"> | <img src="https://avatars.githubusercontent.com/u/48922050?v=4" width="120"> |
 |                                     **BE**                                     |                                     **BE**                                     |                                    **FE**                                     |                                    **FE**                                    |                                    **FE**                                    |
 |                       [@i3kae](https://github.com/i3kae)                       |                    [@hoeeeeeh](https://github.com/hoeeeeeh)                    |                   [@gominzip](https://github.com/gominzip)                    |                    [@jsk3342](https://github.com/jsk3342)                    |                   [@spearStr](https://github.com/spearStr)                   |
+
+<div align="center">
+  <p align=center>
+    <a href="https://gominzip.notion.site/TEAM-127673f3719e803faf63c70322560d3b?pvs=4"> Notion </a> &nbsp; ｜ &nbsp; 
+    <a href="https://www.figma.com/design/op5Ui6oZ4Zx2D8VUgWOKM0/LiBoo-%F0%9F%9A%80?node-id=1-2&node-type=canvas&t=zcYYT1qCtckcUdcs-0"> Figma </a> &nbsp; ｜ &nbsp;
+    <a href="https://github.com/boostcampwm-2024/web22-LiBoo/wiki"> Wiki </a> &nbsp; ｜ &nbsp;
+    <a href="https://github.com/orgs/boostcampwm-2024/projects/17"> BackLog </a>
+  </p>
+</div>
