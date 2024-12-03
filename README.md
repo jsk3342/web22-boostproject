@@ -14,6 +14,11 @@
 </p>
 </div>
 
+# 💻 데모 및 배포 링크
+
+- **서비스 링크**: [https://liboo.com](https://liboo.com/)
+
+
 <br/>
 
 ![테스트용 (2)](https://github.com/user-attachments/assets/17eb5365-41d0-4982-b866-99639084277f)
