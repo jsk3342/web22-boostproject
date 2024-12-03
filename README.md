@@ -110,27 +110,31 @@
 
 <br/>
 
-# 🏃 주차별 진행 상황
+# 📝 핵심 기술 정리
 
-| 주차  | 내용 요약                                                | 발표자료                                                                                          |
-| ----- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| 1주차 | 기획 공유 및 팀 목표 설정                                | [보러가기](https://gominzip.notion.site/Week1-Web22-LiBoo-56af3bb7b2314f878667bdbbf99e791f?pvs=4) |
-| 2주차 | 백로그 작성, 퍼블리싱, 동영상 스트리밍 아키텍처 설계     | [보러가기](https://gominzip.notion.site/Week2-Web22-LiBoo-137673f3719e805baab4e0a9855ed885?pvs=4) |
-| 3주차 | CI/CD, 메인 api 서버 개발, 플레이어 커스텀, 웹소켓 학습 | [보러가기](https://gominzip.notion.site/Week3-Web22-LiBoo-a09dcec3adea4b289d22603df59f24be?pvs=4) |
-| 4주차 | 채팅 구현, 서비스 시연 | [보러가기](https://gominzip.notion.site/Week4-Web22-LiBoo-13e673f3719e80e2a6b0cf5fe10d603a) |
-| 5주차 | 채팅 고도화, 플레이어 고도화, 다시보기 api 설계 | [보러가기](https://gominzip.notion.site/Week5-Web22-LiBoo-14c673f3719e80eeb14fe3f1f668e1fc?pvs=4) |
+프로젝트를 진행하면서 겪은 다양한 경험과 학습 내용을 정리한 블로그 포스트를 공유합니다. 각 포스트는 LiBoo의 개발 과정에서 얻은 통찰과 해결한 문제들을 상세히 다루고 있으며, 비슷한 프로젝트를 진행하는 분들에게 유용한 참고 자료가 될 것입니다.
 
-<br/>
+### 📺 메인 대시보드
 
-# 🔥 기술적 도전
+- [**동영상 스트리밍 처리 프로토콜을 알아보자**](https://www.notion.so/b987e92eb6c84eef9af1301877eb7c91?pvs=21)
+    - **설명**: 실시간 스트리밍의 핵심인 RTMP와 HLS 프로토콜의 차이점과 각각의 장단점을 깊이 있게 분석합니다. LiBoo 프로젝트에서 어떻게 적용되었는지 구체적인 사례를 통해 설명하여, 스트리밍 처리에 관심 있는 개발자들에게 유용한 정보를 제공합니다.
+- [**React Query - Suspense 활용하기](https://www.notion.so/React-Query-useQuery-Suspense-74beaa80dbe34d70942b48a198636afb?pvs=21), [React Query - onError 활용하기](https://www.notion.so/React-Query-useQuery-onError-23e412b69af04c50b5d5da1cca386bba?pvs=21)**
+    - **설명**: React Query의 `Suspense` , `onError`속성으로 데이터 패칭의 상태 관리를 하게된 과정과 트러블 슈팅을 담았습니다.
 
-꾸준한 문서화를 통해 지식을 공유하고, 깊이 있는 기술적 도전을 이어나가고자 합니다.
+### 🎥 호스트 페이지
 
-- [[학습] 동영상 스트리밍 처리 프로토콜을 알아보자](https://gominzip.notion.site/b987e92eb6c84eef9af1301877eb7c91?pvs=4)
-- [[학습] 웹 소켓의 실시간 양방향 통신](https://gominzip.notion.site/13b673f3719e8037b430ff7b6af397b7?pvs=4)
-- [[과정/근거] 패키지 매니저 및 모노레포 정하기](https://gominzip.notion.site/7677c9cf96464b1d9e9c1d8afd4ab0b6?pvs=4)
-- [[트러블슈팅] 외부의 사용자가 Object Storage에 접근하지 못하는 권한 제어](https://gominzip.notion.site/Object-Storage-1cf0c1bde758437ea595c57cf704a029?pvs=4)
-- [[트러블슈팅] Docker yarn-berry workspace 를 찾지 못하는 오류](https://gominzip.notion.site/docker-yarn-berry-workspace-eff32ce3f695470a8a2d9ef4d02be1e0?pvs=4)
+- [**리액트 훅 폼 딥다이브**](https://www.notion.so/38fb796bb3034277885637e54f8747bb?pvs=21)
+    - **설명**: **리액트 훅 폼**의 기능과 내부 동작 방식을 심층적으로 탐구합니다. 특히 **Controlled 컴포넌트**와 **Uncontrolled 컴포넌트**의 차이점과 각각의 장단점을 상세히 분석하며, 이를 통해 폼 관리의 효율성을 최적화하는 방법을 제시합니다.
+
+### 💬 채팅
+
+- [**채팅 서버의 확장성을 고려한 Redis-Cluster 및 Redis Adapter**](https://www.notion.so/12-03-151673f3719e80068a99d912ef97f0b9?pvs=21)
+    - **설명**: 실시간 채팅 기능의 원활한 운영을 위해 Redis 클러스터링과 어댑터 설정을 도입한 과정을 상세히 설명합니다. 대규모 사용자 트래픽을 처리해야 하는 서비스에 관심 있는 백엔드 개발자들에게 유용한 정보를 제공합니다.
+
+### ☁️ 인프라
+
+- [**백엔드 서버의 확장성을 고려한 Docker 및 Docker Swarm 도입**](https://www.notion.so/12-03-151673f3719e80068a99d912ef97f0b9?pvs=21)
+    - **설명**: 컨테이너화된 인프라를 통해 서비스의 확장성과 배포 효율성을 높이는 방법을 다룹니다. DevOps에 관심 있는 개발자와 인프라 엔지니어들에게 중요한 가이드를 제공합니다.
 
 [더 많은 기술정리 보러 가기](https://gominzip.notion.site/12d673f3719e8098ad94ed6b71b10ac0?pvs=4)
 
