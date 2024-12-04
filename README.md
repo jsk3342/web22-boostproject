@@ -22,13 +22,13 @@
 > [2. 🎯 기획 배경](#-기획-배경) <br>
 > [3. 📺 핵심 기능](#-핵심-기능) <br>
 > [4. ⚙️ 서비스 아키텍처](#%EF%B8%8F-서비스-아키텍처) <br>
-> &nbsp;&nbsp;&nbsp;&nbsp;[4.1. 호스트](#21-랜딩) <br>
-> &nbsp;&nbsp;&nbsp;&nbsp;[4.2. 클라이언트](#21-랜딩) <br>
-> &nbsp;&nbsp;&nbsp;&nbsp;[4.3. CI/CD](#21-랜딩) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[4.1. 호스트](#-호스트) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[4.2. 클라이언트](#-클라이언트) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[4.3. CI/CD](#-cicd) <br>
 > [5. 📝 핵심 기술 정리](#-핵심-기술-정리) <br>
-> &nbsp;&nbsp;&nbsp;&nbsp;[5.1. 전체](#21-랜딩) <br>
-> &nbsp;&nbsp;&nbsp;&nbsp;[5.2. 프론트엔드의 기술적 도전](#21-랜딩) <br>
-> &nbsp;&nbsp;&nbsp;&nbsp;[5.3. 백엔드의 기술적 도전](#21-랜딩) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[5.1. 전체](#전체) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[5.2. 프론트엔드의 기술적 도전](#프론트엔드의-기술적-도전) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[5.3. 백엔드의 기술적 도전](#백엔드의-기술적-도전) <br>
 > [6. 🛠️ 기술 스택](#%EF%B8%8F-기술-스택) <br>
 > [7. 👊 팀 소개](#team-정권지르기-) <br>
 
