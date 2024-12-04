@@ -132,7 +132,16 @@
 ### [🏛️ 확장성을 고려한 초반 구조 설계](https://gominzip.notion.site/f5f09f3143bf492e87c654ecbebec9a7?pvs=4)
 - 각각의 서버가 intensive 한 부분을 고려해서 계획
 - 서버를 분리해서 확장성을 고려
-- 
+
+### [📮 채팅 서버에 Redis 를 쓴 이유](https://gominzip.notion.site/Redis-9be68c7746044d938a0dc65f9cdf47b1?pvs=4)
+- 채팅 서버가 확장될 수 있음을 고려
+- 채팅 서버 간, 데이터 공유를 위해 Redis 사용
+- Redis 도 단일로 동작하지 않도록 redis-cluster 활용
+
+### [🐬 서버를 docker swarm 으로 관리해보자](https://gominzip.notion.site/docker-swarm-80b228b59cf54d0e9221fc6c150e07bf?pvs=4)
+- 서버를 도커 컨테이너로 올려서 docker-compose 로 관리
+- docker swarm 으로 서버 인스턴스를 축소/확장할 수 있도록 관리
+
 #### [👉 더 많은 기술정리 보러 가기 👈](https://gominzip.notion.site/12d673f3719e8098ad94ed6b71b10ac0?pvs=4)
 
 <br/>
