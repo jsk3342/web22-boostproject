@@ -97,7 +97,7 @@
 | **카테고리** | **주제** | **설명** |  
 |---------------------|--------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|  
 | **메인 대시보드** | [**동영상 스트리밍 처리 프로토콜을 알아보자**](https://gominzip.notion.site/b987e92eb6c84eef9af1301877eb7c91?pvs=4) | RTMP와 HLS의 차이와 장단점을 분석하며, LiBoo 프로젝트 사례를 공유합니다. |  
-| | [React Query - Suspense 활용하기](https://gominzip.notion.site/React-Query-useQuery-Suspense-74beaa80dbe34d70942b48a198636afb?pvs=4), [React Query - onError 활용하기](https://gominzip.notion.site/React-Query-useQuery-onError-23e412b69af04c50b5d5da1cca386bba?pvs=4) | React Query의 `Suspense`와 `onError`를 활용한 상태 관리 및 문제 해결 과정을 공유합니다. |  
+| | [React Query - Suspense 활용하기](https://gominzip.notion.site/React-Query-useQuery-Suspense-74beaa80dbe34d70942b48a198636afb?pvs=4), [React Query - onError 활용하기](https://gominzip.notion.site/React-Query-useQuery-onError-23e412b69af04c50b5d5da1cca386bba?pvs=4) | React Query를 활용하여 Suspense와 Error를 다루게 된 배경과 과정을 다루고 있습니다. |  
 | **호스트 페이지** | [**리액트 훅 폼 딥다이브**](https://gominzip.notion.site/38fb796bb3034277885637e54f8747bb?pvs=4) | 리액트 훅 폼의 동작 방식과 Controlled/Uncontrolled 컴포넌트의 차이를 설명합니다. |  
 | **채팅** | [**채팅 서버의 확장성을 고려한 Redis-Cluster 및 Redis Adapter**]() | Redis 클러스터링과 어댑터 설정으로 채팅 서버 확장성을 높인 사례를 공유합니다. |  
 | | [**Shared Worker로 소켓 통신 개선하기**](https://gominzip.notion.site/Shared-Worker-14c673f3719e80379344fd026b1109a1?pvs=4) | 다중 탭에서도 하나의 소켓을 공유할 수 있도록 개선해온 과정 |  
