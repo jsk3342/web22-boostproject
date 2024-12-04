@@ -116,8 +116,8 @@
 - socket.io를 통한 채팅 기능을 구현했으나, 컴포넌트 마운트 시 매번 새로운 소켓이 생성되는 이슈
 - shared worker thread를 도입해 다중 탭에서도 하나의 소켓을 공유할 수 있도록 개선
 
-### [🚨 비동기 에러처리 딥다이브](https://gominzip.notion.site/04ce24ffdb68478699c61b557625a843?pvs=4)
-- React-Query를 활용한 Suspense와 Error처리
+### [🚨 React-Query로 안정적인 스트리밍을 위한 로딩 및 에러 관리](https://gominzip.notion.site/React-Query-04ce24ffdb68478699c61b557625a843?pvs=4)
+- HLS 영상을 받아오는 비동기 데이터 페칭에서의 에러 핸들링
 - 각각의 컴포넌트에서 로딩과 에러처리를 독립적으로 진행한 방식에서부터 AsyncBoundary를 활용하여 효율적인 비동기 데이터 페칭관리와 ErrorPage 라우팅까지 처리
 
 ### [🐊 리액트 훅 폼 딥다이브](https://gominzip.notion.site/38fb796bb3034277885637e54f8747bb?pvs=4)
