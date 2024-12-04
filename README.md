@@ -129,6 +129,10 @@
 - 서비스 별로 분리하여 확장이 쉽고, 유지 보수에 우수한 서버를 구축하고자 계획
 - NestJS의 모듈화와 DI를 통해 각 도메인 간의 종속되지 않는 DDD 서비스 설계
 
+### [🏛️ 확장성을 고려한 초반 구조 설계](https://gominzip.notion.site/f5f09f3143bf492e87c654ecbebec9a7?pvs=4)
+- 각각의 서버가 intensive 한 부분을 고려해서 계획
+- 서버를 분리해서 확장성을 고려
+- 
 #### [👉 더 많은 기술정리 보러 가기 👈](https://gominzip.notion.site/12d673f3719e8098ad94ed6b71b10ac0?pvs=4)
 
 <br/>
