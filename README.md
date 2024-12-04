@@ -17,13 +17,31 @@
 
 <br/>
 
+> ### 목차
+> [1. 💻 데모 및 배포 링크](#-데모-및-배포-링크) <br>
+> [2. 🎯 기획 배경](#-기획-배경) <br>
+> [3. 📺 핵심 기능](#-핵심-기능) <br>
+> [4. ⚙️ 서비스 아키텍처](#%EF%B8%8F-서비스-아키텍처) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[4.1. 호스트](#21-랜딩) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[4.2. 클라이언트](#21-랜딩) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[4.3. CI/CD](#21-랜딩) <br>
+> [5. 📝 핵심 기술 정리](#-핵심-기술-정리) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[5.1. 전체](#21-랜딩) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[5.2. 프론트엔드의 기술적 도전](#21-랜딩) <br>
+> &nbsp;&nbsp;&nbsp;&nbsp;[5.3. 백엔드의 기술적 도전](#21-랜딩) <br>
+> [6. 🛠️ 기술 스택](#%EF%B8%8F-기술-스택) <br>
+> [7. 👊 팀 소개](#team-정권지르기-) <br>
+
+<br/>
+
 # 💻 데모 및 배포 링크
 
 - **서비스 링크**: [https://liboo.kr](https://liboo.kr/)
 
 <br/>
 
-# 🎯기획 배경
+
+# 🎯 기획 배경
 
 네이버 DAN, 토스 Slash, 카카오 If, 인프콘 등 다양한 컨퍼런스가 열리고 있지만, 참여는 여전히 쉽지 않습니다.
 
@@ -81,6 +99,40 @@
 
 <br/>
 
+# 📝 핵심 기술 정리
+프로젝트를 진행하면서 겪은 다양한 경험과 학습 내용을 꾸준히 문서화하며 지식을 공유하고, 깊이 있는 기술적 도전을 이어나가고자 합니다.
+
+## 전체
+### [📹 동영상 스트리밍 처리 프로토콜을 알아보자](https://gominzip.notion.site/b987e92eb6c84eef9af1301877eb7c91?pvs=4)
+- 처음 접하는 동영상 스트리밍 서비스의 동작 원리를 팀원들과 함께 이해하기
+- 다양한 스트리밍 프로토콜(RTMP, WebRTC, HLS 등)을 검토한 결과, 실시간 단방향 스트리밍에 적합한 RTMP와 HLS 조합으로 결정
+
+### [🚀 웹 소켓의 실시간 양방향 통신 (feat. WS vs Socket.io)](https://gominzip.notion.site/feat-WS-vs-Socket-io-13b673f3719e8037b430ff7b6af397b7?pvs=4)
+- 채팅 구현을 위해 실시간 양방향 통신 구현 방식에 대한 학습 진행
+- 생산성을 고려해 broadcast, namespace, 자동 재연결이 구현되어 있는 socket.io 라이브러리를 사용하기로 결정
+
+## 프론트엔드의 기술적 도전
+### [👷‍♀️ Shared Worker로 클라이언트의 소켓 통신 개선하기](https://gominzip.notion.site/Shared-Worker-14c673f3719e80379344fd026b1109a1?pvs=4)
+- socket.io를 통한 채팅 기능을 구현했으나, 컴포넌트 마운트 시 매번 새로운 소켓이 생성되는 이슈
+- shared worker thread를 도입해 다중 탭에서도 하나의 소켓을 공유할 수 있도록 개선
+
+### [🚨 비동기 에러처리 딥다이브](https://gominzip.notion.site/04ce24ffdb68478699c61b557625a843?pvs=4)
+- React-Query를 활용한 Suspense와 Error처리
+- 각각의 컴포넌트에서 로딩과 에러처리를 독립적으로 진행한 방식에서부터 AsyncBoundary를 활용하여 효율적인 비동기 데이터 페칭관리와 ErrorPage 라우팅까지 처리
+
+### [🐊 리액트 훅 폼 딥다이브](https://gominzip.notion.site/38fb796bb3034277885637e54f8747bb?pvs=4)
+- 호스트 페이지에 사용되는 많은 인풋을 리액트 훅 폼을 활용해 효율적으로 관리
+- 훅 폼의 개념과 핵심 기능을 이해하고, controlled vs uncontrolled 컴포넌트, 폼 상태 관리 최적화 및 검증 로직 구현 방법을 탐구
+
+## 백엔드의 기술적 도전
+### [☕️ NestJS를 통한 일관적인 시스템 설계](https://gominzip.notion.site/NestJS-ccb02a5403cd489ab1529799f17570b1?pvs=4)
+- 서비스 별로 분리하여 확장이 쉽고, 유지 보수에 우수한 서버를 구축하고자 계획
+- NestJS의 모듈화와 DI를 통해 각 도메인 간의 종속되지 않는 DDD 서비스 설계
+
+#### [👉 더 많은 기술정리 보러 가기 👈](https://gominzip.notion.site/12d673f3719e8098ad94ed6b71b10ac0?pvs=4)
+
+<br/>
+
 # 🛠️ 기술 스택
 
 | Part       | Stack                                                                                           |
@@ -88,22 +140,6 @@
 | 공통       | ![fullstack 2](https://github.com/user-attachments/assets/1a7f6b03-9d59-4ecc-adc9-39ad17ac67a4) |
 | 프론트엔드 | ![fullstack 1](https://github.com/user-attachments/assets/64fdaa86-289d-42f0-80ce-4f01df4bfe75) |
 | 백엔드     | ![fullstack 3](https://github.com/user-attachments/assets/8a01cd0b-f324-4c6e-85f6-f75c74239bdb) |
-
-<br/>
-
-# 📝 핵심 기술 정리
-
-프로젝트를 진행하면서 겪은 다양한 경험과 학습 내용을 꾸준히 문서화하며 지식을 공유하고, 깊이 있는 기술적 도전을 이어나가고자 합니다.
-| **카테고리** | **주제** | **설명** |  
-|---------------------|--------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|  
-| **메인 대시보드** | [**동영상 스트리밍 처리 프로토콜을 알아보자**](https://gominzip.notion.site/b987e92eb6c84eef9af1301877eb7c91?pvs=4) | RTMP와 HLS의 차이와 장단점을 분석하며, LiBoo 프로젝트 사례를 공유합니다. |  
-| | [React Query - Suspense 활용하기](https://gominzip.notion.site/React-Query-useQuery-Suspense-74beaa80dbe34d70942b48a198636afb?pvs=4), [React Query - onError 활용하기](https://gominzip.notion.site/React-Query-useQuery-onError-23e412b69af04c50b5d5da1cca386bba?pvs=4) | React Query를 활용하여 Suspense와 Error를 다루게 된 배경과 과정을 다루고 있습니다. |  
-| **호스트 페이지** | [**리액트 훅 폼 딥다이브**](https://gominzip.notion.site/38fb796bb3034277885637e54f8747bb?pvs=4) | 리액트 훅 폼의 동작 방식과 Controlled/Uncontrolled 컴포넌트의 차이를 설명합니다. |  
-| **채팅** | [**채팅 서버의 확장성을 고려한 Redis-Cluster 및 Redis Adapter**]() | Redis 클러스터링과 어댑터 설정으로 채팅 서버 확장성을 높인 사례를 공유합니다. |  
-| | [**Shared Worker로 소켓 통신 개선하기**](https://gominzip.notion.site/Shared-Worker-14c673f3719e80379344fd026b1109a1?pvs=4) | 다중 탭에서도 하나의 소켓을 공유할 수 있도록 개선해온 과정 |  
-| **인프라** | [**백엔드 서버의 확장성을 고려한 Docker 및 Docker Swarm 도입**]() | Docker로 서비스 확장성과 배포 효율성을 높인 사례를 다룹니다. |
-
-[👉 더 많은 기술정리 보러 가기 👈](https://gominzip.notion.site/12d673f3719e8098ad94ed6b71b10ac0?pvs=4)
 
 <br/>
 
