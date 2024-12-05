@@ -150,9 +150,9 @@
 
 | Part       | Stack                                                                                           |
 | ---------- | ----------------------------------------------------------------------------------------------- |
-| 공통       | ![fullstack 2](https://github.com/user-attachments/assets/1a7f6b03-9d59-4ecc-adc9-39ad17ac67a4) |
-| 프론트엔드 | ![fullstack 1](https://github.com/user-attachments/assets/64fdaa86-289d-42f0-80ce-4f01df4bfe75) |
-| 백엔드     | ![fullstack 3](https://github.com/user-attachments/assets/8a01cd0b-f324-4c6e-85f6-f75c74239bdb) |
+| 공통       | ![Group 15](https://github.com/user-attachments/assets/82b2beac-df23-48f4-814d-b46ec79d755e)   |
+| 프론트엔드 |![Group 17](https://github.com/user-attachments/assets/9c57bf4e-df45-4319-9fb2-e5ffa58440b7)|
+| 백엔드     | ![Group 16](https://github.com/user-attachments/assets/fa4933ca-0e46-4aab-ba3d-76614c332f73)|
 
 <br/>
 
