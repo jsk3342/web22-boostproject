@@ -14,9 +14,17 @@
       "@components/*": ["src/components/*"],
       "@hooks/*": ["src/hooks/*"],
       "@pages/*": ["src/pages/*"],
+      "@utils/*": ["src/utils/*"],
       "@assets/*": ["src/assets/*"],
       "@styles/*": ["src/styles/*"],
-      "@types/*": ["src/types/*"]
+      "@type/*": ["src/type/*"],
+      "@apis/*": ["src/apis/*"],
+      "@queries/*": ["src/apis/queries/*"],
+      "@constants/*": ["src/constants/*"],
+      "@hocs/*": ["src/hocs/*"],
+      "@common/*": ["src/components/common/*"],
+      "@reducers/*": ["src/reducers/*"],
+      "@contexts/*": ["src/contexts/*"]
     },
     "types": ["vite/client"]
   },

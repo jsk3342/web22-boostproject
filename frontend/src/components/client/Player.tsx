@@ -1,28 +1,57 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useState } from 'react';
 
-import playerLoading from '@assets/player_loading.gif';
-import PlayIcon from '@assets/play_icon.svg';
+import PauseIcon from '@assets/icons/pause_icon.svg';
+import PlayIcon from '@assets/icons/play_icon.svg';
+import usePlayer from '@hooks/usePlayer';
+// import VideoPlayer from './video/VideoPlayer';
+import VideoPlayer from './VideoPlayer';
 
-interface ContainerProps {
-  onStreaming: boolean;
-}
+const Player = ({ videoUrl }: { videoUrl: string }) => {
+  const [isPaused, setIsPaused] = useState(false);
+  const [showIcon, setShowIcon] = useState(false);
 
-const Player = () => {
-  const [onStreaming, setOnStreaming] = useState(false);
+  const videoRef = usePlayer(videoUrl);
+
+  const handlePlayPause = () => {
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+
+    setIsPaused(!videoElement.paused);
+    setShowIcon(true);
+    setTimeout(() => setShowIcon(false), 1000);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        handlePlayPause();
+      }
+    };
+
+    const videoElement = videoRef.current;
+    videoElement?.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      videoElement?.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handlePlayPause]);
 
   return (
-    <Container $onStreaming={onStreaming}>
-      <LivePlayerInner>{!onStreaming && <PlayButton onClick={() => setOnStreaming(true)} />}</LivePlayerInner>
-    </Container>
+    <PlayerContainer>
+      <LivePlayerInner>
+        <VideoPlayer url={videoUrl} isLive={false} />
+        {showIcon && <IconOverlay>{isPaused ? <PlayIcon /> : <PauseIcon />}</IconOverlay>}
+      </LivePlayerInner>
+    </PlayerContainer>
   );
 };
 
 export default Player;
 
-const Container = styled.div<ContainerProps>`
-  background: ${({ onStreaming, theme }) =>
-    onStreaming ? theme.tokenColors['surface-default'] : `url(${playerLoading}) no-repeat center / cover`};
+const PlayerContainer = styled.div`
+  background: ${({ theme }) => theme.tokenColors['surface-default']};
   padding-top: 56.25%;
   position: relative;
 `;
@@ -39,12 +68,23 @@ const LivePlayerInner = styled.div`
   justify-content: center;
 `;
 
-const PlayButton = styled(PlayIcon)`
-  width: 55px;
-  height: 55px;
-  cursor: pointer;
-
-  &:active {
-    opacity: 0.8;
-  }
+const IconOverlay = styled.div`
+  position: absolute;
+  width: 75px;
+  height: 75px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${({ theme }) => theme.tokenColors['color-white']};
+  border-radius: 50%;
+  opacity: 0.8;
+  transition: opacity 0.3s;
 `;
+
+// const Video = styled.video`
+//   width: 100%;
+//   height: 100%;
+// `;

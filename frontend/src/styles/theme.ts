@@ -1,4 +1,4 @@
-import { TypographyToken, ColorToken } from '@types/style';
+import { TypographyToken, ColorToken } from '@type/style';
 
 export const colorMap = {
   gray: {
